@@ -1,0 +1,72 @@
+#showcase {
+  /* background: url('../images/pexels-dennis-magati-862848.jpg') no-repeat center center/cover; */
+  /* background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),url('../images/pexels-fotografierende-3150553.jpg') no-repeat center center/cover; */
+  /* background: url('../images/pexels-dennis-magati-862848.jpg') no-repeat center center/cover; */
+  max-width: 95%;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* #showcase .showcase-content {
+    color: #fff;
+    text-align: center;
+    padding-top: 120px;
+  } */
+
+#showcase h1 {
+  font-size: 60px;
+  line-height: 1.2em;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.text-superimpose {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+}
+
+p.lead {
+  padding-bottom: 20px;
+  line-height: 1.7em;
+  font-size: 1.2em;
+  color: var(--primary-color);
+}
+
+/* Categories */
+.category {
+  display: flex;
+  flex-direction: row;
+  height: 400px;
+}
+
+.half {
+  width: 50%;
+  min-height: 100%;
+}
+
+/* #category-1 {
+    background: url('../images/pexels-august-de-richelieu-4262185.jpg') no-repeat center center/cover;
+}
+#category-2 {
+    background: url('../images/pexels-josé-luis-photographer-2576788.jpg') no-repeat center center/cover;
+}
+#category-3 {
+    background: url('../images/tech1.jpg') no-repeat center center/cover;
+} */
+
+.sliderimg {
+  width: 100%;
+  height: 550px;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .sliderimg {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+}
