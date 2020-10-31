@@ -5,11 +5,6 @@ import CollectionCard from "../../components/CollectionCard/CollectionCard"
 function CollectionsPage() {
 
     const location = useLocation()
-    console.log(location)
-    console.log(location.pathname)
-
-
-    //let activePath
 
     const [activePath, setActivePath] = useState("")
 

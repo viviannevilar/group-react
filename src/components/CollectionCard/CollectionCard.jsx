@@ -5,7 +5,6 @@ import "./CollectionCard.css"
 function CollectionCard(props) {
     const { collectionData } = props
     const id = collectionData.id
-    console.log(id)
 
     const archiveCollection = async (e) => {
         e.preventDefault();
@@ -25,12 +24,10 @@ function CollectionCard(props) {
 
     return (
         <div className="collection-wrapper">
-            <p> {collectionData.title}</p>
-            <p> {collectionData.last_updated} </p>
-            <button onClick={archiveCollection}>{ collectionData.is_active ? "Archive" : "Unarchive" }</button>
+            <p> {collectionData.title}
+            <button onClick={archiveCollection}>{ collectionData.is_active ? "Archive" : "Unarchive" }</button> </p>
         </div>
     )
-
 }
 
 

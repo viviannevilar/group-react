@@ -51,9 +51,10 @@ function HomePage() {
             alt="Company Logo"
           />
           </div>
-          <div className="buttons">
-            <Link to="/signup" id="button" className="button">Sign Up</Link>
-            <Link to="/login" id="button" className="button">Log In</Link>
+          <div className="buttons-wrapper">
+            <Link to="/signup" className="button" >Sign Up</Link>
+            <Link to="/login" className="button" >Log In</Link>
+            <Link to="/collections" className="button">Collections</Link>
           </div>   
           <div className="footer">
             <Link to="/contactus">Contact Us</Link>

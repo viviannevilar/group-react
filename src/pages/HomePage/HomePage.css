@@ -9,7 +9,7 @@
   width: 200px;
 }
 
-#button {
+.button {
   border-radius: 25px;
   width: 60%;
   height: 40px;
@@ -28,7 +28,7 @@
   margin: 20px;
 }
 
-.buttons {
+.buttons-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
