@@ -97,7 +97,7 @@ function LoginForm() {
       </form>
 
       <div id="test">
-        <div> Don't have an account? Sign up </div> <div id="linky"><Link to={`/profile/`}>{`  here`} </Link></div>
+        <div> Don't have an account? Sign up </div> <div id="linky"><Link to={`/signup/`}>{`  here`} </Link></div>
       </div>
 
       {
