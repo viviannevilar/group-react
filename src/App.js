@@ -11,6 +11,7 @@ import CollectionsPage from "./pages/CollectionsPage/CollectionsPage";
 
 function App() {
 
+    let active
     return (
         <Router>
             <div>
@@ -43,8 +44,9 @@ function App() {
                     <Route exact path="/collections/">
                         <CollectionsPage />
                     </Route>
-                    
-
+                    <Route exact path="/collections-archive/">
+                        <CollectionsPage />
+                    </Route>
                 </Switch>
             </div>
 

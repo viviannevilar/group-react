@@ -1,10 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom"
 import "./CollectionCard.css"
 
 
 function CollectionCard(props) {
-    const { key, collectionData } = props
+    const { collectionData } = props
     const id = collectionData.id
     console.log(id)
 
@@ -25,22 +24,16 @@ function CollectionCard(props) {
     }
 
     return (
-        <div key={key} className="collection-wrapper">
+        <div className="collection-wrapper">
             <p> {collectionData.title}</p>
             <p> {collectionData.last_updated} </p>
-            <button onClick={archiveCollection}>Archive</button>
+            <button onClick={archiveCollection}>{ collectionData.is_active ? "Archive" : "Unarchive" }</button>
         </div>
     )
 
 }
 
+
 export default CollectionCard
 
 
-
-
-{/* <div className="centered flexbox-container">
-<PublishConfirm id = {id} />
-<Link to={myLink}><button className="btn-small">Edit Project</button></Link>
-<DeleteConfirm id = {id} type="project" />
-</div> */}

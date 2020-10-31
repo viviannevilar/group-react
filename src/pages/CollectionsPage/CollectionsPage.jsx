@@ -1,7 +1,31 @@
 import React, { useState, useEffect } from "react"
+import { Link, useLocation } from "react-router-dom"
 import CollectionCard from "../../components/CollectionCard/CollectionCard"
 
 function CollectionsPage() {
+
+    const location = useLocation()
+    console.log(location)
+    console.log(location.pathname)
+
+
+    //let activePath
+
+    const [activePath, setActivePath] = useState("")
+
+    useEffect(() => {
+
+        if (location.pathname === "/collections/") {
+            setActivePath("active-collections/")
+            console.log("here")
+            //activePath = "active-collections"
+        } else {
+            setActivePath("archived-collections/")
+            //activePath = "archived-collections"
+        }
+
+    }, [location]);
+
 
     const [collectionsList, setCollectionsList] = useState([]);
 
@@ -9,10 +33,10 @@ function CollectionsPage() {
     const [errorCode, setErrorCode] = useState();
 
     useEffect(() => {
-        let token = window.localStorage.getItem("token");
-        console.log("here")
 
-        fetch(`${process.env.REACT_APP_API_URL}active-collections/`, {
+        let token = window.localStorage.getItem("token");
+
+        fetch(`${process.env.REACT_APP_API_URL}${activePath}`, {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
@@ -27,7 +51,7 @@ function CollectionsPage() {
         .then((data) => {
             setCollectionsList(data);
         })
-    }, []);
+     }, [activePath]);
 
 
     //The page will return different things depending on whether there are errors, or no collections, or some collections to show
@@ -50,8 +74,12 @@ function CollectionsPage() {
         return (
             <div>
             {collectionsList.map((collectionData, key) => {
-                return <CollectionCard key={key} collectionData={collectionData} />;
+                return <CollectionCard key={key} collectionData={collectionData}/>;
             })}
+
+            <br></br>
+            {(activePath === "active-collections/") && <Link to={`/collections-archive/`}><button >See archived collections</button></Link>}
+            {(activePath === "archived-collections/") && <Link to={`/collections/`}><button >See active collections</button></Link>}
             </div>
         )
     }
