@@ -1,7 +1,9 @@
 import React from "react";
 function AboutUsPage(){
 
-    return <h1>This is the AboutUS page</h1>
+    return <h1>About Us</h1>;
+    
+            
 
 }
 
