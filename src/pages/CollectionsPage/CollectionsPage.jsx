@@ -1,16 +1,16 @@
-import React​, { useState, useEffect }​ from "react";
-import "./HomePage.css"
-
+import React, { useState, useEffect } from "react"
+import CollectionCard from "../../components/CollectionCard/CollectionCard"
 
 function CollectionsPage() {
 
-    ​const [collectionsList, setCollectionsList] = useState([]);
+    const [collectionsList, setCollectionsList] = useState([]);
 
     // This variable will have the error code from the request
     const [errorCode, setErrorCode] = useState();
 
     useEffect(() => {
         let token = window.localStorage.getItem("token");
+        console.log("here")
 
         fetch(`${process.env.REACT_APP_API_URL}collections/`, {
             method: "get",
@@ -21,7 +21,7 @@ function CollectionsPage() {
         })
         .then((results) =>  {
             setErrorCode(results.status)
-
+            console.log("results.status: ", results.status)
             return results.json();
         })
         .then((data) => {
@@ -30,36 +30,33 @@ function CollectionsPage() {
     }, []);
 
 
-    function Collections() {
+    //The page will return different things depending on whether there are errors, or no collections, or some collections to show
+    if ((errorCode === 401) || errorCode === 403) {
 
-        if (!items || items.length === 0) {
-            return "Be the first one to donate to this project!";
-          } else {
-              
-            return items.map((item, key) => {
-                  return (
-                      <div key={key} className="collection-wrapper">
-                          <p> {item.title}</p>
-                          <p> {item.date_created} </p>
-                      </div>
-                  )
-            });
-          }
-    }
+        return (
+            <h1>You don't have permission to see this page! </h1>
+        )
 
+    } else if (!collectionsList || collectionsList.length === 0) {
 
-    return (
-        <div id="collections-list">
-            <div className="wrapper">
-
-                {Collections()}
-
+        return (
+            <div>
+                <h1>No collections to show</h1>
             </div>
-        </div>
-    ); 
+        )
+
+    } else {
+        
+        return (
+            <div>
+            {collectionsList.map((collectionData, key) => {
+                return <CollectionCard key={key} collectionData={collectionData} />;
+            })}
+            </div>
+        )
+    }
+    
+
 }
 
 export default CollectionsPage;
-
-
-
