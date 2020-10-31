@@ -12,7 +12,7 @@ function CollectionsPage() {
         let token = window.localStorage.getItem("token");
         console.log("here")
 
-        fetch(`${process.env.REACT_APP_API_URL}collections/`, {
+        fetch(`${process.env.REACT_APP_API_URL}active-collections/`, {
             method: "get",
             headers: {
                 "Content-Type": "application/json",

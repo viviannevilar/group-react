@@ -43,6 +43,8 @@ function App() {
                     <Route exact path="/collections/">
                         <CollectionsPage />
                     </Route>
+                    
+
                 </Switch>
             </div>
 
