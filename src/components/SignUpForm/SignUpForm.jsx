@@ -25,7 +25,7 @@ function SignUpForm() {
 
   const postData = async () => {
     //function you can call but carry on as well
-    const response = await fetch(`${process.env.REACT_APP_API_URL}users/`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}register/`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",

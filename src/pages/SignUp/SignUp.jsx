@@ -1,6 +1,6 @@
 import React from "react";
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
-// import LogoutForm from "../components/LogoutForm/LogoutForm";
+import LogoutForm from "../../components/LogoutForm/LogoutForm";
 
 function SignUp() {
   let username = localStorage.username;
@@ -19,7 +19,7 @@ function SignUp() {
             You are already logged in as user {username}! Please log out to
             register a new user{" "}
           </h2>
-          {/* <LogoutForm /> */}
+          <LogoutForm />
         </div>
       )}
     </div>
