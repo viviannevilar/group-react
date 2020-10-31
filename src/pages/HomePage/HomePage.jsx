@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import "./HomePage.css";
 import "../SignUp/SignUp";
 import "../ContactUs/ContactUs";
@@ -9,39 +9,39 @@ import { Link } from 'react-router-dom';
 
 function HomePage() {
 
-  const [credentials, setCredentials] = useState({
-    username: "",
-    email: "",
-    preferred_name: "",
-    password: "",
-    userprofile: {},
-  });
+  // const [credentials, setCredentials] = useState({
+  //   username: "",
+  //   email: "",
+  //   preferred_name: "",
+  //   password: "",
+  //   userprofile: {},
+  // });
 
-  const history = useHistory();
+  // const history = useHistory();
 
-  const postData = async () => {
-    //function you can call but carry on as well
-    const response = await fetch(`${process.env.REACT_APP_API_URL}users/`, {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(credentials),
-    });
-    return response.json();
-  };
+  // const postData = async () => {
+  //   //function you can call but carry on as well
+  //   const response = await fetch(`${process.env.REACT_APP_API_URL}users/`, {
+  //     method: "post",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(credentials),
+  //   });
+  //   return response.json();
+  // };
 
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (credentials.username != null) {
-      console.log(credentials);
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (credentials.username != null) {
+  //     console.log(credentials);
 
-      postData().then((response) => {
-        history.push("/login");
-      });
-    }
-  };
+  //     postData().then((response) => {
+  //       history.push("/login");
+  //     });
+  //   }
+  // };
     return (
         <div className="homepage">
           <div className="logo" style={{flex:1, backgroundColor:"pink"}}>
@@ -52,16 +52,8 @@ function HomePage() {
           />
           </div>
           <div className="buttons">
-            <Link to="/signup">
-            <button id="button" className="button" type="submit" onClick={handleSubmit}>
-            Sign Up!
-            </button>
-            </Link>
-            <Link to="/login">
-            <button id="button" className="button" type="submit" onClick={handleSubmit}>
-            Log In!
-            </button>
-            </Link>
+            <Link to="/signup" id="button" className="button">Sign Up</Link>
+            <Link to="/login" id="button" className="button">Log In</Link>
           </div>   
           <div className="footer">
             <Link to="/contactus">Contact Us</Link>
