@@ -7,6 +7,7 @@ import AboutUs from "./pages/AboutUs/AboutUs";
 import ContactUs from "./pages/ContactUs/ContactUs";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignUp from "./pages/SignUp/SignUp";
+import NewCollection from './pages/NewCollection/NewCollection';
 
 function App() {
 
@@ -38,6 +39,9 @@ function App() {
                     </Route>
                     <Route exact path="/signup">
                         <SignUp />
+                    </Route>
+                    <Route exact path="/newcollection">
+                        <NewCollection />
                     </Route>
                 </Switch>
             </div>
