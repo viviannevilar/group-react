@@ -10,7 +10,7 @@ function HomePage() {
 
     return (
         <div className="homepage">
-          <div className="logo" style={{flex:1, backgroundColor:"pink"}}>
+          <div className="logo" style={{flex:1}}>
             <img
             id="logoimage"
             src={require("../../images/Logo.png")}
