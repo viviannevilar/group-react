@@ -2,7 +2,10 @@
 .logo {
   display: flex;
   justify-content: center;
+  flex: 1;
+  background-color: "pink";
 }
+
 
 #logoimage {
   height: 200px;

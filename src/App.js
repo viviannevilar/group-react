@@ -8,10 +8,10 @@ import ContactUs from "./pages/ContactUs/ContactUs";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignUp from "./pages/SignUp/SignUp";
 import CollectionsPage from "./pages/CollectionsPage/CollectionsPage";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
 function App() {
 
-    let active
     return (
         <Router>
             <div>
@@ -47,6 +47,7 @@ function App() {
                     <Route exact path="/collections-archive/">
                         <CollectionsPage />
                     </Route>
+                    <Route path="*" component={NotFoundPage} />
                 </Switch>
             </div>
 
