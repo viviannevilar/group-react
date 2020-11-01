@@ -1,12 +1,12 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
-import Nav from "./components/Nav/Nav";
 import HomePage from "./pages/HomePage/HomePage";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import ContactUs from "./pages/ContactUs/ContactUs";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignUp from "./pages/SignUp/SignUp";
+import CollectionDetailPage from "./pages/CollectionDetailPage/CollectionDetailPage";
 
 function App() {
 
@@ -38,6 +38,10 @@ function App() {
                     </Route>
                     <Route exact path="/signup">
                         <SignUp />
+                    </Route>
+
+                    <Route path="/collection/:id">
+                        <CollectionDetailPage />
                     </Route>
                 </Switch>
             </div>
