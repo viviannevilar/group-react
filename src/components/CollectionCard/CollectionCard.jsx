@@ -24,7 +24,7 @@ function CollectionCard(props) {
 
     function shareCollection()  {
 
-        const linkText = "https://warm-falls-74169.herokuapp.com/" + collectionData.signed_pk + "/"
+        const linkText = "https://warm-falls-74169.herokuapp.com/collection/shared/" + collectionData.signed_pk + "/"
 
         navigator.clipboard.writeText(linkText)
 

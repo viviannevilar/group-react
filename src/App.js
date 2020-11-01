@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import SignUp from "./pages/SignUp/SignUp";
 import CollectionsPage from "./pages/CollectionsPage/CollectionsPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+import SharedCollection from "./pages/SharedCollection/SharedCollection";
 
 function App() {
 
@@ -46,6 +47,9 @@ function App() {
                     </Route>
                     <Route exact path="/collections-archive/">
                         <CollectionsPage />
+                    </Route>
+                    <Route exact path="/collection/shared/:id/:code/">
+                        <SharedCollection />
                     </Route>
                     <Route path="*" component={NotFoundPage} />
                 </Switch>
