@@ -13,8 +13,6 @@ function SharedCollection() {
 
     const [errorCode, setErrorCode] = useState();
 
-    
-
 
     useEffect(() => {
 
@@ -45,16 +43,14 @@ function SharedCollection() {
     } else {
         return (
             <div>
-                <h1>Collection ID: {collectionData.id}</h1>
-                <p>{collectionData.title}</p>
-                <p>{collectionData.user}</p>
+                <h1>Shared Collection</h1>
+                <p>Collection ID: {collectionData.id}</p>
+                <p>Collection title: {collectionData.title}</p>
+                <p>Collection owner: {collectionData.user}</p>
             </div>
         )
 
     }
-
-
-
 
 
 }
