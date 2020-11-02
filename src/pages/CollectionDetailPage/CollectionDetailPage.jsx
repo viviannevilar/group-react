@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import ItemCard from "../../components/ItemCard/ItemCard";
+import AddItemForm from "../../components/AddItemForm/AddItemForm";
+import EditItemForm from "../../components/EditItemForm/EditItemForm";
+
+import "./CollectionDetailPage.css";
+
 
 function formatDate(string) {
     var options = { year: "numeric", month: "long", day: "numeric" };
@@ -12,6 +17,7 @@ function formatDate(string) {
 // Items at phone screen width are swipeable
 // Add item - form - pop up modal or new form we will see
 // Edit each item with a button - pop up
+// Archive, delete and edit button for each list item. 
 
 function CollectionDetailPage() {
     let token = window.localStorage.getItem("token");
@@ -19,20 +25,22 @@ function CollectionDetailPage() {
     const history = useHistory();
     const [isLoading, setisLoading] = useState(true);
     const [modalState, setModalState] = useState(false);
+    const [editmodalState, setEditModalState] = useState(false);
+
     const [error, setError] = useState();
     const [errorMessage, setErrorMessage] = useState(false);
     const [DeleteState, setDeleteState] = useState(false);
 
-    const toggleModalState = () => {
+    const addItemToggleModalState = () => {
         setModalState(!modalState);
         window.scrollTo(0, 0);
     };
 
-
-    const toggleDelete = () => {
-        setDeleteState(!DeleteState);
+    const editItemToggleModalState = () => {
+        setEditModalState(!editmodalState);
         window.scrollTo(0, 0);
     };
+
 
     const [collectionData, setCollectionData] = useState({ collection_items: [] });
     const [itemData, setItemData] = useState([]);
@@ -81,16 +89,17 @@ function CollectionDetailPage() {
         fetchProjects()
     }, [id]);
 
-    const handleDelete = (e) => {
+    const handleDelete = (projectdat, e) => {
         let token = localStorage.getItem("token");
-        fetch(`${process.env.REACT_APP_API_URL}collection/${id}/`, {
+        fetch(`${process.env.REACT_APP_API_URL}item/${projectdat.id}/`, {
             method: "delete",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Token ${token}`,
             },
         }).then(() => {
-            history.push("/")
+            history.push(`/collection/${id}`)
+            window.location.reload();
         });
     }
 
@@ -111,15 +120,56 @@ function CollectionDetailPage() {
 
             {!isLoading && !errorMessage && (
                 <div>
-                    <p>See your collection of {collectionData.title} </p>
-                    <p>Date Created {formatDate(collectionData.date_created)} </p>
-                    <p>Last Updated {formatDate(collectionData.last_updated)} </p>
-                    <div id="project-list">
-                        {itemData.reduce((total, projectData, key) => {
-                            total.push(<ItemCard key={key} projectData={projectData} collectionData={collectionData} />);
-                            return total;
-                        }, [])}
+                    <div id="App">
+                        <p>See your collection of {collectionData.title} </p>
+                        <p>Date Created {formatDate(collectionData.date_created)} </p>
+                        <p>Last Updated {formatDate(collectionData.last_updated)} </p>
+
+                        {collectionData.collection_items.length > 0 && (<p>You are currently comparing {collectionData.collection_items.length} items in {collectionData.title} list. </p>)}
+                        {collectionData.collection_items.length == 0 && (<p>You are yet to add any items to {collectionData.title}! Add one now below. </p>)}
+                        {collectionData.is_active && (
+                            <button className="button" onClick={() => addItemToggleModalState()}>Add Item</button>
+                        )}
+
+                        <div id="project-list">
+                            {itemData.map((projectData, key) => {
+                                return (
+                                    <div>
+                                        <button className={`button-${key}`} onClick={() => editItemToggleModalState()}>Edit this Item </button>
+                                        <div className={`modalBackground modalShowing-${editmodalState}`}>
+                                            <div className="modalInner">
+                                                <div className="modalText">
+                                                    <EditItemForm key={key} itemData={projectData} collectionData={collectionData} />
+                                                    <div>
+                                                        <button className="exitButton" onClick={() => editItemToggleModalState()}> exit </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ItemCard key={key} projectData={projectData} collectionData={collectionData} />
+                                        <button className={`button-delete${key}`} onClick={() => handleDelete(projectData)}>Delete Item: {projectData.name} </button>
+
+
+                                    </div>)
+
+                            })
+                            }
+                        </div>
                     </div>
+                    <div className={`modalBackground modalShowing-${modalState}`}>
+                        <div className="modalInner">
+                            <div className="modalText">
+                                <AddItemForm id={id} collectionData={collectionData} />
+                                <div>
+                                    <button className="exitButton" onClick={() => addItemToggleModalState()}> exit </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
                 </div>
             )
             }

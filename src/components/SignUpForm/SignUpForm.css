@@ -86,19 +86,6 @@ html{
 }
 
 
-#test {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-#linky{
-    margin-left: 4px;
-}
-
-
-
 #errordiv{
   display: flex;
   flex-direction: column;

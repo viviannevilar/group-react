@@ -43,6 +43,9 @@ function App() {
                     <Route path="/collection/:id">
                         <CollectionDetailPage />
                     </Route>
+
+
+
                 </Switch>
             </div>
 
