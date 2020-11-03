@@ -9,7 +9,7 @@ function CollectionsPage() {
     // this checks the url (/collections/ or /collections-archive/)
     const location = useLocation()
 
-    const [activePath, setActivePath] = useState("")
+    const [activePath, setActivePath] = useState("active-collections/")
 
     const [collectionsList, setCollectionsList] = useState([]);
 
@@ -77,7 +77,7 @@ function CollectionsPage() {
             </div>
         )
     // if not logged in or wrong credentials
-    } else if ((errorCode === 401) || errorCode === 403) {
+    } else if ((errorCode === 401) || (errorCode === 403)) {
 
         return (
             <div>

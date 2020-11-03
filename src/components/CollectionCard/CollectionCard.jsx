@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./CollectionCard.css"
 
 
@@ -7,6 +8,7 @@ function CollectionCard(props) {
     //////////////////////////// variables ////////////////////////////
     const { collectionData } = props
     const id = collectionData.id
+    const linkCollection = "/collection/" + id + "/"
 
 
     //////////////////////////// methods ////////////////////////////
@@ -55,9 +57,10 @@ function CollectionCard(props) {
     }
 
      //////////////////////////// return ////////////////////////////   
+
     return (
         <div className="collection-wrapper">
-            <p> {collectionData.title}
+            <p> <Link to={linkCollection}>{collectionData.title}</Link>
             <button onClick={archiveCollection}>{ collectionData.is_active ? "Archive" : "Unarchive" }</button> 
             <button onClick={shareCollection}>Share Collection</button>
             <button onClick={deleteCollection}>Delete Collection</button> 
