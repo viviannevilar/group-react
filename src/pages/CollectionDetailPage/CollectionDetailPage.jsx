@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, useLocation } from "react-router-dom";
 import ItemCard from "../../components/ItemCard/ItemCard";
 import AddItemForm from "../../components/AddItemForm/AddItemForm";
 import EditItemForm from "../../components/EditItemForm/EditItemForm";
@@ -21,6 +21,20 @@ function formatDate(string) {
 
 function CollectionDetailPage() {
     let token = window.localStorage.getItem("token");
+    const location = useLocation();
+    const urlComponents = location.pathname.split("/")
+    const { id } = useParams();
+
+    let urlPath
+    let shared_link
+    if (urlComponents.length === 5) {
+        urlPath = "safe/" + id + "/" + urlComponents[3]
+        shared_link = "public"
+    } else {
+        urlPath = id
+        shared_link = "private"
+    }
+
 
     const history = useHistory();
     const [isLoading, setisLoading] = useState(true);
@@ -45,7 +59,6 @@ function CollectionDetailPage() {
     const [collectionData, setCollectionData] = useState({ collection_items: [] });
     const [itemData, setItemData] = useState([]);
 
-    const { id } = useParams();
 
 
 
@@ -53,13 +66,22 @@ function CollectionDetailPage() {
     const fetchProjects = async () => {
         let response
         try {
-            response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/`, {
-                method: "get",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Token ${token}`,
-                },
-            })
+            if (urlComponents.length === 4) {
+                response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/`, {
+                    method: "get",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Token ${token}`,
+                    },
+                })
+            } else {
+                response = await fetch(`${process.env.REACT_APP_API_URL}collection/${urlPath}/`, {
+                    method: "get",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
+            }
         } catch (error) {
             setisLoading(false);
             setErrorMessage(true);
@@ -125,17 +147,30 @@ function CollectionDetailPage() {
                         <p>Date Created {formatDate(collectionData.date_created)} </p>
                         <p>Last Updated {formatDate(collectionData.last_updated)} </p>
 
-                        {collectionData.collection_items.length > 0 && (<p>You are currently comparing {collectionData.collection_items.length} items in {collectionData.title} list. </p>)}
-                        {collectionData.collection_items.length == 0 && (<p>You are yet to add any items to {collectionData.title}! Add one now below. </p>)}
-                        {collectionData.is_active && (
-                            <button className="button" onClick={() => addItemToggleModalState()}>Add Item</button>
+                        {shared_link == "private" && (
+                            <div>
+                                { collectionData.collection_items.length > 0 && (<p>You are currently comparing {collectionData.collection_items.length} items in {collectionData.title} list. </p>)}
+                                {collectionData.collection_items.length == 0 && (<p>You are yet to add any items to {collectionData.title}! Add one now below. </p>)}
+                                {collectionData.is_active && (
+                                    <button className="button" onClick={() => addItemToggleModalState()}>Add Item</button>
+                                )}
+                            </div>
                         )}
+
+                        {shared_link == "public" && (
+                            <div>
+                                { collectionData.collection_items.length > 0 && (<p>There are currently {collectionData.collection_items.length} items in the {collectionData.title} list for comparison. </p>)}
+                                {collectionData.collection_items.length == 0 && (<p>There are no items added to list {collectionData.title}!</p>)}
+                            </div>
+                        )}
+
+
 
                         <div id="project-list">
                             {itemData.map((projectData, key) => {
                                 return (
                                     <div>
-                                        <button className={`button-${key}`} onClick={() => editItemToggleModalState()}>Edit this Item </button>
+                                        {/* <button className={`button-${key}`} onClick={() => editItemToggleModalState()}>Edit this Item </button> */}
                                         <div className={`modalBackground modalShowing-${editmodalState}`}>
                                             <div className="modalInner">
                                                 <div className="modalText">
@@ -147,8 +182,12 @@ function CollectionDetailPage() {
                                             </div>
                                         </div>
                                         <ItemCard key={key} projectData={projectData} collectionData={collectionData} />
-                                        <button className={`button-delete${key}`} onClick={() => handleDelete(projectData)}>Delete Item: {projectData.name} </button>
 
+                                        {shared_link == "private" && (
+                                            <div>
+                                                <button className={`button-delete${key}`} onClick={() => handleDelete(projectData)}>Delete Item: {projectData.name} </button>
+                                            </div>
+                                        )}
 
                                     </div>)
 
