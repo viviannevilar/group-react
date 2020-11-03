@@ -20,30 +20,20 @@ function formatDate(string) {
 // Archive, delete and edit button for each list item. 
 
 function CollectionDetailPage() {
+    let urlPath
+    let shared_link
     let token = window.localStorage.getItem("token");
     const location = useLocation();
     const urlComponents = location.pathname.split("/")
     const { id } = useParams();
-
-    let urlPath
-    let shared_link
-    if (urlComponents.length === 5) {
-        urlPath = "safe/" + id + "/" + urlComponents[3]
-        shared_link = "public"
-    } else {
-        urlPath = id
-        shared_link = "private"
-    }
-
-
     const history = useHistory();
     const [isLoading, setisLoading] = useState(true);
     const [modalState, setModalState] = useState(false);
     const [editmodalState, setEditModalState] = useState(false);
-
     const [error, setError] = useState();
     const [errorMessage, setErrorMessage] = useState(false);
-    const [DeleteState, setDeleteState] = useState(false);
+    const [collectionData, setCollectionData] = useState({ collection_items: [] });
+    const [itemData, setItemData] = useState([]);
 
     const addItemToggleModalState = () => {
         setModalState(!modalState);
@@ -55,13 +45,14 @@ function CollectionDetailPage() {
         window.scrollTo(0, 0);
     };
 
-
-    const [collectionData, setCollectionData] = useState({ collection_items: [] });
-    const [itemData, setItemData] = useState([]);
-
-
-
-
+    console.log(urlComponents)
+    if (urlComponents.length === 6) {
+        urlPath = "safe/" + id + "/" + urlComponents[4]
+        shared_link = "public"
+    } else {
+        urlPath = id
+        shared_link = "private"
+    }
 
     const fetchProjects = async () => {
         let response
@@ -120,7 +111,7 @@ function CollectionDetailPage() {
                 Authorization: `Token ${token}`,
             },
         }).then(() => {
-            history.push(`/collection/${id}`)
+            history.push(`/collection/${id}/`)
             window.location.reload();
         });
     }
@@ -150,10 +141,12 @@ function CollectionDetailPage() {
                         {shared_link == "private" && (
                             <div>
                                 { collectionData.collection_items.length > 0 && (<p>You are currently comparing {collectionData.collection_items.length} items in {collectionData.title} list. </p>)}
-                                {collectionData.collection_items.length == 0 && (<p>You are yet to add any items to {collectionData.title}! Add one now below. </p>)}
+                                {collectionData.collection_items.length == 0 && (<p>You are yet to add any items to {collectionData.title}!</p>)}
                                 {collectionData.is_active && (
                                     <button className="button" onClick={() => addItemToggleModalState()}>Add Item</button>
                                 )}
+                                {!collectionData.is_active && (
+                                    <p>This list is archived, please unarchive to add new items</p>)}
                             </div>
                         )}
 

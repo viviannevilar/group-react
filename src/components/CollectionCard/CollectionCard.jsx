@@ -1,5 +1,6 @@
 import React from "react";
 import "./CollectionCard.css"
+import { Link } from "react-router-dom";
 
 
 function CollectionCard(props) {
@@ -9,7 +10,7 @@ function CollectionCard(props) {
     const archiveCollection = async (e) => {
         e.preventDefault();
         let token = window.localStorage.getItem("token");
-    
+
         const response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/archive/`, {
             method: "post",
             headers: {
@@ -22,7 +23,7 @@ function CollectionCard(props) {
         return response.json();
     }
 
-    function shareCollection()  {
+    function shareCollection() {
 
         const linkText = "https://warm-falls-74169.herokuapp.com/collection/shared/" + collectionData.signed_pk + "/"
 
@@ -32,9 +33,10 @@ function CollectionCard(props) {
 
     return (
         <div className="collection-wrapper">
-            <p> {collectionData.title}
-            <button onClick={archiveCollection}>{ collectionData.is_active ? "Archive" : "Unarchive" }</button> 
-            <button onClick={shareCollection}>Share Collection</button>
+            <p>
+                <Link to={`/collection/${id}/`}>{collectionData.title}</Link>
+                <button onClick={archiveCollection}>{collectionData.is_active ? "Archive" : "Unarchive"}</button>
+                <button onClick={shareCollection}>Share Collection</button>
             </p>
 
         </div>

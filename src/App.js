@@ -43,7 +43,7 @@ function App() {
                         <SignUp />
                     </Route>
 
-                    <Route path="/collection/:id">
+                    <Route exact path="/collection/:id">
                         <CollectionDetailPage />
                     </Route>
 
@@ -54,7 +54,7 @@ function App() {
                         <CollectionsPage />
                     </Route>
                     <Route exact path="/collection/shared/:id/:code/">
-                        <SharedCollection />
+                        <CollectionDetailPage />
                     </Route>
                     <Route path="*" component={NotFoundPage} />
                 </Switch>
