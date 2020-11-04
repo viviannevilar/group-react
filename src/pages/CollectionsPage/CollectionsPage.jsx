@@ -77,7 +77,7 @@ function CollectionsPage() {
             </div>
         )
     // if not logged in or wrong credentials
-    } else if ((errorCode === 401) || errorCode === 403) {
+    } else if ((errorCode === 401) || (errorCode === 403)) {
 
         return (
             <div>

@@ -38,7 +38,6 @@ function CollectionCard(props) {
                 <button onClick={archiveCollection}>{collectionData.is_active ? "Archive" : "Unarchive"}</button>
                 <button onClick={shareCollection}>Share Collection</button>
             </p>
-
         </div>
     )
 }
