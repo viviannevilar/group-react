@@ -134,7 +134,9 @@ function CollectionDetailPage() {
             {!isLoading && !errorMessage && (
                 <div>
                     <div id="App">
-                        <p>See your collection of {collectionData.title} </p>
+                        {shared_link == "private" && (<p>See your collection of {collectionData.title} </p>)}
+                        {shared_link == "public" && (<p>Collection of {collectionData.title} </p>)}
+
                         <p>Date Created {formatDate(collectionData.date_created)} </p>
                         <p>Last Updated {formatDate(collectionData.last_updated)} </p>
 
