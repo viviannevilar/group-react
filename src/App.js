@@ -10,7 +10,7 @@ import SignUp from "./pages/SignUp/SignUp";
 import CollectionDetailPage from "./pages/CollectionDetailPage/CollectionDetailPage";
 import CollectionsPage from "./pages/CollectionsPage/CollectionsPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
-import SharedCollection from "./pages/SharedCollection/SharedCollection";
+
 
 function App() {
 

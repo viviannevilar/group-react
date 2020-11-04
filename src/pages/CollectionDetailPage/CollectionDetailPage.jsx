@@ -76,7 +76,7 @@ function CollectionDetailPage() {
         } catch (error) {
             setisLoading(false);
             setErrorMessage(true);
-            setError(data);
+            setError(error);
             return
         }
 
@@ -125,7 +125,7 @@ function CollectionDetailPage() {
 
                 <div id="errormessage">
                     <br></br>
-                    <img className="backgroundimage" src="https://www.pngitem.com/pimgs/m/119-1190787_warning-alert-attention-search-error-icon-hd-png.png" />
+                    <img className="backgroundimage" alt="Error!" src="https://www.pngitem.com/pimgs/m/119-1190787_warning-alert-attention-search-error-icon-hd-png.png" />
                     <h2 id="headerTitle">There is no collection with ID {id} </h2>
                 </div>
             </div>)}
@@ -138,10 +138,10 @@ function CollectionDetailPage() {
                         <p>Date Created {formatDate(collectionData.date_created)} </p>
                         <p>Last Updated {formatDate(collectionData.last_updated)} </p>
 
-                        {shared_link == "private" && (
+                        {shared_link === "private" && (
                             <div>
                                 { collectionData.collection_items.length > 0 && (<p>You are currently comparing {collectionData.collection_items.length} items in {collectionData.title} list. </p>)}
-                                {collectionData.collection_items.length == 0 && (<p>You are yet to add any items to {collectionData.title}!</p>)}
+                                {collectionData.collection_items.length === 0 && (<p>You are yet to add any items to {collectionData.title}!</p>)}
                                 {collectionData.is_active && (
                                     <button className="button" onClick={() => addItemToggleModalState()}>Add Item</button>
                                 )}
@@ -150,10 +150,10 @@ function CollectionDetailPage() {
                             </div>
                         )}
 
-                        {shared_link == "public" && (
+                        {shared_link === "public" && (
                             <div>
                                 { collectionData.collection_items.length > 0 && (<p>There are currently {collectionData.collection_items.length} items in the {collectionData.title} list for comparison. </p>)}
-                                {collectionData.collection_items.length == 0 && (<p>There are no items added to list {collectionData.title}!</p>)}
+                                {collectionData.collection_items.length === 0 && (<p>There are no items added to list {collectionData.title}!</p>)}
                             </div>
                         )}
 
@@ -176,7 +176,7 @@ function CollectionDetailPage() {
                                         </div>
                                         <ItemCard key={key} projectData={projectData} collectionData={collectionData} />
 
-                                        {shared_link == "private" && (
+                                        {shared_link === "private" && (
                                             <div>
                                                 <button className={`button-delete${key}`} onClick={() => handleDelete(projectData)}>Delete Item: {projectData.name} </button>
                                             </div>

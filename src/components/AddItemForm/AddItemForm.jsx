@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 function AddItemForm(props) {
     const { id, collectionData } = props;
@@ -70,7 +70,7 @@ function AddItemForm(props) {
                     />
                 </div>
 
-                {collectionData.attribute1 != "" && (<div className="formattribute">
+                {collectionData.attribute1 !== "" && (<div className="formattribute">
                     <label htmlFor="attribute1">{collectionData.attribute1}:</label>
                     <input
                         type="text"
@@ -81,7 +81,7 @@ function AddItemForm(props) {
 
 
 
-                {collectionData.attribute2 != "" && (<div className="formattribute">
+                {collectionData.attribute2 !== "" && (<div className="formattribute">
                     <label htmlFor="attribute2">{collectionData.attribute2}:</label>
                     <input
                         type="text"
@@ -90,7 +90,7 @@ function AddItemForm(props) {
                     />
                 </div>)}
 
-                {collectionData.attribute3 != "" && (<div className="formattribute">
+                {collectionData.attribute3 !== "" && (<div className="formattribute">
                     <label htmlFor="attribute3">{collectionData.attribute3}:</label>
                     <input
                         type="text"
@@ -99,7 +99,7 @@ function AddItemForm(props) {
                     />
                 </div>)}
 
-                {collectionData.attribute4 != "" && (<div className="formattribute">
+                {collectionData.attribute4 !== "" && (<div className="formattribute">
                     <label htmlFor="attribute4">{collectionData.attribute4}:</label>
                     <input
                         type="text"
@@ -109,7 +109,7 @@ function AddItemForm(props) {
                 </div>)}
 
 
-                {collectionData.attribute5 != "" && (<div className="formattribute">
+                {collectionData.attribute5 !== "" && (<div className="formattribute">
                     <label htmlFor="attribute5">{collectionData.attribute5}:</label>
                     <input
                         type="text"
