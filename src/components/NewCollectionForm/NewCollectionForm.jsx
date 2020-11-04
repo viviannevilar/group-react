@@ -63,9 +63,9 @@ function NewCollectionForm() {
 
     postData().then((response) => {
       if (response != undefined) {
-        history.push("/")
+        history.push("/collections/")
       } else {
-        history.push("/collection-create") 
+        history.push("/newcollection/") 
         // not sure about whether this should just be collection????????
       }
     }).catch(
