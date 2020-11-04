@@ -79,6 +79,9 @@ function NewCollectionForm() {
   return (
     <div id="collectionform">
       <h2 id="headerTitle"> Create a new collection! </h2>
+      <br></br>
+      <h4>Price, Sale Price, Date Sale Price Ends and Image Upload are all default attributes that will be included in your collections. </h4>
+      <h4>Select additional Attributes you want to compare below</h4>
 
       <form>
         <div className="thra">
@@ -141,6 +144,8 @@ function NewCollectionForm() {
             onChange={handleChange}
           />
         </div>
+        <br></br>
+        <br></br>
 
         <div className="thra">
           <label htmlFor="is_active">Is this Project Active on submission of this form?:</label>
@@ -153,7 +158,7 @@ function NewCollectionForm() {
             value="true"
             onChange={handleChange}
           />
-          <label htmlFor="is_open">Open</label>
+          <label htmlFor="is_open">Active</label>
           <input
             type="radio"
             id="is_open"
@@ -163,7 +168,8 @@ function NewCollectionForm() {
           />
           <label htmlFor="false">Closed</label>
         </div>
-
+        <br></br>
+        <br></br>
 
 
         <div className="buttonwrapper">
