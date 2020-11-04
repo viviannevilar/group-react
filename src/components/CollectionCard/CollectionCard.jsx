@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./CollectionCard.css"
-import { Link } from "react-router-dom";
 
 
 function CollectionCard(props) {
@@ -56,7 +55,6 @@ function CollectionCard(props) {
 
         window.location.reload();
     }
-
 
 
 
