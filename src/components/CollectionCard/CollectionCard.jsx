@@ -1,12 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./CollectionCard.css"
 import { Link } from "react-router-dom";
 
 
 function CollectionCard(props) {
+
+    //////////////////////////// variables ////////////////////////////
     const { collectionData } = props
     const id = collectionData.id
+    const linkCollection = "/collection/" + id + "/"
 
+
+    //////////////////////////// methods ////////////////////////////
+
+    // Archive collection
     const archiveCollection = async (e) => {
         e.preventDefault();
         let token = window.localStorage.getItem("token");
@@ -23,20 +31,44 @@ function CollectionCard(props) {
         return response.json();
     }
 
+
     function shareCollection() {
 
-        const linkText = "https://warm-falls-74169.herokuapp.com/collection/shared/" + collectionData.signed_pk + "/"
+        const linkText = "https://warm-falls-74169.herokuapp.com/collection/" + collectionData.signed_pk + "/"
 
         navigator.clipboard.writeText(linkText)
-
+    
     }
+
+    // Delete collection
+    
+    const deleteCollection = async (e) => {
+        e.preventDefault();
+        let token = window.localStorage.getItem("token");
+        let urlPath = "collection/" + collectionData.id
+    
+        const response = await fetch(`${process.env.REACT_APP_API_URL}${urlPath}/`, {
+            method: "delete",
+            headers: {
+                Authorization: `Token ${token}`,
+            },
+        });
+
+        window.location.reload();
+    }
+
+
+
+
+     //////////////////////////// return ////////////////////////////   
 
     return (
         <div className="collection-wrapper">
-            <p>
-                <Link to={`/collection/${id}/`}>{collectionData.title}</Link>
-                <button onClick={archiveCollection}>{collectionData.is_active ? "Archive" : "Unarchive"}</button>
-                <button onClick={shareCollection}>Share Collection</button>
+
+            <p> <Link to={linkCollection}>{collectionData.title}</Link>
+            <button onClick={archiveCollection}>{ collectionData.is_active ? "Archive" : "Unarchive" }</button> 
+            <button onClick={shareCollection}>Share Collection</button>
+            <button onClick={deleteCollection}>Delete Collection</button> 
             </p>
         </div>
     )
