@@ -1,5 +1,7 @@
 import React from "react";
 // import { useHistory } from "react-router-dom";
+
+import React, { useState, useEffect } from "react";
 import "./HomePage.css";
 import "../SignUp/SignUp";
 import "../ContactUs/ContactUs";
@@ -9,11 +11,9 @@ import { Link } from 'react-router-dom';
 
 function HomePage() {
 
-
     return (
         <div className="homepage">
-
-          <div className="logo" >
+          <div className="logo" style={{flex:1}}>
             <img
                 id="logoimage"
                 src={require("../../images/Logo.png")}
@@ -36,7 +36,5 @@ function HomePage() {
         </div>
     );
 }
-
-
 
 export default HomePage
