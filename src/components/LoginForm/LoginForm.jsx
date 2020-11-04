@@ -46,8 +46,8 @@ function LoginForm() {
     e.preventDefault();
     if (credentials.username && credentials.password) {
       postData().then((response) => {
-        if (response != undefined) {
-          if (response.token != null || response != null) {
+        if (response !== undefined) {
+          if (response.token !== null || response != null) {
             window.localStorage.setItem("token", response.token);
             window.localStorage.setItem("username", credentials.username);
             history.push("/");
