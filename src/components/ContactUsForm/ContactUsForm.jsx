@@ -39,11 +39,9 @@ function ContactUsForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("catisthebest")
         if (credentials.username &&
           credentials.email &&
           credentials.message) {
-            console.log("dogisthebest")
          postData().then((response) => {
            window.localStorage.setItem("token", response.token);
            history.push("/");
