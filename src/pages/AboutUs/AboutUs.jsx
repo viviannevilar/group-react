@@ -1,9 +1,6 @@
 import React from "react";
 import "./AboutUs.css";
-
-    return <h1>About Us</h1>;
-    
-            
+           
 
 function AboutUsPage(){
     return (
