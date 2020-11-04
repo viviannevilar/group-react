@@ -188,6 +188,7 @@ function CollectionDetailPage() {
                             }
                         </div>
                     </div>
+                    
                     <div className={`modalBackground modalShowing-${modalState}`}>
                         <div className="modalInner">
                             <div className="modalText">
