@@ -1,5 +1,4 @@
-import React from "react";
-// import { useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import "./HomePage.css";
 import "../SignUp/SignUp";
 import "../ContactUs/ContactUs";
@@ -36,7 +35,5 @@ function HomePage() {
     </div>
   );
 }
-
-
 
 export default HomePage

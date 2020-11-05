@@ -1,0 +1,82 @@
+#collectionform{
+    max-width: 700px;
+    min-width: 300px;
+    max-height: 900px;
+    width: 100%;
+    margin: 0px auto;
+    background-color: #FFFFFF;
+    border-radius: 25px;
+  }
+  
+  #headerTitle{
+    text-align: center;
+    font-family: 'open sans', sans-serif;
+    padding: 1.5rem 0;
+    margin: 0;
+    font-size: rem;
+  }
+  
+  .thra{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
+    max-width: 100%;
+    
+  }
+  
+  .thra input{
+    width: 80%;
+    box-sizing: border-box;
+      border: none;
+    font-size: 1.1rem;
+    padding-left: 1.5rem;
+    padding-bottom: 0.5rem;
+    box-shadow: inset 0px -3px 0px 0px rgba(187,187,187,0.2);
+    transition: box-shadow 0.2s ease-in;
+  }
+  
+  .thra input:focus{
+     box-shadow: inset 0px -3px 0px 0px rgba(46,44,56,0.7);
+     outline: none;
+  }
+
+
+  .collectionbutton{
+    padding: 5px 10px;
+    background: #373a47;
+    border-radius: 30px;
+    font-size: 18px;
+    color: white;
+    border: none;
+  }
+
+
+  
+div.buttonwrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+  
+div.radiowrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+
+
+textarea {
+    outline: none;
+    resize: none;
+    width: 80%;
+
+  }
