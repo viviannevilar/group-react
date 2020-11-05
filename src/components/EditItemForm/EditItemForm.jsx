@@ -14,7 +14,6 @@ function EditItemForm(props) {
         attribute2: "",
         attribute3: "",
         attribute4: "",
-        attribute5: "",
         image: null,
         collection: null,
         is_active: true,
@@ -22,8 +21,6 @@ function EditItemForm(props) {
 
     useEffect(() => {
         console.log(itemData)
-
-
         setCredentials({
             id: parseInt(itemData.id),
             name: itemData.name,
@@ -31,12 +28,12 @@ function EditItemForm(props) {
             attribute2: itemData.attribute2,
             attribute3: itemData.attribute3,
             attribute4: itemData.attribute4,
-            attribute5: itemData.attribute5,
             image: itemData.image,
             is_active: itemData.is_active,
-            collection: parseInt(collectionData.id),
+            collection: parseInt(itemData.collection),
         });
         console.log(credentials)
+
 
     }, [itemData]);
 
@@ -69,19 +66,17 @@ function EditItemForm(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        console.log("handlesubit")
         console.log(credentials);
         postData().then((response) => {
             console.log(response)
             history.push(`/collection/${collectionData.id}/`);
+            // window.location.reload();
         });
 
     };
 
 
-    const handleBack = (e) => {
-        history.push(`/collection/${collectionData.id}/`);
-    };
 
     return (
         <div id="pledgeform">
@@ -93,7 +88,7 @@ function EditItemForm(props) {
                     <input
                         type="text"
                         id="name"
-                        value={itemData.name}
+                        value={credentials.name}
                         onChange={handleChange}
                     />
                 </div>
@@ -103,7 +98,7 @@ function EditItemForm(props) {
                     <input
                         type="text"
                         id="attribute1"
-                        value={itemData.attribute1}
+                        value={credentials.attribute1}
                         onChange={handleChange}
                     />
                 </div>)}
@@ -115,7 +110,7 @@ function EditItemForm(props) {
                     <input
                         type="text"
                         id="attribute2"
-                        value={itemData.attribute2}
+                        value={credentials.attribute2}
                         onChange={handleChange}
                     />
                 </div>)}
@@ -125,7 +120,7 @@ function EditItemForm(props) {
                     <input
                         type="text"
                         id="attribute3"
-                        value={itemData.attribute3}
+                        value={credentials.attribute3}
                         onChange={handleChange}
                     />
                 </div>)}
@@ -135,27 +130,18 @@ function EditItemForm(props) {
                     <input
                         type="text"
                         id="attribute4"
-                        value={itemData.attribute4}
+                        value={credentials.attribute4}
                         onChange={handleChange}
                     />
                 </div>)}
 
 
-                {collectionData.attribute5 !== "" && (<div className="thra">
-                    <label htmlFor="attribute5">{collectionData.attribute5}:</label>
-                    <input
-                        type="text"
-                        id="attribute5"
-                        value={itemData.attribute5}
-                        onChange={handleChange}
-                    />
-                </div>)}
 
                 <div className="thra">
                     <label htmlFor="image">Image:</label>
                     <br></br>
                     <div id="imagecon">
-                        <img id="profilepicture" src={itemData.image} alt="anon pic" />
+                        <img id="profilepicture" src={credentials.image} alt="anon pic" />
                     </div>
                     <br></br>
                     <input
@@ -171,7 +157,7 @@ function EditItemForm(props) {
                     <input
                         type="textarea"
                         id="notes"
-                        value={itemData.notes}
+                        value={credentials.notes}
                         onChange={handleChange}
                     />
                 </div>
@@ -202,7 +188,7 @@ function EditItemForm(props) {
 
 
                 <div className="buttonwrapper">
-                    <button className="pledgebutton" type="submit" onClick={handleSubmit}>  Edit List Item </button>
+                    <button className="pledgebutton" type="submit" onClick={handleSubmit}>  Update List Item </button>
                 </div>
             </form>
         </div>

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useHistory, useLocation } from "react-router-dom";
+import { useParams, useHistory, useLocation, Link } from "react-router-dom";
 import ItemCard from "../../components/ItemCard/ItemCard";
 import AddItemForm from "../../components/AddItemForm/AddItemForm";
-import EditItemForm from "../../components/EditItemForm/EditItemForm";
-
 import "./CollectionDetailPage.css";
 
 
@@ -165,17 +163,9 @@ function CollectionDetailPage() {
                             {itemData.map((projectData, key) => {
                                 return (
                                     <div>
-                                        {/* <button className={`button-${key}`} onClick={() => editItemToggleModalState()}>Edit this Item </button> */}
-                                        <div className={`modalBackground modalShowing-${editmodalState}`}>
-                                            <div className="modalInner">
-                                                <div className="modalText">
-                                                    <EditItemForm key={key} itemData={projectData} collectionData={collectionData} />
-                                                    <div>
-                                                        <button className="exitButton" onClick={() => editItemToggleModalState()}> exit </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <Link to={`/item-edit/${projectData.id}/${collectionData.id}/`}>
+                                            <p>Edit Item</p>
+                                        </Link>
                                         <ItemCard key={key} projectData={projectData} collectionData={collectionData} />
 
                                         {shared_link === "private" && (
@@ -190,7 +180,7 @@ function CollectionDetailPage() {
                             }
                         </div>
                     </div>
-                    
+
                     <div className={`modalBackground modalShowing-${modalState}`}>
                         <div className="modalInner">
                             <div className="modalText">

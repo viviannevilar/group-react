@@ -46,15 +46,15 @@ function CollectionsPage() {
                 Authorization: `Token ${token}`,
             }
         })
-        .then((results) =>  {
-            setErrorCode(results.status)
-            return results.json();
-        })
-        .then((data) => {
-            setCollectionsList(data);
-            setIsLoading(false)
-        })
-     }, [activePath]);
+            .then((results) => {
+                setErrorCode(results.status)
+                return results.json();
+            })
+            .then((data) => {
+                setCollectionsList(data);
+                setIsLoading(false)
+            })
+    }, [activePath]);
 
 
     //////////////////////////// return ////////////////////////////
@@ -64,11 +64,11 @@ function CollectionsPage() {
 
         return (
             <div>
-                <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"}/>
+                <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"} />
             </div>
         )
-    
-    // if not found (project doesn't exist) 
+
+        // if not found (project doesn't exist) 
     } else if (errorCode === 404) {
 
         return (
@@ -76,7 +76,7 @@ function CollectionsPage() {
                 <h1> Collection not found! </h1>
             </div>
         )
-    // if not logged in or wrong credentials
+        // if not logged in or wrong credentials
     } else if ((errorCode === 401) || (errorCode === 403)) {
 
         return (
@@ -84,8 +84,8 @@ function CollectionsPage() {
                 <h1>You don't have permission to see this page! </h1>
             </div>
         )
-    
-    // if there are no collections to show
+
+        // if there are no collections to show
     } else if (!collectionsList || collectionsList.length === 0) {
 
         return (
@@ -94,31 +94,31 @@ function CollectionsPage() {
             </div>
         )
 
-    // if the credentials match and there are collections to show
+        // if the credentials match and there are collections to show
     } else {
-        
+
         return (
 
             <div>
-                <h1>{ (activePath === "active-collections/") ? "Collections" : "Archived Collections" } </h1>
+                <h1>{(activePath === "active-collections/") ? "Collections" : "Archived Collections"} </h1>
 
                 {/* display list of collections */}
                 {collectionsList.map((collectionData, key) => {
-                    return <CollectionCard key={key} collectionData={collectionData}/>;
+                    return <CollectionCard key={key} collectionData={collectionData} />;
                 })}
 
                 <br></br>
 
                 {/* button to see archived collections or active collections */}
                 {
-                (activePath === "archived-collections/") ? 
-                <Link to={`/collections/`}><button >See active collections</button></Link> : 
-                <Link to={`/collections-archive/`}><button >See archived collections</button></Link>
+                    (activePath === "archived-collections/") ?
+                        <Link to={`/collections/`}><button >See active collections</button></Link> :
+                        <Link to={`/collections-archive/`}><button >See archived collections</button></Link>
                 }
             </div>
         )
     }
-    
+
 
 }
 
