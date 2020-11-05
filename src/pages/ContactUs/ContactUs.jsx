@@ -1,8 +1,13 @@
 import React from "react";
+import ContactUsForm from "../../components/ContactUsForm/ContactUsForm";
+
 function ContactUsPage(){
 
-    return <h1>This is the COntactUS page</h1>
+    return (
+      <div>
+        <ContactUsForm />
+      </div>
+    );
+  }
 
-}
-
-export default ContactUsPage
+export default ContactUsPage;
