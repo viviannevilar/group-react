@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 
-function EditItemForm(props) {
+function ItemEditForm(props) {
 
 
     const { itemData, collectionData } = props;
@@ -47,26 +47,46 @@ function EditItemForm(props) {
         }));
     };
 
+    const handleImageChange = (e) => {
+        e.persist();
+
+        setCredentials((prevCredentials) => ({
+            ...prevCredentials,
+            image: e.target.files[0],
+        }));
+    };
+
     const history = useHistory();
 
     const postData = async () => {
         let token = window.localStorage.getItem("token");
 
+        let form_data = new FormData();
+        form_data.append('image', credentials.image);
+        form_data.append('attribute1', credentials.attribute1);
+        form_data.append('attribute2', credentials.attribute2);
+        form_data.append('attribute3', credentials.attribute3);
+        form_data.append('attribute4', credentials.attribute4);
+        form_data.append('collection', credentials.collection);       
+        form_data.append('is_active', credentials.is_active);
+        form_data.append('name', credentials.name);
+
         //function you can call but carry on as well
         const response = await fetch(`${process.env.REACT_APP_API_URL}item/${itemData.id}/`, {
             method: "put",
             headers: {
-                "Content-Type": "application/json",
+                // "Content-Type": "application/json",
                 Authorization: `Token ${token}`,
             },
-            body: JSON.stringify(credentials),
+            body: form_data,
+            // body: JSON.stringify(credentials),
         });
         return response.json();
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("handlesubit")
+        console.log("handlesubmit")
         console.log(credentials);
         postData().then((response) => {
             console.log(response)
@@ -147,7 +167,7 @@ function EditItemForm(props) {
                     <input
                         type="file"
                         id="image"
-                        onChange={handleChange}
+                        onChange={handleImageChange}
                     />
                 </div>
 
@@ -195,4 +215,4 @@ function EditItemForm(props) {
     );
 }
 
-export default EditItemForm;
+export default ItemEditForm;

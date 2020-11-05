@@ -1,9 +1,9 @@
-import EditItemForm from "../../components/EditItemForm/EditItemForm";
+import ItemEditForm from "../../components/ItemEditForm/ItemEditForm";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 
-function EditFormPage() {
+function ItemEditPage() {
     const { id, listid } = useParams();
     const [editData, setEditData] = useState({})
     const [collectionData, setCollectionData] = useState({})
@@ -52,7 +52,7 @@ function EditFormPage() {
         <div>
             {token !== null && (
                 <div>
-                    <EditItemForm itemData={editData} collectionData={collectionData} />
+                    <ItemEditForm itemData={editData} collectionData={collectionData} />
                 </div>
             )}
 
@@ -61,4 +61,4 @@ function EditFormPage() {
     );
 }
 
-export default EditFormPage;
+export default ItemEditPage;
