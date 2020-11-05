@@ -12,6 +12,7 @@ import CollectionDetailPage from "./pages/CollectionDetailPage/CollectionDetailP
 import CollectionsPage from "./pages/CollectionsPage/CollectionsPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import ItemEditPage from "./pages/ItemEditPage/ItemEditPage";
+import CollectionSortPage from "./pages/CollectionSortPage/CollectionSortPage";
 
 
 function App() {
@@ -66,6 +67,13 @@ function App() {
                     <Route exact path="/collection/shared/:id/:code/">
                         <CollectionDetailPage />
                     </Route>
+
+                    <Route exact path="/collection/sort/:id/">
+                        <CollectionSortPage />
+                    </Route>
+
+
+
                     <Route path="*" component={NotFoundPage} />
                 </Switch>
             </div>
