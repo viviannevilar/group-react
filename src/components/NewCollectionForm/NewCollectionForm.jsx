@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "./NewCollectionForm.css";
+import Nav from "../../components/Nav/Nav";
 // import "../../components/CollectionCard/CollectionCard.css";
 
 function NewCollectionForm() {
@@ -78,6 +79,9 @@ function NewCollectionForm() {
 
   return (
     <div id="collectionform">
+
+        <Nav />
+
       <h2 id="headerTitle"> Create a new collection! </h2>
       <br></br>
       <h4>Price, Sale Price, Date Sale Price Ends and Image Upload are all default attributes that will be included in your collections. </h4>

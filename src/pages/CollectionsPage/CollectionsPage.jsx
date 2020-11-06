@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
 import CollectionCard from "../../components/CollectionCard/CollectionCard"
+import Nav from "../../components/Nav/Nav";
 
 function CollectionsPage() {
 
@@ -101,6 +102,9 @@ function CollectionsPage() {
         return (
 
             <div>
+
+                <Nav />
+
                 <h1>{(activePath === "active-collections/") ? "Collections" : "Archived Collections"} </h1>
 
                 {/* display list of collections */}
