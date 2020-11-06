@@ -67,9 +67,8 @@ function CollectionSortPage() {
 
     ////////       functions to sort collections       ////////
 
-    //let sortedItemData
-
-    const [sortedItemData, setSortedItemData] = useState(itemData)
+    // state variable that will be used to store the sorted values of items
+    //const [sortedItemData, setSortedItemData] = useState(itemData)
 
     // sort by price, lowest to highest
     const sortAscending = () => {
@@ -77,7 +76,6 @@ function CollectionSortPage() {
         //see explanation at the end of file to understand this a bit more
         setItemData(sorted)
     }
-
     
     // sort by price, highest to lowest
     const sortDescending = () => {
@@ -113,17 +111,19 @@ function CollectionSortPage() {
 
                 <div>
                     <div id="App">
+
+                        {/* collection information */}
                         <p>Collection of {collectionData.title} </p>
                         <p>Date Created {formatDate(collectionData.date_created)} </p>
                         <p>Last Updated {formatDate(collectionData.last_updated)} </p>
 
+                        {/* buttons to sort data */}
                         <button onClick={sortAscending}>Sort by Price asc</button>
                         <button onClick={sortDescending}>Sort by Price desc</button>
                         <button onClick={sortCreated}>Sort by Created</button>
                         <button onClick={sortModified}>Sort by Modified</button>
 
-
-                        {/* return new Date(b.date) - new Date(a.date); */}
+                        {/* show items list, and this list will be sorted according to the button that has been pressed above */}
                         <div id="project-list">
                             {itemData.map((item, key) => {
                                 return (
@@ -131,8 +131,8 @@ function CollectionSortPage() {
                                         <p>{item.id} - {item.name} - {item.price}</p>
                                     </div>)
                             })}
-
                         </div>
+
                     </div>
                 </div>
 
@@ -160,7 +160,7 @@ function CollectionSortPage() {
                 <div>
                     <div>
                         <div>
-                            <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"} />
+                            <img alt="" src={imageError} />
                         </div>
                         {/* <Loader /> */}
                     </div>
