@@ -43,7 +43,6 @@ function CollectionDetailPage() {
         window.scrollTo(0, 0);
     };
 
-    console.log(urlComponents)
     if (urlComponents.length === 6) {
         urlPath = "safe/" + id + "/" + urlComponents[4]
         shared_link = "public"
@@ -51,6 +50,24 @@ function CollectionDetailPage() {
         urlPath = id
         shared_link = "private"
     }
+
+
+    // Archive itme
+    const archiveItem = async (e) => {
+        e.preventDefault();
+        let token = window.localStorage.getItem("token");
+        const response = await fetch(`${process.env.REACT_APP_API_URL}item/${id}/archive/`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Token ${token}`,
+            },
+        });
+
+        window.location.reload();
+        return response.json();
+    }
+
 
     const fetchProjects = async () => {
         let response
@@ -163,14 +180,15 @@ function CollectionDetailPage() {
                             {itemData.map((projectData, key) => {
                                 return (
                                     <div>
-                                        <Link to={`/item-edit/${projectData.id}/${collectionData.id}/`}>
-                                            <p>Edit Item</p>
-                                        </Link>
                                         <ItemCard key={key} projectData={projectData} collectionData={collectionData} />
 
                                         {shared_link === "private" && (
                                             <div>
                                                 <button className={`button-delete${key}`} onClick={() => handleDelete(projectData)}>Delete Item: {projectData.name} </button>
+                                                <Link to={`/item-edit/${projectData.id}/${collectionData.id}/`}>
+                                                    <button>Edit Item</button >
+                                                </Link>
+                                                <button onClick={archiveItem}>{projectData.is_active ? "Archive" : "Unarchive"}</button>
                                             </div>
                                         )}
 
