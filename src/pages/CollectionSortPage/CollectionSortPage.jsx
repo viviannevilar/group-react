@@ -73,12 +73,12 @@ function CollectionSortPage() {
 
     // sort by price, lowest to highest
     const sortAscending = () => {
-        const sorted = [...itemData].sort((a, b) => a.price - b.price) 
+        const sorted = [...itemData].sort((a, b) => a.price - b.price)
         //see explanation at the end of file to understand this a bit more
         setItemData(sorted)
     }
 
-    
+
     // sort by price, highest to lowest
     const sortDescending = () => {
         const sorted = [...itemData].sort((a, b) => a.price - b.price).reverse()
@@ -87,7 +87,7 @@ function CollectionSortPage() {
 
     // sort by date created, oldest to newest
     const sortCreated = () => {
-        const sorted = [...itemData].sort((a, b) => a.id - b.id) 
+        const sorted = [...itemData].sort((a, b) => a.id - b.id)
         setItemData(sorted)
     }
 
@@ -96,9 +96,9 @@ function CollectionSortPage() {
         const sorted = [...itemData].sort((a, b) => a.id - b.id).reverse
         setItemData(sorted)
     }
-    
+
     const sortModified = () => {
-        const sorted = [...itemData].sort((a,b) => new Date(a.last_updated) - new Date(b.last_updated))
+        const sorted = [...itemData].sort((a, b) => new Date(a.last_updated) - new Date(b.last_updated))
         setItemData(sorted)
     }
 
@@ -136,7 +136,7 @@ function CollectionSortPage() {
                     </div>
                 </div>
 
-            ) : null }
+            ) : null}
 
             {/* *******      if there IS an error message and 
                              if it is no longer waiting for the fetch  ******** */}
@@ -151,7 +151,7 @@ function CollectionSortPage() {
                     </div>
                 </div>
 
-            ) : null }
+            ) : null}
 
             {/* *******      if there IS an error message and 
                              if it is no longer waiting for the fetch  ******** */}
@@ -166,7 +166,7 @@ function CollectionSortPage() {
                     </div>
                 </div>
 
-            ) : null }
+            ) : null}
 
         </div >
 

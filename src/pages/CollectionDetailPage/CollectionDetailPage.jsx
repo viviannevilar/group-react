@@ -98,9 +98,6 @@ function CollectionDetailPage() {
         const data = await response.json();
 
         if (response.ok) {
-            console.log(data)
-            console.log(data.collection_items)
-
             setCollectionData(data);
             setItemData(data.collection_items);
             setisLoading(false);
@@ -131,7 +128,42 @@ function CollectionDetailPage() {
         });
     }
 
+    ////////       functions to sort collections       ////////
 
+    //let sortedItemData
+
+    const [sortedItemData, setSortedItemData] = useState(itemData)
+
+    // sort by price, lowest to highest
+    const sortAscending = () => {
+        const sorted = [...itemData].sort((a, b) => a.price - b.price)
+        //see explanation at the end of file to understand this a bit more
+        setItemData(sorted)
+    }
+
+
+    // sort by price, highest to lowest
+    const sortDescending = () => {
+        const sorted = [...itemData].sort((a, b) => a.price - b.price).reverse()
+        setItemData(sorted)
+    }
+
+    // sort by date created, oldest to newest
+    const sortCreated = () => {
+        const sorted = [...itemData].sort((a, b) => a.id - b.id)
+        setItemData(sorted)
+    }
+
+    // sort by date created, oldest to newest
+    const sortCreatedReverse = () => {
+        const sorted = [...itemData].sort((a, b) => a.id - b.id).reverse
+        setItemData(sorted)
+    }
+
+    const sortModified = () => {
+        const sorted = [...itemData].sort((a, b) => new Date(a.last_updated) - new Date(b.last_updated))
+        setItemData(sorted)
+    }
 
     return (
         <div id="projectlistcenter">
@@ -151,9 +183,14 @@ function CollectionDetailPage() {
                     <div id="App">
                         {shared_link == "private" && (<p>See your collection of {collectionData.title} </p>)}
                         {shared_link == "public" && (<p>Collection of {collectionData.title} </p>)}
-
                         <p>Date Created {formatDate(collectionData.date_created)} </p>
                         <p>Last Updated {formatDate(collectionData.last_updated)} </p>
+
+                        <button onClick={sortAscending}>Sort by Price asc</button>
+                        <button onClick={sortDescending}>Sort by Price desc</button>
+                        <button onClick={sortCreated}>Sort by Created</button>
+                        <button onClick={sortModified}>Sort by Modified</button>
+
 
                         {shared_link === "private" && (
                             <div>
