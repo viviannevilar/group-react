@@ -103,9 +103,9 @@ function EditProfileForm() {
     postData()
       .then((response) => {
         if (response != undefined) {
-          history.push("/");
+          history.push("/collections/");
         } else {
-          history.push("/")
+          history.push("/collections/")
         }
       }).catch(
         (error) => {
@@ -118,26 +118,31 @@ function EditProfileForm() {
   const handleSubmitPassword = (e) => {
   
     e.preventDefault();
-    console.log(passwords)
-  
-
-  
     fetch(`${process.env.REACT_APP_API_URL}change-password/`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${token}`},
-
       body:JSON.stringify(passwords)
   
-    }).then((results) => {
-      return results.json();
-    }).then((data) => {
-      console.log("success!",data)
-      // setProfileData(data);
-    });
+    })
+    
+    .then((result) => {
+      if (result != undefined) {
+        history.push ("/collections/");
+        // window.location.reload();
+      } else {
+        history.push("/edituserdetails/")
+      }
+    
+    }).catch(
+      (error) => {
+        console.log("error")
+      }
+    )
+    };
   
-  };
+   
 
   return (
     <div>
