@@ -160,6 +160,7 @@ function CollectionDetailPage() {
         setItemData(sorted)
     }
 
+    // sort by last updated
     const sortModified = () => {
         const sorted = [...itemData].sort((a, b) => new Date(a.last_updated) - new Date(b.last_updated))
         setItemData(sorted)

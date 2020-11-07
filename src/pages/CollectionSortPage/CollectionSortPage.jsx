@@ -78,7 +78,6 @@ function CollectionSortPage() {
         setItemData(sorted)
     }
 
-
     // sort by price, highest to lowest
     const sortDescending = () => {
         const sorted = [...itemData].sort((a, b) => a.price - b.price).reverse()
@@ -97,6 +96,7 @@ function CollectionSortPage() {
         setItemData(sorted)
     }
 
+    // sort by last updated
     const sortModified = () => {
         const sorted = [...itemData].sort((a, b) => new Date(a.last_updated) - new Date(b.last_updated))
         setItemData(sorted)
@@ -122,8 +122,6 @@ function CollectionSortPage() {
                         <button onClick={sortCreated}>Sort by Created</button>
                         <button onClick={sortModified}>Sort by Modified</button>
 
-
-                        {/* return new Date(b.date) - new Date(a.date); */}
                         <div id="project-list">
                             {itemData.map((item, key) => {
                                 return (
