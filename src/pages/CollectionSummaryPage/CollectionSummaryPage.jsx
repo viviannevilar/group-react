@@ -10,17 +10,10 @@ function formatDate(string) {
     return new Date(string).toLocaleDateString([], options);
 }
 
-// List of items print out
-// Each attribute is clickable and takes you to a pop up modal that compares the items
-// Items at phone screen width are swipeable
-// Add item - form - pop up modal or new form we will see
-// Edit each item with a button - pop up
-// Archive, delete and edit button for each list item. 
-
 function CollectionDetailPage() {
     let urlPath
     let shared_link
-    let token = window.localStorage.getItem("token");
+    //let token = window.localStorage.getItem("token");
     const location = useLocation();
     const urlComponents = location.pathname.split("/")
     const { id } = useParams();
@@ -101,7 +94,7 @@ function CollectionDetailPage() {
     }, [id]);
 
     const handleDelete = (projectdat, e) => {
-        //let token = localStorage.getItem("token");
+        let token = localStorage.getItem("token");
         fetch(`${process.env.REACT_APP_API_URL}item/${projectdat.id}/`, {
             method: "delete",
             headers: {

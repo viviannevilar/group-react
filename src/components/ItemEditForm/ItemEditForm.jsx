@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 
-function EditItemForm(props) {
+function ItemEditForm(props) {
 
 
     const { itemData, collectionData } = props;
@@ -14,7 +14,6 @@ function EditItemForm(props) {
         attribute2: "",
         attribute3: "",
         attribute4: "",
-        attribute5: "",
         image: null,
         collection: null,
         is_active: true,
@@ -22,8 +21,6 @@ function EditItemForm(props) {
 
     useEffect(() => {
         console.log(itemData)
-
-
         setCredentials({
             id: parseInt(itemData.id),
             name: itemData.name,
@@ -31,12 +28,12 @@ function EditItemForm(props) {
             attribute2: itemData.attribute2,
             attribute3: itemData.attribute3,
             attribute4: itemData.attribute4,
-            attribute5: itemData.attribute5,
             image: itemData.image,
             is_active: itemData.is_active,
-            collection: parseInt(collectionData.id),
+            collection: parseInt(itemData.collection),
         });
         console.log(credentials)
+
 
     }, [itemData]);
 
@@ -50,38 +47,56 @@ function EditItemForm(props) {
         }));
     };
 
+    const handleImageChange = (e) => {
+        e.persist();
+
+        setCredentials((prevCredentials) => ({
+            ...prevCredentials,
+            image: e.target.files[0],
+        }));
+    };
+
     const history = useHistory();
 
     const postData = async () => {
         let token = window.localStorage.getItem("token");
 
+        let form_data = new FormData();
+        form_data.append('image', credentials.image);
+        form_data.append('attribute1', credentials.attribute1);
+        form_data.append('attribute2', credentials.attribute2);
+        form_data.append('attribute3', credentials.attribute3);
+        form_data.append('attribute4', credentials.attribute4);
+        form_data.append('collection', credentials.collection);       
+        form_data.append('is_active', credentials.is_active);
+        form_data.append('name', credentials.name);
+
         //function you can call but carry on as well
         const response = await fetch(`${process.env.REACT_APP_API_URL}item/${itemData.id}/`, {
             method: "put",
             headers: {
-                "Content-Type": "application/json",
+                // "Content-Type": "application/json",
                 Authorization: `Token ${token}`,
             },
-            body: JSON.stringify(credentials),
+            body: form_data,
+            // body: JSON.stringify(credentials),
         });
         return response.json();
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        console.log("handlesubmit")
         console.log(credentials);
         postData().then((response) => {
             console.log(response)
             history.push(`/collection/${collectionData.id}/`);
+            // window.location.reload();
         });
 
     };
 
 
-    const handleBack = (e) => {
-        history.push(`/collection/${collectionData.id}/`);
-    };
 
     return (
         <div id="pledgeform">
@@ -93,7 +108,7 @@ function EditItemForm(props) {
                     <input
                         type="text"
                         id="name"
-                        value={itemData.name}
+                        value={credentials.name}
                         onChange={handleChange}
                     />
                 </div>
@@ -103,7 +118,7 @@ function EditItemForm(props) {
                     <input
                         type="text"
                         id="attribute1"
-                        value={itemData.attribute1}
+                        value={credentials.attribute1}
                         onChange={handleChange}
                     />
                 </div>)}
@@ -115,7 +130,7 @@ function EditItemForm(props) {
                     <input
                         type="text"
                         id="attribute2"
-                        value={itemData.attribute2}
+                        value={credentials.attribute2}
                         onChange={handleChange}
                     />
                 </div>)}
@@ -125,7 +140,7 @@ function EditItemForm(props) {
                     <input
                         type="text"
                         id="attribute3"
-                        value={itemData.attribute3}
+                        value={credentials.attribute3}
                         onChange={handleChange}
                     />
                 </div>)}
@@ -135,33 +150,24 @@ function EditItemForm(props) {
                     <input
                         type="text"
                         id="attribute4"
-                        value={itemData.attribute4}
+                        value={credentials.attribute4}
                         onChange={handleChange}
                     />
                 </div>)}
 
 
-                {collectionData.attribute5 !== "" && (<div className="thra">
-                    <label htmlFor="attribute5">{collectionData.attribute5}:</label>
-                    <input
-                        type="text"
-                        id="attribute5"
-                        value={itemData.attribute5}
-                        onChange={handleChange}
-                    />
-                </div>)}
 
                 <div className="thra">
                     <label htmlFor="image">Image:</label>
                     <br></br>
                     <div id="imagecon">
-                        <img id="profilepicture" src={itemData.image} alt="anon pic" />
+                        <img id="profilepicture" src={credentials.image} alt="anon pic" />
                     </div>
                     <br></br>
                     <input
                         type="file"
                         id="image"
-                        onChange={handleChange}
+                        onChange={handleImageChange}
                     />
                 </div>
 
@@ -171,7 +177,7 @@ function EditItemForm(props) {
                     <input
                         type="textarea"
                         id="notes"
-                        value={itemData.notes}
+                        value={credentials.notes}
                         onChange={handleChange}
                     />
                 </div>
@@ -202,11 +208,11 @@ function EditItemForm(props) {
 
 
                 <div className="buttonwrapper">
-                    <button className="pledgebutton" type="submit" onClick={handleSubmit}>  Edit List Item </button>
+                    <button className="pledgebutton" type="submit" onClick={handleSubmit}>  Update List Item </button>
                 </div>
             </form>
         </div>
     );
 }
 
-export default EditItemForm;
+export default ItemEditForm;

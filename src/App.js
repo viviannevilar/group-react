@@ -11,8 +11,9 @@ import NewCollection from './pages/NewCollection/NewCollection';
 import CollectionDetailPage from "./pages/CollectionDetailPage/CollectionDetailPage";
 import CollectionsPage from "./pages/CollectionsPage/CollectionsPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+import ItemEditPage from "./pages/ItemEditPage/ItemEditPage";
 
- 
+
 function App() {
 
     return (
@@ -50,6 +51,10 @@ function App() {
 
                     <Route exact path="/collection/:id">
                         <CollectionDetailPage />
+                    </Route>
+
+                    <Route exact path="/item-edit/:id/:listid/">
+                        <ItemEditPage />
                     </Route>
 
                     <Route exact path="/collections/">
