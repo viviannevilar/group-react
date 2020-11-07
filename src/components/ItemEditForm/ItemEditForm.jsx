@@ -19,14 +19,15 @@ function ItemEditForm(props) {
         attribute2: "",
         attribute3: "",
         attribute4: "",
-        image: null,
+        image: "",
         collection: null,
     });
 
 
     useEffect(() => {
         console.log(itemData)
-        setCredentials({
+        setCredentials((prevCredentials) => ({
+            ...prevCredentials,
             id: parseInt(itemData.id),
             name: itemData.name,
             sale_amount: itemData.sale_amount,
@@ -36,9 +37,9 @@ function ItemEditForm(props) {
             attribute2: itemData.attribute2,
             attribute3: itemData.attribute3,
             attribute4: itemData.attribute4,
-            image: itemData.image,
+            //image: itemData.image,
             collection: parseInt(itemData.collection),
-        });
+        }));
         console.log(credentials)
 
 
@@ -206,7 +207,7 @@ function ItemEditForm(props) {
                     <label htmlFor="image">Image:</label>
                     <br></br>
                     <div id="imagecon">
-                        <img id="profilepicture" src={credentials.image} alt="anon pic" />
+                        <img id="image" src={credentials.image} alt="anon pic" />
                     </div>
                     <br></br>
                     <input
