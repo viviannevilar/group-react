@@ -2,7 +2,6 @@ import React from "react";
 //import { Link } from "react-router-dom";
 import "./ItemCard.css";
 
-
 function formatDate(string) {
     var options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(string).toLocaleDateString([], options);
@@ -13,7 +12,9 @@ function ItemCard(props) {
 
 
     return (
+
         <div className="project-card" id={projectData.is_active === false ? "project-closed" : "project-open"}>
+
             <p className="cat">Item: {projectData.name}</p>
 
             <img alt="Item" src={projectData.image} />

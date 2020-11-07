@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Nav from "../../components/Nav/Nav";
 
 function LoginForm() {
   //variables
@@ -50,7 +51,7 @@ function LoginForm() {
           if (response.token !== null || response != null) {
             window.localStorage.setItem("token", response.token);
             window.localStorage.setItem("username", credentials.username);
-            history.push("/");
+            history.push("/collections/");
             window.location.reload();
           } else {
             history.push("/login");
@@ -68,7 +69,10 @@ function LoginForm() {
 
   return (
 
+      <div>
+
     <div id="loginform">
+
       <h2 id="headerTitle">Login</h2>
       <form>
         <div className="row">
@@ -109,6 +113,7 @@ function LoginForm() {
       }
 
     </div >
+    </div>
 
   );
 }
