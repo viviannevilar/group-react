@@ -20,6 +20,7 @@ function HomePage() {
       </div>
 
       <div className="buttons-wrapper">
+
         <Link to="/signup" className="button1" >Sign Up</Link>
         <Link to="/login" className="button1" >Log In</Link>
       </div>
@@ -27,6 +28,7 @@ function HomePage() {
       <div className="footer">
         <Link className="footer1" to="/contactus">CONTACT US</Link>
         <Link className="footer1" to="/aboutus">ABOUT US</Link>
+
       </div>
 
     </div>
