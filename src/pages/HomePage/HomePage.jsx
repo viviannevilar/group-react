@@ -21,7 +21,6 @@ function HomePage() {
           <div className="buttons-wrapper">
             <Link to="/signup" className="button" >Sign Up</Link>
             <Link to="/login" className="button" >Log In</Link>
-            <Link to="/collections" className="button">Collections</Link>
           </div>   
 
           <div className="footer">
