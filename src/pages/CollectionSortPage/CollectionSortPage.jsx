@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useHistory, Link } from "react-router-dom";
-import ItemCard from "../../components/ItemCard/ItemCard";
+import { useParams } from "react-router-dom";
 
 function formatDate(string) {
     var options = { year: "numeric", month: "long", day: "numeric" };
@@ -17,7 +16,6 @@ function CollectionSortPage() {
     // tokens, ids, location, history
     let token = window.localStorage.getItem("token");
     const { id } = useParams();
-    const history = useHistory();
 
     // state variables
     const [isLoading, setisLoading] = useState(true);
@@ -27,13 +25,7 @@ function CollectionSortPage() {
     const [itemData, setItemData] = useState([]);
     const [itemDisplayData, setItemDisplayData ] = useState([])
 
-
-    const [ activePath, setActivePath ] = useState("active-items")
-    // 'items/'
-    // 'archived-items/'
-    // 'active-items/'
-
-    const [ filterChoice, setFilterChoice ] = useState("active")
+    const [ filterChoice, setFilterChoice ] = useState("all")
     const [ orderChoice, setOrderChoice ] = useState("date-modified")
     
 
@@ -67,6 +59,7 @@ function CollectionSortPage() {
             setCollectionData(data);
             setItemData(data.collection_items);
             setItemDisplayData(data.collection_items)
+            console.log(data.collection_items)
             setisLoading(false);
         } else {
             setisLoading(false);
@@ -80,9 +73,10 @@ function CollectionSortPage() {
 
     ////////       filter by item.is_active       ////////
 
-    let filteredData
 
     useEffect(() => {
+
+        let filteredData
 
         if (filterChoice === "active") {
 
@@ -107,7 +101,7 @@ function CollectionSortPage() {
 
         }
 
-    }, [filterChoice])
+    }, [filterChoice, itemData])
 
 
     ////////       order items by price, date       ////////
@@ -187,7 +181,7 @@ function CollectionSortPage() {
                         </select>
 
 
-                        {/* show items list, and this list will be sorted according to the button that has been pressed above */}
+                        {/* show items list, sorted according to the button that has been pressed above */}
                         <div id="project-list">
                             {itemDisplayData.map((item, key) => {
                                 return (
