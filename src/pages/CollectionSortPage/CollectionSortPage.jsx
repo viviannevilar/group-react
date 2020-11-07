@@ -88,15 +88,18 @@ function CollectionSortPage() {
 
             filteredData = itemData.filter((item) => item.is_active)
             setItemDisplayData(filteredData)
+            console.log("active filtering")
 
         } else if (filterChoice === "archived") {
 
             filteredData = itemData.filter((item) => !item.is_active)
             setItemDisplayData(filteredData)
+            console.log("archive filtering")
 
         } else if (filterChoice === "all") {
 
             setItemDisplayData(itemData)
+            console.log("no filtering - all items")
 
         } else {
 
@@ -107,36 +110,43 @@ function CollectionSortPage() {
     }, [filterChoice])
 
 
-    ////////       functions to sort items       ////////
+    ////////       order items by price, date       ////////
 
+    let sorted
 
     useEffect(() => {
 
         if (orderChoice === "price-lh") {
 
-            const sorted = [...itemDisplayData].sort((a, b) => a.price - b.price) 
+            sorted = [...itemDisplayData].sort((a, b) => a.price - b.price) 
             //see explanation at the end of this file to understand this a bit more
             setItemDisplayData(sorted)
+            console.log("price-lh ordering")
 
         } else if (orderChoice === "price-hl") {
 
-            const sorted = [...itemDisplayData].sort((a, b) => a.price - b.price).reverse()
+            sorted = [...itemDisplayData].sort((a, b) => a.price - b.price).reverse()
             setItemDisplayData(sorted)
+            console.log("price-hl ordering")
 
 
         } else if (orderChoice === "date-created") {
 
-            const sorted = [...itemDisplayData].sort((a, b) => a.id - b.id) 
+            sorted = [...itemDisplayData].sort((a, b) => a.id - b.id) 
             setItemDisplayData(sorted)
+            console.log("date-created ordering")
 
         } else if (orderChoice === "date-modified") {
 
-            const sorted = [...itemDisplayData].sort((a,b) => new Date(a.last_updated) - new Date(b.last_updated))
+            sorted = [...itemDisplayData].sort((a,b) => new Date(a.last_updated) - new Date(b.last_updated))
             setItemDisplayData(sorted)
+            console.log("date-modified ordering")
 
         } else {
 
             console.log("Error in ordering. Order chosen doesn't match any of the order options. orderChoice = ", orderChoice)
+
+            console.log("error ordering")
 
         }
 
@@ -145,6 +155,7 @@ function CollectionSortPage() {
 
 
     //////////////////////////// return ////////////////////////////
+     
     return (
         <div id="projectlistcenter">
 
@@ -160,12 +171,14 @@ function CollectionSortPage() {
                         <p>Date Created {formatDate(collectionData.date_created)} </p>
                         <p>Last Updated {formatDate(collectionData.last_updated)} </p>
 
+                        {/* first drop down - filter choices */}
                         <select onChange={(e) => setFilterChoice(e.target.value)}>
                             <option value="all">All items</option>
                             <option value="active">Active items</option>
                             <option value="archived">Archived items</option>
                         </select>
 
+                        {/* second drop down - order choices */}
                         <select onChange={(e) => setOrderChoice(e.target.value)}>
                             <option value="date-modified">Date modified</option>
                             <option value="price-lh">Price - low to high</option>
