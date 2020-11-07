@@ -3,7 +3,7 @@ import ContactUsForm from "../../components/ContactUsForm/ContactUsForm";
 
 function ContactUsPage(){
 
-    return (
+    return (   
       <div>
         <ContactUsForm />
       </div>

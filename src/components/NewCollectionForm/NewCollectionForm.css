@@ -1,12 +1,37 @@
-#collectionform {
-  max-width: 700px;
-  min-width: 300px;
-  max-height: 900px;
-  width: 100%;
-  margin: 0px auto;
-  background-color: #ffffff;
-  border-radius: 25px;
+
+.navbarcontainer{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
+
+
+
+
+#collectionform{
+    max-width: 700px;
+    min-width: 300px;
+    max-height: 900px;
+    width: 100%;
+    margin: 0px auto;
+    background-color: #FFFFFF;
+    border-radius: 25px;
+  }
+  
+  #headerTitle{
+    text-align: center;
+    font-family: 'open sans', sans-serif;
+    padding: 1.5rem 0;
+    margin: 0;
+    font-size: rem;
+  }
+  
+  .thra{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 
 #headerTitle {
   text-align: center;

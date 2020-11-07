@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "./NewCollectionForm.css";
+import Nav from "../../components/Nav/Nav";
 // import "../../components/CollectionCard/CollectionCard.css";
 
 function NewCollectionForm() {
@@ -14,7 +15,6 @@ function NewCollectionForm() {
     attribute2: "",
     attribute3: "",
     attribute4: "",
-    attribute5: "",
     is_active: true,
   });
 
@@ -77,6 +77,11 @@ function NewCollectionForm() {
   };
 
   return (
+    <div id="Nav">
+    <div>
+        <Nav />
+    </div>
+      <div>
     <div id="collectionform">
       <h2 id="headerTitle"> Create a new collection! </h2>
       <br></br>
@@ -135,15 +140,6 @@ function NewCollectionForm() {
           />
         </div>
     
-        <div className="thra">
-          <label htmlFor="attribute5">Attribute 5:</label>
-          <textarea
-            type="textarea"
-            id="attribute5"
-            placeholder="Pick an attribute you would lilke to use to compare items"
-            onChange={handleChange}
-          />
-        </div>
         <br></br>
         <br></br>
 
@@ -193,6 +189,8 @@ function NewCollectionForm() {
         )
       }
     </div >
+    </div>
+    </div>
   );
 }
 
