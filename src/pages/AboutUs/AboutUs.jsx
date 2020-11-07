@@ -1,9 +1,14 @@
 import React from "react";
 import "./AboutUs.css";
+import Nav from "../../components/Nav/Nav";
            
 
 function AboutUsPage(){
     return (
+        <div id="Nav">
+        <div>
+            <Nav />
+        </div>
         <div className="aboutus">
             <h1 id="about">We Love Comparing!</h1>
             <p>At ComparaList, we understand that making everyday life decisions such as buying a fridge, car or furniture can be daunting. That's why we're here:)</p>
@@ -17,6 +22,7 @@ function AboutUsPage(){
             <h1 id="about">We Love hearing from you!</h1>
             <p>We hope you enjoy our website, as much as we enjoyed creating it for you. If you have any questions or comments, please don't hesitate to <a href="./ContactUs">contact us</a></p>
 
+        </div>
         </div>
     ) 
 }

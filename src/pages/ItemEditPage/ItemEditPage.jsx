@@ -1,6 +1,7 @@
 import ItemEditForm from "../../components/ItemEditForm/ItemEditForm";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Nav from "../../components/Nav/Nav";
 
 
 function ItemEditPage() {
@@ -49,6 +50,10 @@ function ItemEditPage() {
 
 
     return (
+        <div id="Nav">
+        <div>
+            <Nav />
+        </div>
         <div>
             {token !== null && (
                 <div>
@@ -57,6 +62,7 @@ function ItemEditPage() {
             )}
 
 
+        </div>
         </div>
     );
 }

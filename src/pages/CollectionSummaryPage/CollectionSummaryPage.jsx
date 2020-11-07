@@ -3,6 +3,7 @@ import { useParams, useHistory, useLocation, Link } from "react-router-dom";
 import ItemCard from "../../components/ItemCard/ItemCard";
 import AddItemForm from "../../components/AddItemForm/AddItemForm";
 import "./CollectionDetailPage.css";
+import Nav from "../../components/Nav/Nav";
 
 
 function formatDate(string) {
@@ -110,6 +111,10 @@ function CollectionDetailPage() {
 
 
     return (
+        <div id="Nav">
+        <div>
+            <Nav />
+        </div>
         <div id="projectlistcenter">
 
             {!isLoading && errorMessage && (<div>
@@ -203,7 +208,7 @@ function CollectionDetailPage() {
                 )}
             </div>
         </div >
-
+    </div>
     )
 }
 

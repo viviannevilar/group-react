@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "./NewCollectionForm.css";
+import Nav from "../../components/Nav/Nav";
 // import "../../components/CollectionCard/CollectionCard.css";
 
 function NewCollectionForm() {
@@ -77,6 +78,11 @@ function NewCollectionForm() {
   };
 
   return (
+    <div id="Nav">
+    <div>
+        <Nav />
+    </div>
+      <div>
     <div id="collectionform">
       <h2 id="headerTitle"> Create a new collection! </h2>
       <br></br>
@@ -193,6 +199,8 @@ function NewCollectionForm() {
         )
       }
     </div >
+    </div>
+    </div>
   );
 }
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Nav from "../../components/Nav/Nav";
 
 function LoginForm() {
   //variables
@@ -67,8 +68,14 @@ function LoginForm() {
   };
 
   return (
+    <div id="Nav">
+    <div>
+        <Nav />
+    </div>
+      <div>
 
     <div id="loginform">
+
       <h2 id="headerTitle">Login</h2>
       <form>
         <div className="row">
@@ -109,6 +116,8 @@ function LoginForm() {
       }
 
     </div >
+    </div>
+    </div>
 
   );
 }
