@@ -21,17 +21,17 @@ function Nav(props) {
 
     return (
 
-            <nav>
-                <Link to="/">Home</Link>
+            <nav className="Navbarcontainer">
+                <Link id="Navitem" to="/">Home</Link>
                 {isloggedIn ? (
-                    <Link to="/login" onClick={handleLogout}>
+                    <Link id="Navitem" to="/login" onClick={handleLogout}>
                     Logout
                     </Link>
                 ) : (
                     <Link to="/login">Login</Link>
                 )}
-                <Link to="/edituserdetails">Account</Link>
-                <Link to="/collections/">Collections</Link>
+                <Link id="Navitem" to="/edituserdetails">Account</Link>
+                <Link id="Navitem" to="/collections/">Collections</Link>
             </nav>
       );
     }
