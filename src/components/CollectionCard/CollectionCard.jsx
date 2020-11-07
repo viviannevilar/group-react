@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./CollectionCard.css"
+import "./CollectionCard.css";
+
 
 
 function CollectionCard(props) {
@@ -61,8 +62,9 @@ function CollectionCard(props) {
      //////////////////////////// return ////////////////////////////   
 
     return (
-        <div className="collection-wrapper">
 
+
+        <div className="collection-wrapper">
             <p> <Link to={linkCollection}>{collectionData.title}</Link>
             <button onClick={archiveCollection}>{ collectionData.is_active ? "Archive" : "Unarchive" }</button> 
             <button onClick={shareCollection}>Share Collection</button>

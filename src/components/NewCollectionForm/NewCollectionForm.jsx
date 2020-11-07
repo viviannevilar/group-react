@@ -78,10 +78,12 @@ function NewCollectionForm() {
   };
 
   return (
-    <div id="collectionform">
-
+    <div id="Nav">
+    <div>
         <Nav />
-
+    </div>
+      <div>
+    <div id="collectionform">
       <h2 id="headerTitle"> Create a new collection! </h2>
       <br></br>
       <h4>Price, Sale Price, Date Sale Price Ends and Image Upload are all default attributes that will be included in your collections. </h4>
@@ -197,6 +199,8 @@ function NewCollectionForm() {
         )
       }
     </div >
+    </div>
+    </div>
   );
 }
 
