@@ -1,8 +1,8 @@
 import React from "react";
 import "./AboutUs.css";
+           
 
 function AboutUsPage(){
-
     return (
         <div className="aboutus">
             <h1 id="about">We Love Comparing!</h1>
