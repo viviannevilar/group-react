@@ -69,10 +69,7 @@ function CollectionSortPage() {
 
     }
 
-    ////////       functions to filter active-archived-all items       ////////
-
-    ////////       filter by item.is_active       ////////
-
+    ////////       filter active-archived-all items       ////////
 
     useEffect(() => {
 
@@ -112,35 +109,33 @@ function CollectionSortPage() {
 
         if (orderChoice === "price-lh") {
 
-            sorted = [...itemDisplayData].sort((a, b) => a.price - b.price) 
+            sorted = [...itemData].sort((a, b) => a.price - b.price) 
             //see explanation at the end of this file to understand this a bit more
-            setItemDisplayData(sorted)
+            setItemData(sorted)
             console.log("price-lh ordering")
 
         } else if (orderChoice === "price-hl") {
 
-            sorted = [...itemDisplayData].sort((a, b) => a.price - b.price).reverse()
-            setItemDisplayData(sorted)
+            sorted = [...itemData].sort((a, b) => a.price - b.price).reverse()
+            setItemData(sorted)
             console.log("price-hl ordering")
 
 
         } else if (orderChoice === "date-created") {
 
-            sorted = [...itemDisplayData].sort((a, b) => a.id - b.id) 
-            setItemDisplayData(sorted)
+            sorted = [...itemData].sort((a, b) => a.id - b.id) 
+            setItemData(sorted)
             console.log("date-created ordering")
 
         } else if (orderChoice === "date-modified") {
 
-            sorted = [...itemDisplayData].sort((a,b) => new Date(a.last_updated) - new Date(b.last_updated))
-            setItemDisplayData(sorted)
+            sorted = [...itemData].sort((a,b) => new Date(a.last_updated) - new Date(b.last_updated))
+            setItemData(sorted)
             console.log("date-modified ordering")
 
         } else {
 
             console.log("Error in ordering. Order chosen doesn't match any of the order options. orderChoice = ", orderChoice)
-
-            console.log("error ordering")
 
         }
 
