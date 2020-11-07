@@ -116,7 +116,7 @@ function CollectionsPage() {
                         <Link to={`/collections/`}><button >See active collections</button></Link> :
                         <Link to={`/collections-archive/`}><button >See archived collections</button></Link>
                 }
-                 <Link to={`/newcollection/`}><button >Create New Collection</button></Link>
+                <Link to={`/newcollection/`}><button >Create New Collection</button></Link>
             </div>
         )
     }

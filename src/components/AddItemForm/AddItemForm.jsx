@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 
 function AddItemForm(props) {
     const { id, collectionData } = props;
+    const [errorHandle, setError] = useState()
 
     //variables
     const [credentials, setCredentials] = useState({
@@ -57,7 +58,7 @@ function AddItemForm(props) {
         form_data.append('name', credentials.name);
         form_data.append('price', credentials.price);
         form_data.append('sale_amount', credentials.sale_amount);
-        if (credentials.sale_end_date !== null ) {
+        if (credentials.sale_end_date !== null && parseInt(credentials.sale_amount) !== 0) {
             form_data.append('sale_end_date', credentials.sale_end_date);
         }
         form_data.append('is_active', true);
@@ -71,15 +72,35 @@ function AddItemForm(props) {
             },
             body: form_data,
         });
-        return response.json();
+        if (response.ok) {
+            setError("Successful");
+            return response.json();
+
+        } else {
+            response.text().then(text => {
+                throw Error(text)
+            }).catch(
+                (error) => {
+                    const errorObj = JSON.parse(error.message);
+                    setError(errorObj);
+                    console.log(errorHandle)
+
+                }
+            )
+        }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         postData().then((response) => {
-            console.log("RESPONSE: ", response)
-            history.push(`/collection/${id}/`);
-            // window.location.reload();
+            if (errorHandle !== "Successful") {
+                console.log("Error: ", errorHandle)
+            } else {
+                history.push(`/collection/${id}/`);
+                // window.location.reload();
+
+
+            }
         });
 
     };
