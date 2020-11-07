@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "../SignUpForm/SignUpForm.css";
-import Nav from "../../components/Nav/Nav";
+
 
 function SignUpForm() {
   //variables
@@ -48,10 +48,7 @@ function SignUpForm() {
   };
 
   return (
-    <div id="Nav">
-    <div>
-        <Nav />
-    </div>
+
       <div>
     <form id="loginform">
 
@@ -94,7 +91,6 @@ function SignUpForm() {
       </button>
       </div >
     </form >
-    </div>
     </div>
   );
 }
