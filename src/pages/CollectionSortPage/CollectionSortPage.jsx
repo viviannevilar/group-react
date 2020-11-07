@@ -34,6 +34,7 @@ function CollectionSortPage() {
     // 'active-items/'
 
     const [ filterChoice, setFilterChoice ] = useState("active")
+    const [ orderChoice, setOrderChoice ] = useState("date-modified")
     
 
     //////////////////////////// methods ////////////////////////////
@@ -65,10 +66,7 @@ function CollectionSortPage() {
         if (response.ok) {
             setCollectionData(data);
             setItemData(data.collection_items);
-
-            const filteredData = data.collection_items.filter((item) => item.is_active)
-            console.log(filteredData)
-            setItemDisplayData(filteredData)
+            setItemDisplayData(data.collection_items)
             setisLoading(false);
         } else {
             setisLoading(false);
@@ -80,68 +78,70 @@ function CollectionSortPage() {
 
     ////////       functions to filter active-archived-all items       ////////
 
+    ////////       filter by item.is_active       ////////
+
+    let filteredData
 
     useEffect(() => {
 
+        if (filterChoice === "active") {
 
+            filteredData = itemData.filter((item) => item.is_active)
+            setItemDisplayData(filteredData)
 
-    }, [])
+        } else if (filterChoice === "archived") {
 
-    const filterActive = () => {
-        setFilterChoice("active")
-        //setActivePath("active-items")
-        const filteredData = itemData.filter((item) => item.is_active)
-        setItemDisplayData(filteredData)
+            filteredData = itemData.filter((item) => !item.is_active)
+            setItemDisplayData(filteredData)
 
+        } else if (filterChoice === "all") {
 
-    }
+            setItemDisplayData(itemData)
 
-    const filterArchived = () => {
-        setFilterChoice("archived")
-        //setActivePath("archived-items")
-    }
+        } else {
 
-    const filterAll = () => {
-        setFilterChoice("all")
-        //setActivePath("items")
-    }
+            console.log("Error in filters. Filter chosen doesn't match any of the filter options. filterChoice = ", filterChoice)
 
+        }
 
-      
-
+    }, [filterChoice])
 
 
     ////////       functions to sort items       ////////
 
-    // sort by price, lowest to highest
-    const sortAscending = () => {
-        const sorted = [...itemData].sort((a, b) => a.price - b.price) 
-        //see explanation at the end of this file to understand this a bit more
-        setItemData(sorted)
-    }
-    
-    // sort by price, highest to lowest
-    const sortDescending = () => {
-        const sorted = [...itemData].sort((a, b) => a.price - b.price).reverse()
-        setItemData(sorted)
-    }
 
-    // sort by date created, oldest to newest
-    const sortCreated = () => {
-        const sorted = [...itemData].sort((a, b) => a.id - b.id) 
-        setItemData(sorted)
-    }
+    useEffect(() => {
 
-    // sort by date created, oldest to newest
-    const sortCreatedReverse = () => {
-        const sorted = [...itemData].sort((a, b) => a.id - b.id).reverse
-        setItemData(sorted)
-    }
-    
-    const sortModified = () => {
-        const sorted = [...itemData].sort((a,b) => new Date(a.last_updated) - new Date(b.last_updated))
-        setItemData(sorted)
-    }
+        if (orderChoice === "price-lh") {
+
+            const sorted = [...itemDisplayData].sort((a, b) => a.price - b.price) 
+            //see explanation at the end of this file to understand this a bit more
+            setItemDisplayData(sorted)
+
+        } else if (orderChoice === "price-hl") {
+
+            const sorted = [...itemDisplayData].sort((a, b) => a.price - b.price).reverse()
+            setItemDisplayData(sorted)
+
+
+        } else if (orderChoice === "date-created") {
+
+            const sorted = [...itemDisplayData].sort((a, b) => a.id - b.id) 
+            setItemDisplayData(sorted)
+
+        } else if (orderChoice === "date-modified") {
+
+            const sorted = [...itemDisplayData].sort((a,b) => new Date(a.last_updated) - new Date(b.last_updated))
+            setItemDisplayData(sorted)
+
+        } else {
+
+            console.log("Error in ordering. Order chosen doesn't match any of the order options. orderChoice = ", orderChoice)
+
+        }
+
+    }, [orderChoice])
+
 
 
     //////////////////////////// return ////////////////////////////
@@ -165,11 +165,14 @@ function CollectionSortPage() {
                             <option value="active">Active items</option>
                             <option value="archived">Archived items</option>
                         </select>
-                        {/* buttons to sort data */}
-                        <button onClick={sortAscending}>Sort by Price asc</button>
-                        <button onClick={sortDescending}>Sort by Price desc</button>
-                        <button onClick={sortCreated}>Sort by Created</button>
-                        <button onClick={sortModified}>Sort by Modified</button>
+
+                        <select onChange={(e) => setOrderChoice(e.target.value)}>
+                            <option value="date-modified">Date modified</option>
+                            <option value="price-lh">Price - low to high</option>
+                            <option value="price-hl">Price - high to low</option>
+                            <option value="date-created">Date created</option>
+                        </select>
+
 
                         {/* show items list, and this list will be sorted according to the button that has been pressed above */}
                         <div id="project-list">
