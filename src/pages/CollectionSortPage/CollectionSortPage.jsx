@@ -25,7 +25,16 @@ function CollectionSortPage() {
     const [errorMessage, setErrorMessage] = useState(false);
     const [collectionData, setCollectionData] = useState({ collection_items: [] });
     const [itemData, setItemData] = useState([]);
+    const [itemDisplayData, setItemDisplayData ] = useState([])
 
+
+    const [ activePath, setActivePath ] = useState("active-items")
+    // 'items/'
+    // 'archived-items/'
+    // 'active-items/'
+
+    const [ filterChoice, setFilterChoice ] = useState("active")
+    
 
     //////////////////////////// methods ////////////////////////////
 
@@ -56,6 +65,10 @@ function CollectionSortPage() {
         if (response.ok) {
             setCollectionData(data);
             setItemData(data.collection_items);
+
+            const filteredData = data.collection_items.filter((item) => item.is_active)
+            console.log(filteredData)
+            setItemDisplayData(filteredData)
             setisLoading(false);
         } else {
             setisLoading(false);
@@ -65,9 +78,40 @@ function CollectionSortPage() {
 
     }
 
-    ////////       functions to sort collections       ////////
+    ////////       functions to filter active-archived-all items       ////////
 
-    // initially it is sorted by date modified. Why?
+
+    useEffect(() => {
+
+
+
+    }, [])
+
+    const filterActive = () => {
+        setFilterChoice("active")
+        //setActivePath("active-items")
+        const filteredData = itemData.filter((item) => item.is_active)
+        setItemDisplayData(filteredData)
+
+
+    }
+
+    const filterArchived = () => {
+        setFilterChoice("archived")
+        //setActivePath("archived-items")
+    }
+
+    const filterAll = () => {
+        setFilterChoice("all")
+        //setActivePath("items")
+    }
+
+
+      
+
+
+
+    ////////       functions to sort items       ////////
 
     // sort by price, lowest to highest
     const sortAscending = () => {
@@ -116,6 +160,11 @@ function CollectionSortPage() {
                         <p>Date Created {formatDate(collectionData.date_created)} </p>
                         <p>Last Updated {formatDate(collectionData.last_updated)} </p>
 
+                        <select onChange={(e) => setFilterChoice(e.target.value)}>
+                            <option value="all">All items</option>
+                            <option value="active">Active items</option>
+                            <option value="archived">Archived items</option>
+                        </select>
                         {/* buttons to sort data */}
                         <button onClick={sortAscending}>Sort by Price asc</button>
                         <button onClick={sortDescending}>Sort by Price desc</button>
@@ -124,7 +173,7 @@ function CollectionSortPage() {
 
                         {/* show items list, and this list will be sorted according to the button that has been pressed above */}
                         <div id="project-list">
-                            {itemData.map((item, key) => {
+                            {itemDisplayData.map((item, key) => {
                                 return (
                                     <div key={key}>
                                         <p>{item.id} - {item.name} - {item.price}</p>
