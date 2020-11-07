@@ -79,7 +79,10 @@ function ItemEditForm(props) {
         form_data.append('name', credentials.name);
         form_data.append('price', credentials.price);
         form_data.append('sale_amount', credentials.sale_amount);
-        form_data.append('sale_end_date', credentials.sale_end_date);
+        if (credentials.sale_end_date !== null ) {
+            form_data.append('sale_end_date', credentials.sale_end_date);
+        }
+
 
 
         //function you can call but carry on as well

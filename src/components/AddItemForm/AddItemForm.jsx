@@ -27,6 +27,7 @@ function AddItemForm(props) {
             ...prevCredentials,
             [id]: value,
         }));
+        console.log(e.target)
     };
 
     const handleImageChange = (e) => {
@@ -45,6 +46,7 @@ function AddItemForm(props) {
         console.log(credentials.sale_end_date)
         //function you can call but carry on as well
 
+
         let form_data = new FormData();
         form_data.append('image', credentials.image);
         form_data.append('attribute1', credentials.attribute1);
@@ -55,8 +57,12 @@ function AddItemForm(props) {
         form_data.append('name', credentials.name);
         form_data.append('price', credentials.price);
         form_data.append('sale_amount', credentials.sale_amount);
-        form_data.append('sale_end_date', credentials.sale_end_date);
+        if (credentials.sale_end_date !== null ) {
+            form_data.append('sale_end_date', credentials.sale_end_date);
+        }
         form_data.append('is_active', true);
+
+        console.log("form_data: ", form_data)
 
         const response = await fetch(`${process.env.REACT_APP_API_URL}items/`, {
             method: "post",
@@ -71,7 +77,7 @@ function AddItemForm(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         postData().then((response) => {
-            console.log(response)
+            console.log("RESPONSE: ", response)
             history.push(`/collection/${id}/`);
             // window.location.reload();
         });
