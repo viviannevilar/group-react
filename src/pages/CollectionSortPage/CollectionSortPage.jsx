@@ -67,13 +67,12 @@ function CollectionSortPage() {
 
     ////////       functions to sort collections       ////////
 
-    // state variable that will be used to store the sorted values of items
-    //const [sortedItemData, setSortedItemData] = useState(itemData)
+    // initially it is sorted by date modified. Why?
 
     // sort by price, lowest to highest
     const sortAscending = () => {
         const sorted = [...itemData].sort((a, b) => a.price - b.price) 
-        //see explanation at the end of file to understand this a bit more
+        //see explanation at the end of this file to understand this a bit more
         setItemData(sorted)
     }
     
