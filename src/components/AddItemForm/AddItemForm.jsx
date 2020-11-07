@@ -11,8 +11,7 @@ function AddItemForm(props) {
         attribute2: "",
         attribute3: "",
         attribute4: "",
-        attribute5: "",
-        image: null,
+        image: "",
         collection: parseInt(id),
         is_active: true,
     });
@@ -27,19 +26,38 @@ function AddItemForm(props) {
         }));
     };
 
+    const handleImageChange = (e) => {
+        e.persist();
+
+        setCredentials((prevCredentials) => ({
+            ...prevCredentials,
+            image: e.target.files[0],
+        }));
+    };
+
     const history = useHistory();
 
     const postData = async () => {
         let token = window.localStorage.getItem("token");
 
         //function you can call but carry on as well
+
+        let form_data = new FormData();
+        form_data.append('image', credentials.image);
+        form_data.append('attribute1', credentials.attribute1);
+        form_data.append('attribute2', credentials.attribute2);
+        form_data.append('attribute3', credentials.attribute3);
+        form_data.append('attribute4', credentials.attribute4);
+        form_data.append('collection', credentials.collection);       
+        form_data.append('is_active', credentials.is_active);
+        form_data.append('name', credentials.name);
+
         const response = await fetch(`${process.env.REACT_APP_API_URL}items/`, {
             method: "post",
             headers: {
-                "Content-Type": "application/json",
                 Authorization: `Token ${token}`,
             },
-            body: JSON.stringify(credentials),
+            body: form_data,
         });
         return response.json();
     };
@@ -47,7 +65,6 @@ function AddItemForm(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(credentials);
         postData().then((response) => {
             console.log(response)
             history.push(`/collection/${id}/`);
@@ -109,21 +126,12 @@ function AddItemForm(props) {
                 </div>)}
 
 
-                {collectionData.attribute5 !== "" && (<div className="formattribute">
-                    <label htmlFor="attribute5">{collectionData.attribute5}:</label>
-                    <input
-                        type="text"
-                        id="attribute5"
-                        onChange={handleChange}
-                    />
-                </div>)}
-
                 <div className="formattribute">
                     <label htmlFor="image">Image:</label>
                     <input
                         type="file"
                         id="image"
-                        onChange={handleChange}
+                        onChange={handleImageChange}
                     />
                 </div>
 
