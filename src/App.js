@@ -7,12 +7,12 @@ import AboutUs from "./pages/AboutUs/AboutUs";
 import ContactUs from "./pages/ContactUs/ContactUs";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignUp from "./pages/SignUp/SignUp";
+import EditProfileForm from './components/EditProfileForm/EditProfileForm';
 import NewCollection from './pages/NewCollection/NewCollection';
 import CollectionDetailPage from "./pages/CollectionDetailPage/CollectionDetailPage";
 import CollectionsPage from "./pages/CollectionsPage/CollectionsPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import ItemEditPage from "./pages/ItemEditPage/ItemEditPage";
-
 
 function App() {
 
@@ -46,6 +46,11 @@ function App() {
                     <Route exact path="/signup">
                         <SignUp />
                     </Route>
+
+                    <Route exact path="/edituserdetails">
+                        <EditProfileForm />
+                    </Route>
+
                     <Route exact path="/newcollection">
                         <NewCollection />
                     </Route>
@@ -68,6 +73,7 @@ function App() {
                         <CollectionDetailPage />
                     </Route>
                     <Route path="*" component={NotFoundPage} />
+
                 </Switch>
             </div>
 
