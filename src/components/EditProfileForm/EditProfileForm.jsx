@@ -8,6 +8,11 @@ function EditProfileForm() {
     username: "",
     preferred_name: "",
     email: "",
+    
+  });
+  const [passwords, setPasswords] = useState({
+    old_password:"",
+    new_password:"",
 
   });
 
@@ -37,20 +42,29 @@ function EditProfileForm() {
       username: profileData.username,
       email: profileData.email,
       preferred_name: profileData.preferred_name,
+      password: profileData.password,
 
     });
   }, [profileData]);
 
   const history = useHistory();
 
-  const handleChange = (e) => {
+  const handleChangeCredentials = (e) => {
     const { id, value } = e.target;
+    console.log(id, " ", value)
     setCredentials((prevCredentials) => ({
       ...prevCredentials,
       [id]: value,
     }));
   };
-
+  const handleChangePasswords = (event) => {
+    const { id, value } = event.target;
+       
+    setPasswords((prevPasswords) => ({
+      ...prevPasswords,
+      [id]: value,
+    }));
+  };
   const postData = async () => {
     let username = localStorage.username;
     let token = localStorage.token;
@@ -84,7 +98,7 @@ function EditProfileForm() {
 
 
 
-  const handleSubmit = (e) => {
+  const handleSubmitCredential = (e) => {
     e.preventDefault();
     postData()
       .then((response) => {
@@ -101,6 +115,29 @@ function EditProfileForm() {
 
   };
 
+  const handleSubmitPassword = (e) => {
+  
+    e.preventDefault();
+    console.log(passwords)
+  
+
+  
+    fetch(`${process.env.REACT_APP_API_URL}change-password/`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`},
+
+      body:JSON.stringify(passwords)
+  
+    }).then((results) => {
+      return results.json();
+    }).then((data) => {
+      console.log("success!",data)
+      // setProfileData(data);
+    });
+  
+  };
 
   return (
     <div>
@@ -111,7 +148,7 @@ function EditProfileForm() {
             type="username"
             id="username"
             value={credentials.username}
-            onChange={handleChange}
+            onChange={handleChangeCredentials}
           />
         </div>
 
@@ -120,7 +157,7 @@ function EditProfileForm() {
           <input
             type="email"
             id="email"
-            onChange={handleChange}
+            onChange={handleChangeCredentials}
             value={credentials.email}
           />
         </div>
@@ -129,11 +166,30 @@ function EditProfileForm() {
           <input
             type="preferred_name"
             id="preferred_name"
-            onChange={handleChange}
+            onChange={handleChangeCredentials}
             value={credentials.preferred_name}
+          /> 
+        </div>
+        <div class="form1-item">
+          <label htmlFor="old_password">Old Password:</label>
+          <input
+            type="old_password"
+            id="old_password"
+            onChange={handleChangePasswords}
+            value={passwords.old_password}
           />
         </div>
-        <button type="submit" onClick={handleSubmit}> EditProfile </button>
+        <div class="form1-item">
+          <label htmlFor="new_password">New Password:</label>
+          <input
+            type="new_password"
+            id="new_password"
+            onChange={handleChangePasswords}
+            value={passwords.new_password}
+          />
+        </div>
+        <button type="submit" onClick={handleSubmitCredential}> EditProfile </button>
+        <button type="submit" onClick={handleSubmitPassword}> Change Password </button>
       </form>
     </div>
   );
