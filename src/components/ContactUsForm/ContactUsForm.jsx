@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "../ContactUsForm/ContactUsForm.css";
+import Nav from "../../components/Nav/Nav";
 
 function ContactUsForm() {
   //variables
@@ -50,6 +51,10 @@ function ContactUsForm() {
      };
   
   return (
+    <div id="Nav">
+    <div>
+        <Nav />
+    </div>
     <div>
       <h2 id="headerTitle">Contact Us</h2>
       <form onSubmit={handleSubmit}>
@@ -81,6 +86,7 @@ function ContactUsForm() {
       </button>
       </div >
     </form >
+    </div>
     </div>
   );
 };

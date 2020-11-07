@@ -3,4 +3,9 @@
 #about {
   font-family: Roboto, sans-serif;
   color: b3b7a4;
+  text-align: center;
+}
+
+p {
+  text-align: center;
 }

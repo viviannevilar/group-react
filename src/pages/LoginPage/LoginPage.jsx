@@ -3,6 +3,7 @@ import LoginForm from "../../components/LoginForm/LoginForm";
 import LogoutForm from "../../components/LogoutForm/LogoutForm";
 
 
+
 function LoginPage() {
   let username = localStorage.username;
   let token = localStorage.token;
@@ -21,6 +22,7 @@ function LoginPage() {
         </div>
       )}
     </div>
+
   );
 }
 
