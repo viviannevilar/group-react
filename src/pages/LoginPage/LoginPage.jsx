@@ -1,7 +1,7 @@
 import React from "react";
 import LoginForm from "../../components/LoginForm/LoginForm";
 import LogoutForm from "../../components/LogoutForm/LogoutForm";
-import Nav from "../../components/Nav/Nav";
+
 
 
 function LoginPage() {
@@ -9,10 +9,6 @@ function LoginPage() {
   let token = localStorage.token;
 
   return (
-      <div id="Nav">
-          <div>
-              <Nav />
-          </div>
     <div>
       {token == null && (
         <div>
@@ -26,7 +22,7 @@ function LoginPage() {
         </div>
       )}
     </div>
-    </div>
+
   );
 }
 

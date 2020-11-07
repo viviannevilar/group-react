@@ -74,6 +74,9 @@ function CollectionsPage() {
 
         return (
             <div>
+                <div id="Nav">
+                    <Nav />
+                </div>
                 <h1> Collection not found! </h1>
             </div>
         )
@@ -82,6 +85,9 @@ function CollectionsPage() {
 
         return (
             <div>
+                <div id="Nav">
+                    <Nav />
+                </div>
                 <h1>You don't have permission to see this page! </h1>
             </div>
         )
@@ -91,6 +97,9 @@ function CollectionsPage() {
 
         return (
             <div>
+                <div id="Nav">
+                    <Nav />
+                </div>
                 <h1>No collections to show</h1>
                 <Link to={`/newcollection/`}><button >Create New Collection</button></Link>
             </div>

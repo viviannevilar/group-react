@@ -15,7 +15,6 @@ function NewCollectionForm() {
     attribute2: "",
     attribute3: "",
     attribute4: "",
-    attribute5: "",
     is_active: true,
   });
 
@@ -141,15 +140,6 @@ function NewCollectionForm() {
           />
         </div>
     
-        <div className="thra">
-          <label htmlFor="attribute5">Attribute 5:</label>
-          <textarea
-            type="textarea"
-            id="attribute5"
-            placeholder="Pick an attribute you would lilke to use to compare items"
-            onChange={handleChange}
-          />
-        </div>
         <br></br>
         <br></br>
 

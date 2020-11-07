@@ -31,7 +31,7 @@ function Nav(props) {
                     <Link to="/login">Login</Link>
                 )}
                 <Link to="/edituserdetails">Account</Link>
-                <Link to="/collections">Collections</Link>
+                <Link to="/collections/">Collections</Link>
             </nav>
       );
     }
