@@ -51,7 +51,7 @@ function LoginForm() {
           if (response.token !== null || response != null) {
             window.localStorage.setItem("token", response.token);
             window.localStorage.setItem("username", credentials.username);
-            history.push("/");
+            history.push("/collections/");
             window.location.reload();
           } else {
             history.push("/login");
@@ -68,10 +68,7 @@ function LoginForm() {
   };
 
   return (
-    <div id="Nav">
-    <div>
-        <Nav />
-    </div>
+
       <div>
 
     <div id="loginform">
@@ -116,7 +113,6 @@ function LoginForm() {
       }
 
     </div >
-    </div>
     </div>
 
   );

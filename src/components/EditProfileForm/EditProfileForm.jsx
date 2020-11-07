@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
+import Nav from "../../components/Nav/Nav";
 
 
 function EditProfileForm() {
@@ -141,6 +142,11 @@ function EditProfileForm() {
 
   return (
     <div>
+        <div id="Nav">
+            <Nav />
+        </div>
+   
+    <div>
       <form>
         <div class="form1-item">
           <label htmlFor="username">Username:</label>
@@ -191,6 +197,7 @@ function EditProfileForm() {
         <button type="submit" onClick={handleSubmitCredential}> EditProfile </button>
         <button type="submit" onClick={handleSubmitPassword}> Change Password </button>
       </form>
+    </div>
     </div>
   );
 }

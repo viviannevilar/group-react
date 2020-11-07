@@ -1,7 +1,6 @@
 import React from "react";
 //import { Link } from "react-router-dom";
 import "./ItemCard.css";
-import Nav from "../../components/Nav/Nav";
 
 function formatDate(string) {
     var options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -13,10 +12,7 @@ function ItemCard(props) {
 
 
     return (
-        <div id="Nav">
-        <div>
-            <Nav />
-        </div>
+
         <div className="project-card" id={projectData.is_active === false ? "project-closed" : "project-open"}>
 
             <p className="cat">Item: {projectData.name}</p>
@@ -39,7 +35,6 @@ function ItemCard(props) {
                 )}
 
             </div>
-        </div>
         </div>
     );
 }
