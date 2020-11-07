@@ -17,14 +17,17 @@ function CollectionSortPage() {
     let token = window.localStorage.getItem("token");
     const { id } = useParams();
 
-    // state variables
+    // loading and error state variables
     const [isLoading, setisLoading] = useState(true);
     const [error, setError] = useState();
     const [errorMessage, setErrorMessage] = useState(false);
+
+    // data state variables
     const [collectionData, setCollectionData] = useState({ collection_items: [] });
     const [itemData, setItemData] = useState([]);
     const [itemDisplayData, setItemDisplayData ] = useState([])
 
+    // ordering and filtering state variables
     const [ filterChoice, setFilterChoice ] = useState("all")
     const [ orderChoice, setOrderChoice ] = useState("date-modified")
     
