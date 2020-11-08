@@ -21,42 +21,19 @@ function formatDate(string) {
 // List of items print out
 // Each attribute is clickable and takes you to a pop up modal that compares the items
 // Items at phone screen width are swipeable
-// Add item - form - pop up modal or new form we will see
-// Edit each item with a button - pop up
-// Archive, delete and edit button for each list item. 
 
 function CollectionDetailPage() {
+
+    // Variable for colelction ID
+    const { id } = useParams();
+
+
+    // Variables to understand if public or private path
     let urlPath
     let shared_link
     let token = window.localStorage.getItem("token");
     const location = useLocation();
     const urlComponents = location.pathname.split("/")
-    const { id } = useParams();
-    const history = useHistory();
-    const [isLoading, setisLoading] = useState(true);
-    const [modalState, setModalState] = useState(false);
-    const [editmodalState, setEditModalState] = useState(false);
-    const [error, setError] = useState();
-    const [errorMessage, setErrorMessage] = useState(false);
-    const [collectionData, setCollectionData] = useState({ collection_items: [] });
-    const [itemData, setItemData] = useState([]);
-
-
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
-    const [controlledSwiper, setControlledSwiper] = useState(null);
-    const [dataInsideSwiper, setdataInsideSwiper] = useState([]);
-
-    // ordering and filtering state variables
-    const [filterChoice, setFilterChoice] = useState("all")
-    const [orderChoice, setOrderChoice] = useState("date-modified")
-    const [itemDisplayData, setItemDisplayData] = useState([])
-
-
-    const addItemToggleModalState = () => {
-        setModalState(!modalState);
-        window.scrollTo(0, 0);
-    };
-
 
     if (urlComponents.length === 6) {
         urlPath = "safe/" + id + "/" + urlComponents[4]
@@ -67,9 +44,35 @@ function CollectionDetailPage() {
     }
 
 
+    // Collection ID, Loading states and modal states
+    const history = useHistory();
+    const [isLoading, setisLoading] = useState(true);
+    const [modalState, setModalState] = useState(false);
+    const [error, setError] = useState();
+    const [errorMessage, setErrorMessage] = useState(false);
+    const [collectionData, setCollectionData] = useState({ collection_items: [] });
+    const [itemData, setItemData] = useState([]);
+
+    // testing swiper state variables
+    const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    const [controlledSwiper, setControlledSwiper] = useState(null);
+
+    // ordering and filtering state variables
+    const [filterChoice, setFilterChoice] = useState("all")
+    const [orderChoice, setOrderChoice] = useState("date-modified")
+    const [itemDisplayData, setItemDisplayData] = useState([])
 
 
+    // functions:
 
+    // Modal state change function:
+    const addItemToggleModalState = () => {
+        setModalState(!modalState);
+        window.scrollTo(0, 0);
+    };
+
+
+    // Fetch Collection Data and Items
     const fetchProjects = async () => {
         let response
         try {
@@ -98,8 +101,6 @@ function CollectionDetailPage() {
 
         const data = await response.json();
 
-
-
         if (response.ok) {
             setCollectionData(data);
             setItemData(data.collection_items);
@@ -119,6 +120,8 @@ function CollectionDetailPage() {
         fetchProjects()
     }, [id]);
 
+
+    // Delete Item
     const handleDelete = (projectdat, e) => {
         //let token = localStorage.getItem("token");
         fetch(`${process.env.REACT_APP_API_URL}item/${projectdat.id}/`, {
@@ -133,7 +136,7 @@ function CollectionDetailPage() {
         });
     }
 
-    // Archive itme
+    // Archive Item
     const archiveItem = (projectdat, e) => {
         let token = window.localStorage.getItem("token");
         fetch(`${process.env.REACT_APP_API_URL}item/${projectdat.id}/archive/`, {
@@ -149,13 +152,10 @@ function CollectionDetailPage() {
     }
 
     ////////       filter active-archived-all items       ////////
-
     useEffect(() => {
 
         let filteredData
-
         if (filterChoice === "active") {
-
             filteredData = itemData.filter((item) => item.is_active)
             setItemDisplayData(filteredData)
             console.log("active filtering")
@@ -172,9 +172,7 @@ function CollectionDetailPage() {
             console.log("no filtering - all items")
 
         } else {
-
             console.log("Error in filters. Filter chosen doesn't match any of the filter options. filterChoice = ", filterChoice)
-
         }
 
     }, [filterChoice, itemData])
@@ -221,7 +219,7 @@ function CollectionDetailPage() {
     }, [orderChoice])
 
 
-
+    // Set up data for inside slider
     const slides = [];
     itemDisplayData.map((projectData, key) => {
         slides.push(
@@ -313,7 +311,7 @@ function CollectionDetailPage() {
                             <div id="project-list">
 
 
-                                {itemDisplayData.map((projectData, key) => {
+                                {/* {itemDisplayData.map((projectData, key) => {
                                     return (
                                         <div>
                                             <ItemCard key={key} projectData={projectData} collectionData={collectionData} />
@@ -331,28 +329,48 @@ function CollectionDetailPage() {
                                         </div>)
 
                                 })
-                                }
+                                } */}
 
-                                {/* <React.Fragment>
-                                    <Swiper
-                                        id="main"
-                                        thumbs={{ swiper: thumbsSwiper }}
-                                        controller={{ control: controlledSwiper }}
-                                        tag="section"
-                                        wrapperTag="ul"
-                                        navigation
-                                        pagination
-                                        spaceBetween={0}
-                                        slidesPerView={1}
-                                        onInit={(swiper) => console.log('Swiper initialized!', swiper)}
-                                        onSlideChange={(swiper) => {
-                                            console.log('Slide index changed to: ', swiper.activeIndex);
-                                        }}
-                                        onReachEnd={() => console.log('Swiper end reached')}
-                                    >
-                                        {slides}
-                                    </Swiper>
-                                </React.Fragment> */}
+                                <React.Fragment>
+                                    <div style={modalState ? { pointerEvents: "none", opacity: "0.4" } : {}} >
+                                        <Swiper
+                                            // breakpoints={{
+                                            //     // when window width is >= 640px
+                                            //     400: {
+                                            //         width: 400,
+                                            //         slidesPerView: 1,
+                                            //     },
+                                            //     // when window width is >= 768px
+                                            //     768: {
+                                            //         width: 768,
+                                            //         slidesPerView: 2,
+                                            //     },
+
+                                            //     1000: {
+                                            //         width: 1000,
+                                            //         slidesPerView: 5,
+                                            //     },
+                                            // }}
+                                            id="main"
+                                            thumbs={{ swiper: thumbsSwiper }}
+                                            controller={{ control: controlledSwiper }}
+                                            tag="section"
+                                            wrapperTag="ul"
+                                            navigation
+                                            pagination
+                                            spaceBetween={0}
+                                            slidesPerView={1}
+                                            onInit={(swiper) => console.log('Swiper initialized!', swiper)}
+                                            onSlideChange={(swiper) => {
+                                                console.log('Slide index changed to: ', swiper.activeIndex);
+                                            }}
+                                            onReachEnd={() => console.log('Swiper end reached')}
+                                        >
+                                            {slides}
+                                        </Swiper>
+                                    </div>
+
+                                </React.Fragment>
 
                             </div>
                         </div>
