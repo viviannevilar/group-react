@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
+import Nav from "../../components/Nav/Nav";
 
 function ItemEditForm(props) {
 
@@ -113,7 +114,13 @@ function ItemEditForm(props) {
 
 
     return (
+        <div id="Nav">
+            <div>
+                <Nav />
+            </div>
+    
         <div id="pledgeform">
+
             <h2 id="headerTitle"> Edit Item in {collectionData.title} </h2>
             <form>
 
@@ -238,6 +245,7 @@ function ItemEditForm(props) {
                     <button className="pledgebutton" type="submit" onClick={handleSubmit}>  Update List Item </button>
                 </div>
             </form>
+        </div>
         </div>
     );
 }

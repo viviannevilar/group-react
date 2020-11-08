@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useHistory, Link } from "react-router-dom";
-import ItemCard from "../../components/ItemCard/ItemCard";
+import { useParams } from "react-router-dom";
 
 function formatDate(string) {
     var options = { year: "numeric", month: "long", day: "numeric" };
@@ -17,14 +16,20 @@ function CollectionSortPage() {
     // tokens, ids, location, history
     let token = window.localStorage.getItem("token");
     const { id } = useParams();
-    const history = useHistory();
 
-    // state variables
+    // loading and error state variables
     const [isLoading, setisLoading] = useState(true);
     const [error, setError] = useState();
     const [errorMessage, setErrorMessage] = useState(false);
+
+    // data state variables
     const [collectionData, setCollectionData] = useState({ collection_items: [] });
     const [itemData, setItemData] = useState([]);
+    const [itemDisplayData, setItemDisplayData] = useState([])
+
+    // ordering and filtering state variables
+    const [filterChoice, setFilterChoice] = useState("all")
+    const [orderChoice, setOrderChoice] = useState("date-modified")
 
 
     //////////////////////////// methods ////////////////////////////
@@ -56,6 +61,8 @@ function CollectionSortPage() {
         if (response.ok) {
             setCollectionData(data);
             setItemData(data.collection_items);
+            setItemDisplayData(data.collection_items)
+            console.log(data.collection_items)
             setisLoading(false);
         } else {
             setisLoading(false);
@@ -65,45 +72,82 @@ function CollectionSortPage() {
 
     }
 
-    ////////       functions to sort collections       ////////
+    ////////       filter active-archived-all items       ////////
 
-    //let sortedItemData
+    useEffect(() => {
 
-    const [sortedItemData, setSortedItemData] = useState(itemData)
+        let filteredData
 
-    // sort by price, lowest to highest
-    const sortAscending = () => {
-        const sorted = [...itemData].sort((a, b) => a.price - b.price)
-        //see explanation at the end of file to understand this a bit more
-        setItemData(sorted)
-    }
+        if (filterChoice === "active") {
 
-    // sort by price, highest to lowest
-    const sortDescending = () => {
-        const sorted = [...itemData].sort((a, b) => a.price - b.price).reverse()
-        setItemData(sorted)
-    }
+            filteredData = itemData.filter((item) => item.is_active)
+            setItemDisplayData(filteredData)
+            console.log("active filtering")
 
-    // sort by date created, oldest to newest
-    const sortCreated = () => {
-        const sorted = [...itemData].sort((a, b) => a.id - b.id)
-        setItemData(sorted)
-    }
+        } else if (filterChoice === "archived") {
 
-    // sort by date created, oldest to newest
-    const sortCreatedReverse = () => {
-        const sorted = [...itemData].sort((a, b) => a.id - b.id).reverse
-        setItemData(sorted)
-    }
+            filteredData = itemData.filter((item) => !item.is_active)
+            setItemDisplayData(filteredData)
+            console.log("archive filtering")
 
-    // sort by last updated
-    const sortModified = () => {
-        const sorted = [...itemData].sort((a, b) => new Date(a.last_updated) - new Date(b.last_updated))
-        setItemData(sorted)
-    }
+        } else if (filterChoice === "all") {
+
+            setItemDisplayData(itemData)
+            console.log("no filtering - all items")
+
+        } else {
+
+            console.log("Error in filters. Filter chosen doesn't match any of the filter options. filterChoice = ", filterChoice)
+
+        }
+
+    }, [filterChoice, itemData])
+
+
+    ////////       order items by price, date       ////////
+
+    let sorted
+
+    useEffect(() => {
+
+        if (orderChoice === "price-lh") {
+
+            sorted = [...itemData].sort((a, b) => a.price - b.price)
+            //see explanation at the end of this file to understand this a bit more
+            setItemData(sorted)
+            console.log("price-lh ordering")
+
+        } else if (orderChoice === "price-hl") {
+
+            sorted = [...itemData].sort((a, b) => a.price - b.price).reverse()
+            setItemData(sorted)
+            console.log("price-hl ordering")
+
+
+        } else if (orderChoice === "date-created") {
+
+            sorted = [...itemData].sort((a, b) => a.id - b.id)
+            setItemData(sorted)
+            console.log("date-created ordering")
+
+        } else if (orderChoice === "date-modified") {
+
+            sorted = [...itemData].sort((a, b) => new Date(a.last_updated) - new Date(b.last_updated))
+            setItemData(sorted)
+            console.log("date-modified ordering")
+
+        } else {
+
+            console.log("Error in ordering. Order chosen doesn't match any of the order options. orderChoice = ", orderChoice)
+
+        }
+
+    }, [orderChoice])
+
 
 
     //////////////////////////// return ////////////////////////////
+
     return (
         <div id="projectlistcenter">
 
@@ -113,24 +157,38 @@ function CollectionSortPage() {
 
                 <div>
                     <div id="App">
+
+                        {/* collection information */}
                         <p>Collection of {collectionData.title} </p>
                         <p>Date Created {formatDate(collectionData.date_created)} </p>
                         <p>Last Updated {formatDate(collectionData.last_updated)} </p>
 
-                        <button onClick={sortAscending}>Sort by Price asc</button>
-                        <button onClick={sortDescending}>Sort by Price desc</button>
-                        <button onClick={sortCreated}>Sort by Created</button>
-                        <button onClick={sortModified}>Sort by Modified</button>
+                        {/* first drop down - filter choices */}
+                        <select onChange={(e) => setFilterChoice(e.target.value)}>
+                            <option value="all">All items</option>
+                            <option value="active">Active items</option>
+                            <option value="archived">Archived items</option>
+                        </select>
 
+                        {/* second drop down - order choices */}
+                        <select onChange={(e) => setOrderChoice(e.target.value)}>
+                            <option value="date-modified">Date modified</option>
+                            <option value="price-lh">Price - low to high</option>
+                            <option value="price-hl">Price - high to low</option>
+                            <option value="date-created">Date created</option>
+                        </select>
+
+
+                        {/* show items list, sorted according to the button that has been pressed above */}
                         <div id="project-list">
-                            {itemData.map((item, key) => {
+                            {itemDisplayData.map((item, key) => {
                                 return (
                                     <div key={key}>
                                         <p>{item.id} - {item.name} - {item.price}</p>
                                     </div>)
                             })}
-
                         </div>
+
                     </div>
                 </div>
 
@@ -158,7 +216,7 @@ function CollectionSortPage() {
                 <div>
                     <div>
                         <div>
-                            <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"} />
+                            <img alt="" src={imageError} />
                         </div>
                         {/* <Loader /> */}
                     </div>
