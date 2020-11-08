@@ -9,14 +9,15 @@ import { allItems } from "../../data"
 const SortableItem = SortableElement(({value}) => <li>{value}</li>);
 
 const SortableList = SortableContainer(({items}) => {
-  return (
-    <ul>
-      {items.map((value, index) => (
-        <SortableItem key={`item-${value.name}`} index={index} value={value.name} />
-      ))}
-    </ul>
-  );
+    return (
+        <ul>
+        {items.map((value, index) => (
+            <SortableItem key={`item-${value.name}`} index={index} value={value.name} />
+        ))}
+        </ul>
+    );
 });
+
 
 function SortableComponent() {
 
