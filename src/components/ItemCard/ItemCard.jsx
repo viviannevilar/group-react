@@ -21,9 +21,7 @@ function ItemCard(props) {
     return (
 
         <div className="project-card" id={projectData.is_active === false ? "project-closed" : "project-open"}>
-            <p className="cat">{projectData.name.toUpperCase()}</p>
-
-            <p className="cat">Item: {projectData.name}</p>
+            <p>{projectData.name.toUpperCase()}</p>
 
             <img alt="Item" src={projectData.image} />
 
