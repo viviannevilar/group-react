@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ItemCardSmall from "../../components/ItemCardSmall/ItemCardSmall";
+import "./CollectionSortPage.css"
 
 function formatDate(string) {
     var options = { year: "numeric", month: "long", day: "numeric" };
@@ -180,12 +182,11 @@ function CollectionSortPage() {
 
 
                         {/* show items list, sorted according to the button that has been pressed above */}
-                        <div id="project-list">
+                        <div id="items-list">
                             {itemDisplayData.map((item, key) => {
                                 return (
-                                    <div key={key}>
-                                        <p>{item.id} - {item.name} - {item.price}</p>
-                                    </div>)
+                                    <ItemCardSmall itemData={item} collectionData={collectionData} />
+                                    )
                             })}
                         </div>
 

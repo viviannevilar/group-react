@@ -1,0 +1,16 @@
+.item-card-small {
+    
+    border: 1px solid var(--dark-color-muted);
+
+}
+
+.item-small-closed {
+
+    color: var(--dark-color-muted);
+
+}
+
+.item-small-open {
+
+    color: var(--dark-color);
+}

@@ -14,6 +14,7 @@ import CollectionsPage from "./pages/CollectionsPage/CollectionsPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import ItemEditPage from "./pages/ItemEditPage/ItemEditPage";
 import CollectionSortPage from "./pages/CollectionSortPage/CollectionSortPage";
+import SortableComponent from "./pages/CollectionSortPage/SortPage"
 
 function App() {
 
@@ -75,7 +76,8 @@ function App() {
                     </Route>
 
                     <Route exact path="/collection/sort/:id/">
-                        <CollectionSortPage />
+                        <SortableComponent />
+                        {/* <CollectionSortPage /> */}
                     </Route>
 
 
