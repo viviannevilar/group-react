@@ -46,6 +46,10 @@ function CollectionDetailPage() {
     const [controlledSwiper, setControlledSwiper] = useState(null);
     const [dataInsideSwiper, setdataInsideSwiper] = useState([]);
 
+    // ordering and filtering state variables
+    const [filterChoice, setFilterChoice] = useState("all")
+    const [orderChoice, setOrderChoice] = useState("date-modified")
+    const [itemDisplayData, setItemDisplayData] = useState([])
 
 
     const addItemToggleModalState = () => {
@@ -94,9 +98,13 @@ function CollectionDetailPage() {
 
         const data = await response.json();
 
+
+
         if (response.ok) {
             setCollectionData(data);
             setItemData(data.collection_items);
+            setItemDisplayData(data.collection_items)
+
             setisLoading(false);
 
         } else {
@@ -140,178 +148,244 @@ function CollectionDetailPage() {
         });
     }
 
-    ////////       functions to sort collections       ////////
+    ////////       filter active-archived-all items       ////////
 
-    // sort by price, lowest to highest
-    const sortAscending = () => {
-        const sorted = [...itemData].sort((a, b) => a.price - b.price)
-        //see explanation at the end of file to understand this a bit more
-        setItemData(sorted)
-        // swiper.slideTo(0)
+    useEffect(() => {
 
-    }
+        let filteredData
 
+        if (filterChoice === "active") {
 
-    // sort by price, highest to lowest
-    const sortDescending = () => {
-        const sorted = [...itemData].sort((a, b) => a.price - b.price).reverse()
-        setItemData(sorted)
-        // swiper.slideTo(0)
+            filteredData = itemData.filter((item) => item.is_active)
+            setItemDisplayData(filteredData)
+            console.log("active filtering")
 
+        } else if (filterChoice === "archived") {
 
-    }
+            filteredData = itemData.filter((item) => !item.is_active)
+            setItemDisplayData(filteredData)
+            console.log("archive filtering")
 
-    // sort by date created, oldest to newest
-    const sortCreated = () => {
-        const sorted = [...itemData].sort((a, b) => a.id - b.id)
-        setItemData(sorted)
-        // swiper.slideTo(0)
+        } else if (filterChoice === "all") {
 
-    }
+            setItemDisplayData(itemData)
+            console.log("no filtering - all items")
 
+        } else {
 
-    // sort by last updated
-    const sortModified = () => {
-        const sorted = [...itemData].sort((a, b) => new Date(a.last_updated) - new Date(b.last_updated))
-        setItemData(sorted)
-        // swiper.slideTo(0)
+            console.log("Error in filters. Filter chosen doesn't match any of the filter options. filterChoice = ", filterChoice)
 
-    }
+        }
+
+    }, [filterChoice, itemData])
 
 
+    ////////       order items by price, date       ////////
+
+    let sorted
+
+    useEffect(() => {
+
+        if (orderChoice === "price-lh") {
+
+            sorted = [...itemData].sort((a, b) => a.price - b.price)
+            //see explanation at the end of this file to understand this a bit more
+            setItemData(sorted)
+            console.log("price-lh ordering")
+
+        } else if (orderChoice === "price-hl") {
+
+            sorted = [...itemData].sort((a, b) => a.price - b.price).reverse()
+            setItemData(sorted)
+            console.log("price-hl ordering")
+
+
+        } else if (orderChoice === "date-created") {
+
+            sorted = [...itemData].sort((a, b) => a.id - b.id)
+            setItemData(sorted)
+            console.log("date-created ordering")
+
+        } else if (orderChoice === "date-modified") {
+
+            sorted = [...itemData].sort((a, b) => new Date(a.last_updated) - new Date(b.last_updated))
+            setItemData(sorted)
+            console.log("date-modified ordering")
+
+        } else {
+
+            console.log("Error in ordering. Order chosen doesn't match any of the order options. orderChoice = ", orderChoice)
+
+        }
+
+    }, [orderChoice])
 
 
 
+    const slides = [];
+    itemDisplayData.map((projectData, key) => {
+        slides.push(
+            <SwiperSlide key={`slide-${key}`}>
+                <div>
+                    <ItemCard key={key} projectData={projectData} collectionData={collectionData} />
 
+                    {shared_link === "private" && (
+                        <div>
+                            <button className={`button-delete${key}`} onClick={() => handleDelete(projectData)}>Delete Item: {projectData.name} </button>
+                            <Link to={`/item-edit/${projectData.id}/${collectionData.id}/`}>
+                                <button>Edit Item</button >
+                            </Link>
+                            <button onClick={() => archiveItem(projectData)}>{projectData.is_active ? "Archive" : "Unarchive"}</button>
+                        </div>
+                    )}
 
-
+                </div>
+            </SwiperSlide>
+        );
+    })
 
     return (
         <div id="Nav">
-        <div>
-            <Nav />
-        </div>
-        <div id="projectlistcenter">
+            <div>
+                <Nav />
+            </div>
+            <div id="projectlistcenter">
 
-            {!isLoading && errorMessage && (<div>
+                {!isLoading && errorMessage && (<div>
 
-                <div id="errormessage">
-                    <br></br>
-                    <img className="backgroundimage" alt="Error!" src="https://www.pngitem.com/pimgs/m/119-1190787_warning-alert-attention-search-error-icon-hd-png.png" />
-                    <h2 id="headerTitle">There is no collection with ID {id} </h2>
-                </div>
-            </div>)}
-
-
-            {!isLoading && !errorMessage && (
-                <div>
-
-
-
-                    <div id="App">
-                        {shared_link == "private" && (<p>See your collection of {collectionData.title} </p>)}
-                        {shared_link == "public" && (<p>Collection of {collectionData.title} </p>)}
-                        <p>Date Created {formatDate(collectionData.date_created)} </p>
-                        <p>Last Updated {formatDate(collectionData.last_updated)} </p>
-
-                        <button onClick={sortAscending}>Sort by Price asc</button>
-                        <button onClick={sortDescending}>Sort by Price desc</button>
-                        <button onClick={sortCreated}>Sort by Created</button>
-                        <button onClick={sortModified}>Sort by Modified</button>
-
-
-                        {shared_link === "private" && (
-                            <div>
-                                { collectionData.collection_items.length > 0 && (<p>You are currently comparing {collectionData.collection_items.length} items in {collectionData.title} list. </p>)}
-                                {collectionData.collection_items.length === 0 && (<p>You are yet to add any items to {collectionData.title}!</p>)}
-                                {collectionData.is_active && (
-                                    <button className="button" onClick={() => addItemToggleModalState()}>Add Item</button>
-                                )}
-                                {!collectionData.is_active && (
-                                    <p>This list is archived, please unarchive to add new items</p>)}
-                            </div>
-                        )}
-
-                        {shared_link === "public" && (
-                            <div>
-                                { collectionData.collection_items.length > 0 && (<p>There are currently {collectionData.collection_items.length} items in the {collectionData.title} list for comparison. </p>)}
-                                {collectionData.collection_items.length === 0 && (<p>There are no items added to list {collectionData.title}!</p>)}
-                            </div>
-                        )}
-
-
-
-                        <div id="project-list">
-                            {/* <React.Fragment>
-                                <Swiper
-                                    id="main"
-                                    thumbs={{ swiper: thumbsSwiper }}
-                                    controller={{ control: controlledSwiper }}
-                                    tag="section"
-                                    navigation
-                                    spaceBetween={0}
-                                    slidesPerView={1}
-                                    onInit={(swiper) => console.log('Swiper initialized!', swiper)}
-                                    onSlideChange={(swiper) => {
-                                        console.log('Slide index changed to: ', swiper.activeIndex);
-                                    }}
-                                    onReachEnd={() => console.log('Swiper end reached')}>
-                                    {dataInsideSwiper}
-                                </Swiper>
-                            </React.Fragment> */}
-
-                            {itemData.map((projectData, key) => {
-                                return (
-                                    <div>
-                                        <ItemCard key={key} projectData={projectData} collectionData={collectionData} />
-
-                                        {shared_link === "private" && (
-                                            <div>
-                                                <button className={`button-delete${key}`} onClick={() => handleDelete(projectData)}>Delete Item: {projectData.name} </button>
-                                                <Link to={`/item-edit/${projectData.id}/${collectionData.id}/`}>
-                                                    <button>Edit Item</button >
-                                                </Link>
-                                                <button onClick={() => archiveItem(projectData)}>{projectData.is_active ? "Archive" : "Unarchive"}</button>
-                                            </div>
-                                        )}
-
-                                    </div>)
-
-                            })
-                            }
-
-                        </div>
+                    <div id="errormessage">
+                        <br></br>
+                        <img className="backgroundimage" alt="Error!" src="https://www.pngitem.com/pimgs/m/119-1190787_warning-alert-attention-search-error-icon-hd-png.png" />
+                        <h2 id="headerTitle">There is no collection with ID {id} </h2>
                     </div>
+                </div>)}
 
-                    <div className={`modalBackground modalShowing-${modalState}`}>
-                        <div className="modalInner">
-                            <div className="modalText">
-                                <AddItemForm id={id} collectionData={collectionData} />
+
+                {!isLoading && !errorMessage && (
+                    <div>
+
+
+
+                        <div id="App">
+                            {/* collection information */}
+
+                            {shared_link == "private" && (<p>See your collection of {collectionData.title} </p>)}
+                            {shared_link == "public" && (<p>Collection of {collectionData.title} </p>)}
+                            <p>Date Created {formatDate(collectionData.date_created)} </p>
+                            <p>Last Updated {formatDate(collectionData.last_updated)} </p>
+
+                            {/* first drop down - filter choices */}
+                            <select onChange={(e) => setFilterChoice(e.target.value)}>
+                                <option value="all">All items</option>
+                                <option value="active">Active items</option>
+                                <option value="archived">Archived items</option>
+                            </select>
+
+                            {/* second drop down - order choices */}
+                            <select onChange={(e) => setOrderChoice(e.target.value)}>
+                                <option value="date-modified">Date modified</option>
+                                <option value="price-lh">Price - low to high</option>
+                                <option value="price-hl">Price - high to low</option>
+                                <option value="date-created">Date created</option>
+                            </select>
+
+                            {shared_link === "private" && (
                                 <div>
-                                    <button className="exitButton" onClick={() => addItemToggleModalState()}> exit </button>
+                                    { collectionData.collection_items.length > 0 && (<p>You are currently comparing {collectionData.collection_items.length} items in {collectionData.title} list. </p>)}
+                                    {collectionData.collection_items.length === 0 && (<p>You are yet to add any items to {collectionData.title}!</p>)}
+                                    {collectionData.is_active && (
+                                        <button className="button" onClick={() => addItemToggleModalState()}>Add Item</button>
+                                    )}
+                                    {!collectionData.is_active && (
+                                        <p>This list is archived, please unarchive to add new items</p>)}
+                                </div>
+                            )}
+
+                            {shared_link === "public" && (
+                                <div>
+                                    { collectionData.collection_items.length > 0 && (<p>There are currently {collectionData.collection_items.length} items in the {collectionData.title} list for comparison. </p>)}
+                                    {collectionData.collection_items.length === 0 && (<p>There are no items added to list {collectionData.title}!</p>)}
+                                </div>
+                            )}
+
+
+
+                            <div id="project-list">
+
+
+                                {itemDisplayData.map((projectData, key) => {
+                                    return (
+                                        <div>
+                                            <ItemCard key={key} projectData={projectData} collectionData={collectionData} />
+
+                                            {shared_link === "private" && (
+                                                <div>
+                                                    <button className={`button-delete${key}`} onClick={() => handleDelete(projectData)}>Delete Item: {projectData.name} </button>
+                                                    <Link to={`/item-edit/${projectData.id}/${collectionData.id}/`}>
+                                                        <button>Edit Item</button >
+                                                    </Link>
+                                                    <button onClick={() => archiveItem(projectData)}>{projectData.is_active ? "Archive" : "Unarchive"}</button>
+                                                </div>
+                                            )}
+
+                                        </div>)
+
+                                })
+                                }
+
+                                {/* <React.Fragment>
+                                    <Swiper
+                                        id="main"
+                                        thumbs={{ swiper: thumbsSwiper }}
+                                        controller={{ control: controlledSwiper }}
+                                        tag="section"
+                                        wrapperTag="ul"
+                                        navigation
+                                        pagination
+                                        spaceBetween={0}
+                                        slidesPerView={1}
+                                        onInit={(swiper) => console.log('Swiper initialized!', swiper)}
+                                        onSlideChange={(swiper) => {
+                                            console.log('Slide index changed to: ', swiper.activeIndex);
+                                        }}
+                                        onReachEnd={() => console.log('Swiper end reached')}
+                                    >
+                                        {slides}
+                                    </Swiper>
+                                </React.Fragment> */}
+
+                            </div>
+                        </div>
+
+                        <div className={`modalBackground modalShowing-${modalState}`}>
+                            <div className="modalInner">
+                                <div className="modalText">
+                                    <AddItemForm id={id} collectionData={collectionData} />
+                                    <div>
+                                        <button className="exitButton" onClick={() => addItemToggleModalState()}> exit </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+
+
+
                     </div>
+                )
+                }
 
 
 
-
+                <div>
+                    {isLoading && (
+                        <div>
+                            <div>IS Loading</div>
+                            {/* <Loader /> */}
+                        </div>
+                    )}
                 </div>
-            )
-            }
-
-
-
-            <div>
-                {isLoading && (
-                    <div>
-                        <div>IS Loading</div>
-                        {/* <Loader /> */}
-                    </div>
-                )}
-            </div>
-        </div >
+            </div >
         </div>
 
     )
