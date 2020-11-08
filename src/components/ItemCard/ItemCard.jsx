@@ -17,7 +17,6 @@ function ItemCard(props) {
 
             <p className="cat">Item: {projectData.name}</p>
 
-
             <img alt="Item" src={projectData.image} />
 
             <div className="project-infosummary">
@@ -28,7 +27,6 @@ function ItemCard(props) {
                 {collectionData.attribute4 !== "" && (<p>{collectionData.attribute4}:  {projectData.attribute4} {projectData.attribute4 !== "" ? "" : "No information added for this attribute"}  </p>)}
                 {collectionData.attribute5 !== "" && (<p>{collectionData.attribute5}:  {projectData.attribute5} {projectData.attribute5 !== "" ? "" : "No information added for this attribute"}  </p>)}
                 <p className="cat">Notes: {projectData.notes} {projectData.notes !== "" ? "" : "No additional notes for this item"} </p>
-
 
                 {!projectData.is_active && (
                     <p id="author" className="cat">Item: {projectData.name.toUpperCase()} is currently archived and does not appear in attribute comparisons</p>
