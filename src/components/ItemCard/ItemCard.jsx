@@ -20,13 +20,12 @@ function ItemCard(props) {
 
     return (
         <div className="project-card" id={projectData.is_active === false ? "project-closed" : "project-open"}>
-            <p className="cat">Item: {projectData.name}</p>
+            <p className="cat">{projectData.name.toUpperCase()}</p>
 
 
             <img alt="Item" src={projectData.image} />
 
             <div className="project-infosummary">
-                <p className="cat">Item: {projectData.name}</p>
                 <p className="cat">Price: ${projectData.price}</p>
                 <p>Discount:  {parseInt(projectData.sale_amount) !== 0 ? `${projectData.sale_amount}%` : "No current discount for this item"}  </p>
                 {parseInt(projectData.sale_amount) !== 0 && (<p>Total Saving: ${calculateDiscount(projectData.price, projectData.sale_amount)}  </p>)}

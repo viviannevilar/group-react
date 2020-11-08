@@ -1,8 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useParams, useHistory, useLocation, Link } from "react-router-dom";
 import ItemCard from "../../components/ItemCard/ItemCard";
 import AddItemForm from "../../components/AddItemForm/AddItemForm";
 import "./CollectionDetailPage.css";
+
+
+// Swiper copies
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation, Pagination, Controller, Thumbs } from 'swiper';
+import 'swiper/swiper-bundle.css';
+SwiperCore.use([Navigation, Pagination, Controller, Thumbs]);
 
 
 function formatDate(string) {
@@ -33,15 +40,18 @@ function CollectionDetailPage() {
     const [collectionData, setCollectionData] = useState({ collection_items: [] });
     const [itemData, setItemData] = useState([]);
 
+
+    const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    const [controlledSwiper, setControlledSwiper] = useState(null);
+    const [dataInsideSwiper, setdataInsideSwiper] = useState([]);
+
+
+
     const addItemToggleModalState = () => {
         setModalState(!modalState);
         window.scrollTo(0, 0);
     };
 
-    const editItemToggleModalState = () => {
-        setEditModalState(!editmodalState);
-        window.scrollTo(0, 0);
-    };
 
     if (urlComponents.length === 6) {
         urlPath = "safe/" + id + "/" + urlComponents[4]
@@ -52,21 +62,7 @@ function CollectionDetailPage() {
     }
 
 
-    // Archive itme
-    const archiveItem = async (e) => {
-        e.preventDefault();
-        let token = window.localStorage.getItem("token");
-        const response = await fetch(`${process.env.REACT_APP_API_URL}item/${id}/archive/`, {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Token ${token}`,
-            },
-        });
 
-        window.location.reload();
-        return response.json();
-    }
 
 
     const fetchProjects = async () => {
@@ -128,17 +124,30 @@ function CollectionDetailPage() {
         });
     }
 
+    // Archive itme
+    const archiveItem = (projectdat, e) => {
+        let token = window.localStorage.getItem("token");
+        fetch(`${process.env.REACT_APP_API_URL}item/${projectdat.id}/archive/`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Token ${token}`,
+            },
+        }).then(() => {
+            history.push(`/collection/${id}/`)
+            window.location.reload();
+        });
+    }
+
     ////////       functions to sort collections       ////////
-
-    //let sortedItemData
-
-    const [sortedItemData, setSortedItemData] = useState(itemData)
 
     // sort by price, lowest to highest
     const sortAscending = () => {
         const sorted = [...itemData].sort((a, b) => a.price - b.price)
         //see explanation at the end of file to understand this a bit more
         setItemData(sorted)
+        // swiper.slideTo(0)
+
     }
 
 
@@ -146,25 +155,35 @@ function CollectionDetailPage() {
     const sortDescending = () => {
         const sorted = [...itemData].sort((a, b) => a.price - b.price).reverse()
         setItemData(sorted)
+        // swiper.slideTo(0)
+
+
     }
 
     // sort by date created, oldest to newest
     const sortCreated = () => {
         const sorted = [...itemData].sort((a, b) => a.id - b.id)
         setItemData(sorted)
+        // swiper.slideTo(0)
+
     }
 
-    // sort by date created, oldest to newest
-    const sortCreatedReverse = () => {
-        const sorted = [...itemData].sort((a, b) => a.id - b.id).reverse
-        setItemData(sorted)
-    }
 
     // sort by last updated
     const sortModified = () => {
         const sorted = [...itemData].sort((a, b) => new Date(a.last_updated) - new Date(b.last_updated))
         setItemData(sorted)
+        // swiper.slideTo(0)
+
     }
+
+
+
+
+
+
+
+
 
     return (
         <div id="projectlistcenter">
@@ -181,6 +200,9 @@ function CollectionDetailPage() {
 
             {!isLoading && !errorMessage && (
                 <div>
+
+
+
                     <div id="App">
                         {shared_link == "private" && (<p>See your collection of {collectionData.title} </p>)}
                         {shared_link == "public" && (<p>Collection of {collectionData.title} </p>)}
@@ -215,6 +237,24 @@ function CollectionDetailPage() {
 
 
                         <div id="project-list">
+                            {/* <React.Fragment>
+                                <Swiper
+                                    id="main"
+                                    thumbs={{ swiper: thumbsSwiper }}
+                                    controller={{ control: controlledSwiper }}
+                                    tag="section"
+                                    navigation
+                                    spaceBetween={0}
+                                    slidesPerView={1}
+                                    onInit={(swiper) => console.log('Swiper initialized!', swiper)}
+                                    onSlideChange={(swiper) => {
+                                        console.log('Slide index changed to: ', swiper.activeIndex);
+                                    }}
+                                    onReachEnd={() => console.log('Swiper end reached')}>
+                                    {dataInsideSwiper}
+                                </Swiper>
+                            </React.Fragment> */}
+
                             {itemData.map((projectData, key) => {
                                 return (
                                     <div>
@@ -226,7 +266,7 @@ function CollectionDetailPage() {
                                                 <Link to={`/item-edit/${projectData.id}/${collectionData.id}/`}>
                                                     <button>Edit Item</button >
                                                 </Link>
-                                                <button onClick={archiveItem}>{projectData.is_active ? "Archive" : "Unarchive"}</button>
+                                                <button onClick={() => archiveItem(projectData)}>{projectData.is_active ? "Archive" : "Unarchive"}</button>
                                             </div>
                                         )}
 
@@ -234,6 +274,7 @@ function CollectionDetailPage() {
 
                             })
                             }
+
                         </div>
                     </div>
 
