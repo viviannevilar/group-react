@@ -1,6 +1,7 @@
 
 #Nav{
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -10,6 +11,7 @@
 .navbarcontainer{
     padding: 20px;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
 }
 
