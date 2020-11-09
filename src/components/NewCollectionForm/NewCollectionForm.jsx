@@ -77,8 +77,8 @@ function NewCollectionForm() {
   };
 
   return (
-    <div id="Nav">
     <div>
+    <div id="Nav">
         <Nav />
     </div>
       <div>
