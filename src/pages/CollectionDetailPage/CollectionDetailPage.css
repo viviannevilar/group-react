@@ -1,121 +1,133 @@
 
   #headerTitle{
-    text-align: center;
-    font-family: 'open sans', sans-serif;
-    padding: 1.5rem 0;
-    margin: 0;
-    font-size: rem;
-  }
-  
+   text-align: center;
+   font-family: 'open sans', sans-serif;
+   padding: 1.5rem 0;
+   margin: 0;
+   font-size: rem;
+ }
+ 
 
 
-  .button{
-    padding: 5px 10px;
-    background: #373a47;
-    border-radius: 30px;
-    font-size: 18px;
-    color: white;
-    border: none;
-  }
-  
+ .button{
+   padding: 5px 10px;
+   background: #373a47;
+   border-radius: 30px;
+   font-size: 18px;
+   color: white;
+   border: none;
+ }
+ 
 
-  .App {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Nunito', sans-serif;
+ .App {
+ min-height: 100%;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ font-family: 'Nunito', sans-serif;
 }
 
 .App-information{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 80%;
+ display: flex;
+ flex-direction: row;
+ justify-content: center;
+ align-items: center;
+ width: 80%;
 }
 
 
 
 .App button:not(.exitButton, .editbutton) {
-  padding: 5px 10px;
-  background: #373a47;
-  border-radius: 30px;
-  font-size: 18px;
-  color: white;
-  border: none;
+ padding: 5px 10px;
+ background: #373a47;
+ border-radius: 30px;
+ font-size: 18px;
+ color: white;
+ border: none;
 }
 
 
 .App button:hover{
-  opacity: 0.7;
+ opacity: 0.7;
 }
 
 .modalBackground {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease-in-out;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
+ opacity: 0;
+ pointer-events: none;
+ transition: opacity 0.4s ease-in-out;
+ position: absolute;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ top: 0;
+ width: 100%;
+ height: 100%;
+ background: rgba(0, 0, 0, 0.7);
+ display: flex;
 }
 
 .modalShowing-true {
-  opacity: 1;
-  pointer-events: visible;
+ opacity: 1;
+ pointer-events: visible;
 }
 
 .modalInner {
-  background: white;
-  width: 900px;
-  max-width: calc(100% - 50px);
-  justify-content: center;
-  margin: auto;
-  display: flex;
-  flex-direction: row;
-  color: black;
-  text-align: left;
+ background: white;
+ width: 900px;
+ max-width: calc(100% - 50px);
+ justify-content: center;
+ margin: auto;
+ display: flex;
+ flex-direction: row;
+ color: black;
+ text-align: left;
 }
 
 .modalText {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 15px;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ padding: 15px;
 }
 
 .modalText p {
-  line-height: 180%;
+ line-height: 180%;
 }
 
 .modalText button {
-  display: block;
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
+ display: block;
+ width: 50%;
+ display: flex;
+ flex-direction: column;
+ text-align: center;
 }
 
 
 .exitButton {
-  padding: 15px;
-  display: block;
-  width: 100%;
-  background-color: transparent;
-  border: 0;
-  text-align: center;
-  color: black;
+ padding: 15px;
+ display: block;
+ width: 100%;
+ background-color: transparent;
+ border: 0;
+ text-align: center;
+ color: black;
 }
 
 button.exitButton{
-  align-items: center;
+ align-items: center;
 }
 
+.swiper-container {
+ width: 500px;
+}
+
+.swiper-pagination {
+ bottom: 0;
+ padding-bottom: 10px;
+}
+
+.swiper-wrapper {
+ padding-inline-start: 0;
+}
 
