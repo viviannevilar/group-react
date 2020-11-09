@@ -1,11 +1,46 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap"); */
+@media only screen and (max-width: 500px) {
+  #about {
+    font-family: "Roboto", sans-serif;
+    color: #b3b7a4;
+    text-align: center;
+    font-size: 18px;
+  }
 
-#about {
-  font-family: "Roboto", sans-serif;
-  color: b3b7a4;
-  text-align: center;
+  p {
+    text-align: center;
+    margin-right: 1cm;
+    margin-left: 1cm;
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 800px) {
+  #about {
+    font-family: "Roboto", sans-serif;
+    color: #b3b7a4;
+    text-align: center;
+    font-size: 25px;
+  }
+
+  p {
+    text-align: center;
+    margin-right: 2cm;
+    margin-left: 2cm;
+    font-size: 20px;
+  }
 }
 
-p {
-  text-align: center;
+@media only screen and (min-width: 1200px) {
+  #about {
+    font-family: "Roboto", sans-serif;
+    color: #b3b7a4;
+    text-align: center;
+    font-size: 40px;
+  }
+
+  p {
+    text-align: center;
+    margin-right: 3cm;
+    margin-left: 3cm;
+    font-size: 35px;
+  }
 }
