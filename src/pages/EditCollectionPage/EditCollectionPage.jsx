@@ -1,10 +1,10 @@
-import ItemEditForm from "../../components/ItemEditForm/ItemEditForm";
+import EditCollectionForm from "../../components/EditCollecitonForm/EditCollectionForm";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 
 
-function ItemEditPage() {
+function EditCollectionPage() {
     const { id, listid } = useParams();
     const [editData, setEditData] = useState({})
     const [collectionData, setCollectionData] = useState({})
@@ -12,7 +12,7 @@ function ItemEditPage() {
 
     useEffect(() => {
 
-        fetch(`${process.env.REACT_APP_API_URL}item/${id}/`, {
+        fetch(`${process.env.REACT_APP_API_URL}collection/${id}/`, {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
@@ -29,32 +29,12 @@ function ItemEditPage() {
     }, [id]);
 
 
-    useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}collection/${listid}/`, {
-            method: "get",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Token ${token}`,
-            }
-        })
-            .then((results) => {
-                return results.json();
-            })
-            .then((data) => {
-                console.log(data)
-                setCollectionData(data);
-            })
-    }, [listid]);
-
-
-
-
     return (
 
         <div>
             {token !== null && (
                 <div>
-                    <ItemEditForm itemData={editData} collectionData={collectionData} />
+                    <EditCollectionForm CollecitonData={editData}/>
                 </div>
             )}
 
@@ -63,4 +43,4 @@ function ItemEditPage() {
     );
 }
 
-export default ItemEditPage;
+export default EditCollectionPage;
