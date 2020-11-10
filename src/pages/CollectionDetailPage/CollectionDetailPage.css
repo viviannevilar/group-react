@@ -131,3 +131,7 @@ button.exitButton{
  padding-inline-start: 0;
 }
 
+.swiper-slide {
+   padding: 2em;
+   border: 1px solid #ccc;
+ }

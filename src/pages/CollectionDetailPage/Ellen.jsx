@@ -1,29 +1,22 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useParams, useHistory, useLocation, Link } from "react-router-dom";
+import ItemCard from "../../components/ItemCard/ItemCard";
+import AddItemForm from "../../components/AddItemForm/AddItemForm";
 import "./CollectionDetailPage.css";
 import Nav from "../../components/Nav/Nav";
 
+
 // Swiper copies
-import Swiper, { Autoplay } from 'swiper';
-//import { SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Controller, Thumbs } from 'swiper';
-import 'swiper/swiper-bundle.min.css';
-//swiper-bundle.css';
-
-
-Swiper.use([Navigation, Pagination, Controller, Thumbs]);
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation, Pagination, Controller, Thumbs } from 'swiper';
+import 'swiper/swiper-bundle.css';
+SwiperCore.use([Navigation, Pagination, Controller, Thumbs]);
 
 
 function formatDate(string) {
     var options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(string).toLocaleDateString([], options);
 }
-
-
-
-
-
-
 
 // List of items print out
 // Each attribute is clickable and takes you to a pop up modal that compares the items
@@ -61,10 +54,8 @@ function CollectionDetailPage() {
     const [itemData, setItemData] = useState([]);
 
     // testing swiper state variables
-    //const [thumbsSwiper, setThumbsSwiper] = useState(null);
-    //const [controlledSwiper, setControlledSwiper] = useState(null);
-    const swiper = useRef(null)
-    //const [index,setIndex] = useState(0)
+    const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    const [controlledSwiper, setControlledSwiper] = useState(null);
 
     // ordering and filtering state variables
     const [filterChoice, setFilterChoice] = useState("all")
@@ -73,39 +64,6 @@ function CollectionDetailPage() {
 
 
     // functions:
-
-   // Swiper
-   useEffect(()=>{
-      swiper.current = new Swiper('.swiper-container',{
-         observer: true,
-          effect: 'coverflow',
-          grabCursor: true,
-          centeredSlides: true,
-          slidesPerView: 1,
-          coverflowEffect: {
-            rotate: 50,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows : true,
-          },
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-          },
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          }
-        })
-  },[itemDisplayData])
-
-
-
-
-
-
-
 
     // Modal state change function:
     const addItemToggleModalState = () => {
@@ -193,20 +151,6 @@ function CollectionDetailPage() {
         });
     }
 
-
-
- 
-
-   // useEffect(()=>{
-   //    // swiper.current.updateSlides();
-   // },[itemDisplayData])
-
-
-
-
-
-
-
     ////////       filter active-archived-all items       ////////
     useEffect(() => {
 
@@ -231,11 +175,8 @@ function CollectionDetailPage() {
             console.log("Error in filters. Filter chosen doesn't match any of the filter options. filterChoice = ", filterChoice)
         }
 
-        //swiper.current.update();
-
     }, [filterChoice, itemData])
 
-   //useEffect(()=>{swiper.current.update()},[itemDisplayData])
 
     ////////       order items by price, date       ////////
 
@@ -278,25 +219,18 @@ function CollectionDetailPage() {
     }, [orderChoice])
 
 
+    // Set up data for inside slider
+    const slides = [];
+    itemDisplayData.map((item, key) => {
+        slides.push(
+            <SwiperSlide key={`slide-${key}`}>
+                <div>
+                    <ItemCard key={key} item={item} collectionData={collectionData} />
 
-
-
-
-    
-
-
-   //  // Set up data for inside slider
-   //  const slides = [];
-   //  itemDisplayData.map((item, key) => {
-   //      slides.push(
-   //          <SwiperSlide key={`slide-${key}`}>
-   //              <div>
-   //                  <ItemCard key={key} item={item} collectionData={collectionData} />
-
-   //              </div>
-   //          </SwiperSlide>
-   //      );
-   //  })
+                </div>
+            </SwiperSlide>
+        );
+    })
 
     return (
         <div id="Nav">
@@ -317,6 +251,8 @@ function CollectionDetailPage() {
 
                 {!isLoading && !errorMessage && (
                     <div>
+
+
 
                         <div id="App">
                             {/* collection information */}
@@ -362,39 +298,87 @@ function CollectionDetailPage() {
 
 
 
-                           <div id="project-list">
+                            <div id="project-list">
 
-                              <div className="swiperMainContainer">
 
-                                 {/* Here we will be adding swiper container */}
-                                 <div className="swiper-container">
-                                    <div className="swiper-wrapper">
-                                       {itemDisplayData.map((el,key)=>{
-                                          return(
-                                             <div className="swiper-slide" key={key}>
+                                {/* {itemDisplayData.map((item, key) => {
+                                    return (
+                                        <div>
+                                            <ItemCard key={key} item={item} collectionData={collectionData} />
+
+                                            {shared_link === "private" && (
                                                 <div>
-                                                <p>Item: {el.name}</p>
-                                                <img alt="images" src={el.image} />
-
-                                             {/* <ItemCard key={key} item={el} collectionData={collectionData} /> */}
+                                                    <button className={`button-delete${key}`} onClick={() => handleDelete(item)}>Delete Item: {item.name} </button>
+                                                    <Link to={`/item-edit/${item.id}/${collectionData.id}/`}>
+                                                        <button>Edit Item</button >
+                                                    </Link>
+                                                    <button onClick={() => archiveItem(item)}>{item.is_active ? "Archive" : "Unarchive"}</button>
                                                 </div>
-                                             </div>
-                                             )
-                                       })}
+                                            )}
+
+                                        </div>)
+
+                                })
+                                } */}
+
+                                <React.Fragment>
+                                    <div style={modalState ? { pointerEvents: "none", opacity: "0.4" } : {}} >
+                                        <Swiper
+                                            // breakpoints={{
+                                            //     // when window width is >= 640px
+                                            //     400: {
+                                            //         width: 400,
+                                            //         slidesPerView: 1,
+                                            //     },
+                                            //     // when window width is >= 768px
+                                            //     768: {
+                                            //         width: 768,
+                                            //         slidesPerView: 2,
+                                            //     },
+
+                                            //     1000: {
+                                            //         width: 1000,
+                                            //         slidesPerView: 5,
+                                            //     },
+                                            // }}
+                                            id="main"
+                                            thumbs={{ swiper: thumbsSwiper }}
+                                            controller={{ control: controlledSwiper }}
+                                            tag="section"
+                                            wrapperTag="ul"
+                                            navigation
+                                            pagination
+                                            spaceBetween={0}
+                                            slidesPerView={1}
+                                            onInit={(swiper) => console.log('Swiper initialized!', swiper)}
+                                            onSlideChange={(swiper) => {
+                                                console.log('Slide index changed to: ', swiper.activeIndex);
+                                            }}
+                                            onReachEnd={() => console.log('Swiper end reached')}
+                                        >
+                                            {slides}
+                                        </Swiper>
                                     </div>
-                                    {/* -- If we need pagination -- */}
-                                    <div className="swiper-pagination"></div>
-                                    {/* -- If we need navigation buttons -- */}
-                                    <div className="swiper-button-prev"></div>
-                                    <div className="swiper-button-next"></div>
-                                 </div>
 
-                              </div>
+                                </React.Fragment>
 
-                           </div>
-
-
+                            </div>
                         </div>
+
+                        <div className={`modalBackground modalShowing-${modalState}`}>
+                            <div className="modalInner">
+                                <div className="modalText">
+                                    <AddItemForm id={id} collectionData={collectionData} />
+                                    <div>
+                                        <button className="exitButton" onClick={() => addItemToggleModalState()}> exit </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
                     </div>
                 )
                 }

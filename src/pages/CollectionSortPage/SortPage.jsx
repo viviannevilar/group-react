@@ -33,6 +33,8 @@ function SortableComponent() {
 
     console.log(myArray)
 
+    console.log(items)
+
   
 
   return <SortableList items={items} onSortEnd={onSortEnd} />;
