@@ -119,7 +119,7 @@ button.exitButton{
 }
 
 .swiper-container {
-  width: 500px;
+  width: 95%;
 }
 
 .swiper-pagination {
@@ -130,4 +130,63 @@ button.exitButton{
 .swiper-wrapper {
   padding-inline-start: 0;
 }
+
+
+.CollectionInformationContainer{ display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;}
+
+
+.item-container{
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  border: #373a47;
+  border-style: dashed;
+}
+
+
+.buttonblue {
+  color: white;
+  background: #4C8FFB;
+  border: 1px #3079ED solid;
+  box-shadow: inset 0 1px 0 #80B0FB;
+  margin: 4px;
+}
+
+.buttonblue:hover {
+  border: 1px #2F5BB7 solid;
+  box-shadow: 0 1px 1px #EAEAEA, inset 0 1px 0 #5A94F1;
+  background: #3F83F1;
+}
+
+.buttonblue:active {
+  box-shadow: inset 0 2px 5px #2370FE;   
+}
+
+@media all and (max-width:30em){
+  .buttonblue{
+  display:block;
+  margin:0.2em auto;
+  }
+}
+
+
+
+
+.buttoncontainer{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+
+#projectlistcenter{
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+}
+
 

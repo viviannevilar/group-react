@@ -1,6 +1,8 @@
 import React from "react";
 //import { Link } from "react-router-dom";
 import "./ItemCard.css";
+import nophoto from '../../images/noimage.PNG';
+import pricetag from "../../images/img_568452.png"
 
 function formatDate(string) {
     var options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -11,11 +13,16 @@ function calculateDiscount(price, discount) {
     var total_saving = parseInt(price) * (discount / 100)
     return Math.round(total_saving, 3)
 }
+function calculateNewPrice(oldprice, totalsaving) {
+    var updateprice = parseInt(oldprice) - parseInt(totalsaving)
+    return updateprice
+}
 
 
 
 function ItemCard(props) {
     const { projectData, collectionData } = props;
+    console.log(projectData.image)
 
 
     return (
@@ -23,12 +30,20 @@ function ItemCard(props) {
         <div className="project-card" id={projectData.is_active === false ? "project-closed" : "project-open"}>
             <p>{projectData.name.toUpperCase()}</p>
 
-            <img alt="Item" src={projectData.image} />
+            <div class="item">
+                <a href="#">
+                    {projectData.image !== null ? <img className="item" alt="Item" src={projectData.image} /> : <img className="item" alt="Item" src={nophoto} />}
+                    {parseInt(projectData.sale_amount) !== 0 && (<span class="notify-badge"> {projectData.sale_amount}% OFF</span>)}
+
+                </a>
+            </div>
+
 
             <div className="project-infosummary">
-                <p className="cat">Price: ${projectData.price}</p>
-                <p>Discount:  {parseInt(projectData.sale_amount) !== 0 ? `${projectData.sale_amount}%` : "No current discount for this item"}  </p>
-                {parseInt(projectData.sale_amount) !== 0 && (<p>Total Saving: ${calculateDiscount(projectData.price, projectData.sale_amount)}  </p>)}
+                <div className="priceSummary">
+                    <img className="priceicon" alt="priceicon" src={pricetag} />
+                    {parseInt(projectData.sale_amount) !== 0 ? (<p classname={parseInt(projectData.sale_amount) !== 0 ? "onsale" : "item"} > ${calculateNewPrice(projectData.price, calculateDiscount(projectData.price, projectData.sale_amount))}   (<strike>${projectData.price}</strike>) </p>) : <p>${projectData.price} </p>}
+                </div>
                 {parseInt(projectData.sale_amount) !== 0 && projectData.sale_end_date !== null && (<p>Sale End Date: {formatDate(projectData.sale_end_date)}  </p>)}
                 {collectionData.attribute2 !== "" && (<p>{collectionData.attribute2}:  {projectData.attribute2} {projectData.attribute2 !== "" ? "" : "No information added for this attribute"}  </p>)}
                 {collectionData.attribute3 !== "" && (<p>{collectionData.attribute3}:  {projectData.attribute3} {projectData.attribute3 !== "" ? "" : "No information added for this attribute"}  </p>)}
