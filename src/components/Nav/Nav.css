@@ -1,8 +1,14 @@
-
-#Nav{
+@media screen and (max-width: 500px) {
+    .Navbarcontainer {
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-}
+    justify-content: space-between;
+    padding: 10px;
+    }
 
+    .Navitem {
+        flex-basis: 100%;
+        color: #004aad
+    }
+}

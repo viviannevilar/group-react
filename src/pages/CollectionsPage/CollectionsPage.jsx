@@ -109,7 +109,7 @@ function CollectionsPage() {
     } else {
 
         return (
-            <div id="Nav">
+            <div>
             <div>
                 <Nav />
             </div>
