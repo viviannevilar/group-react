@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import ContactUs from "./pages/ContactUs/ContactUs";
 import LoginPage from "./pages/LoginPage/LoginPage";
+import LogoutPage from "./components/LogoutForm/LogoutForm";
 import SignUp from "./pages/SignUp/SignUp";
 import EditProfileForm from './components/EditProfileForm/EditProfileForm';
 import NewCollection from './pages/NewCollection/NewCollection';
@@ -43,6 +44,9 @@ function App() {
                     </Route>
                     <Route exact path="/login">
                         <LoginPage />
+                    </Route>
+                    <Route exact path="/logout">
+                        <LogoutPage />
                     </Route>
                     <Route exact path="/signup">
                         <SignUp />
