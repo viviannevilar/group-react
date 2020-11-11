@@ -132,7 +132,7 @@ function CollectionsPage() {
                         <Link to={`/collections-archive/`}><button >See archived collections</button></Link>
                 }
                  <Link to={`/newcollection/`}><button >Create New Collection</button></Link>
-                 <Link to={`/editcollection/`}><button >Edit Collection</button></Link>
+                 
             </div>
             </div>
         )

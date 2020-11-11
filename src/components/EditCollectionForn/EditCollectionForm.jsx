@@ -2,12 +2,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import Nav from "../../components/Nav/Nav";
+import ContactUsPage from "../../pages/ContactUs/ContactUs";
 
 function EditCollectionForm(props) {
 
 
     const { collectionData } = props;
 
+    console.log(collectionData)
     //variables
     const [credentials, setCredentials] = useState({
         id: null,
@@ -20,7 +22,7 @@ function EditCollectionForm(props) {
     });
 
     useEffect(() => {
-        console.log(itemData)
+
         setCredentials({
             id: parseInt(collectionData.id),
             title: collectionData.title,
@@ -28,11 +30,8 @@ function EditCollectionForm(props) {
             attribute2: collectionData.attribute2,
             attribute3: collectionData.attribute3,
             attribute4: collectionData.attribute4,
-            is_active: itemData.is_active,
+            is_active: collectionData.is_active,
         });
-        console.log(credentials)
-
-
     }, [collectionData]);
 
 
@@ -109,14 +108,14 @@ function EditCollectionForm(props) {
                     <label htmlFor="title">Name of Collection:</label>
                     <input
                         type="text"
-                        id="name"
+                        id="title"
                         value={credentials.title}
                         onChange={handleChange}
                     />
                 </div>
 
                 {collectionData.attribute1 !== "" && (<div className="thra">
-                    <label htmlFor="attribute1">{collectionData.attribute1}:</label>
+                    <label htmlFor="attribute1">Attribute 1:</label>
                     <input
                         type="text"
                         id="attribute1"
@@ -128,7 +127,7 @@ function EditCollectionForm(props) {
 
 
                 {collectionData.attribute2 !== "" && (<div className="thra">
-                    <label htmlFor="attribute2">{collectionData.attribute2}:</label>
+                    <label htmlFor="attribute2">Attribute 2:</label>
                     <input
                         type="text"
                         id="attribute2"
@@ -138,7 +137,7 @@ function EditCollectionForm(props) {
                 </div>)}
 
                 {collectionData.attribute3 !== "" && (<div className="thra">
-                    <label htmlFor="attribute3">{collectionData.attribute3}:</label>
+                    <label htmlFor="attribute3">Attribute 3:</label>
                     <input
                         type="text"
                         id="attribute3"
@@ -148,7 +147,7 @@ function EditCollectionForm(props) {
                 </div>)}
 
                 {collectionData.attribute4 !== "" && (<div className="thra">
-                    <label htmlFor="attribute4">{collectionData.attribute4}:</label>
+                    <label htmlFor="attribute4">Attribute 4:</label>
                     <input
                         type="text"
                         id="attribute4"
