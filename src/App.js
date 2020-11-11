@@ -13,6 +13,8 @@ import CollectionDetailPage from "./pages/CollectionDetailPage/CollectionDetailP
 import CollectionsPage from "./pages/CollectionsPage/CollectionsPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import ItemEditPage from "./pages/ItemEditPage/ItemEditPage";
+import CollectionSortPage from "./pages/CollectionSortPage/CollectionSortPage";
+import EditCollectionPage from "./pages/EditCollectionPage/EditCollectionPage";
 
 function App() {
 
@@ -55,6 +57,10 @@ function App() {
                         <NewCollection />
                     </Route>
 
+                    <Route exact path="/editcollection/:id">
+                        <EditCollectionPage />
+                    </Route>
+
                     <Route exact path="/collection/:id">
                         <CollectionDetailPage />
                     </Route>
@@ -72,6 +78,13 @@ function App() {
                     <Route exact path="/collection/shared/:id/:code/">
                         <CollectionDetailPage />
                     </Route>
+
+                    <Route exact path="/collection/sort/:id/">
+                        <CollectionSortPage />
+                    </Route>
+
+
+
                     <Route path="*" component={NotFoundPage} />
 
                 </Switch>

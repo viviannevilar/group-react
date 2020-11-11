@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
+import Nav from "../../components/Nav/Nav";
 
 
 function EditProfileForm() {
@@ -168,6 +169,11 @@ function EditProfileForm() {
   
   return (
     <div>
+        <div id="Nav">
+            <Nav />
+        </div>
+   
+    <div>
       <form>
         <h2>Edit Profile here</h2>
         <div class="form1-item">
@@ -232,6 +238,7 @@ function EditProfileForm() {
 
         <button onClick={DeleteAccount}>Delete Account</button>
       </form>
+    </div>
     </div>
   );
 }

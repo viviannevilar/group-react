@@ -31,6 +31,7 @@ function SharedCollection() {
             setCollectionData(data);
             setIsLoading(false)
         })
+        
      }, [id]);
 
     
