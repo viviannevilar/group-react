@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "../SignUpForm/SignUpForm.css";
 
+
 function SignUpForm() {
   //variables
   const [credentials, setCredentials] = useState({
@@ -25,7 +26,7 @@ function SignUpForm() {
 
   const postData = async () => {
     //function you can call but carry on as well
-    const response = await fetch(`${process.env.REACT_APP_API_URL}users/`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}register/`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -47,7 +48,11 @@ function SignUpForm() {
   };
 
   return (
+
+      <div>
     <form id="loginform">
+
+    
       <h2 id="headerTitle">Create an Account</h2>
 
       <div className="row">
@@ -86,6 +91,7 @@ function SignUpForm() {
       </button>
       </div >
     </form >
+    </div>
   );
 }
 

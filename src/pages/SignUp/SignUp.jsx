@@ -1,12 +1,18 @@
 import React from "react";
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
-// import LogoutForm from "../components/LogoutForm/LogoutForm";
+import LogoutForm from "../../components/LogoutForm/LogoutForm";
+import Nav from "../../components/Nav/Nav";
 
 function SignUp() {
   let username = localStorage.username;
   let token = localStorage.token;
 
   return (
+      <div>
+          <div id="Nav">
+              <Nav />
+          </div>
+    
     <div>
       {token == null && (
         <div>
@@ -19,9 +25,10 @@ function SignUp() {
             You are already logged in as user {username}! Please log out to
             register a new user{" "}
           </h2>
-          {/* <LogoutForm /> */}
+          <LogoutForm />
         </div>
       )}
+    </div>
     </div>
   );
 }
