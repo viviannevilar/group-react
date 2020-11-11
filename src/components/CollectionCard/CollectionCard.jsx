@@ -59,6 +59,22 @@ function CollectionCard(props) {
 
 
 
+    // const editCollection = async (e) => {
+    //     e.preventDefault();
+    //     let token = window.localStorage.getItem("token");
+    //     let urlPath = "collection/" + collectionData.id
+    
+    //     const response = await fetch(`${process.env.REACT_APP_API_URL}${urlPath}/editcollection/:id`, {
+    //         method: "put",
+    //         headers: {
+    //             Authorization: `Token ${token}`,
+    //         },
+    //     });
+
+    //     window.location.reload();
+    // }
+
+
      //////////////////////////// return ////////////////////////////   
 
     return (
@@ -68,6 +84,7 @@ function CollectionCard(props) {
             <p> <Link to={linkCollection}>{collectionData.title}</Link>
             <button onClick={archiveCollection}>{ collectionData.is_active ? "Archive" : "Unarchive" }</button> 
             <button onClick={shareCollection}>Share Collection</button>
+            <Link to={`/editcollection/${collectionData.id}`}><button >Edit Collection</button></Link>
             <button onClick={deleteCollection}>Delete Collection</button> 
             </p>
         </div>
