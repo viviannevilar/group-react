@@ -65,6 +65,9 @@ function EditProfileForm() {
       [id]: value,
     }));
   };
+ 
+
+
   const postData = async () => {
     let username = localStorage.username;
     let token = localStorage.token;
@@ -142,11 +145,31 @@ function EditProfileForm() {
     )
     };
   
-   
+  
+  const DeleteAccount = async (e) => {
+    e.preventDefault();
+    let token = localStorage.getItem("token");
+    let username = localStorage.getItem("username");
 
+    const response = fetch(`${process.env.REACT_APP_API_URL}user/${username}/`, {
+      method: "delete",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    });
+    console.log(response)
+    localStorage.removeItem("username");
+    localStorage.removeItem("token");
+    history.push("/");
+    window.location.reload();
+  };  
+
+  
   return (
     <div>
       <form>
+        <h2>Edit Profile here</h2>
         <div class="form1-item">
           <label htmlFor="username">Username:</label>
           <input
@@ -175,6 +198,8 @@ function EditProfileForm() {
             value={credentials.preferred_name}
           /> 
         </div>
+        <button type="submit" onClick={handleSubmitCredential}> EditProfile </button>
+        <h2>Edit Password here</h2>
         <div class="form1-item">
           <label htmlFor="old_password">Old Password:</label>
           <input
@@ -184,6 +209,7 @@ function EditProfileForm() {
             value={passwords.old_password}
           />
         </div>
+        
         <div class="form1-item">
           <label htmlFor="new_password">New Password:</label>
           <input
@@ -193,8 +219,18 @@ function EditProfileForm() {
             value={passwords.new_password}
           />
         </div>
-        <button type="submit" onClick={handleSubmitCredential}> EditProfile </button>
+        
         <button type="submit" onClick={handleSubmitPassword}> Change Password </button>
+
+        <h2>Delete Account here</h2>
+        <div class="form1-item">
+          <label htmlFor="delete_account"></label>
+                     
+          
+        </div>
+
+
+        <button onClick={DeleteAccount}>Delete Account</button>
       </form>
     </div>
   );
