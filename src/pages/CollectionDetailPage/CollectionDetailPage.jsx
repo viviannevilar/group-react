@@ -1,22 +1,32 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useParams, useHistory, useLocation, Link } from "react-router-dom";
-import ItemCard from "../../components/ItemCard/ItemCard";
-import AddItemForm from "../../components/AddItemForm/AddItemForm";
 import "./CollectionDetailPage.css";
 import Nav from "../../components/Nav/Nav";
+import ItemCard from "../../components/ItemCard/ItemCard"
 import SummaryItemCard from "../../components/SummaryItemCard/SummaryItemCard";
+import AddItemForm from "../../components/AddItemForm/AddItemForm";
 
 // Swiper copies
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, Pagination, Controller, Thumbs } from 'swiper';
-import 'swiper/swiper-bundle.css';
-SwiperCore.use([Navigation, Pagination, Controller, Thumbs]);
+import Swiper, { Autoplay } from 'swiper';
+//import { SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Controller, Thumbs } from 'swiper';
+import 'swiper/swiper-bundle.min.css';
+//swiper-bundle.css';
+
+
+Swiper.use([Navigation, Pagination, Controller, Thumbs]);
 
 
 function formatDate(string) {
     var options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(string).toLocaleDateString([], options);
 }
+
+
+
+
+
+
 
 // List of items print out
 // Each attribute is clickable and takes you to a pop up modal that compares the items
@@ -42,27 +52,16 @@ function CollectionDetailPage() {
         urlPath = id
         shared_link = "private"
     }
-    console.log(shared_link)
+
 
     // Collection ID, Loading states and modal states
     const history = useHistory();
     const [isLoading, setisLoading] = useState(true);
     const [modalState, setModalState] = useState(false);
-    const [summarymodalState, setSummaryModalState] = useState(false);
-
     const [error, setError] = useState();
     const [errorMessage, setErrorMessage] = useState(false);
     const [collectionData, setCollectionData] = useState({ collection_items: [] });
     const [itemData, setItemData] = useState([]);
-
-    // testing swiper state variables
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
-    const [controlledSwiper, setControlledSwiper] = useState(null);
-
-    // ordering and filtering state variables
-    const [filterChoice, setFilterChoice] = useState("all")
-    const [orderChoice, setOrderChoice] = useState("date-modified")
-    const [itemDisplayData, setItemDisplayData] = useState([])
 
     // summary variables:
     const [summaryChoice, setSummaryChoice] = useState("")
@@ -71,24 +70,16 @@ function CollectionDetailPage() {
     const [summaryInfo, setSummaryInformation] = useState([])
     const [summaryTitle, setsummaryTitle] = useState("Price")
 
+    // testing swiper state variables
+    //const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    //const [controlledSwiper, setControlledSwiper] = useState(null);
+    const swiper = useRef(null)
+    //const [index,setIndex] = useState(0)
 
-
-
-    // functions:
-
-    // Modal state change function:
-    const addItemToggleModalState = () => {
-        setModalState(!modalState);
-        window.scrollTo(0, 0);
-    };
-
-
-    const summaryToggleState = () => {
-        setSummaryModal(!summaryModal);
-        window.scrollTo(0, 0);
-    };
-
-    // Fetch Collection Data and Items
+    // ordering and filtering state variables
+    const [filterChoice, setFilterChoice] = useState("all")
+    const [orderChoice, setOrderChoice] = useState("date-modified")
+    const [itemDisplayData, setItemDisplayData] = useState([])
     const fetchProjects = async () => {
         let response
         try {
@@ -132,6 +123,27 @@ function CollectionDetailPage() {
 
     }
 
+
+    // functions:
+    useEffect(() => {
+        fetchProjects()
+    }, []);
+
+
+
+    // Modal state change function:
+    const addItemToggleModalState = () => {
+        setModalState(!modalState);
+        window.scrollTo(0, 0);
+    };
+
+    const summaryToggleState = () => {
+        setSummaryModal(!summaryModal);
+        window.scrollTo(0, 0);
+    };
+    // Fetch Collection Data and Items
+
+
     useEffect(() => {
         fetchProjects()
     }, [id]);
@@ -167,6 +179,20 @@ function CollectionDetailPage() {
         });
     }
 
+
+
+
+
+    // useEffect(() => {
+    //     swiper.current.updateSlides();
+    // }, [itemDisplayData])
+
+
+
+
+
+
+
     ////////       filter active-archived-all items       ////////
     useEffect(() => {
 
@@ -191,8 +217,11 @@ function CollectionDetailPage() {
             console.log("Error in filters. Filter chosen doesn't match any of the filter options. filterChoice = ", filterChoice)
         }
 
+        //swiper.current.update();
+
     }, [filterChoice, itemData])
 
+    //useEffect(()=>{swiper.current.update()},[itemDisplayData])
 
     ////////       order items by price, date       ////////
 
@@ -233,6 +262,36 @@ function CollectionDetailPage() {
         }
 
     }, [orderChoice])
+
+
+
+    // Swiper
+    useEffect(() => {
+        swiper.current = new Swiper('.swiper-container', {
+            observer: true,
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 1,
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            }
+        })
+
+    }, [itemDisplayData, id])
+
 
 
 
@@ -291,6 +350,16 @@ function CollectionDetailPage() {
 
             console.log(key_information)
 
+        } else if (summaryChoice === "attribute4") {
+
+
+            var key_information = itemData.map(function (item, index) {
+                return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute4 };
+            })
+            setSummaryInformation(key_information)
+            setsummaryTitle(collectionData.attribute4)
+            console.log(key_information)
+
         } else {
 
             console.log("Error in summaryChoice. summaryChoice chosen doesn't match any of the attributes, attribute = ", summaryChoice)
@@ -299,34 +368,6 @@ function CollectionDetailPage() {
 
     }, [summaryChoice])
 
-
-
-
-
-    // Set up data for inside slider
-    const slides = [];
-    itemDisplayData.map((projectData, key) => {
-        slides.push(
-            <SwiperSlide key={`slide-${key}`}>
-                <div class="item-container">
-                    <div className="itemcardcontainer">
-                        <ItemCard key={key} projectData={projectData} collectionData={collectionData} />
-                    </div>
-                    {shared_link === "private" && (
-                        <div className="buttoncontainer">
-                            <Link to={`/item-edit/${projectData.id}/${collectionData.id}/`}>
-                                <button className="buttonblue" >Edit </button >
-                            </Link>
-                            <a><button className="buttonblue" onClick={() => archiveItem(projectData)}>{projectData.is_active ? "Archive" : "Unarchive"}</button></a>
-                            <a><button className="buttonblue" onClick={() => handleDelete(projectData)}>Delete </button></a>
-
-                        </div>
-                    )}
-
-                </div>
-            </SwiperSlide>
-        );
-    })
 
     return (
         <div id="Nav">
@@ -348,8 +389,6 @@ function CollectionDetailPage() {
                 {!isLoading && !errorMessage && (
                     <div>
 
-
-
                         <div id="App">
                             <div id="fexrow">
                                 <p>Summarise by: </p>
@@ -370,23 +409,12 @@ function CollectionDetailPage() {
                                 </select>
                                 <button className="buttonblue" onClick={() => summaryToggleState()}>GO</button>
                             </div>
+                            {/* collection information */}
 
-
-
-                            {shared_link === "private" ? (
-                                <div className="CollectionInformationContainer">
-                                    { collectionData.collection_items.length > 0 && (<p>You are currently comparing {itemDisplayData.length} items in {collectionData.title} list. </p>)}
-                                    {collectionData.collection_items.length === 0 && (<p>You are yet to add any items to {collectionData.title}!</p>)}
-                                    {collectionData.is_active && (
-                                        <button className="buttonblue" onClick={() => addItemToggleModalState()}>Add Item</button>
-                                    )}
-                                    {!collectionData.is_active && (
-                                        <p>This list is archived, please unarchive to add new items</p>)}
-                                </div>
-                            ) : (<div>
-                                { collectionData.collection_items.length > 0 && (<p>There are currently {collectionData.collection_items.length} items in the {collectionData.title} list for comparison. </p>)}
-                                {collectionData.collection_items.length === 0 && (<p>There are no items added to list {collectionData.title}!</p>)}
-                            </div>)}
+                            {shared_link == "private" && (<p>See your collection of {collectionData.title} </p>)}
+                            {shared_link == "public" && (<p>Collection of {collectionData.title} </p>)}
+                            <p>Date Created {formatDate(collectionData.date_created)} </p>
+                            <p>Last Updated {formatDate(collectionData.last_updated)} </p>
 
                             {/* first drop down - filter choices */}
                             <select onChange={(e) => setFilterChoice(e.target.value)}>
@@ -403,84 +431,68 @@ function CollectionDetailPage() {
                                 <option value="date-created">Date created</option>
                             </select>
 
+                            {shared_link === "private" && (
+                                <div>
+                                    { itemDisplayData.length > 0 && (<p>You are currently comparing {itemDisplayData.length} items in {collectionData.title} list. </p>)}
+                                    {itemDisplayData.length === 0 && (<p>You are yet to add any items to {collectionData.title}!</p>)}
+                                    {collectionData.is_active && (
+                                        <button className="button" onClick={() => addItemToggleModalState()}>Add Item</button>
+                                    )}
+                                    {!collectionData.is_active && (
+                                        <p>This list is archived, please unarchive to add new items</p>)}
+                                </div>
+                            )}
 
+                            {shared_link === "public" && (
+                                <div>
+                                    { itemDisplayData.length > 0 && (<p>There are currently {itemDisplayData.length} items in the {collectionData.title} list for comparison. </p>)}
+                                    {itemDisplayData.length === 0 && (<p>There are no items added to list {collectionData.title}!</p>)}
+                                </div>
+                            )}
 
 
 
                             <div id="project-list">
 
+                                <div className="swiperMainContainer" style={modalState || summaryModal ? { pointerEvents: "none", opacity: "0.4" } : {}} >
 
-                                {/* {itemDisplayData.map((projectData, key) => {
-                                    return (
-                                        <div>
-                                            <ItemCard key={key} projectData={projectData} collectionData={collectionData} />
+                                    {/* Here we will be adding swiper container */}
+                                    <div className="swiper-container">
+                                        <div className="swiper-wrapper">
+                                            {itemDisplayData.map((el, key) => {
+                                                return (
+                                                    <div className="swiper-slide" key={key}>
+                                                        <div>
+                                                            <ItemCard key={key} projectData={el} collectionData={collectionData} />
+                                                            {shared_link === "private" && (
+                                                                <div className="buttoncontainer">
+                                                                    <Link to={`/item-edit/${el.id}/${collectionData.id}/`}>
+                                                                        <button className="buttonblue" >Edit </button >
+                                                                    </Link>
+                                                                    <a><button className="buttonblue" onClick={() => archiveItem(el)}>{el.is_active ? "Archive" : "Unarchive"}</button></a>
+                                                                    <a><button className="buttonblue" onClick={() => handleDelete(el)}>Delete </button></a>
 
-                                            {shared_link === "private" && (
-                                                <div>
-                                                    <button className={`button-delete${key}`} onClick={() => handleDelete(projectData)}>Delete Item: {projectData.name} </button>
-                                                    <Link to={`/item-edit/${projectData.id}/${collectionData.id}/`}>
-                                                        <button>Edit Item</button >
-                                                    </Link>
-                                                    <button onClick={() => archiveItem(projectData)}>{projectData.is_active ? "Archive" : "Unarchive"}</button>
-                                                </div>
-                                            )}
-
-                                        </div>)
-
-                                })
-                                } */}
-
-                                <React.Fragment>
-                                    <div className="areyoutheproblem" style={modalState || summaryModal ? { pointerEvents: "none", opacity: "0.4" } : {}} >
-                                        <Swiper
-
-                                            breakpoints={{
-                                                // when window width is >= 640px
-                                                400: {
-                                                    width: 400,
-                                                    slidesPerView: 1,
-                                                    spaceBetween: 10,
-
-                                                },
-                                                // when window width is >= 768px
-                                                768: {
-                                                    width: 768,
-                                                    slidesPerView: 2,
-                                                    spaceBetween: 30,
-
-                                                },
-
-                                                1000: {
-                                                    width: 1000,
-                                                    slidesPerView: 3,
-                                                    spaceBetween: 40,
-
-                                                },
-                                            }}
-                                            id="main"
-                                            thumbs={{ swiper: thumbsSwiper }}
-                                            controller={{ control: controlledSwiper }}
-                                            tag="section"
-                                            wrapperTag="ul"
-                                            navigation
-                                            pagination
-                                            spaceBetween={1}
-                                            centeredSlides={true}
-                                            slidesPerView={1}
-                                            onInit={(swiper) => console.log('Swiper initialized!', swiper)}
-                                            onSlideChange={(swiper) => {
-                                                console.log('Slide index changed to: ', swiper.activeIndex);
-                                            }}
-                                            onReachEnd={() => console.log('Swiper end reached')}
-                                        >
-                                            {slides}
-                                        </Swiper>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                        {/* -- If we need pagination -- */}
+                                        <div className="swiper-pagination"></div>
+                                        {/* -- If we need navigation buttons -- */}
+                                        <div className="swiper-button-prev"></div>
+                                        <div className="swiper-button-next"></div>
                                     </div>
 
-                                </React.Fragment>
+                                </div>
 
                             </div>
+
+
                         </div>
+
 
                         <div className={`modalBackground modalShowing-${modalState}`}>
                             <div className="modalInner">
@@ -504,14 +516,6 @@ function CollectionDetailPage() {
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
-
-
-
                     </div>
                 )
                 }
@@ -527,9 +531,12 @@ function CollectionDetailPage() {
                     )}
                 </div>
             </div >
-        </div >
+        </div>
 
     )
 }
 
 export default CollectionDetailPage;
+
+
+
