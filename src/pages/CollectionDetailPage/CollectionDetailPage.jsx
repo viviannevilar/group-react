@@ -4,6 +4,7 @@ import ItemCard from "../../components/ItemCard/ItemCard";
 import AddItemForm from "../../components/AddItemForm/AddItemForm";
 import "./CollectionDetailPage.css";
 import Nav from "../../components/Nav/Nav";
+import SummaryItemCard from "../../components/SummaryItemCard/SummaryItemCard";
 
 // Swiper copies
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -47,6 +48,8 @@ function CollectionDetailPage() {
     const history = useHistory();
     const [isLoading, setisLoading] = useState(true);
     const [modalState, setModalState] = useState(false);
+    const [summarymodalState, setSummaryModalState] = useState(false);
+
     const [error, setError] = useState();
     const [errorMessage, setErrorMessage] = useState(false);
     const [collectionData, setCollectionData] = useState({ collection_items: [] });
@@ -61,6 +64,15 @@ function CollectionDetailPage() {
     const [orderChoice, setOrderChoice] = useState("date-modified")
     const [itemDisplayData, setItemDisplayData] = useState([])
 
+    // summary variables:
+    const [summaryChoice, setSummaryChoice] = useState("price")
+
+    const [summaryModal, setSummaryModal] = useState(false)
+    const [summaryInfo, setSummaryInformation] = useState([])
+    const [summaryTitle, setsummaryTitle] = useState("Price")
+
+
+
 
     // functions:
 
@@ -70,6 +82,11 @@ function CollectionDetailPage() {
         window.scrollTo(0, 0);
     };
 
+
+    const summaryToggleState = () => {
+        setSummaryModal(!summaryModal);
+        window.scrollTo(0, 0);
+    };
 
     // Fetch Collection Data and Items
     const fetchProjects = async () => {
@@ -218,6 +235,74 @@ function CollectionDetailPage() {
     }, [orderChoice])
 
 
+
+
+    useEffect(() => {
+
+        if (summaryChoice === "price") {
+
+            var key_information = itemData.map(function (item, index) {
+                return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.price };
+            })
+            setSummaryInformation(key_information)
+            setsummaryTitle("Price")
+
+            console.log(key_information)
+
+        } else if (summaryChoice === "sale_amount") {
+
+            var key_information = itemData.map(function (item, index) {
+                return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.sale_amount, end_date: item.sale_end_date };
+            })
+            setSummaryInformation(key_information)
+            setsummaryTitle("Discounted By")
+
+            console.log(key_information)
+
+
+        } else if (summaryChoice === "attribute1") {
+
+            var key_information = itemData.map(function (item, index) {
+                return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute1 };
+            })
+            setSummaryInformation(key_information)
+            setsummaryTitle(collectionData.attribute1)
+
+            console.log(key_information)
+
+        } else if (summaryChoice === "attribute2") {
+
+            var key_information = itemData.map(function (item, index) {
+                return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute2 };
+            })
+            setSummaryInformation(key_information)
+            setsummaryTitle(collectionData.attribute2)
+
+            console.log(key_information)
+
+        } else if (summaryChoice === "attribute3") {
+
+
+            var key_information = itemData.map(function (item, index) {
+                return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute3 };
+            })
+            setSummaryInformation(key_information)
+            setsummaryTitle(collectionData.attribute3)
+
+            console.log(key_information)
+
+        } else {
+
+            console.log("Error in summaryChoice. summaryChoice chosen doesn't match any of the attributes, attribute = ", summaryChoice)
+
+        }
+
+    }, [summaryChoice])
+
+
+
+
+
     // Set up data for inside slider
     const slides = [];
     itemDisplayData.map((projectData, key) => {
@@ -266,6 +351,26 @@ function CollectionDetailPage() {
 
 
                         <div id="App">
+                            <div id="fexrow">
+                                <p>Summarise by: </p>
+                                <select onChange={(e) => setSummaryChoice(e.target.value)}>
+                                    <option value="none" selected disabled hidden></option>
+
+
+                                    <option value="price">Price</option>
+                                    <option value="sale_amount">Discount</option>
+                                    {collectionData.attribute1 !== "" && (<option value="attribute1">{collectionData.attribute1}</option>
+                                    )}
+                                    {collectionData.attribute2 !== "" && (<option value="attribute2">{collectionData.attribute2}</option>
+                                    )}
+                                    {collectionData.attribute3 !== "" && (<option value="attribute3">{collectionData.attribute3}</option>
+                                    )}
+                                    {collectionData.attribute4 !== "" && (<option value="attribute4">{collectionData.attribute4}</option>
+                                    )}
+                                </select>
+                                <button className="buttonblue" onClick={() => summaryToggleState()}>GO</button>
+                            </div>
+
 
 
                             {shared_link === "private" ? (
@@ -326,7 +431,7 @@ function CollectionDetailPage() {
                                 } */}
 
                                 <React.Fragment>
-                                    <div className="areyoutheproblem" style={modalState ? { pointerEvents: "none", opacity: "0.4" } : {}} >
+                                    <div className="areyoutheproblem" style={modalState || summaryModal ? { pointerEvents: "none", opacity: "0.4" } : {}} >
                                         <Swiper
 
                                             breakpoints={{
@@ -387,6 +492,22 @@ function CollectionDetailPage() {
                                 </div>
                             </div>
                         </div>
+
+
+                        <div className={`modalBackground modalShowing-${summaryModal}`}>
+                            <div className="modalInner">
+                                <div className="modalText">
+                                    <SummaryItemCard summary_choice={summaryTitle} summary_info={summaryInfo} />
+                                    <div>
+                                        <button className="exitButton" onClick={() => summaryToggleState()}> exit </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
 
 
 
