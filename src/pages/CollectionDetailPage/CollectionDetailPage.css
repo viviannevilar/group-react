@@ -73,6 +73,8 @@
 }
 
 .modalInner {
+  height: 60vh;
+  overflow: auto;
   background: white;
   width: 900px;
   max-width: calc(100% - 50px);
@@ -88,11 +90,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 15px;
+  padding: 5px;
 }
 
 .modalText p {
-  line-height: 180%;
+  line-height: 70%;
 }
 
 .modalText button {

@@ -65,7 +65,7 @@ function CollectionDetailPage() {
     const [itemDisplayData, setItemDisplayData] = useState([])
 
     // summary variables:
-    const [summaryChoice, setSummaryChoice] = useState("price")
+    const [summaryChoice, setSummaryChoice] = useState("")
 
     const [summaryModal, setSummaryModal] = useState(false)
     const [summaryInfo, setSummaryInformation] = useState([])
@@ -255,7 +255,7 @@ function CollectionDetailPage() {
                 return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.sale_amount, end_date: item.sale_end_date };
             })
             setSummaryInformation(key_information)
-            setsummaryTitle("Discounted By")
+            setsummaryTitle("Discount")
 
             console.log(key_information)
 

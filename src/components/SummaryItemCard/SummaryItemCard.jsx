@@ -7,25 +7,27 @@ function SummaryItemCard(props) {
 
     return (
 
-        <div id="summarybox">
-            {summary_choice !== undefined ? (<div id="summarybox">
-                <h3>Comparison summary by {summary_choice}</h3>
-                {summary_info.map((item, key) => {
-                    return (
-                        <div id="fexrow">
-                            <p>{item.title} - </p>
-                            <p>{summary_choice}: {item.value}</p>
-                        </div>)
-
-                })
-                }
-
-            </div>) : (<div></div>
-
-                )}
-
+        <div>
+            {summary_choice !== undefined ? (
+                <div className="summarybox">
+                    <h3>Comparison of Items by {summary_choice}</h3>
+                    <ul>
+                        {summary_info.map((item, key) => {
+                            return (
+                                <li key={key}>
+                                    <div id="fexrow">
+                                        <p>{item.title} : </p>
+                                        <p>{item.value}</p>
+                                    </div>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div >) : (<div></div>)}
         </div>
     );
 }
 
 export default SummaryItemCard;
+
+
