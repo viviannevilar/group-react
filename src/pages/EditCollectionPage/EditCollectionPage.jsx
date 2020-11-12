@@ -12,7 +12,7 @@ function EditCollectionPage() {
     const [isLoading, setIsLoading] = useState(true)
     let token = localStorage.token;
 
-    
+
     useEffect(() => {
         console.log('ppp')
         fetch(`${process.env.REACT_APP_API_URL}collection/${id}/`, {
@@ -43,23 +43,23 @@ function EditCollectionPage() {
 
         // if the credentials match and there are collections to show
     } else {
-  
-    return (
 
-        <div>
-            
-            {token !== null && (
-                <div>
+        return (
 
-                 
-                    <EditCollectionForm collectionData={editData}/>
-                </div>
-            )}
+            <div>
+
+                {token !== null && (
+                    <div>
 
 
-        </div>
-    );
-}
+                        <EditCollectionForm collectionData={editData} />
+                    </div>
+                )}
+
+
+            </div>
+        );
+    }
 }
 
 export default EditCollectionPage;
