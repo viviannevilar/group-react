@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 
 function HomePage() {
 
-
   return (
     <div className="homepage">
 
@@ -21,19 +20,20 @@ function HomePage() {
       </div>
 
       <div className="buttons-wrapper">
-        <Link to="/signup" className="button" >Sign Up</Link>
-        <Link to="/login" className="button" >Log In</Link>
-        <Link to="/collections/" className="button">Collections</Link>
+
+        <Link to="/signup" className="button1" >Sign Up</Link>
+        <Link to="/login" className="button1" >Log In</Link>
       </div>
 
       <div className="footer">
-        <Link to="/contactus">Contact Us</Link>
-        <span> | </span>
-        <Link to="/aboutus">About Us</Link>
+        <Link className="footer1" to="/contactus">CONTACT US</Link>
+        <Link className="footer1" to="/aboutus">ABOUT US</Link>
+
       </div>
 
     </div>
   );
+
 }
 
 export default HomePage
