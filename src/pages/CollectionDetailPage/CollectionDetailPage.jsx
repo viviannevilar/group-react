@@ -268,10 +268,12 @@ function CollectionDetailPage() {
     // Swiper
     useEffect(() => {
         swiper.current = new Swiper('.swiper-container', {
-            observer: true,
+            // observer: true,
             effect: 'coverflow',
             grabCursor: true,
+            simulateTouch: true,
             centeredSlides: true,
+            watchOverflow: true,
             slidesPerView: 1,
             coverflowEffect: {
                 rotate: 50,
