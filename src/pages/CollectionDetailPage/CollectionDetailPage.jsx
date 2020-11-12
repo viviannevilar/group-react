@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { useParams, useHistory, useLocation, Link } from "react-router-dom";
 import "./CollectionDetailPage.css";
 import Nav from "../../components/Nav/Nav";
+import ItemCard from "../../components/ItemCard/ItemCard"
 
 // Swiper copies
 import Swiper, { Autoplay } from 'swiper';
@@ -70,51 +71,6 @@ function CollectionDetailPage() {
     const [filterChoice, setFilterChoice] = useState("all")
     const [orderChoice, setOrderChoice] = useState("date-modified")
     const [itemDisplayData, setItemDisplayData] = useState([])
-
-
-    // functions:
-
-   // Swiper
-   useEffect(()=>{
-      swiper.current = new Swiper('.swiper-container',{
-         observer: true,
-          effect: 'coverflow',
-          grabCursor: true,
-          centeredSlides: true,
-          slidesPerView: 1,
-          coverflowEffect: {
-            rotate: 50,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows : true,
-          },
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-          },
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          }
-        })
-  },[itemDisplayData])
-
-
-
-
-
-
-
-
-    // Modal state change function:
-    const addItemToggleModalState = () => {
-        setModalState(!modalState);
-        window.scrollTo(0, 0);
-    };
-
-
-    // Fetch Collection Data and Items
     const fetchProjects = async () => {
         let response
         try {
@@ -158,6 +114,24 @@ function CollectionDetailPage() {
 
     }
 
+
+    // functions:
+    useEffect(() => {
+        fetchProjects()
+    }, []);
+
+
+
+    // Modal state change function:
+    const addItemToggleModalState = () => {
+        setModalState(!modalState);
+        window.scrollTo(0, 0);
+    };
+
+
+    // Fetch Collection Data and Items
+
+
     useEffect(() => {
         fetchProjects()
     }, [id]);
@@ -195,11 +169,11 @@ function CollectionDetailPage() {
 
 
 
- 
 
-   // useEffect(()=>{
-   //    // swiper.current.updateSlides();
-   // },[itemDisplayData])
+
+    // useEffect(() => {
+    //     swiper.current.updateSlides();
+    // }, [itemDisplayData])
 
 
 
@@ -235,7 +209,7 @@ function CollectionDetailPage() {
 
     }, [filterChoice, itemData])
 
-   //useEffect(()=>{swiper.current.update()},[itemDisplayData])
+    //useEffect(()=>{swiper.current.update()},[itemDisplayData])
 
     ////////       order items by price, date       ////////
 
@@ -279,24 +253,50 @@ function CollectionDetailPage() {
 
 
 
+    // Swiper
+    useEffect(() => {
+        swiper.current = new Swiper('.swiper-container', {
+            observer: true,
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 1,
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            }
+        })
+
+    }, [itemDisplayData, id])
 
 
 
-    
 
 
-   //  // Set up data for inside slider
-   //  const slides = [];
-   //  itemDisplayData.map((item, key) => {
-   //      slides.push(
-   //          <SwiperSlide key={`slide-${key}`}>
-   //              <div>
-   //                  <ItemCard key={key} item={item} collectionData={collectionData} />
 
-   //              </div>
-   //          </SwiperSlide>
-   //      );
-   //  })
+    //  // Set up data for inside slider
+    //  const slides = [];
+    //  itemDisplayData.map((item, key) => {
+    //      slides.push(
+    //          <SwiperSlide key={`slide-${key}`}>
+    //              <div>
+    //                  <ItemCard key={key} item={item} collectionData={collectionData} />
+
+    //              </div>
+    //          </SwiperSlide>
+    //      );
+    //  })
 
     return (
         <div id="Nav">
@@ -362,36 +362,34 @@ function CollectionDetailPage() {
 
 
 
-                           <div id="project-list">
+                            <div id="project-list">
 
-                              <div className="swiperMainContainer">
+                                <div className="swiperMainContainer">
 
-                                 {/* Here we will be adding swiper container */}
-                                 <div className="swiper-container">
-                                    <div className="swiper-wrapper">
-                                       {itemDisplayData.map((el,key)=>{
-                                          return(
-                                             <div className="swiper-slide" key={key}>
-                                                <div>
-                                                <p>Item: {el.name}</p>
-                                                <img alt="images" src={el.image} />
+                                    {/* Here we will be adding swiper container */}
+                                    <div className="swiper-container">
+                                        <div className="swiper-wrapper">
+                                            {itemDisplayData.map((el, key) => {
+                                                return (
+                                                    <div className="swiper-slide" key={key}>
+                                                        <div>
+                                                            <ItemCard key={key} item={el} collectionData={collectionData} />
 
-                                             {/* <ItemCard key={key} item={el} collectionData={collectionData} /> */}
-                                                </div>
-                                             </div>
-                                             )
-                                       })}
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                        {/* -- If we need pagination -- */}
+                                        <div className="swiper-pagination"></div>
+                                        {/* -- If we need navigation buttons -- */}
+                                        <div className="swiper-button-prev"></div>
+                                        <div className="swiper-button-next"></div>
                                     </div>
-                                    {/* -- If we need pagination -- */}
-                                    <div className="swiper-pagination"></div>
-                                    {/* -- If we need navigation buttons -- */}
-                                    <div className="swiper-button-prev"></div>
-                                    <div className="swiper-button-next"></div>
-                                 </div>
 
-                              </div>
+                                </div>
 
-                           </div>
+                            </div>
 
 
                         </div>
