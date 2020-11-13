@@ -14,6 +14,7 @@ import 'swiper/swiper-bundle.min.css';
 //swiper-bundle.css';
 
 
+// Swiper.use([Navigation, Pagination, Controller, Thumbs]);
 Swiper.use([Navigation, Pagination, Controller, Thumbs]);
 
 
@@ -269,12 +270,30 @@ function CollectionDetailPage() {
     useEffect(() => {
         swiper.current = new Swiper('.swiper-container', {
             // observer: true,
+            loop: true,
             effect: 'coverflow',
-            grabCursor: true,
+            // grabCursor: false,
             simulateTouch: true,
-            centeredSlides: true,
+            // slidesOffsetAfter: 20,
+            // centeredSlides: true,
+            // centeredSlidesBounds: true,
             watchOverflow: true,
             slidesPerView: 1,
+            spaceBetween: 10,
+            breakpoints: {
+                '@0.75': {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                '@1.00': {
+                    slidesPerView: 3,
+                    spaceBetween: 40,
+                },
+                '@1.50': {
+                    slidesPerView: 4,
+                    spaceBetween: 50,
+                }
+            },
             coverflowEffect: {
                 rotate: 50,
                 stretch: 0,
@@ -302,7 +321,7 @@ function CollectionDetailPage() {
 
         if (summaryChoice === "price") {
 
-            var key_information = itemData.map(function (item, index) {
+            var key_information = itemDisplayData.map(function (item, index) {
                 return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.price };
             })
             setSummaryInformation(key_information)
@@ -312,7 +331,7 @@ function CollectionDetailPage() {
 
         } else if (summaryChoice === "sale_amount") {
 
-            var key_information = itemData.map(function (item, index) {
+            var key_information = itemDisplayData.map(function (item, index) {
                 return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.sale_amount, end_date: item.sale_end_date };
             })
             setSummaryInformation(key_information)
@@ -323,7 +342,7 @@ function CollectionDetailPage() {
 
         } else if (summaryChoice === "attribute1") {
 
-            var key_information = itemData.map(function (item, index) {
+            var key_information = itemDisplayData.map(function (item, index) {
                 return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute1 };
             })
             setSummaryInformation(key_information)
@@ -333,7 +352,7 @@ function CollectionDetailPage() {
 
         } else if (summaryChoice === "attribute2") {
 
-            var key_information = itemData.map(function (item, index) {
+            var key_information = itemDisplayData.map(function (item, index) {
                 return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute2 };
             })
             setSummaryInformation(key_information)
@@ -344,7 +363,7 @@ function CollectionDetailPage() {
         } else if (summaryChoice === "attribute3") {
 
 
-            var key_information = itemData.map(function (item, index) {
+            var key_information = itemDisplayData.map(function (item, index) {
                 return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute3 };
             })
             setSummaryInformation(key_information)
@@ -355,7 +374,7 @@ function CollectionDetailPage() {
         } else if (summaryChoice === "attribute4") {
 
 
-            var key_information = itemData.map(function (item, index) {
+            var key_information = itemDisplayData.map(function (item, index) {
                 return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute4 };
             })
             setSummaryInformation(key_information)
@@ -392,65 +411,59 @@ function CollectionDetailPage() {
                     <div>
 
                         <div id="App">
-                            <div id="fexrow">
-                                <p>Summarise by: </p>
-                                <select onChange={(e) => setSummaryChoice(e.target.value)}>
-                                    <option value="none" selected disabled hidden></option>
 
-
-                                    <option value="price">Price</option>
-                                    <option value="sale_amount">Discount</option>
-                                    {collectionData.attribute1 !== "" && (<option value="attribute1">{collectionData.attribute1}</option>
-                                    )}
-                                    {collectionData.attribute2 !== "" && (<option value="attribute2">{collectionData.attribute2}</option>
-                                    )}
-                                    {collectionData.attribute3 !== "" && (<option value="attribute3">{collectionData.attribute3}</option>
-                                    )}
-                                    {collectionData.attribute4 !== "" && (<option value="attribute4">{collectionData.attribute4}</option>
-                                    )}
-                                </select>
-                                <button className="buttonblue" onClick={() => summaryToggleState()}>GO</button>
-                            </div>
                             {/* collection information */}
 
-                            {shared_link == "private" && (<p>See your collection of {collectionData.title} </p>)}
-                            {shared_link == "public" && (<p>Collection of {collectionData.title} </p>)}
-                            <p>Date Created {formatDate(collectionData.date_created)} </p>
-                            <p>Last Updated {formatDate(collectionData.last_updated)} </p>
 
-                            {/* first drop down - filter choices */}
-                            <select onChange={(e) => setFilterChoice(e.target.value)}>
-                                <option value="all">All items</option>
-                                <option value="active">Active items</option>
-                                <option value="archived">Archived items</option>
-                            </select>
 
-                            {/* second drop down - order choices */}
-                            <select onChange={(e) => setOrderChoice(e.target.value)}>
-                                <option value="date-modified">Date modified</option>
-                                <option value="price-lh">Price - low to high</option>
-                                <option value="price-hl">Price - high to low</option>
-                                <option value="date-created">Date created</option>
-                            </select>
+                            <div id="SwiperInfoContainer" >
 
-                            {shared_link === "private" && (
-                                <div>
-                                    { itemDisplayData.length > 0 && (<p>You are currently comparing {itemDisplayData.length} items in {collectionData.title} list. </p>)}
-                                    {itemDisplayData.length === 0 && (<p>You are yet to add any items to {collectionData.title}!</p>)}
-                                    {collectionData.is_active && (
-                                        <button className="button" onClick={() => addItemToggleModalState()}>Add Item</button>
-                                    )}
-                                    {!collectionData.is_active && (
-                                        <p>This list is archived, please unarchive to add new items</p>)}
+                                {shared_link === "private" ? (
+                                    <div>
+                                        { itemDisplayData.length > 0 ? (<p>You are currently comparing {itemDisplayData.length} items in the {collectionData.title} list </p>) : (<p>You are yet to add any items to {collectionData.title}!</p>)}
+                                    </div>
+                                ) : (<div>
+                                    { itemDisplayData.length > 0 ? (<p>There are currently {itemDisplayData.length} items in the {collectionData.title} list for comparison. </p>) : (<p>There are no items added to list {collectionData.title}!</p>)}
+                                </div>)}
+
+                                <div id="fexrow">
+                                    <p>Summarise by: </p>
+                                    <select onChange={(e) => setSummaryChoice(e.target.value)}>
+                                        <option value="none" selected disabled hidden></option>
+                                        <option value="price">Price</option>
+                                        <option value="sale_amount">Discount</option>
+                                        {collectionData.attribute1 !== "" && (<option value="attribute1">{collectionData.attribute1}</option>
+                                        )}
+                                        {collectionData.attribute2 !== "" && (<option value="attribute2">{collectionData.attribute2}</option>
+                                        )}
+                                        {collectionData.attribute3 !== "" && (<option value="attribute3">{collectionData.attribute3}</option>
+                                        )}
+                                        {collectionData.attribute4 !== "" && (<option value="attribute4">{collectionData.attribute4}</option>
+                                        )}
+                                    </select>
+                                    <button className="" onClick={() => summaryToggleState()}>GO</button>
                                 </div>
-                            )}
+                            </div>
+                            <div id="store-filter-button-container" >
+                                <div id="Container-for-Filtering" >
+                                    {/* first drop down - filter choices */}
+                                    <select onChange={(e) => setFilterChoice(e.target.value)}>
+                                        <option value="all">All items</option>
+                                        <option value="active">Active items</option>
+                                        <option value="archived">Archived items</option>
+                                    </select>
 
-                            {shared_link === "public" && (
-                                <div>
-                                    { itemDisplayData.length > 0 && (<p>There are currently {itemDisplayData.length} items in the {collectionData.title} list for comparison. </p>)}
-                                    {itemDisplayData.length === 0 && (<p>There are no items added to list {collectionData.title}!</p>)}
+                                    {/* second drop down - order choices */}
+                                    <select onChange={(e) => setOrderChoice(e.target.value)}>
+                                        <option value="date-modified">Date modified</option>
+                                        <option value="price-lh">Price - low to high</option>
+                                        <option value="price-hl">Price - high to low</option>
+                                        <option value="date-created">Date created</option>
+                                    </select>
                                 </div>
-                            )}
+                                {collectionData.is_active ? (<button className="" onClick={() => addItemToggleModalState()}>Add Item</button>
+                                ) : ("")}
+                            </div>
 
 
 
@@ -464,28 +477,23 @@ function CollectionDetailPage() {
                                             {itemDisplayData.map((el, key) => {
                                                 return (
                                                     <div className="swiper-slide" key={key}>
-                                                        <div>
-                                                            <ItemCard key={key} projectData={el} collectionData={collectionData} />
-                                                            {shared_link === "private" && (
-                                                                <div className="buttoncontainer">
-                                                                    <Link to={`/item-edit/${el.id}/${collectionData.id}/`}>
-                                                                        <button className="buttonblue" >Edit </button >
-                                                                    </Link>
-                                                                    <a><button className="buttonblue" onClick={() => archiveItem(el)}>{el.is_active ? "Archive" : "Unarchive"}</button></a>
-                                                                    <a><button className="buttonblue" onClick={() => handleDelete(el)}>Delete </button></a>
+                                                        <ItemCard key={key} projectData={el} collectionData={collectionData} />
+                                                        {shared_link === "private" && (
+                                                            <div className="buttoncontainer">
+                                                                <Link to={`/item-edit/${el.id}/${collectionData.id}/`}>
+                                                                    <button className="buttonblue" >Edit </button >
+                                                                </Link>
+                                                                <a><button className="buttonblue" onClick={() => archiveItem(el)}>{el.is_active ? "Archive" : "Unarchive"}</button></a>
+                                                                <a><button className="buttonblue" onClick={() => handleDelete(el)}>Delete </button></a>
 
-                                                                </div>
-                                                            )}
-                                                        </div>
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 )
                                             })}
                                         </div>
                                         {/* -- If we need pagination -- */}
                                         <div className="swiper-pagination"></div>
-                                        {/* -- If we need navigation buttons -- */}
-                                        <div className="swiper-button-prev"></div>
-                                        <div className="swiper-button-next"></div>
                                     </div>
 
                                 </div>

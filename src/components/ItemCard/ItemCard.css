@@ -1,5 +1,6 @@
 div.project-card {
-    width: 100%;
+    width: 99%;
+    height: 99%;
     border: 0.1px solid black;
     display: flex;
     flex-direction: column;
@@ -21,7 +22,7 @@ div.project-infosummary{
  }
 
 a {
-  width: 100%;
+  width: 99%;
   text-decoration: none;
 }
 

@@ -189,4 +189,22 @@ align-items: center;}
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 }
+
+
+#store-filter-button-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+
+
+#SwiperInfoContainer p{
+  margin: 4px;
+  height: 4vh;
+}
+
+
