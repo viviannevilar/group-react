@@ -76,10 +76,14 @@ function App() {
                     </Route>
 
                     <Route exact path="/collection/sort/:id/">
+                        {/* <SortableComponent /> */}
+                        <CollectionSortPage />
+                    </Route>
+
+                    <Route exact path="/collection/:id/manual-sort/">
                         <SortableComponent />
                         {/* <CollectionSortPage /> */}
                     </Route>
-
 
 
                     <Route path="*" component={NotFoundPage} />
