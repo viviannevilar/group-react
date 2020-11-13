@@ -23,9 +23,6 @@ function formatDate(string) {
 
 
 
-
-
-
 // List of items print out
 // Each attribute is clickable and takes you to a pop up modal that compares the items
 // Items at phone screen width are swipeable
@@ -69,8 +66,10 @@ function CollectionDetailPage() {
 
     // ordering and filtering state variables
     const [filterChoice, setFilterChoice] = useState("all")
-    const [orderChoice, setOrderChoice] = useState("date-modified")
+    const [orderChoice, setOrderChoice] = useState("default")
     const [itemDisplayData, setItemDisplayData] = useState([])
+
+
     const fetchProjects = async () => {
         let response
         try {
@@ -167,20 +166,6 @@ function CollectionDetailPage() {
         });
     }
 
-
-
-
-
-    // useEffect(() => {
-    //     swiper.current.updateSlides();
-    // }, [itemDisplayData])
-
-
-
-
-
-
-
     ////////       filter active-archived-all items       ////////
     useEffect(() => {
 
@@ -237,11 +222,23 @@ function CollectionDetailPage() {
             setItemData(sorted)
             console.log("date-created ordering")
 
-        } else if (orderChoice === "date-modified") {
+         } else if (orderChoice === "alphabetical") {
 
-            sorted = [...itemData].sort((a, b) => new Date(a.last_updated) - new Date(b.last_updated))
+            sorted = [...itemData].sort()
             setItemData(sorted)
-            console.log("date-modified ordering")
+            console.log("alphabetical ordering")
+
+        } else if (orderChoice === "default") {
+
+            // sorted = [...itemData].sort((a, b) => a.last_updated - b.last_updated )
+            setItemData(collectionData.collection_items)
+            console.log("default ordering")
+
+         // } else if (orderChoice === "date-modified") {
+
+         //    sorted = [...itemData].sort((a, b) => new Date(a.last_updated) - new Date(b.last_updated))
+         //    setItemData(sorted)
+         //    console.log("date-modified ordering")
 
         } else {
 
@@ -255,6 +252,7 @@ function CollectionDetailPage() {
 
     // Swiper
     useEffect(() => {
+
         swiper.current = new Swiper('.swiper-container', {
             observer: true,
             effect: 'coverflow',
@@ -281,23 +279,6 @@ function CollectionDetailPage() {
     }, [itemDisplayData, id])
 
 
-
-
-
-
-    //  // Set up data for inside slider
-    //  const slides = [];
-    //  itemDisplayData.map((item, key) => {
-    //      slides.push(
-    //          <SwiperSlide key={`slide-${key}`}>
-    //              <div>
-    //                  <ItemCard key={key} item={item} collectionData={collectionData} />
-
-    //              </div>
-    //          </SwiperSlide>
-    //      );
-    //  })
-
     return (
         <div id="Nav">
             <div>
@@ -321,6 +302,11 @@ function CollectionDetailPage() {
                         <div id="App">
                             {/* collection information */}
 
+                            <Link to={{pathname: `/collection/${id}/manual-sort/`, state: {itemsProps: itemData}}}><button >Change Default Order</button></Link>
+                
+
+
+
                             {shared_link == "private" && (<p>See your collection of {collectionData.title} </p>)}
                             {shared_link == "public" && (<p>Collection of {collectionData.title} </p>)}
                             <p>Date Created {formatDate(collectionData.date_created)} </p>
@@ -335,7 +321,8 @@ function CollectionDetailPage() {
 
                             {/* second drop down - order choices */}
                             <select onChange={(e) => setOrderChoice(e.target.value)}>
-                                <option value="date-modified">Date modified</option>
+                                <option value="default">Default</option>
+                                <option value="alphabetical">Alphabetical order</option>
                                 <option value="price-lh">Price - low to high</option>
                                 <option value="price-hl">Price - high to low</option>
                                 <option value="date-created">Date created</option>

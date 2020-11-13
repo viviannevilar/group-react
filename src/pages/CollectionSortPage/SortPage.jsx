@@ -1,67 +1,73 @@
-import React, { useState } from 'react';
-//import React, { Component, useState } from 'react';
-//import {render} from 'react-dom';
+//////////////////////////// imports ////////////////////////////
 
-import { useParams } from "react-router-dom";
+import React, { useState } from 'react';
+import { useParams, useHistory, useLocation } from "react-router-dom";
 
 import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 
-import { allItems } from "../../data"
+//import { allItems } from "../../data"
 
 
+//////////////////////////// components ////////////////////////////
 
-const SortableItem = SortableElement(({value}) => <li>{value}</li>);
+// sortables
+const SortableItem = SortableElement(({value}) => <ul>{value.name}, order: {value.ranking}</ul>);
 
 const SortableList = SortableContainer(({items}) => {
     return (
         <ul>
         {items.map((value, index) => (
-            <SortableItem key={`item-${value.name}`} index={index} value={value.name} />
+            <SortableItem key={`item-${value.name}`} index={index} value={value} />
         ))}
         </ul>
     );
 });
 
+//////////////////////////// main function ////////////////////////////
+function SortableComponent(props) {
 
-function SortableComponent() {
+   /////////////// variables
 
-    const [ items, setItems ] = useState(allItems)
+   // location
+   const { id } = useParams();
+   const history = useHistory();
 
-   const [rankingData, setRankingData] = useState({ collection_id: 0, ranking: [] });
+   // get props passed down from <Link > component in CollectionDetailPage
+   let data = useLocation()
+   let itemsProps = data.state.itemsProps
+   const [items, setItems] = useState(itemsProps);
 
-    const onSortEnd = ({oldIndex, newIndex}) => {
-        setItems(arrayMove(items, oldIndex, newIndex))
-    };
+   // change order of elements
+   const onSortEnd = ({oldIndex, newIndex}) => {
+      setItems(arrayMove(items, oldIndex, newIndex))
+   };
 
+   // get an array with the item.ids in the order they are displayed on the screen
    let myArray = []
-
    items.forEach(item => {myArray.push(item.id)})
 
-   // //location
-   const { id } = useParams();
-   //console.log(id)
 
+   /////////////// methods
 
-
+   // save order of items in the backend
    const postData = async () => {
+
+      // get token for authentication
       let token = window.localStorage.getItem("token");
 
+      // get the data ready in a "dictionary"
+      let jsonData = {}
+      jsonData.ranking = myArray
+      jsonData.collection_id = id
 
-      let formData = new FormData();
-      formData.append('ranking', myArray);
-      formData.append('collection_id', id);
-
-      console.log("formData: ", formData)
-
-
-      //function you can call but carry on as well
-      const response = await fetch(`${process.env.REACT_APP_API_URL}items/`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/ranking/`, {
           method: "post",
           headers: {
-              Authorization: `Token ${token}`,
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
           },
-          body: formData,
+          body: JSON.stringify(jsonData),
       });
       return response.json();
   };
@@ -70,18 +76,16 @@ function SortableComponent() {
       e.preventDefault();
 
       postData().then((response) => {
-          console.log(response)
-         //  history.push(`/collection/${id}/`);
-         //  window.location.reload();
+         console.log(response)
+         history.push(`/collection/${id}/`);
+         window.location.reload();
       });
 
   };
 
 
-
-
   
-
+   /////////////// return
    return (
       <div>
          <SortableList items={items} onSortEnd={onSortEnd} />
