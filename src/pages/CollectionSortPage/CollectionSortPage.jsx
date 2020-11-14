@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ItemCardSmall from "../../components/ItemCardSmall/ItemCardSmall";
+import "./CollectionSortPage.css"
 
 function formatDate(string) {
     var options = { year: "numeric", month: "long", day: "numeric" };
@@ -25,12 +27,12 @@ function CollectionSortPage() {
     // data state variables
     const [collectionData, setCollectionData] = useState({ collection_items: [] });
     const [itemData, setItemData] = useState([]);
-    const [itemDisplayData, setItemDisplayData ] = useState([])
+    const [itemDisplayData, setItemDisplayData] = useState([])
 
     // ordering and filtering state variables
-    const [ filterChoice, setFilterChoice ] = useState("all")
-    const [ orderChoice, setOrderChoice ] = useState("date-modified")
-    
+    const [filterChoice, setFilterChoice] = useState("all")
+    const [orderChoice, setOrderChoice] = useState("date-modified")
+
 
     //////////////////////////// methods ////////////////////////////
 
@@ -112,7 +114,7 @@ function CollectionSortPage() {
 
         if (orderChoice === "price-lh") {
 
-            sorted = [...itemData].sort((a, b) => a.price - b.price) 
+            sorted = [...itemData].sort((a, b) => a.price - b.price)
             //see explanation at the end of this file to understand this a bit more
             setItemData(sorted)
             console.log("price-lh ordering")
@@ -126,13 +128,13 @@ function CollectionSortPage() {
 
         } else if (orderChoice === "date-created") {
 
-            sorted = [...itemData].sort((a, b) => a.id - b.id) 
+            sorted = [...itemData].sort((a, b) => a.id - b.id)
             setItemData(sorted)
             console.log("date-created ordering")
 
         } else if (orderChoice === "date-modified") {
 
-            sorted = [...itemData].sort((a,b) => new Date(a.last_updated) - new Date(b.last_updated))
+            sorted = [...itemData].sort((a, b) => new Date(a.last_updated) - new Date(b.last_updated))
             setItemData(sorted)
             console.log("date-modified ordering")
 
@@ -147,7 +149,7 @@ function CollectionSortPage() {
 
 
     //////////////////////////// return ////////////////////////////
-     
+
     return (
         <div id="projectlistcenter">
 
@@ -180,19 +182,18 @@ function CollectionSortPage() {
 
 
                         {/* show items list, sorted according to the button that has been pressed above */}
-                        <div id="project-list">
+                        <div id="items-list">
                             {itemDisplayData.map((item, key) => {
                                 return (
-                                    <div key={key}>
-                                        <p>{item.id} - {item.name} - {item.price}</p>
-                                    </div>)
+                                    <ItemCardSmall itemData={item} collectionData={collectionData} />
+                                    )
                             })}
                         </div>
 
                     </div>
                 </div>
 
-            ) : null }
+            ) : null}
 
             {/* *******      if there IS an error message and 
                              if it is no longer waiting for the fetch  ******** */}
@@ -207,7 +208,7 @@ function CollectionSortPage() {
                     </div>
                 </div>
 
-            ) : null }
+            ) : null}
 
             {/* *******      if there IS an error message and 
                              if it is no longer waiting for the fetch  ******** */}
@@ -222,7 +223,7 @@ function CollectionSortPage() {
                     </div>
                 </div>
 
-            ) : null }
+            ) : null}
 
         </div >
 

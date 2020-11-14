@@ -4,17 +4,21 @@ import { useHistory } from "react-router-dom";
 
 function AddItemForm(props) {
     const { id, collectionData } = props;
+    const [errorHandle, setError] = useState()
 
     //variables
     const [credentials, setCredentials] = useState({
         name: "",
+        price: "",
+        sale_amount: "",
         attribute1: "",
         attribute2: "",
         attribute3: "",
         attribute4: "",
         image: "",
+        sale_amount: 0,
+        sale_end_date: null,
         collection: parseInt(id),
-        is_active: true,
     });
 
 
@@ -25,6 +29,7 @@ function AddItemForm(props) {
             ...prevCredentials,
             [id]: value,
         }));
+        console.log(e.target)
     };
 
     const handleImageChange = (e) => {
@@ -40,8 +45,9 @@ function AddItemForm(props) {
 
     const postData = async () => {
         let token = window.localStorage.getItem("token");
-
+        console.log(credentials.sale_end_date)
         //function you can call but carry on as well
+
 
         let form_data = new FormData();
         form_data.append('image', credentials.image);
@@ -49,9 +55,16 @@ function AddItemForm(props) {
         form_data.append('attribute2', credentials.attribute2);
         form_data.append('attribute3', credentials.attribute3);
         form_data.append('attribute4', credentials.attribute4);
-        form_data.append('collection', credentials.collection);       
-        form_data.append('is_active', credentials.is_active);
+        form_data.append('collection', credentials.collection);
         form_data.append('name', credentials.name);
+        form_data.append('price', credentials.price);
+        form_data.append('sale_amount', credentials.sale_amount);
+        if (credentials.sale_end_date !== null && parseInt(credentials.sale_amount) !== 0) {
+            form_data.append('sale_end_date', credentials.sale_end_date);
+        }
+        form_data.append('is_active', true);
+
+        console.log("form_data: ", form_data)
 
         const response = await fetch(`${process.env.REACT_APP_API_URL}items/`, {
             method: "post",
@@ -60,16 +73,35 @@ function AddItemForm(props) {
             },
             body: form_data,
         });
-        return response.json();
+        if (response.ok) {
+            setError("Successful");
+            return response.json();
+
+        } else {
+            response.text().then(text => {
+                throw Error(text)
+            }).catch(
+                (error) => {
+                    const errorObj = JSON.parse(error.message);
+                    setError(errorObj);
+                    console.log(errorHandle)
+
+                }
+            )
+        }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         postData().then((response) => {
-            console.log(response)
-            history.push(`/collection/${id}/`);
-            window.location.reload();
+            if (errorHandle !== "Successful") {
+                console.log("Error: ", errorHandle)
+            } else {
+                history.push(`/collection/${id}/`);
+                // window.location.reload();
+
+
+            }
         });
 
     };
@@ -88,6 +120,35 @@ function AddItemForm(props) {
                         onChange={handleChange}
                     />
                 </div>
+
+                <div className="formattribute">
+                    <label htmlFor="price">Price of Item:</label>
+                    <input
+                        type="number"
+                        id="price"
+                        onChange={handleChange}
+                    />
+                </div>
+
+
+                <div className="formattribute">
+                    <label htmlFor="sale_amount">Is there a discount currently offered (%)?:</label>
+                    <input
+                        type="number"
+                        id="sale_amount"
+                        onChange={handleChange}
+                    />
+                </div>
+
+
+                {parseInt(credentials.sale_amount) > 0 && (<div className="formattribute">
+                    <label htmlFor="sale_end_date">When does the discount expire?</label>
+                    <input
+                        type="date"
+                        id="sale_end_date"
+                        onChange={handleChange}
+                    />
+                </div>)}
 
                 {collectionData.attribute1 !== "" && (<div className="formattribute">
                     <label htmlFor="attribute1">{collectionData.attribute1}:</label>
