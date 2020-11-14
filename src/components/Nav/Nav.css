@@ -1,5 +1,6 @@
-@media screen and (max-width: 500px) {
-    .Navbarcontainer {
+
+
+.Navbarcontainer {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -7,10 +8,149 @@
     padding: 10px;
     }
 
-    .Navitem {
-        flex-basis: 100%;
-        color: #004aad
+.Navbarcontainer a{
+    /* flex-basis: 100%; */
+    color:#004aad
     }
+
+
+@media screen and (max-width: 500px) {
+
 }
 
 
+
+
+
+/* .logo {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    /* margin-right: 50px; */
+  /* }
+  
+  #logoimage {
+    height: 450px;
+    width: 450px;
+  }
+  
+  .button1 {
+    border-radius: 0.2em;
+    box-sizing: border-box;
+    width: 50%;
+    height: 40px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: white;
+    background: #b3b7a4;
+    border: 0.1em solid #ffffff;
+    transition: all 0.2s;
+    margin: 10px auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .button:hover {
+    color: #004aad;
+  }
+  
+  .buttons-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: -80px;
+    align-content: space-between;
+  }
+  
+  .footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    position: fixed;
+    bottom: 40px;
+    width: 100%;
+    font-size: 1.2em;
+    text-align: center;
+  }
+  
+  .footer a {
+    width: auto;
+  }
+  
+  .footer a:visited {
+    color: #004aad;
+  }
+  
+  @media only screen and (max-width: 1200px) {
+    .logo {
+      margin-top: -110px;
+    }
+    #logoimage {
+      height: 600px;
+      width: 600px;
+    }
+  
+    .button1 {
+      height: 80px;
+      font-size: 1.8rem;
+    }
+  
+    .buttons-wrapper {
+      margin-top: -180px;
+    }
+  
+    .footer {
+      bottom: 50px;
+      font-size: 0.7cm;
+    }
+  }
+  
+  @media only screen and (max-width: 800px) {
+    .logo {
+      margin-top: -70px;
+    }
+  
+    #logoimage {
+      height: 550px;
+      width: 550px;
+    }
+  
+    .button1 {
+      height: 80px;
+      font-size: 1.8rem;
+    }
+  
+    .buttons-wrapper {
+      margin-top: -180px;
+    }
+  
+    .footer {
+      bottom: 50px;
+      font-size: 0.7cm;
+    }
+  }
+  
+  @media only screen and (max-width: 500px) {
+    .logo {
+      margin-top: -70px;
+    }
+  
+    #logoimage {
+      height: 400px;
+      width: 400px;
+    }
+  
+    .button1 {
+      font-size: 1.5rem;
+    }
+  
+    .buttons-wrapper {
+      margin-top: -100px;
+    }
+  
+    .footer {
+      font-size: 0.7cm;
+    }
+  }
+   */ 

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./CollectionCard.css";
+import "../../components/Nav/Nav.css";
 
 
 function formatDate(string) {
