@@ -1,11 +1,95 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap"); */
-
 #about {
   font-family: "Roboto", sans-serif;
-  color: b3b7a4;
+  color: #b3b7a4;
   text-align: center;
+  font-size: 18px;
 }
 
 p {
   text-align: center;
+  margin-right: 1cm;
+  margin-left: 1cm;
+  font-size: 12px;
+}
+
+.team {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.middle {
+  transition: 0.5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 200px;
+  height: 200px;
+  transition: 0.5s ease;
+  backface-visibility: hidden;
+}
+
+.container {
+  position: relative;
+  margin: 0px 15px;
+}
+
+.container:hover .image {
+  opacity: 0.3;
+}
+
+.container:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  color: black;
+  font-size: 16px;
+  padding: 16px 32px;
+}
+
+@media only screen and (min-width: 1200px) {
+  #about {
+    font-size: 24px;
+  }
+
+  p {
+    text-align: center;
+    margin-right: 3cm;
+    margin-left: 3cm;
+    font-size: 22px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  #about {
+    font-size: 22px;
+  }
+
+  p {
+    margin-right: 2cm;
+    margin-left: 2cm;
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  #about {
+    font-size: 20px;
+  }
+
+  p {
+    margin-right: 1cm;
+    margin-left: 1cm;
+    font-size: 18px;
+  }
 }

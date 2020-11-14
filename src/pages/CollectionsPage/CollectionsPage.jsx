@@ -101,6 +101,14 @@ function CollectionsPage() {
                     <Nav />
                 </div>
                 <h1>No collections to show</h1>
+
+                  {/* button to see archived collections or active collections */}
+                  {
+                     (activePath === "archived-collections/") ?
+                           <Link to={`/collections/`}><button >See active collections</button></Link> :
+                           <Link to={`/collections-archive/`}><button >See archived collections</button></Link>
+                  }
+
                 <Link to={`/newcollection/`}><button >Create New Collection</button></Link>
             </div>
         )

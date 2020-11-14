@@ -112,6 +112,10 @@ function ItemEditForm(props) {
 
     };
 
+   const cancelSubmit = (e) => {
+   history.push(`/collection/${collectionData.id}/`);
+   }
+
 
 
     return (
@@ -243,7 +247,8 @@ function ItemEditForm(props) {
 
 
                 <div className="buttonwrapper">
-                    <button className="pledgebutton" type="submit" onClick={handleSubmit}>  Update List Item </button>
+                    <button className="pledgebutton" type="submit" onClick={handleSubmit}>  Update Item </button>
+                    <button className="pledgebutton" type="submit" onClick={cancelSubmit}>  Cancel </button>
                 </div>
             </form>
         </div>
