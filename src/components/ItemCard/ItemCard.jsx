@@ -34,7 +34,7 @@ function ItemCard(props) {
             <div className="item">
                 <a href="#">
                     {projectData.image !== null ? <img className="item" alt="Item" src={projectData.image} /> : <img className="item" alt="Item" src={nophoto} />}
-                    {parseInt(projectData.sale_amount) !== 0 && (<span class="notify-badge"> {projectData.sale_amount}% OFF</span>)}
+                    {parseInt(projectData.sale_amount) !== 0 && (<span className="notify-badge"> {projectData.sale_amount}% OFF</span>)}
 
                 </a>
             </div>

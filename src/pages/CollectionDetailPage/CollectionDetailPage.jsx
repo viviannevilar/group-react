@@ -103,7 +103,7 @@ function CollectionDetailPage() {
                })
          }
       } catch (thisError) {
-         console.log("thisError: ", thisError)
+         console.log("---------------thisError: ", thisError)
          setisLoading(false);
          setErrorMessage(thisError);
          setError(true);
@@ -121,7 +121,7 @@ function CollectionDetailPage() {
       } else {
          setisLoading(false);
          setError(true);
-         console.log("DATA: ", data.detail)
+         console.log("-------------DATA: ", data.detail)
          setErrorMessage(data.detail);
       }
 
@@ -207,7 +207,6 @@ function CollectionDetailPage() {
 
 
     // ORDER items by price, date 
-
     let sorted
 
     useEffect(() => {
@@ -234,7 +233,7 @@ function CollectionDetailPage() {
 
          } else if (orderChoice === "alphabetical") {
 
-            sorted = [...itemData].sort()
+            sorted = [...itemData].sort((a,b ) => a.name > b.name ? 1: -1)
             setItemData(sorted)
             console.log("alphabetical ordering")
 
@@ -308,9 +307,8 @@ function CollectionDetailPage() {
 
    }, [itemDisplayData, id])
 
-
    
-// SUMMARY choices
+   // SUMMARY choices
    useEffect(() => {
 
       if (summaryChoice === "price") {
@@ -362,7 +360,6 @@ function CollectionDetailPage() {
 
       } else if (summaryChoice === "attribute4") {
 
-
          var key_information = itemDisplayData.map(function (item, index) {
                return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute4 };
          })
@@ -388,7 +385,7 @@ function CollectionDetailPage() {
          </div>
          <div id="projectlistcenter">
 
-            {/* No longer loading, there IS an error message */}
+   {/* No longer loading, there IS an error message */}
             {!isLoading && error && (<div>
                <div id="errormessage">
                      <br></br>
@@ -398,25 +395,27 @@ function CollectionDetailPage() {
                </div>
             </div>)}
 
-            {/* No longer loading, there is NO error message */}
+   {/* No longer loading, there is NO error message */}
             {!isLoading && !error && (
                <div>
                      <div id="App">
 
                         {/* collection information */}
                         <div id="SwiperInfoContainer" >
+
                            {shared_link === "private" ? (
-                                 <div>
-                                    { itemDisplayData.length > 0 ? (<p>You are currently comparing {itemDisplayData.length} items in the {collectionData.title} list </p>) : (<p>You are yet to add any items to {collectionData.title}!</p>)}
+                              <div>
+                                 {/* top text with the number of items in a collection */}
+                                 { itemDisplayData.length > 0 ? (<p>You are currently comparing {itemDisplayData.length} items in the {collectionData.title} list </p>) : (<p>You are yet to add any items to {collectionData.title}!</p>)}
 
+                                 {/* button to change order of items - go to a different url */}
+                                 <Link to={{pathname:`/collection/${id}/manual-sort/`, state: {itemsProps: itemData}}}><button >Change Default Order</button></Link>
+                              </div>
 
-                                    <Link to={{pathname:`/collection/${id}/manual-sort/`, state: {itemsProps: itemData}}}><button >Change Default Order</button></Link>
-
-
-                                 </div>
                            ) : (<div>
-                                 { itemDisplayData.length > 0 ? (<p>There are currently {itemDisplayData.length} items in the {collectionData.title} list for comparison. </p>) : (<p>There are no items added to list {collectionData.title}!</p>)}
+                              { itemDisplayData.length > 0 ? (<p>There are currently {itemDisplayData.length} items in the {collectionData.title} list for comparison. </p>) : (<p>There are no items added to list {collectionData.title}!</p>)}
                            </div>)}
+
                            <div id="fexrow">
                                  <p>Summarise by: </p>
                                  <select onChange={(e) => setSummaryChoice(e.target.value)}>
@@ -511,7 +510,7 @@ function CollectionDetailPage() {
             )
             }
 
-            {/* Is still loading (fetching the data) */}
+      {/* Is still loading (fetching the data) */}
             {isLoading && (
                   <div>
                      <div>Is Loading</div>

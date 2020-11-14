@@ -5,6 +5,7 @@ import "../ContactUs/ContactUs";
 import "../AboutUs/AboutUs";
 import "../LoginPage/LoginPage";
 import { Link } from 'react-router-dom';
+import LogoutForm from "../../components/LogoutForm/LogoutForm";
 
 function HomePage() {
 
@@ -12,7 +13,6 @@ function HomePage() {
 
   const isAuthenticated = () => {
     let token = window.localStorage.getItem("token");
-
 
     if (token != null) {
       return true;
@@ -38,8 +38,8 @@ function HomePage() {
 
         {loggedin ? 
         (<div className="buttons-wrapper"> 
-        <Link to="/newcollection" className="button1" >My Collection</Link>
-        <Link to="/newcollection" className="button1" >Sign Out</Link>
+        <Link to="/collections/" className="button1" >My Collections</Link>
+        <LogoutForm />
         </div>
         ):(  
         <div className="buttons-wrapper">
