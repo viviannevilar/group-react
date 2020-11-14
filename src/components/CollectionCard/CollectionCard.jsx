@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import "./CollectionCard.css";
 
 
+function formatDate(string) {
+    var options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(string).toLocaleDateString([], options);
+}
 
 function CollectionCard(props) {
 
@@ -37,16 +41,16 @@ function CollectionCard(props) {
         const linkText = "https://warm-falls-74169.herokuapp.com/collection/shared/" + collectionData.signed_pk + "/"
 
         navigator.clipboard.writeText(linkText)
-    
+
     }
 
     // Delete collection
-    
+
     const deleteCollection = async (e) => {
         e.preventDefault();
         let token = window.localStorage.getItem("token");
         let urlPath = "collection/" + collectionData.id
-    
+
         const response = await fetch(`${process.env.REACT_APP_API_URL}${urlPath}/`, {
             method: "delete",
             headers: {
@@ -58,19 +62,38 @@ function CollectionCard(props) {
     }
 
 
+    // const editCollection = async (e) => {
+    //     e.preventDefault();
+    //     let token = window.localStorage.getItem("token");
+    //     let urlPath = "collection/" + collectionData.id
 
-     //////////////////////////// return ////////////////////////////   
+    //     const response = await fetch(`${process.env.REACT_APP_API_URL}${urlPath}/editcollection/:id`, {
+    //         method: "put",
+    //         headers: {
+    //             Authorization: `Token ${token}`,
+    //         },
+    //     });
+
+    //     window.location.reload();
+    // }
+
+
+    //////////////////////////// return ////////////////////////////
 
     return (
 
 
         <div className="collection-wrapper">
             <p> <Link to={linkCollection}>{collectionData.title}</Link>
-            <button onClick={archiveCollection}>{ collectionData.is_active ? "Archive" : "Unarchive" }</button> 
-            <button onClick={shareCollection}>Share Collection</button>
-            <button onClick={deleteCollection}>Delete Collection</button> 
+
+                <p>Date Created {formatDate(collectionData.date_created)} </p>
+                <p>Last Updated {formatDate(collectionData.last_updated)} </p>
+                <button onClick={archiveCollection}>{collectionData.is_active ? "Archive" : "Unarchive"}</button>
+                <button onClick={shareCollection}>Share Collection</button>
+                <Link to={`/editcollection/${collectionData.id}`}><button >Edit Collection</button></Link>
+                <button onClick={deleteCollection}>Delete Collection</button>
             </p>
-        </div>
+        </div >
     )
 }
 
