@@ -8,6 +8,23 @@ import { Link } from 'react-router-dom';
 
 function HomePage() {
 
+  const [loggedin, setLoggedIn] = useState(false);
+
+  const isAuthenticated = () => {
+    let token = window.localStorage.getItem("token");
+
+
+    if (token != null) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    setLoggedIn(isAuthenticated());
+  }, []);
+
   return (
     <div className="homepage">
 
@@ -19,19 +36,24 @@ function HomePage() {
         />
       </div>
 
-      <div className="buttons-wrapper">
-
-        <Link to="/signup" className="button1" >Sign Up</Link>
-        <Link to="/login" className="button1" >Log In</Link>
-      </div>
-
+        {loggedin ? 
+        (<div className="buttons-wrapper"> 
+        <Link to="/newcollection" className="button1" >My Collection</Link>
+        <Link to="/newcollection" className="button1" >Sign Out</Link>
+        </div>
+        ):(  
+        <div className="buttons-wrapper">
+          <Link to="/signup" className="button1" >Sign Up</Link>
+          <Link to="/login" className="button1" >Log In</Link>
+        </div>
+      )}
+ 
+    
       <div className="footer">
         <Link className="footer1" to="/contactus">CONTACT US</Link>
         <Link className="footer1" to="/aboutus">ABOUT US</Link>
-
       </div>
-
-    </div>
+</div>
   );
 
 }

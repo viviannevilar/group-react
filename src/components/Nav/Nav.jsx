@@ -22,16 +22,18 @@ function Nav(props) {
     return (
 
             <nav className="Navbarcontainer">
-                <Link id="Navitem" to="/">Home</Link>
-                {isloggedIn ? (
-                    <Link id="Navitem" to="/login" onClick={handleLogout}>
-                    Logout
-                    </Link>
-                ) : (
-                    <Link to="/login">Login</Link>
-                )}
-                <Link id="Navitem" to="/edituserdetails">Account</Link>
-                <Link id="Navitem" to="/collections/">Collections</Link>
+                <div className="linkContainer">
+                    <Link className="navItem" to="/">HOME</Link>
+                </div>
+                <div className="linkContainer">
+                    {isloggedIn ? ( <Link id="Navitem1" className="navItem" to="/login" onClick={handleLogout}>LOGOUT</Link> ) : (<Link to="/login">LOGIN</Link>)}
+                </div>
+                <div className="linkContainer">
+                    <Link className="navItem" to="/edituserdetails">ACCOUNT</Link>
+                </div>
+                <div className="linkContainer">
+                    <Link className="navItem" to="/collections/">COLLECTIONS</Link>
+                </div>
             </nav>
       );
     }

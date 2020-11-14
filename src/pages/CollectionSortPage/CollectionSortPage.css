@@ -1,0 +1,5 @@
+#items-list {
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+}

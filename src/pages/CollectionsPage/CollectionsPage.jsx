@@ -101,6 +101,14 @@ function CollectionsPage() {
                     <Nav />
                 </div>
                 <h1>No collections to show</h1>
+
+                  {/* button to see archived collections or active collections */}
+                  {
+                     (activePath === "archived-collections/") ?
+                           <Link to={`/collections/`}><button >See active collections</button></Link> :
+                           <Link to={`/collections-archive/`}><button >See archived collections</button></Link>
+                  }
+
                 <Link to={`/newcollection/`}><button >Create New Collection</button></Link>
             </div>
         )
@@ -109,31 +117,33 @@ function CollectionsPage() {
     } else {
 
         return (
-            <div id="Nav">
+            <div>
             <div>
                 <Nav />
             </div>
 
-            <div>
+                <div>
 
-                <h1>{(activePath === "active-collections/") ? "Collections" : "Archived Collections"} </h1>
+                    <h1>{(activePath === "active-collections/") ? "Collections" : "Archived Collections"} </h1>
 
-                {/* display list of collections */}
-                {collectionsList.map((collectionData, key) => {
-                    return <CollectionCard key={key} collectionData={collectionData} />;
-                })}
+                    {/* display list of collections */}
+                    {collectionsList.map((collectionData, key) => {
+                        return <CollectionCard key={key} collectionData={collectionData} />;
+                    })}
 
-                <br></br>
+                    <br></br>
 
-                {/* button to see archived collections or active collections */}
-                {
-                    (activePath === "archived-collections/") ?
-                        <Link to={`/collections/`}><button >See active collections</button></Link> :
-                        <Link to={`/collections-archive/`}><button >See archived collections</button></Link>
-                }
-                 <Link to={`/newcollection/`}><button >Create New Collection</button></Link>
-                 
-            </div>
+                    {/* button to see archived collections or active collections */}
+                    {
+                        (activePath === "archived-collections/") ?
+                            <Link to={`/collections/`}><button >See active collections</button></Link> :
+                            <Link to={`/collections-archive/`}><button >See archived collections</button></Link>
+                    }
+
+                    <Link to={`/newcollection/`}><button >Create New Collection</button></Link>
+
+
+                </div>
             </div>
         )
     }
