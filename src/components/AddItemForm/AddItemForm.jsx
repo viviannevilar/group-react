@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import "../../components/Nav/Nav.css";
 
@@ -6,6 +6,7 @@ import "../../components/Nav/Nav.css";
 function AddItemForm(props) {
     const { id, collectionData } = props;
     const [errorHandle, setError] = useState()
+    let btnRefAdd = useRef();
 
     //variables
     const [credentials, setCredentials] = useState({
@@ -85,7 +86,7 @@ function AddItemForm(props) {
                 (error) => {
                     const errorObj = JSON.parse(error.message);
                     setError(errorObj);
-                    console.log(errorHandle)
+                    console.log("errorHandle1", errorHandle)
 
                 }
             )
@@ -94,15 +95,19 @@ function AddItemForm(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (btnRefAdd.current) {
+            btnRefAdd.current.setAttribute("disabled", "disabled");
+        }
         postData().then((response) => {
-            if (errorHandle !== "Successful") {
-                console.log("Error: ", errorHandle)
-            } else {
-                history.push(`/collection/${id}/`);
-                // window.location.reload();
+            // if (errorHandle !== "Successful") {
+            //     console.log("Error: ", errorHandle)
+            // } else {
+            //     history.push(`/collection/${id}/`);
+            //     window.location.reload();
+            // }
+            history.push(`/collection/${id}/`);
+            window.location.reload();
 
-
-            }
         });
 
     };
@@ -211,7 +216,7 @@ function AddItemForm(props) {
 
 
                 <div className="buttonwrapper">
-                    <button type="submit" onClick={handleSubmit}>  Add to List </button>
+                    <button ref={btnRefAdd} type="submit" onClick={handleSubmit}>  Add to List </button>
                 </div>
             </form>
         </div>
