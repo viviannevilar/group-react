@@ -4,7 +4,8 @@ import "../SignUp/SignUp";
 import "../ContactUs/ContactUs";
 import "../AboutUs/AboutUs";
 import "../LoginPage/LoginPage";
-import { Link } from "react-router-dom";
+import LogoutForm from "../../components/LogoutForm/LogoutForm";
+
 
 function HomePage() {
   const [loggedin, setLoggedIn] = useState(false);
@@ -33,14 +34,10 @@ function HomePage() {
         />
       </div>
 
-      {loggedin ? (
-        <div className="buttons-wrapper">
-          <Link to="/newcollection" className="button1">
-            My Collections
-          </Link>
-          <Link to="/newcollection" className="button1">
-            Sign Out
-          </Link>
+        {loggedin ? 
+        (<div className="buttons-wrapper"> 
+        <Link to="/collections/" className="button1" >My Collections</Link>
+        <LogoutForm />
         </div>
       ) : (
         <div className="buttons-wrapper">
