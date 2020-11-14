@@ -115,7 +115,9 @@ function AboutUsPage() {
           <p>
             We hope you enjoy our website, as much as we enjoyed creating it for
             you. If you have any questions or comments, please don't hesitate to{" "}
-            <a href="./ContactUs">contact us</a>
+            <a style={{ color: "#004aad" }} href="./ContactUs">
+              contact us
+            </a>
           </p>
           <br></br>
         </div>
