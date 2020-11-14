@@ -70,9 +70,9 @@ function SortableComponent(props) {
           body: JSON.stringify(jsonData),
       });
       return response.json();
-  };
+   };
 
-  const handleSubmit = (e) => {
+   const handleSubmit = (e) => {
       e.preventDefault();
 
       postData().then((response) => {
@@ -81,7 +81,7 @@ function SortableComponent(props) {
          window.location.reload();
       });
 
-  };
+   };
 
 
   
