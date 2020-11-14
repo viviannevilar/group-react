@@ -1,143 +1,144 @@
+//////////////////////////// imports ////////////////////////////
+
+// react imports
 import React, { useRef, useEffect, useState } from "react";
 import { useParams, useHistory, useLocation, Link } from "react-router-dom";
-import "./CollectionDetailPage.css";
+
+// components
 import Nav from "../../components/Nav/Nav";
 import ItemCard from "../../components/ItemCard/ItemCard"
 import SummaryItemCard from "../../components/SummaryItemCard/SummaryItemCard";
 import AddItemForm from "../../components/AddItemForm/AddItemForm";
 
+// styling
+import "./CollectionDetailPage.css";
 
-// Swiper copies
+// Swiper
 import Swiper, { Autoplay } from 'swiper';
-//import { SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Controller, Thumbs } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
-//swiper-bundle.css';
 
 
-Swiper.use([Navigation, Pagination, Controller, Thumbs]);
+//////////////////////////// helpers and set up ////////////////////////////
 
 
+
+// format date for display
 function formatDate(string) {
     var options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(string).toLocaleDateString([], options);
 }
 
 
-
-
-
-// List of items print out
-// Each attribute is clickable and takes you to a pop up modal that compares the items
-// Items at phone screen width are swipeable
-
+//////////////////////////// main component ////////////////////////////
 function CollectionDetailPage() {
 
-    // Variable for colelction ID
-    const { id } = useParams();
+   /////////////// variables
+
+   // Collection id (from url) and history
+   const history = useHistory();
+   const { id } = useParams();
+
+   // Loading and Modal States
+   const [isLoading, setisLoading] = useState(true);
+   const [modalState, setModalState] = useState(false);
+   const [summaryModal, setSummaryModal] = useState(false)
+
+   // Error
+   const [error, setError] = useState();
+   const [errorMessage, setErrorMessage] = useState(false);
+
+   // Data state variables
+   const [collectionData, setCollectionData] = useState({ collection_items: [] });
+   const [itemData, setItemData] = useState([]);
+
+   // swiper
+   Swiper.use([Navigation, Pagination, Controller, Thumbs]);
+   const swiper = useRef(null)
+
+   // ordering and filtering state variables
+   const [filterChoice, setFilterChoice] = useState("all")
+   const [orderChoice, setOrderChoice] = useState("default")
+   const [itemDisplayData, setItemDisplayData] = useState([])
+
+   // summary variables:
+   const [summaryChoice, setSummaryChoice] = useState("")
+   const [summaryInfo, setSummaryInformation] = useState([])
+   const [summaryTitle, setsummaryTitle] = useState("Price")
 
 
-    // Variables to understand if public or private path
-    let urlPath
-    let shared_link
-    let token = window.localStorage.getItem("token");
-    const location = useLocation();
-    const urlComponents = location.pathname.split("/")
+   // Public or private path (shared collection or own collection)
+   let urlPath
+   let shared_link
+   let token = window.localStorage.getItem("token");
+   const location = useLocation();
+   const urlComponents = location.pathname.split("/")
 
-    if (urlComponents.length === 6) {
-        urlPath = "safe/" + id + "/" + urlComponents[4]
-        shared_link = "public"
-    } else {
-        urlPath = id
-        shared_link = "private"
-    }
-
-
-    // Collection ID, Loading states and modal states
-    const history = useHistory();
-    const [isLoading, setisLoading] = useState(true);
-    const [modalState, setModalState] = useState(false);
-    const [error, setError] = useState();
-    const [errorMessage, setErrorMessage] = useState(false);
-    const [collectionData, setCollectionData] = useState({ collection_items: [] });
-    const [itemData, setItemData] = useState([]);
+   if (urlComponents.length === 6) {
+      urlPath = "safe/" + id + "/" + urlComponents[4]
+      shared_link = "public"
+   } else {
+      urlPath = id
+      shared_link = "private"
+   }
 
 
+   /////////////// methods
 
-    // summary variables:
-    const [summaryChoice, setSummaryChoice] = useState("")
+   // Get collection data
+   const fetchProjects = async () => {
+      let response
+      try {
+         if (urlComponents.length === 4) {
+               response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/`, {
+                  method: "get",
+                  headers: {
+                     "Content-Type": "application/json",
+                     Authorization: `Token ${token}`,
+                  },
+               })
+         } else {
+               response = await fetch(`${process.env.REACT_APP_API_URL}collection/${urlPath}/`, {
+                  method: "get",
+                  headers: {
+                     "Content-Type": "application/json",
+                  },
+               })
+         }
+      } catch (error) {
+         setisLoading(false);
+         setErrorMessage(true);
+         setError(error);
+         return
+      }
 
-    const [summaryModal, setSummaryModal] = useState(false)
-    const [summaryInfo, setSummaryInformation] = useState([])
-    const [summaryTitle, setsummaryTitle] = useState("Price")
+      const data = await response.json();
 
-    // testing swiper state variables
-    //const [thumbsSwiper, setThumbsSwiper] = useState(null);
-    //const [controlledSwiper, setControlledSwiper] = useState(null);
-    const swiper = useRef(null)
-    //const [index,setIndex] = useState(0)
+      if (response.ok) {
+         setCollectionData(data);
+         setItemData(data.collection_items);
+         setItemDisplayData(data.collection_items)
+         setisLoading(false);
 
-    // ordering and filtering state variables
-    const [filterChoice, setFilterChoice] = useState("all")
-    const [orderChoice, setOrderChoice] = useState("default")
-    const [itemDisplayData, setItemDisplayData] = useState([])
-    const fetchProjects = async () => {
-        let response
-        try {
-            if (urlComponents.length === 4) {
-                response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/`, {
-                    method: "get",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Token ${token}`,
-                    },
-                })
-            } else {
-                response = await fetch(`${process.env.REACT_APP_API_URL}collection/${urlPath}/`, {
-                    method: "get",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                })
-            }
-        } catch (error) {
-            setisLoading(false);
-            setErrorMessage(true);
-            setError(error);
-            return
-        }
+      } else {
+         setisLoading(false);
+         setError(data);
+         setErrorMessage(true);
+      }
 
-        const data = await response.json();
+   }
 
-        if (response.ok) {
-            setCollectionData(data);
-            setItemData(data.collection_items);
-            setItemDisplayData(data.collection_items)
-
-            setisLoading(false);
-
-        } else {
-            setisLoading(false);
-            setError(data);
-            setErrorMessage(true);
-        }
-
-    }
-
-
-    // functions:
-    useEffect(() => {
-        fetchProjects()
-    }, []);
+   useEffect(() => {
+      fetchProjects()
+   }, []);
 
 
 
-    // Modal state change function:
+    // Modal state change functions
     const addItemToggleModalState = () => {
         setModalState(!modalState);
         window.scrollTo(0, 0);
     };
-
 
     const summaryToggleState = () => {
         setSummaryModal(!summaryModal);
