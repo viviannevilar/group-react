@@ -79,15 +79,23 @@ function NewCollectionForm() {
 
   return (
     <div>
-    <div>
-        <Nav />
-    </div>
+        <div>
+            <Nav />
+        </div>
+        <div className="formlogo" >
+            <img
+            id="formlogoimage"
+            src={require("../../images/Comparalist_rectangle.png")}
+            alt="Company Logo"
+            />
+        </div>
+
       <div>
-    <div id="collectionform">
-      <h2 id="headerTitle"> Create a new collection! </h2>
+    <div className="newcollectionform">
+      <h2 id="newcollectionheadertitle"> Create a new collection! </h2>
       <br></br>
-      <h4>Price, Sale Price, Date Sale Price Ends and Image Upload are all default attributes that will be included in your collections. </h4>
-      <h4>Select additional Attributes you want to compare below</h4>
+      <h4 className="newcollectiontxt" id="newcollectiontxt1">Price, Sale Price, Date Sale Price Ends and Image Upload are all default attributes that will be included in your collections. </h4>
+      <h4 className="newcollectiontxt" id="newcollectiontxt2">Select additional Attributes you want to compare below</h4>
 
       <form>
         <div className="thra">

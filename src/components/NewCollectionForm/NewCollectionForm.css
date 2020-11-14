@@ -1,6 +1,27 @@
+.formlogo {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    padding-top: 5px;
+}
 
+#formlogoimage {
+    height: 40%;
+    width: 40%;
+  }
 
-#collectionform{
+#newcollectionheadertitle {
+    font-family: "Roboto", sans-serif;
+    color: #004aad;
+
+}
+
+.newcollectiontxt {
+    color: #696969
+
+}
+
+.newcollectionform{
     max-width: 700px;
     min-width: 300px;
     max-height: 900px;
