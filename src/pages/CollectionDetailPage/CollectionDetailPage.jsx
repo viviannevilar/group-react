@@ -444,7 +444,8 @@ function CollectionDetailPage() {
                                   </select>
                                   {/* second drop down - order choices */}
                                   <select onChange={(e) => setOrderChoice(e.target.value)}>
-                                      <option value="date-modified">Date modified</option>
+                                      <option value="default">Default</option>
+                                      <option value="alphabetical">Alphabetical order</option>
                                       <option value="price-lh">Price - low to high</option>
                                       <option value="price-hl">Price - high to low</option>
                                       <option value="date-created">Date created</option>
