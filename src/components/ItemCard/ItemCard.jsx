@@ -3,6 +3,7 @@ import React from "react";
 import "./ItemCard.css";
 import nophoto from '../../images/noimage.PNG';
 import pricetag from "../../images/img_568452.png"
+import "../../components/Nav/Nav.css";
 
 function formatDate(string) {
     var options = { year: 'numeric', month: 'long', day: 'numeric' };

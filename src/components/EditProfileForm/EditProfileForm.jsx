@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import Nav from "../../components/Nav/Nav";
+import "../../components/Nav/Nav.css";
 
 
 function EditProfileForm() {
