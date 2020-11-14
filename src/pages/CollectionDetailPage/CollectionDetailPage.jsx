@@ -62,7 +62,7 @@ function CollectionDetailPage() {
    // summary variables:
    const [summaryChoice, setSummaryChoice] = useState("")
    const [summaryInfo, setSummaryInformation] = useState([])
-   const [summaryTitle, setsummaryTitle] = useState("Price")
+   const [summaryTitle, setSummaryTitle] = useState("Price")
 
    // Public or private path (shared collection or own collection)
    let urlPath
@@ -130,6 +130,9 @@ function CollectionDetailPage() {
 
          // Logged in with different account
          // data.detail = "You do not have permission to perform this action."
+
+         // Collection doesn't exist
+         // data.detail = "Not found."
          setIsLoading(false);
       }
 
@@ -158,7 +161,7 @@ function CollectionDetailPage() {
 
    // Delete Item
    const handleDelete = (projectdat, e) => {
-      //let token = localStorage.getItem("token");
+
       fetch(`${process.env.REACT_APP_API_URL}item/${projectdat.id}/`, {
          method: "delete",
          headers: {
@@ -324,7 +327,7 @@ function CollectionDetailPage() {
                return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.price };
          })
          setSummaryInformation(key_information)
-         setsummaryTitle("Price")
+         setSummaryTitle("Price")
          console.log(key_information)
 
       } else if (summaryChoice === "sale_amount") {
@@ -333,7 +336,7 @@ function CollectionDetailPage() {
                return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.sale_amount, end_date: item.sale_end_date };
          })
          setSummaryInformation(key_information)
-         setsummaryTitle("Discount")
+         setSummaryTitle("Discount")
          console.log(key_information)
 
 
@@ -343,7 +346,7 @@ function CollectionDetailPage() {
                return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute1 };
          })
          setSummaryInformation(key_information)
-         setsummaryTitle(collectionData.attribute1)
+         setSummaryTitle(collectionData.attribute1)
          console.log(key_information)
 
       } else if (summaryChoice === "attribute2") {
@@ -352,7 +355,7 @@ function CollectionDetailPage() {
                return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute2 };
          })
          setSummaryInformation(key_information)
-         setsummaryTitle(collectionData.attribute2)
+         setSummaryTitle(collectionData.attribute2)
          console.log(key_information)
 
       } else if (summaryChoice === "attribute3") {
@@ -361,7 +364,7 @@ function CollectionDetailPage() {
                return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute3 };
          })
          setSummaryInformation(key_information)
-         setsummaryTitle(collectionData.attribute3)
+         setSummaryTitle(collectionData.attribute3)
 
          console.log(key_information)
 
@@ -371,7 +374,7 @@ function CollectionDetailPage() {
                return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute4 };
          })
          setSummaryInformation(key_information)
-         setsummaryTitle(collectionData.attribute4)
+         setSummaryTitle(collectionData.attribute4)
          console.log(key_information)
 
       } else {

@@ -7,6 +7,7 @@ import "./AddItemForm.css"
 function AddItemForm(props) {
    const { id, collectionData } = props;
    const [errorMessage, setErrorMessage] = useState()
+   const [errorKey, setErrorKey] = useState()
 
    let btnRefAdd = useRef();
 
@@ -14,7 +15,7 @@ function AddItemForm(props) {
    const [credentials, setCredentials] = useState({
       name: "",
       price: "",
-   //   sale_amount: "",
+      // sale_amount: "",
       attribute1: "",
       attribute2: "",
       attribute3: "",
@@ -92,13 +93,16 @@ function AddItemForm(props) {
                   // then focus on the input of the element that has a problem
                   const errorObj = JSON.parse(error.message);
                   setErrorMessage(errorObj[Object.keys(errorObj)[0]]);
-                  
+                  // "detail": "Invalid token." 
                   
                   console.log("---------- Object.keys(errorObj)[0]: ",Object.keys(errorObj)[0])
 
-                  if (Object.keys(errorObj)[0] === "name") {
-                     document.getElementById(`${Object.keys(errorObj)[0]}`).focus();
+                  let keyName = document.getElementById(`${Object.keys(errorObj)[0]}`)
+
+                  if (keyName) {
+                     keyName.focus();
                   }
+
                   // this enables the submit button again
                   if (btnRefAdd.current) {
                      btnRefAdd.current.disabled = false
@@ -139,8 +143,10 @@ function AddItemForm(props) {
       });
 
    };
-
-    return (
+   
+   //className={`todo ${todo.isCompleted ? "complete" : ""}`}
+   
+   return (
         <div>
 
             <h2 id="headerTitle"> Add Item to {collectionData.title} </h2>
@@ -167,7 +173,6 @@ function AddItemForm(props) {
                     />
                 </div>
 
-
                 <div className="formattribute">
                     <label htmlFor="sale_amount">Is there a discount currently offered (%)?:</label>
                     <input
@@ -176,7 +181,6 @@ function AddItemForm(props) {
                         onChange={handleChange}
                     />
                 </div>
-
 
                 {parseInt(credentials.sale_amount) > 0 && (<div className="formattribute">
                     <label htmlFor="sale_end_date">When does the discount expire?</label>
