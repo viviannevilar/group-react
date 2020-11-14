@@ -76,6 +76,7 @@ function CollectionDetailPage() {
     //const [controlledSwiper, setControlledSwiper] = useState(null);
     const swiper = useRef(null)
     //const [index,setIndex] = useState(0)
+    let btnRef = useRef();
 
     // ordering and filtering state variables
     const [filterChoice, setFilterChoice] = useState("all")
@@ -236,7 +237,7 @@ function CollectionDetailPage() {
             setItemData(sorted)
             console.log("date-created ordering")
 
-         } else if (orderChoice === "alphabetical") {
+        } else if (orderChoice === "alphabetical") {
 
             sorted = [...itemData].sort()
             setItemData(sorted)
@@ -248,11 +249,11 @@ function CollectionDetailPage() {
             setItemData(collectionData.collection_items)
             console.log("default ordering")
 
-         // } else if (orderChoice === "date-modified") {
+            // } else if (orderChoice === "date-modified") {
 
-         //    sorted = [...itemData].sort((a, b) => new Date(a.last_updated) - new Date(b.last_updated))
-         //    setItemData(sorted)
-         //    console.log("date-modified ordering")
+            //    sorted = [...itemData].sort((a, b) => new Date(a.last_updated) - new Date(b.last_updated))
+            //    setItemData(sorted)
+            //    console.log("date-modified ordering")
 
         } else {
 
@@ -387,134 +388,134 @@ function CollectionDetailPage() {
 
 
     return (
-      <div id="Nav">
-          <div>
-              <Nav />
-          </div>
-          <div id="projectlistcenter">
-              {!isLoading && errorMessage && (<div>
-                  <div id="errormessage">
-                      <br></br>
-                      <img className="backgroundimage" alt="Error!" src="https://www.pngitem.com/pimgs/m/119-1190787_warning-alert-attention-search-error-icon-hd-png.png" />
-                      <h2 id="headerTitle">There is no collection with ID {id} </h2>
-                  </div>
-              </div>)}
-              {!isLoading && !errorMessage && (
-                  <div>
-                      <div id="App">
-                          {/* collection information */}
-                          <div id="SwiperInfoContainer" >
-                              {shared_link === "private" ? (
-                                  <div>
-                                      { itemDisplayData.length > 0 ? (<p>You are currently comparing {itemDisplayData.length} items in the {collectionData.title} list </p>) : (<p>You are yet to add any items to {collectionData.title}!</p>)}
+        <div id="Nav">
+            <div>
+                <Nav />
+            </div>
+            <div id="projectlistcenter">
+                {!isLoading && errorMessage && (<div>
+                    <div id="errormessage">
+                        <br></br>
+                        <img className="backgroundimage" alt="Error!" src="https://www.pngitem.com/pimgs/m/119-1190787_warning-alert-attention-search-error-icon-hd-png.png" />
+                        <h2 id="headerTitle">There is no collection with ID {id} </h2>
+                    </div>
+                </div>)}
+                {!isLoading && !errorMessage && (
+                    <div>
+                        <div id="App">
+                            {/* collection information */}
+                            <div id="SwiperInfoContainer" >
+                                {shared_link === "private" ? (
+                                    <div>
+                                        { itemDisplayData.length > 0 ? (<p>You are currently comparing {itemDisplayData.length} items in the {collectionData.title} list </p>) : (<p>You are yet to add any items to {collectionData.title}!</p>)}
 
 
-                                      <Link to={{pathname:`/collection/${id}/manual-sort/`, state: {itemsProps: itemData}}}><button >Change Default Order</button></Link>
+                                        <Link to={{ pathname: `/collection/${id}/manual-sort/`, state: { itemsProps: itemData } }}><button >Change Default Order</button></Link>
 
 
-                                  </div>
-                              ) : (<div>
-                                  { itemDisplayData.length > 0 ? (<p>There are currently {itemDisplayData.length} items in the {collectionData.title} list for comparison. </p>) : (<p>There are no items added to list {collectionData.title}!</p>)}
-                              </div>)}
-                              <div id="fexrow">
-                                  <p>Summarise by: </p>
-                                  <select onChange={(e) => setSummaryChoice(e.target.value)}>
-                                      <option value="none" selected disabled hidden></option>
-                                      <option value="price">Price</option>
-                                      <option value="sale_amount">Discount</option>
-                                      {collectionData.attribute1 !== "" && (<option value="attribute1">{collectionData.attribute1}</option>
-                                      )}
-                                      {collectionData.attribute2 !== "" && (<option value="attribute2">{collectionData.attribute2}</option>
-                                      )}
-                                      {collectionData.attribute3 !== "" && (<option value="attribute3">{collectionData.attribute3}</option>
-                                      )}
-                                      {collectionData.attribute4 !== "" && (<option value="attribute4">{collectionData.attribute4}</option>
-                                      )}
-                                  </select>
-                                  <button className="" onClick={() => summaryToggleState()}>GO</button>
-                              </div>
-                          </div>
-                          <div id="store-filter-button-container" >
-                              <div id="Container-for-Filtering" >
-                                  {/* first drop down - filter choices */}
-                                  <select onChange={(e) => setFilterChoice(e.target.value)}>
-                                      <option value="all">All items</option>
-                                      <option value="active">Active items</option>
-                                      <option value="archived">Archived items</option>
-                                  </select>
-                                  {/* second drop down - order choices */}
-                                  <select onChange={(e) => setOrderChoice(e.target.value)}>
-                                      <option value="date-modified">Date modified</option>
-                                      <option value="price-lh">Price - low to high</option>
-                                      <option value="price-hl">Price - high to low</option>
-                                      <option value="date-created">Date created</option>
-                                  </select>
-                              </div>
-                              {collectionData.is_active ? (<button className="" onClick={() => addItemToggleModalState()}>Add Item</button>
-                              ) : ("")}
-                          </div>
-                          <div id="project-list">
-                              <div className="swiperMainContainer" style={modalState || summaryModal ? { pointerEvents: "none", opacity: "0.4" } : {}} >
-                                  {/* Here we will be adding swiper container */}
-                                  <div className="swiper-container">
-                                      <div className="swiper-wrapper">
-                                          {itemDisplayData.map((el, key) => {
-                                              return (
-                                                  <div className="swiper-slide" key={key}>
-                                                      <ItemCard key={key} projectData={el} collectionData={collectionData} />
-                                                      {shared_link === "private" && (
-                                                          <div className="buttoncontainer">
-                                                              <Link to={`/item-edit/${el.id}/${collectionData.id}/`}>
-                                                                  <button className="buttonblue" >Edit </button >
-                                                              </Link>
-                                                              <a><button className="buttonblue" onClick={() => archiveItem(el)}>{el.is_active ? "Archive" : "Unarchive"}</button></a>
-                                                              <a><button className="buttonblue" onClick={() => handleDelete(el)}>Delete </button></a>
-                                                          </div>
-                                                      )}
-                                                  </div>
-                                              )
-                                          })}
-                                      </div>
-                                      {/* -- If we need pagination -- */}
-                                      <div className="swiper-pagination"></div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div className={`modalBackground modalShowing-${modalState}`}>
-                          <div className="modalInner">
-                              <div className="modalText">
-                                  <AddItemForm id={id} collectionData={collectionData} />
-                                  <div>
-                                      <button className="exitButton" onClick={() => addItemToggleModalState()}> exit </button>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div className={`modalBackground modalShowing-${summaryModal}`}>
-                          <div className="modalInner">
-                              <div className="modalText">
-                                  <SummaryItemCard summary_choice={summaryTitle} summary_info={summaryInfo} />
-                                  <div>
-                                      <button className="exitButton" onClick={() => summaryToggleState()}> exit </button>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              )
-              }
-              <div>
-                  {isLoading && (
-                      <div>
-                          <div>IS Loading</div>
-                          {/* <Loader /> */}
-                      </div>
-                  )}
-              </div>
-          </div >
-      </div>
-  )
+                                    </div>
+                                ) : (<div>
+                                    { itemDisplayData.length > 0 ? (<p>There are currently {itemDisplayData.length} items in the {collectionData.title} list for comparison. </p>) : (<p>There are no items added to list {collectionData.title}!</p>)}
+                                </div>)}
+                                <div id="fexrow">
+                                    <p>Summarise by: </p>
+                                    <select onChange={(e) => setSummaryChoice(e.target.value)}>
+                                        <option value="none" selected disabled hidden></option>
+                                        <option value="price">Price</option>
+                                        <option value="sale_amount">Discount</option>
+                                        {collectionData.attribute1 !== "" && (<option value="attribute1">{collectionData.attribute1}</option>
+                                        )}
+                                        {collectionData.attribute2 !== "" && (<option value="attribute2">{collectionData.attribute2}</option>
+                                        )}
+                                        {collectionData.attribute3 !== "" && (<option value="attribute3">{collectionData.attribute3}</option>
+                                        )}
+                                        {collectionData.attribute4 !== "" && (<option value="attribute4">{collectionData.attribute4}</option>
+                                        )}
+                                    </select>
+                                    <button className="" onClick={() => summaryToggleState()}>GO</button>
+                                </div>
+                            </div>
+                            <div id="store-filter-button-container" >
+                                <div id="Container-for-Filtering" >
+                                    {/* first drop down - filter choices */}
+                                    <select onChange={(e) => setFilterChoice(e.target.value)}>
+                                        <option value="all">All items</option>
+                                        <option value="active">Active items</option>
+                                        <option value="archived">Archived items</option>
+                                    </select>
+                                    {/* second drop down - order choices */}
+                                    <select onChange={(e) => setOrderChoice(e.target.value)}>
+                                        <option value="date-modified">Date modified</option>
+                                        <option value="price-lh">Price - low to high</option>
+                                        <option value="price-hl">Price - high to low</option>
+                                        <option value="date-created">Date created</option>
+                                    </select>
+                                </div>
+                                {collectionData.is_active ? (<button className="" onClick={() => addItemToggleModalState()}>Add Item</button>
+                                ) : ("")}
+                            </div>
+                            <div id="project-list">
+                                <div className="swiperMainContainer" style={modalState || summaryModal ? { pointerEvents: "none", opacity: "0.4" } : {}} >
+                                    {/* Here we will be adding swiper container */}
+                                    <div className="swiper-container">
+                                        <div className="swiper-wrapper">
+                                            {itemDisplayData.map((el, key) => {
+                                                return (
+                                                    <div className="swiper-slide" key={key}>
+                                                        <ItemCard key={key} projectData={el} collectionData={collectionData} />
+                                                        {shared_link === "private" && (
+                                                            <div className="buttoncontainer">
+                                                                <Link to={`/item-edit/${el.id}/${collectionData.id}/`}>
+                                                                    <button className="buttonblue" >Edit </button >
+                                                                </Link>
+                                                                <a><button className="buttonblue" onClick={() => archiveItem(el)}>{el.is_active ? "Archive" : "Unarchive"}</button></a>
+                                                                <a><button className="buttonblue" onClick={() => handleDelete(el)}>Delete </button></a>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                        {/* -- If we need pagination -- */}
+                                        <div className="swiper-pagination"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={`modalBackground modalShowing-${modalState}`}>
+                            <div className="modalInner">
+                                <div className="modalText">
+                                    <AddItemForm id={id} collectionData={collectionData} />
+                                    <div>
+                                        <button className="exitButton" onClick={() => addItemToggleModalState()}> exit </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={`modalBackground modalShowing-${summaryModal}`}>
+                            <div className="modalInner">
+                                <div className="modalText">
+                                    <SummaryItemCard summary_choice={summaryTitle} summary_info={summaryInfo} />
+                                    <div>
+                                        <button className="exitButton" onClick={() => summaryToggleState()}> exit </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+                }
+                <div>
+                    {isLoading && (
+                        <div>
+                            <div>IS Loading</div>
+                            {/* <Loader /> */}
+                        </div>
+                    )}
+                </div>
+            </div >
+        </div>
+    )
 }
 
 
