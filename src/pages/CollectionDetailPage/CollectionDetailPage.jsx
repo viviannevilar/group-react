@@ -38,12 +38,12 @@ function CollectionDetailPage() {
    const { id } = useParams();
 
    // Loading and Modal States
-   const [isLoading, setisLoading] = useState(true);
+   const [isLoading, setIsLoading] = useState(true);
    const [modalState, setModalState] = useState(false);
    const [summaryModal, setSummaryModal] = useState(false)
 
    // Error
-   const [error, setError] = useState(false);
+   const [hasError, setHasError] = useState(false);
    const [errorMessage, setErrorMessage] = useState();
 
    // Data state variables
@@ -80,6 +80,7 @@ function CollectionDetailPage() {
    }
 
 
+   let key_information
    /////////////// methods
 
    // Get collection and associated items' data
@@ -87,26 +88,26 @@ function CollectionDetailPage() {
       let response
       try {
          if (urlComponents.length === 4) {
-               response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/`, {
-                  method: "get",
-                  headers: {
-                     "Content-Type": "application/json",
-                     Authorization: `Token ${token}`,
-                  },
-               })
+            response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/`, {
+               method: "get",
+               headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Token ${token}`,
+               },
+            })
          } else {
-               response = await fetch(`${process.env.REACT_APP_API_URL}collection/${urlPath}/`, {
-                  method: "get",
-                  headers: {
-                     "Content-Type": "application/json",
-                  },
-               })
+            response = await fetch(`${process.env.REACT_APP_API_URL}collection/${urlPath}/`, {
+               method: "get",
+               headers: {
+                  "Content-Type": "application/json",
+               },
+            })
          }
       } catch (thisError) {
          console.log("---------------thisError: ", thisError)
-         setisLoading(false);
+         setIsLoading(false);
          setErrorMessage(thisError);
-         setError(true);
+         setHasError(true);
          return
       }
 
@@ -116,13 +117,20 @@ function CollectionDetailPage() {
          setCollectionData(data);
          setItemData(data.collection_items);
          setItemDisplayData(data.collection_items)
-         setisLoading(false);
+         setIsLoading(false);
 
       } else {
-         setisLoading(false);
-         setError(true);
-         console.log("-------------DATA: ", data.detail)
+         setHasError(true);
          setErrorMessage(data.detail);
+         console.log("-------------DATA: ", data.detail)
+
+         // Here is a list of the errors I have gotten
+         // Not logged on
+         // data.detail = "Invalid token."
+
+         // Logged in with different account
+         // data.detail = "You do not have permission to perform this action."
+         setIsLoading(false);
       }
 
    }
@@ -136,126 +144,125 @@ function CollectionDetailPage() {
    }, [id]);
 
 
-    // Modal state change functions
-    const addItemToggleModalState = () => {
-        setModalState(!modalState);
-        window.scrollTo(0, 0);
-    };
+   // Modal state change functions
+   const addItemToggleModalState = () => {
+      setModalState(!modalState);
+      window.scrollTo(0, 0);
+   };
 
-    const summaryToggleState = () => {
-        setSummaryModal(!summaryModal);
-        window.scrollTo(0, 0);
-    };
-
-
-    // Delete Item
-    const handleDelete = (projectdat, e) => {
-        //let token = localStorage.getItem("token");
-        fetch(`${process.env.REACT_APP_API_URL}item/${projectdat.id}/`, {
-            method: "delete",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Token ${token}`,
-            },
-        }).then(() => {
-            history.push(`/collection/${id}/`)
-            window.location.reload();
-        });
-    }
-
-    // Archive Item
-    const archiveItem = (item, e) => {
-        let token = window.localStorage.getItem("token");
-        fetch(`${process.env.REACT_APP_API_URL}item/${item.id}/archive/`, {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Token ${token}`,
-            },
-        }).then(() => {
-            history.push(`/collection/${id}/`)
-            window.location.reload();
-        });
-    }
-
-    // FILTER active-archived-all items  
-    useEffect(() => {
-
-        let filteredData
-
-        if (filterChoice === "active") {
-            filteredData = itemData.filter((item) => item.is_active)
-            setItemDisplayData(filteredData)
-            console.log("active filtering")
-
-        } else if (filterChoice === "archived") {
-
-            filteredData = itemData.filter((item) => !item.is_active)
-            setItemDisplayData(filteredData)
-            console.log("archive filtering")
-
-        } else if (filterChoice === "all") {
-
-            setItemDisplayData(itemData)
-            console.log("no filtering - all items")
-
-        } else {
-            console.log("Error in filters. Filter chosen doesn't match any of the filter options. filterChoice = ", filterChoice)
-        }
-
-    }, [filterChoice, itemData])
+   const summaryToggleState = () => {
+      setSummaryModal(!summaryModal);
+      window.scrollTo(0, 0);
+   };
 
 
-    // ORDER items by price, date 
-    let sorted
+   // Delete Item
+   const handleDelete = (projectdat, e) => {
+      //let token = localStorage.getItem("token");
+      fetch(`${process.env.REACT_APP_API_URL}item/${projectdat.id}/`, {
+         method: "delete",
+         headers: {
+               "Content-Type": "application/json",
+               Authorization: `Token ${token}`,
+         },
+      }).then(() => {
+         history.push(`/collection/${id}/`)
+         window.location.reload();
+      });
+   }
 
-    useEffect(() => {
+   // Archive Item
+   const archiveItem = (item, e) => {
+      let token = window.localStorage.getItem("token");
+      fetch(`${process.env.REACT_APP_API_URL}item/${item.id}/archive/`, {
+         method: "post",
+         headers: {
+               "Content-Type": "application/json",
+               Authorization: `Token ${token}`,
+         },
+      }).then(() => {
+         history.push(`/collection/${id}/`)
+         window.location.reload();
+      });
+   }
 
-        if (orderChoice === "price-lh") {
+   // FILTER active-archived-all items  
+   useEffect(() => {
 
-            sorted = [...itemData].sort((a, b) => a.price - b.price)
-            //see explanation at the end of this file to understand this a bit more
-            setItemData(sorted)
-            console.log("price-lh ordering")
+      let filteredData
 
-        } else if (orderChoice === "price-hl") {
+      if (filterChoice === "active") {
+         filteredData = itemData.filter((item) => item.is_active)
+         setItemDisplayData(filteredData)
+         console.log("active filtering")
 
-            sorted = [...itemData].sort((a, b) => a.price - b.price).reverse()
-            setItemData(sorted)
-            console.log("price-hl ordering")
+      } else if (filterChoice === "archived") {
+
+         filteredData = itemData.filter((item) => !item.is_active)
+         setItemDisplayData(filteredData)
+         console.log("archive filtering")
+
+      } else if (filterChoice === "all") {
+
+         setItemDisplayData(itemData)
+         console.log("no filtering - all items")
+
+      } else {
+         console.log("Error in filters. Filter chosen doesn't match any of the filter options. filterChoice = ", filterChoice)
+      }
+
+   }, [filterChoice, itemData])
 
 
-        } else if (orderChoice === "date-created") {
+   // ORDER items by price, date 
+   let sorted
 
-            sorted = [...itemData].sort((a, b) => a.id - b.id)
-            setItemData(sorted)
-            console.log("date-created ordering")
+   useEffect(() => {
 
-         } else if (orderChoice === "alphabetical") {
+      if (orderChoice === "price-lh") {
 
-            sorted = [...itemData].sort((a,b ) => a.name > b.name ? 1: -1)
-            setItemData(sorted)
-            console.log("alphabetical ordering")
+         sorted = [...itemData].sort((a, b) => a.price - b.price)
+         //see explanation at the end of this file to understand this a bit more
+         setItemData(sorted)
+         //console.log("price-lh ordering")
 
-        } else if (orderChoice === "default") {
+      } else if (orderChoice === "price-hl") {
 
-            // sorted = [...itemData].sort((a, b) => a.last_updated - b.last_updated )
-            setItemData(collectionData.collection_items)
-            console.log("default ordering")
+         sorted = [...itemData].sort((a, b) => a.price - b.price).reverse()
+         setItemData(sorted)
+         //console.log("price-hl ordering")
 
-         // } else if (orderChoice === "date-modified") {
+      } else if (orderChoice === "date-created") {
 
-         //    sorted = [...itemData].sort((a, b) => new Date(a.last_updated) - new Date(b.last_updated))
-         //    setItemData(sorted)
-         //    console.log("date-modified ordering")
+         sorted = [...itemData].sort((a, b) => a.id - b.id)
+         setItemData(sorted)
+         //console.log("date-created ordering")
 
-        } else {
+      } else if (orderChoice === "alphabetical") {
 
-            console.log("Error in ordering. Order chosen doesn't match any of the order options. orderChoice = ", orderChoice)
+         sorted = [...itemData].sort((a,b ) => a.name > b.name ? 1: -1)
+         setItemData(sorted)
+         //console.log("alphabetical ordering")
 
-        }
+      } else if (orderChoice === "default") {
 
-    }, [orderChoice])
+         // sorted = [...itemData].sort((a, b) => a.last_updated - b.last_updated )
+         setItemData(collectionData.collection_items)
+         //console.log("default ordering")
+
+      } else if (orderChoice === "date-modified") {
+
+         sorted = [...itemData].sort((a, b) => new Date(a.last_updated) - new Date(b.last_updated))
+         setItemData(sorted)
+         // console.log("date-modified ordering")
+
+      } else {
+
+         console.log("Error in ordering. Order chosen doesn't match any of the order options. orderChoice = ", orderChoice)
+
+      }
+
+   }, [orderChoice])
 
 
 
@@ -313,7 +320,7 @@ function CollectionDetailPage() {
 
       if (summaryChoice === "price") {
 
-         var key_information = itemDisplayData.map(function (item, index) {
+         key_information = itemDisplayData.map(function (item, index) {
                return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.price };
          })
          setSummaryInformation(key_information)
@@ -322,7 +329,7 @@ function CollectionDetailPage() {
 
       } else if (summaryChoice === "sale_amount") {
 
-         var key_information = itemDisplayData.map(function (item, index) {
+         key_information = itemDisplayData.map(function (item, index) {
                return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.sale_amount, end_date: item.sale_end_date };
          })
          setSummaryInformation(key_information)
@@ -332,7 +339,7 @@ function CollectionDetailPage() {
 
       } else if (summaryChoice === "attribute1") {
 
-         var key_information = itemDisplayData.map(function (item, index) {
+         key_information = itemDisplayData.map(function (item, index) {
                return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute1 };
          })
          setSummaryInformation(key_information)
@@ -341,7 +348,7 @@ function CollectionDetailPage() {
 
       } else if (summaryChoice === "attribute2") {
 
-         var key_information = itemDisplayData.map(function (item, index) {
+         key_information = itemDisplayData.map(function (item, index) {
                return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute2 };
          })
          setSummaryInformation(key_information)
@@ -350,7 +357,7 @@ function CollectionDetailPage() {
 
       } else if (summaryChoice === "attribute3") {
 
-         var key_information = itemDisplayData.map(function (item, index) {
+         key_information = itemDisplayData.map(function (item, index) {
                return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute3 };
          })
          setSummaryInformation(key_information)
@@ -360,7 +367,7 @@ function CollectionDetailPage() {
 
       } else if (summaryChoice === "attribute4") {
 
-         var key_information = itemDisplayData.map(function (item, index) {
+         key_information = itemDisplayData.map(function (item, index) {
                return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute4 };
          })
          setSummaryInformation(key_information)
@@ -386,17 +393,16 @@ function CollectionDetailPage() {
          <div id="projectlistcenter">
 
    {/* No longer loading, there IS an error message */}
-            {!isLoading && error && (<div>
+            {!isLoading && hasError && (<div>
                <div id="errormessage">
                      <br></br>
                      <img className="backgroundimage" alt="Error!" src="https://www.pngitem.com/pimgs/m/119-1190787_warning-alert-attention-search-error-icon-hd-png.png" />
                      <h2>{errorMessage}</h2>
-                     <h2 id="headerTitle">There is no collection with ID {id} </h2>
                </div>
             </div>)}
 
    {/* No longer loading, there is NO error message */}
-            {!isLoading && !error && (
+            {!isLoading && !hasError && (
                <div>
                      <div id="App">
 
@@ -451,6 +457,7 @@ function CollectionDetailPage() {
                                     <option value="price-lh">Price - low to high</option>
                                     <option value="price-hl">Price - high to low</option>
                                     <option value="date-created">Date created</option>
+                                    <option value="date-modified">Date modified</option>
                                  </select>
                            </div>
                            {collectionData.is_active ? (<button className="" onClick={() => addItemToggleModalState()}>Add Item</button>
