@@ -1,10 +1,9 @@
 
-
 .Navbarcontainer {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding: 10px;
     }
 
@@ -13,13 +12,48 @@
     color:#004aad
     }
 
-
-@media screen and (max-width: 500px) {
-
+.linkContainer {
+    align-items: center;
 }
 
+#Navitem1 {
+    align-content: center;
+}
+
+@media only screen and (max-width: 1450px) {
+    .Navbarcontainer {
+        padding-right: 25%;
+        padding-left: 25%;
+    }
+    .navItem {
+        font-size: 0.8cm;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .Navbarcontainer {
+            padding-right: 10%;
+            padding-left: 10%;
+        }
+    }
 
 
+@media only screen and (max-width: 500px) {
+    .navItem {
+        font-size: 0.4cm;
+    }
+    .linkContainer {
+        align-items: center;
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+    .Navbarcontainer {
+        padding-right: 5%;
+        padding-left: 5%;
+    }
+
+
+}
 
 
 /* .logo {
