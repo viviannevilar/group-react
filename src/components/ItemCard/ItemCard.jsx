@@ -22,8 +22,8 @@ function calculateNewPrice(oldprice, totalsaving) {
 
 
 function ItemCard(props) {
+
     const { projectData, collectionData } = props;
-    console.log(projectData.image)
 
 
     return (
