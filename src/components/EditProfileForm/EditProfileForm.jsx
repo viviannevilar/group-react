@@ -1,26 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import Nav from "../../components/Nav/Nav";
+import "../../components/Nav/Nav.css";
 
 
 function EditProfileForm() {
+  const [modalState, setModalState] = useState(false);
+  const [profileData, setProfileData] = useState({});
+  const token = window.localStorage.getItem("token");
+  const username = window.localStorage.getItem("username");
+
+  const deleteAccountToggleState = () => {
+    setModalState(!modalState);
+    window.scrollTo(0, 0);
+  };
 
   const [credentials, setCredentials] = useState({
     username: "",
     preferred_name: "",
     email: "",
-    
+
   });
   const [passwords, setPasswords] = useState({
-    old_password:"",
-    new_password:"",
+    old_password: "",
+    new_password: "",
 
   });
 
-  const [profileData, setProfileData] = useState({});
-  const token = window.localStorage.getItem("token");
-  const username = window.localStorage.getItem("username");
-  const { id } = useParams();
+
+
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}user/${username}`, {
       method: "get",
@@ -60,12 +68,15 @@ function EditProfileForm() {
   };
   const handleChangePasswords = (event) => {
     const { id, value } = event.target;
-       
+
     setPasswords((prevPasswords) => ({
       ...prevPasswords,
       [id]: value,
     }));
   };
+
+
+
   const postData = async () => {
     let username = localStorage.username;
     let token = localStorage.token;
@@ -110,99 +121,177 @@ function EditProfileForm() {
         }
       }).catch(
         (error) => {
-          console.log("error")
+          console.log("---- error: ", error)
         }
       )
 
   };
 
   const handleSubmitPassword = (e) => {
-  
+
     e.preventDefault();
     fetch(`${process.env.REACT_APP_API_URL}change-password/`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Token ${token}`},
-      body:JSON.stringify(passwords)
-  
+        Authorization: `Token ${token}`
+      },
+      body: JSON.stringify(passwords)
+
     })
-    
-    .then((result) => {
-      if (result != undefined) {
-        history.push ("/collections/");
-        // window.location.reload();
-      } else {
-        history.push("/edituserdetails/")
-      }
-    
-    }).catch(
-      (error) => {
-        console.log("error")
-      }
-    )
-    };
-  
-   
+
+      .then((result) => {
+        if (result != undefined) {
+          history.push("/collections/");
+          window.location.reload();
+        } else {
+          history.push("/edituserdetails/")
+        }
+
+      }).catch(
+        (error) => {
+          console.log("error")
+        }
+      )
+  };
+
+
+  const DeleteAccount = async (e) => {
+    let token = localStorage.getItem("token");
+    let username = localStorage.getItem("username");
+
+    const response = fetch(`${process.env.REACT_APP_API_URL}user/${username}/`, {
+      method: "delete",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    });
+    console.log(response)
+    localStorage.removeItem("username");
+    localStorage.removeItem("token");
+    history.push("/");
+    window.location.reload();
+  };
+
 
   return (
-    <div>
-        <div id="Nav">
-            <Nav />
-        </div>
-   
-    <div>
-      <form>
-        <div class="form1-item">
-          <label htmlFor="username">Username:</label>
-          <input
-            type="username"
-            id="username"
-            value={credentials.username}
-            onChange={handleChangeCredentials}
-          />
+    <div >
+      <div id="Nav">
+        <Nav />
+      </div>
+
+      {username === null ? (<div>You are not logged in </div>
+      ) : (<div>
+
+        <div id="App">
+          <form>
+            <h2>Edit Profile here</h2>
+            <div className="form1-item">
+              <label htmlFor="username">Username:</label>
+              <input
+                type="username"
+                id="username"
+                value={credentials.username}
+                onChange={handleChangeCredentials}
+              />
+            </div>
+
+            <div className="form1-item">
+            <div className="row"></div>
+              <label htmlFor="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                onChange={handleChangeCredentials}
+                value={credentials.email}
+              />
+            </div>
+            <div className="form1-item">
+            <div className="row"></div>
+              <label htmlFor="preferred_name">Preferred Name:</label>
+              <input
+                type="preferred_name"
+                id="preferred_name"
+                onChange={handleChangeCredentials}
+                value={credentials.preferred_name}
+              />
+            </div >
+            <div className="row"></div>
+            <button className="button" button type="submit" onClick={handleSubmitCredential}> EditProfile </button>
+            <h2>Edit Password here</h2>
+            <div className="form1-item">
+              <label htmlFor="old_password">Old Password:</label>
+              <input
+                type="old_password"
+                id="old_password"
+                onChange={handleChangePasswords}
+                value={passwords.old_password}
+              />
+            </div>
+
+            <div className="form1-item">
+            <div className="row"></div>
+              <label htmlFor="new_password">New Password:</label>
+              <input
+                type="new_password"
+                id="new_password"
+                onChange={handleChangePasswords}
+                value={passwords.new_password}
+              />
+            </div>
+
+            <div className="form1-item">
+            <div className="row"></div>
+              <label htmlFor="confirm_new_password">Re-enter Password:</label>
+              <input
+                type="confirm_new_password"
+                id="confirm_new_password"
+                onChange={handleChangePasswords}
+                value={passwords.confirm_new_password}
+              />
+            </div>
+            <div className="form1-item">
+              
+              <label htmlFor="delete_account"></label>
+
+
+            </div>
+
+            <div id="test"></div>
+            <button className="button" button type="submit" onClick={handleSubmitPassword}> Change Password </button>
+            
+            <h2>Delete Account here</h2>
+            <div className="form1-item">
+              <div className="row"></div>
+              <label htmlFor="delete_account"></label>
+
+
+            </div>
+
+
+
+          </form>
+          <div id="test"></div>
+          <button className="button" onClick={() => deleteAccountToggleState()}>Delete your Account</button>
+
         </div>
 
-        <div class="form1-item">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            onChange={handleChangeCredentials}
-            value={credentials.email}
-          />
+        <div className={`modalBackground modalShowing-${modalState}`}>
+          <div className="modalInner">
+            <div className="modalText">
+              <p>Are you sure you want to delete your account? - This will remove all collection and item Data</p>
+              <button onClick={() => DeleteAccount()}>Yes Delete Account</button>
+              <div>
+                <button className="exitButton" onClick={() => deleteAccountToggleState()}> exit </button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="form1-item">
-          <label htmlFor="preferred_name">Preferred Name:</label>
-          <input
-            type="preferred_name"
-            id="preferred_name"
-            onChange={handleChangeCredentials}
-            value={credentials.preferred_name}
-          /> 
-        </div>
-        <div class="form1-item">
-          <label htmlFor="old_password">Old Password:</label>
-          <input
-            type="old_password"
-            id="old_password"
-            onChange={handleChangePasswords}
-            value={passwords.old_password}
-          />
-        </div>
-        <div class="form1-item">
-          <label htmlFor="new_password">New Password:</label>
-          <input
-            type="new_password"
-            id="new_password"
-            onChange={handleChangePasswords}
-            value={passwords.new_password}
-          />
-        </div>
-        <button type="submit" onClick={handleSubmitCredential}> EditProfile </button>
-        <button type="submit" onClick={handleSubmitPassword}> Change Password </button>
-      </form>
-    </div>
+
+      </div>)}
+
+
     </div>
   );
 }

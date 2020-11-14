@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import Nav from "../../components/Nav/Nav";
+import "../../components/Nav/Nav.css";
 
 function ItemEditForm(props) {
 
@@ -8,31 +9,39 @@ function ItemEditForm(props) {
     const { itemData, collectionData } = props;
 
     //variables
+
     const [credentials, setCredentials] = useState({
         id: null,
         name: "",
+        price: "",
+        sale_amount: 0,
+        sale_end_date: null,
+        sale_amount: "",
         attribute1: "",
         attribute2: "",
         attribute3: "",
         attribute4: "",
-        image: null,
+        image: "",
         collection: null,
-        is_active: true,
     });
+
 
     useEffect(() => {
         console.log(itemData)
-        setCredentials({
+        setCredentials((prevCredentials) => ({
+            ...prevCredentials,
             id: parseInt(itemData.id),
             name: itemData.name,
+            sale_amount: itemData.sale_amount,
+            sale_end_date: itemData.sale_end_date,
+            price: itemData.price,
             attribute1: itemData.attribute1,
             attribute2: itemData.attribute2,
             attribute3: itemData.attribute3,
             attribute4: itemData.attribute4,
-            image: itemData.image,
-            is_active: itemData.is_active,
+            //image: itemData.image,
             collection: parseInt(itemData.collection),
-        });
+        }));
         console.log(credentials)
 
 
@@ -68,9 +77,15 @@ function ItemEditForm(props) {
         form_data.append('attribute2', credentials.attribute2);
         form_data.append('attribute3', credentials.attribute3);
         form_data.append('attribute4', credentials.attribute4);
-        form_data.append('collection', credentials.collection);       
-        form_data.append('is_active', credentials.is_active);
+        form_data.append('collection', credentials.collection);
         form_data.append('name', credentials.name);
+        form_data.append('price', credentials.price);
+        form_data.append('sale_amount', credentials.sale_amount);
+        if (credentials.sale_end_date !== null) {
+            form_data.append('sale_end_date', credentials.sale_end_date);
+        }
+
+
 
         //function you can call but carry on as well
         const response = await fetch(`${process.env.REACT_APP_API_URL}item/${itemData.id}/`, {
@@ -97,6 +112,10 @@ function ItemEditForm(props) {
 
     };
 
+   const cancelSubmit = (e) => {
+   history.push(`/collection/${collectionData.id}/`);
+   }
+
 
 
     return (
@@ -119,6 +138,41 @@ function ItemEditForm(props) {
                         onChange={handleChange}
                     />
                 </div>
+
+
+                <div className="thra">
+                    <label htmlFor="price">Price of Item:</label>
+                    <input
+                        type="number"
+                        id="price"
+                        onChange={handleChange}
+                        value={credentials.price}
+
+                    />
+                </div>
+
+
+                <div className="thra">
+                    <label htmlFor="sale_amount">Is there a discount currently offered (%)?:</label>
+                    <input
+                        type="number"
+                        id="sale_amount"
+                        onChange={handleChange}
+                        value={credentials.sale_amount}
+
+                    />
+                </div>
+
+
+                {parseInt(credentials.sale_amount) > 0 && (<div className="thra">
+                    <label htmlFor="sale_end_date">When does the discount expire?</label>
+                    <input
+                        type="date"
+                        id="sale_end_date"
+                        value={credentials.sale_end_date}
+                        onChange={handleChange}
+                    />
+                </div>)}
 
                 {collectionData.attribute1 !== "" && (<div className="thra">
                     <label htmlFor="attribute1">{collectionData.attribute1}:</label>
@@ -168,7 +222,7 @@ function ItemEditForm(props) {
                     <label htmlFor="image">Image:</label>
                     <br></br>
                     <div id="imagecon">
-                        <img id="profilepicture" src={credentials.image} alt="anon pic" />
+                        <img id="image" src={credentials.image} alt="anon pic" />
                     </div>
                     <br></br>
                     <input
@@ -189,33 +243,12 @@ function ItemEditForm(props) {
                     />
                 </div>
 
-                <div className="thra">
-                    <label htmlFor="is_open">Would you like to archive this item in the list and come back to it later?</label>
 
-                </div>
-
-                <div className="radiowrapper">
-                    <input
-                        type="radio"
-                        id="is_active"
-                        name="is_active"
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="is_active">Active</label>
-
-                    <input
-                        type="radio"
-                        id="is_active"
-                        name="is_active"
-                        value="false"
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="false">Archive</label>
-                </div>
 
 
                 <div className="buttonwrapper">
-                    <button className="pledgebutton" type="submit" onClick={handleSubmit}>  Update List Item </button>
+                    <button className="pledgebutton" type="submit" onClick={handleSubmit}>  Update Item </button>
+                    <button className="pledgebutton" type="submit" onClick={cancelSubmit}>  Cancel </button>
                 </div>
             </form>
         </div>
