@@ -198,6 +198,7 @@ function EditProfileForm() {
             </div>
 
             <div className="form1-item">
+            <div className="row"></div>
               <label htmlFor="email">Email:</label>
               <input
                 type="email"
@@ -207,6 +208,7 @@ function EditProfileForm() {
               />
             </div>
             <div className="form1-item">
+            <div className="row"></div>
               <label htmlFor="preferred_name">Preferred Name:</label>
               <input
                 type="preferred_name"
@@ -214,8 +216,9 @@ function EditProfileForm() {
                 onChange={handleChangeCredentials}
                 value={credentials.preferred_name}
               />
-            </div>
-            <button type="submit" onClick={handleSubmitCredential}> EditProfile </button>
+            </div >
+            <div className="row"></div>
+            <button className="button" button type="submit" onClick={handleSubmitCredential}> EditProfile </button>
             <h2>Edit Password here</h2>
             <div className="form1-item">
               <label htmlFor="old_password">Old Password:</label>
@@ -228,6 +231,7 @@ function EditProfileForm() {
             </div>
 
             <div className="form1-item">
+            <div className="row"></div>
               <label htmlFor="new_password">New Password:</label>
               <input
                 type="new_password"
@@ -237,10 +241,29 @@ function EditProfileForm() {
               />
             </div>
 
-            <button type="submit" onClick={handleSubmitPassword}> Change Password </button>
+            <div className="form1-item">
+            <div className="row"></div>
+              <label htmlFor="confirm_new_password">Re-enter Password:</label>
+              <input
+                type="confirm_new_password"
+                id="confirm_new_password"
+                onChange={handleChangePasswords}
+                value={passwords.confirm_new_password}
+              />
+            </div>
+            <div className="form1-item">
+              
+              <label htmlFor="delete_account"></label>
 
+
+            </div>
+
+            <div id="test"></div>
+            <button className="button" button type="submit" onClick={handleSubmitPassword}> Change Password </button>
+            
             <h2>Delete Account here</h2>
             <div className="form1-item">
+              <div className="row"></div>
               <label htmlFor="delete_account"></label>
 
 
@@ -249,6 +272,7 @@ function EditProfileForm() {
 
 
           </form>
+          <div id="test"></div>
           <button className="button" onClick={() => deleteAccountToggleState()}>Delete your Account</button>
 
         </div>

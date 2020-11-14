@@ -73,7 +73,7 @@ html {
   background: rgb(34, 193, 195);
   background: linear-gradient(
     90deg,
-    rgba(46, 44, 56, 0.7) 0%,
+    rgb(46, 44, 56, 0.7) 0%,
     rgb(169, 168, 154) 100%
   );
   border: 0px;
