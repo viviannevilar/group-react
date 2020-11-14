@@ -145,8 +145,6 @@ function CollectionDetailPage() {
     };
 
     // Fetch Collection Data and Items
-
-
     useEffect(() => {
         fetchProjects()
     }, [id]);
@@ -168,9 +166,9 @@ function CollectionDetailPage() {
     }
 
     // Archive Item
-    const archiveItem = (projectdat, e) => {
+    const archiveItem = (item, e) => {
         let token = window.localStorage.getItem("token");
-        fetch(`${process.env.REACT_APP_API_URL}item/${projectdat.id}/archive/`, {
+        fetch(`${process.env.REACT_APP_API_URL}item/${item.id}/archive/`, {
             method: "post",
             headers: {
                 "Content-Type": "application/json",
