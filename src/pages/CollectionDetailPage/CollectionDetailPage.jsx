@@ -173,8 +173,8 @@ function CollectionDetailPage() {
       })
       .then((response) => {
          if (response.ok) {
-            // history.push(`/collection/${id}/`)
-            // window.location.reload();
+            history.push(`/collection/${id}/`)
+            window.location.reload();
          } else {
             console.log(response)
             setHasError(true)
@@ -522,7 +522,7 @@ function CollectionDetailPage() {
                            <div>
                               <button className="exitButton" onClick={() => {
                                  addItemToggleModalState()
-                                 console.log("exit window")
+                                 window.location.reload()
                                  }
                                  
                               }> exit </button>
