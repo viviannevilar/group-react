@@ -147,9 +147,6 @@ function NewCollectionForm() {
             onChange={handleChange}
           />
         </div>
-    
-
-
 
         <div className="ncfa">
           <label className="at" htmlFor="is_active">Is this Project Active on submission of this form?</label>
@@ -173,8 +170,6 @@ function NewCollectionForm() {
           <label htmlFor="false">Archived</label>
         </div>
         <br></br>
-
-
 
         <div className="ncbuttonwrapper">
           <button className="newcollectionbutton" type="submit" onClick={handleSubmit}>
