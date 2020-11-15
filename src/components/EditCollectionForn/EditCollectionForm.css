@@ -1,0 +1,150 @@
+.ecformlogo {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    padding-top: 5px;
+}
+
+#ecformlogoimage {
+    height: 40%;
+    width: 40%;
+  }
+
+#editcollectionheadertitle {
+    font-family: "Roboto", sans-serif;
+    color: #004aad;
+    text-align: center;
+    padding-top: 5%;
+    margin-top: 0px;
+    margin-right: 3%;
+    margin-bottom: 0px;
+    margin-left: 3%;
+}
+
+.editcollectionform{
+    max-width: 800px;
+    min-width: 300px;
+    max-height: 900px;
+    width: 100%;
+    margin: 0px auto;
+    background-color: #FFFFFF;
+    border-radius: 25px;
+  }
+  
+.ecfa{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5%;
+    max-width: 100%;
+  }
+
+.ate {
+    padding-bottom: 2%;
+    color: #004aad;
+    width: 80%;
+    text-align: center;
+}
+
+.ecfa textarea {
+  width: 80%;
+  box-sizing: border-box;
+  border: none;
+  font-family: "Roboto", sans-serif;
+  color: #7D8072;
+  text-align: center;
+  padding-bottom: 0.5rem;
+  box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
+  transition: box-shadow 0.2s ease-in;
+}
+
+.ecfa input:focus {
+  box-shadow: inset 0px -3px 0px 0px rgba(46, 44, 56, 0.7);
+  outline: none;
+}
+
+.ecbutton {
+  padding: 5px 10px;
+  background: #b3b7a4;
+  border-radius: 30px;
+  color: white;
+  border: none;
+}
+
+div.ecbuttonwrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+div.ecradiowrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  color: #7D8072;
+}
+
+textarea {
+  outline: none;
+  resize: none;
+  width: 80%;
+}
+
+
+@media only screen and (max-width: 1450px) {
+    #editcollectionheadertitle {
+        font-size: 3.2rem;
+    }
+    .ate {
+        font-size: 2.0rem;
+    }
+    .ecfa textarea {
+        font-size: 2.0rem;
+    }
+    div.ecradiowrapper {
+        font-size: 2.0rem;
+    }
+    .ecbutton {
+        font-size: 45px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    #editcollectionheadertitle {
+        font-size: 2.5rem;
+    }
+    .ate {
+        font-size: 1.5rem;
+    }
+    .ecfa textarea {
+        font-size: 1.5rem;
+    }
+    div.ecradiowrapper {
+        font-size: 1.5rem;
+    }
+    .ecbutton {
+        font-size: 25px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    #editcollectionheadertitle {
+        font-size: 1.5rem;
+    }
+    .ate {
+        font-size: 0.8rem;
+    }
+    .ecfa textarea {
+        font-size: 0.8rem;
+    }
+    div.ecradiowrapper {
+        font-size: 0.8rem;
+    }
+    .ecbutton {
+        font-size: 18px;
+    }
+}
