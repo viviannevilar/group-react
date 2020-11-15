@@ -1,7 +1,7 @@
 div.project-card {
     width: 99%;
     height: 99%;
-    border: 0.1px solid black;
+    /* border: 0.1px solid black; */
     display: flex;
     flex-direction: column;
     align-items: center;
