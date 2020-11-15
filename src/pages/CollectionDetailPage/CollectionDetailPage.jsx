@@ -117,11 +117,13 @@ function CollectionDetailPage() {
          setCollectionData(data);
          setItemData(data.collection_items);
          setItemDisplayData(data.collection_items)
+         setIsLoading(false);
 
       } else {
          setHasError(true);
          setErrorMessage(data.detail);
          console.log("-------------DATA: ", data.detail)
+         setIsLoading(false);
 
          // Here is a list of the errors I have gotten
          // Not logged on
@@ -143,7 +145,6 @@ function CollectionDetailPage() {
 
    useEffect(() => {
       fetchProjects()
-      setIsLoading(false);
    }, [id]);
 
 
