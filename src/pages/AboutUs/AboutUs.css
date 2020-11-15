@@ -80,6 +80,17 @@ p.aboutpagepagraph  {
     margin-left: 2cm;
     font-size: 20px;
   }
+
+  .team {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .container {
+    position: relative;
+    margin: 15px 15px;
+  }
 }
 
 @media only screen and (max-width: 500px) {
@@ -91,6 +102,17 @@ p.aboutpagepagraph  {
     margin-right: 1cm;
     margin-left: 1cm;
     font-size: 18px;
+  }
+
+  .team {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .container {
+    position: relative;
+    margin: 15px 15px;
   }
 }
 

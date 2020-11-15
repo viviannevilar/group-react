@@ -90,18 +90,17 @@ function NewCollectionForm() {
             />
         </div>
 
-      <div>
-    <div className="newcollectionform">
-      <h2 id="newcollectionheadertitle"> Create a new collection! </h2>
-      <br></br>
-      <h4 className="newcollectiontxt" id="newcollectiontxt1">Price, Sale Price, Date Sale Price Ends and Image Upload are all default attributes that will be included in your collections. </h4>
-      <h4 className="newcollectiontxt" id="newcollectiontxt2">Select additional Attributes you want to compare below</h4>
-
+    
+        <div className="newcollectionform">
+            <h2 id="newcollectionheadertitle"> Create a new collection! </h2>
+            <br></br>
+            <h4 className="newcollectiontxt">Your collection will automatically include the following attributes: Price, Sale Price, Date Sale Price Ends and Image Upload. </h4>
+        </div>
       <form>
-        <div className="thra">
-          <label htmlFor="title">Title:</label>
-          <input
-            type="text"
+        <div className="ncfa">
+          <label className="at" htmlFor="title">Title:</label>
+          <textarea 
+            type="textarea"
             id="title"
             placeholder="What is the title of your collection?"
             onChange={handleChange}
@@ -109,9 +108,9 @@ function NewCollectionForm() {
           />
         </div>
 
-        <div className="thra">
-          <label htmlFor="attribute1">Attribute 1:</label>
-          <textarea
+        <div className="ncfa">
+          <label className="at" htmlFor="attribute1">Attribute 1:</label>
+          <textarea 
             type="textarea"
             id="attribute1"
             placeholder="Pick an attribute you would lilke to use to compare items"
@@ -119,8 +118,8 @@ function NewCollectionForm() {
           />
         </div>
 
-        <div className="thra">
-          <label htmlFor="attribute2">Attribute 2:</label>
+        <div className="ncfa">
+          <label className="at" htmlFor="attribute2">Attribute 2:</label>
           <textarea
             type="textarea"
             id="attribute2"
@@ -129,8 +128,8 @@ function NewCollectionForm() {
           />
         </div>
 
-        <div className="thra">
-          <label htmlFor="attribute3">Attribute 3:</label>
+        <div className="ncfa">
+          <label className="at" htmlFor="attribute3">Attribute 3:</label>
           <textarea
             type="textarea"
             id="attribute3"
@@ -139,8 +138,8 @@ function NewCollectionForm() {
           />
         </div>
 
-        <div className="thra">
-          <label htmlFor="attribute4">Attribute 4:</label>
+        <div className="ncfa">
+          <label className="at" htmlFor="attribute4">Attribute 4:</label>
           <textarea
             type="textarea"
             id="attribute4"
@@ -149,13 +148,13 @@ function NewCollectionForm() {
           />
         </div>
     
-        <br></br>
-        <br></br>
 
-        <div className="thra">
-          <label htmlFor="is_active">Is this Project Active on submission of this form?:</label>
+
+
+        <div className="ncfa">
+          <label className="at" htmlFor="is_active">Is this Project Active on submission of this form?</label>
         </div>
-        <div className="radiowrapper">
+        <div className="ncradiowrapper">
           <input
             type="radio"
             id="is_open"
@@ -171,14 +170,14 @@ function NewCollectionForm() {
             value="false"
             onChange={handleChange}
           />
-          <label htmlFor="false">Closed</label>
+          <label htmlFor="false">Archived</label>
         </div>
         <br></br>
-        <br></br>
 
 
-        <div className="buttonwrapper">
-          <button className="collectionbutton" type="submit" onClick={handleSubmit}>
+
+        <div className="ncbuttonwrapper">
+          <button className="newcollectionbutton" type="submit" onClick={handleSubmit}>
             Submit your Collection!
       </button>
           <br></br>
@@ -198,8 +197,6 @@ function NewCollectionForm() {
         )
       }
     </div >
-    </div>
-    </div>
   );
 }
 
