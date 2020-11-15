@@ -8,6 +8,7 @@ function AddItemForm(props) {
    const { id, collectionData } = props;
    const [errorMessage, setErrorMessage] = useState()
    const [errorKey, setErrorKey] = useState()
+   const [hasError, setHasError] = useState(false)
 
    let btnRefAdd = useRef();
 
@@ -34,7 +35,7 @@ function AddItemForm(props) {
          ...prevCredentials,
          [id]: value,
       }));
-      console.log(e.target)
+      //console.log(e.target)
    };
 
    const handleImageChange = (e) => {
@@ -50,7 +51,6 @@ function AddItemForm(props) {
 
    const postData = async () => {
       let token = window.localStorage.getItem("token");
-      console.log(credentials.sale_end_date)
 
       let form_data = new FormData();
       form_data.append('image', credentials.image);
@@ -78,7 +78,8 @@ function AddItemForm(props) {
          body: form_data,
       });
       if (response.ok) {
-         setErrorMessage("Successful");
+         setHasError(false)
+         setErrorMessage(response.statusText);
          return response.json();
 
       } else {
@@ -91,12 +92,17 @@ function AddItemForm(props) {
                   // the key gives the key of the element that has a problem
                   // and the value gives gives the string with the error message
                   // then focus on the input of the element that has a problem
+
+                  setHasError(true)
                   const errorObj = JSON.parse(error.message);
+                  
+                  setErrorKey(Object.keys(errorObj)[0])
                   setErrorMessage(errorObj[Object.keys(errorObj)[0]]);
                   // "detail": "Invalid token." 
                   
-                  console.log("---------- Object.keys(errorObj)[0]: ",Object.keys(errorObj)[0])
+                  console.log("---------- Object.keys(errorObj)[0]: ", Object.keys(errorObj)[0])
 
+                  
                   let keyName = document.getElementById(`${Object.keys(errorObj)[0]}`)
 
                   if (keyName) {
@@ -124,7 +130,13 @@ function AddItemForm(props) {
       }
 
       postData().then((response) => {
-         if (errorMessage === "Successful") {
+
+         console.log("response: ", response)
+         console.log("errorMessage: ", errorMessage)
+
+         if (errorMessage === "Created") {
+
+            console.log("--------------- hasError: ", hasError)
             
             // enable the "add item"/"submit" button again just in case
             if (btnRefAdd.current) {
@@ -144,18 +156,22 @@ function AddItemForm(props) {
 
    };
    
-   //className={`todo ${todo.isCompleted ? "complete" : ""}`}
+   //className={`error ${errorKey === ? "complete" : ""}`}
    
+   // if ( errorKey === "name" )
+
    return (
         <div>
 
             <h2 id="headerTitle"> Add Item to {collectionData.title} </h2>
-            <form>
 
+            <h4><span className="error">{ (errorKey === "detail") ? errorMessage : null}</span> </h4>
+           
+            <form>
                <div className="formattribute">
                   <label htmlFor="name">
                      Name of Item: 
-                     <span className="error">{errorMessage !== "" ? errorMessage : null}</span> 
+                     <span className="error">{ (errorKey === "name") ? errorMessage : null}</span> 
                   </label>
                   <input
                      type="text"
@@ -165,7 +181,10 @@ function AddItemForm(props) {
                </div>
 
                 <div className="formattribute">
-                    <label htmlFor="price">Price of Item:</label>
+                    <label htmlFor="price">
+                       Price of Item:
+                       <span className="error">{ (errorKey === "price") ? errorMessage : null}</span> 
+                    </label>
                     <input
                         type="number"
                         id="price"
@@ -174,7 +193,10 @@ function AddItemForm(props) {
                 </div>
 
                 <div className="formattribute">
-                    <label htmlFor="sale_amount">Is there a discount currently offered (%)?:</label>
+                     <label htmlFor="sale_amount">
+                       Is there a discount currently offered (%)?:
+                       <span className="error">{ (errorKey === "sale_amount") ? errorMessage : null}</span> 
+                     </label>
                     <input
                         type="number"
                         id="sale_amount"
@@ -183,7 +205,10 @@ function AddItemForm(props) {
                 </div>
 
                 {parseInt(credentials.sale_amount) > 0 && (<div className="formattribute">
-                    <label htmlFor="sale_end_date">When does the discount expire?</label>
+                    <label htmlFor="sale_end_date">
+                       When does the discount expire?
+                       <span className="error">{ (errorKey === "sale_end_date") ? errorMessage : null}</span> 
+                     </label>
                     <input
                         type="date"
                         id="sale_end_date"
@@ -192,7 +217,10 @@ function AddItemForm(props) {
                 </div>)}
 
                 {collectionData.attribute1 !== "" && (<div className="formattribute">
-                    <label htmlFor="attribute1">{collectionData.attribute1}:</label>
+                    <label htmlFor="attribute1">
+                       {collectionData.attribute1}:
+                       <span className="error">{ (errorKey === "attribute1") ? errorMessage : null}</span> 
+                    </label>
                     <input
                         type="text"
                         id="attribute1"
@@ -202,7 +230,10 @@ function AddItemForm(props) {
 
 
                 {collectionData.attribute2 !== "" && (<div className="formattribute">
-                    <label htmlFor="attribute2">{collectionData.attribute2}:</label>
+                    <label htmlFor="attribute2">
+                       {collectionData.attribute2}:
+                       <span className="error">{ (errorKey === "attribute2") ? errorMessage : null}</span> 
+                     </label>
                     <input
                         type="text"
                         id="attribute2"
@@ -211,7 +242,10 @@ function AddItemForm(props) {
                 </div>)}
 
                 {collectionData.attribute3 !== "" && (<div className="formattribute">
-                    <label htmlFor="attribute3">{collectionData.attribute3}:</label>
+                    <label htmlFor="attribute3">
+                       {collectionData.attribute3}:
+                       <span className="error">{ (errorKey === "attribute3") ? errorMessage : null}</span> 
+                     </label>
                     <input
                         type="text"
                         id="attribute3"
@@ -220,7 +254,10 @@ function AddItemForm(props) {
                 </div>)}
 
                 {collectionData.attribute4 !== "" && (<div className="formattribute">
-                    <label htmlFor="attribute4">{collectionData.attribute4}:</label>
+                    <label htmlFor="attribute4">
+                       {collectionData.attribute4}:
+                       <span className="error">{ (errorKey === "attribute4") ? errorMessage : null}</span> 
+                     </label>
                     <input
                         type="text"
                         id="attribute4"
@@ -230,7 +267,10 @@ function AddItemForm(props) {
 
 
                 <div className="formattribute">
-                    <label htmlFor="image">Image:</label>
+                    <label htmlFor="image">
+                       Image:
+                       <span className="error">{ (errorKey === "image") ? errorMessage : null}</span> 
+                     </label>
                     <input
                         type="file"
                         id="image"
@@ -240,7 +280,10 @@ function AddItemForm(props) {
 
 
                 <div className="formattribute">
-                    <label htmlFor="notes">Notes:</label>
+                    <label htmlFor="notes">
+                       Notes:
+                       <span className="error">{ (errorKey === "notes") ? errorMessage : null}</span> 
+                     </label>
                     <input
                         type="textarea"
                         id="notes"
