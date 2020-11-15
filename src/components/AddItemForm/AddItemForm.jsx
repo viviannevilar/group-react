@@ -10,7 +10,7 @@ function AddItemForm(props) {
    const { id, collectionData } = props;
    const [errorMessage, setErrorMessage] = useState()
    const [errorKey, setErrorKey] = useState()
-   const [hasError, setHasError] = useState(false)
+   //const [hasError, setHasError] = useState(false)
 
    let btnRefAdd = useRef();
 
@@ -98,7 +98,7 @@ function AddItemForm(props) {
                   // and the value gives gives the string with the error message
                   // then focus on the input of the element that has a problem
 
-                  setHasError(true)
+                  //setHasError(true)
                   const errorObj = JSON.parse(error.message);
                   
                   // this is the form element that has the problem (eg, "price")

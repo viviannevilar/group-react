@@ -6,11 +6,11 @@ import "./ItemEditForm.css";
 function ItemEditForm(props) {
 
     //variables
-    const { itemData, collectionData } = props;
+    const { itemData, collectionData, isLoading } = props;
 
     const [errorMessage, setErrorMessage] = useState()
     const [errorKey, setErrorKey] = useState()
-    const [hasError, setHasError] = useState(false)
+    
 
     let btnRefAdd = useRef();
 
@@ -122,7 +122,7 @@ function ItemEditForm(props) {
                   // and the value gives gives the string with the error message
                   // then focus on the input of the element that has a problem
 
-                  setHasError(true)
+                  
                   const errorObj = JSON.parse(error.message);
                   
                   // this is the form element that has the problem (eg, "price")
@@ -169,182 +169,195 @@ function ItemEditForm(props) {
    }
 
 
+   if (isLoading) {
+      return (
+         <div>
+            <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"} />
+         </div>
+      )
+   } else {
 
-   return (
-      <div>
-          <div>
-              <Nav />
-          </div>
-          <div className="eiformlogo" >
-              <img
-              id="eiformlogoimage"
-              src={require("../../images/Comparalist_rectangle.png")}
-              alt="Company Logo"
-              />
-          </div>
-      <div id="edititemform">
-
-          <h2 id="edititemheadertitle"> Edit Item in {collectionData.title} </h2>
-
-          <h4><span className="error">{ (errorKey === "detail") ? errorMessage : null}</span> </h4>
-
-          <form>
-
-              <div className="eifa">
-                  <label className="atei" htmlFor="name">
-                     Name of Item:
-                  <span className="error">{ (errorKey === "name") ? errorMessage : null}</span> 
-                  </label>
-                  <input
-                      type="text"
-                      id="name"
-                      value={credentials.name}
-                      onChange={handleChange}
-                  />
-              </div>
+      return (
+         <div>
+      
+            <div>
+               <Nav />
+            </div>
+            <div className="eiformlogo" >
+               <img
+               id="eiformlogoimage"
+               src={require("../../images/Comparalist_rectangle.png")}
+               alt="Company Logo"
+               />
+            </div>
 
 
-              <div className="eifa">
-                  <label className="atei" htmlFor="price">
-                     Price of Item:
-                     <span className="error">{ (errorKey === "price") ? errorMessage : null}</span> 
+         <div id="edititemform">
+
+            <h2 id="edititemheadertitle"> Edit Item in {collectionData.title} </h2>
+
+
+
+            <h4><span className="error">{ (errorKey === "detail") ? errorMessage : null}</span> </h4>
+
+            <form>
+
+               <div className="eifa">
+                     <label className="atei" htmlFor="name">
+                        Name of Item:
+                     <span className="error">{ (errorKey === "name") ? errorMessage : null}</span> 
                      </label>
-                  <input
-                      type="number"
-                      id="price"
-                      onChange={handleChange}
-                      value={credentials.price}
+                     <input
+                        type="text"
+                        id="name"
+                        value={credentials.name}
+                        onChange={handleChange}
+                     />
+               </div>
 
-                  />
-              </div>
+
+               <div className="eifa">
+                     <label className="atei" htmlFor="price">
+                        Price of Item:
+                        <span className="error">{ (errorKey === "price") ? errorMessage : null}</span> 
+                        </label>
+                     <input
+                        type="number"
+                        id="price"
+                        onChange={handleChange}
+                        value={credentials.price}
+
+                     />
+               </div>
 
 
-              <div className="eifa">
-                  <label className="atei" htmlFor="sale_amount">
-                     Is there a discount currently offered (%)?:
-                     <span className="error">{ (errorKey === "sale_amount") ? errorMessage : null}</span> 
+               <div className="eifa">
+                     <label className="atei" htmlFor="sale_amount">
+                        Is there a discount currently offered (%)?:
+                        <span className="error">{ (errorKey === "sale_amount") ? errorMessage : null}</span> 
+                        </label>
+                     <input
+                        type="number"
+                        id="sale_amount"
+                        onChange={handleChange}
+                        value={credentials.sale_amount}
+
+                     />
+               </div>
+
+
+               {parseInt(credentials.sale_amount) > 0 && (<div className="eifa">
+                     <label className="atei" htmlFor="sale_end_date">
+                        When does the discount expire?
+                        <span className="error">{ (errorKey === "sale_end_date") ? errorMessage : null}</span> 
+                        </label>
+                     <input
+                        type="date"
+                        id="sale_end_date"
+                        value={credentials.sale_end_date}
+                        onChange={handleChange}
+                     />
+               </div>)}
+
+               {collectionData.attribute1 !== "" && (<div className="eifa">
+                     <label className="atei" htmlFor="attribute1">
+                        {collectionData.attribute1}:
+                        <span className="error">{ (errorKey === "attribute1") ? errorMessage : null}</span>
                      </label>
-                  <input
-                      type="number"
-                      id="sale_amount"
-                      onChange={handleChange}
-                      value={credentials.sale_amount}
+                     <input
+                        type="text"
+                        id="attribute1"
+                        value={credentials.attribute1}
+                        onChange={handleChange}
+                     />
+               </div>)}
 
-                  />
-              </div>
 
 
-              {parseInt(credentials.sale_amount) > 0 && (<div className="eifa">
-                  <label className="atei" htmlFor="sale_end_date">
-                     When does the discount expire?
-                     <span className="error">{ (errorKey === "sale_end_date") ? errorMessage : null}</span> 
+               {collectionData.attribute2 !== "" && (<div className="eifa">
+                     <label className="atei" htmlFor="attribute2">
+                        {collectionData.attribute2}:
+                        <span className="error">{ (errorKey === "attribute2") ? errorMessage : null}</span> 
                      </label>
-                  <input
-                      type="date"
-                      id="sale_end_date"
-                      value={credentials.sale_end_date}
-                      onChange={handleChange}
-                  />
-              </div>)}
+                     <input
+                        type="text"
+                        id="attribute2"
+                        value={credentials.attribute2}
+                        onChange={handleChange}
+                     />
+               </div>)}
 
-              {collectionData.attribute1 !== "" && (<div className="eifa">
-                  <label className="atei" htmlFor="attribute1">
-                     {collectionData.attribute1}:
-                     <span className="error">{ (errorKey === "attribute1") ? errorMessage : null}</span>
-                  </label>
-                  <input
-                      type="text"
-                      id="attribute1"
-                      value={credentials.attribute1}
-                      onChange={handleChange}
-                  />
-              </div>)}
-
-
-
-              {collectionData.attribute2 !== "" && (<div className="eifa">
-                  <label className="atei" htmlFor="attribute2">
-                     {collectionData.attribute2}:
-                     <span className="error">{ (errorKey === "attribute2") ? errorMessage : null}</span> 
-                  </label>
-                  <input
-                      type="text"
-                      id="attribute2"
-                      value={credentials.attribute2}
-                      onChange={handleChange}
-                  />
-              </div>)}
-
-              {collectionData.attribute3 !== "" && (<div className="eifa">
-                  <label className="atei" htmlFor="attribute3">
-                     {collectionData.attribute3}:
-                     <span className="error">{ (errorKey === "attribute3") ? errorMessage : null}</span>    
-                  </label>
-                  <input
-                      type="text"
-                      id="attribute3"
-                      value={credentials.attribute3}
-                      onChange={handleChange}
-                  />
-              </div>)}
-
-              {collectionData.attribute4 !== "" && (<div className="eifa">
-                  <label className="atei" htmlFor="attribute4">
-                     {collectionData.attribute4}:
-                     <span className="error">{ (errorKey === "attribute4") ? errorMessage : null}</span> 
+               {collectionData.attribute3 !== "" && (<div className="eifa">
+                     <label className="atei" htmlFor="attribute3">
+                        {collectionData.attribute3}:
+                        <span className="error">{ (errorKey === "attribute3") ? errorMessage : null}</span>    
                      </label>
-                  <input
-                      type="text"
-                      id="attribute4"
-                      value={credentials.attribute4}
-                      onChange={handleChange}
-                  />
-              </div>)}
+                     <input
+                        type="text"
+                        id="attribute3"
+                        value={credentials.attribute3}
+                        onChange={handleChange}
+                     />
+               </div>)}
+
+               {collectionData.attribute4 !== "" && (<div className="eifa">
+                     <label className="atei" htmlFor="attribute4">
+                        {collectionData.attribute4}:
+                        <span className="error">{ (errorKey === "attribute4") ? errorMessage : null}</span> 
+                        </label>
+                     <input
+                        type="text"
+                        id="attribute4"
+                        value={credentials.attribute4}
+                        onChange={handleChange}
+                     />
+               </div>)}
 
 
 
-              <div className="eifa">
-                  <label className="atei" htmlFor="image">
-                     Image:
-                     <span className="error">{ (errorKey === "image") ? errorMessage : null}</span>    
-                  </label>
-                  <br></br>
-                  <div id="imagecon">
-                      <img id="image" src={credentials.image} alt="anon pic" />
-                  </div>
-                  <br></br>
-                  <input
-                      type="file"
-                      id="image"
-                      onChange={handleImageChange}
-                  />
-              </div>
+               <div className="eifa">
+                     <label className="atei" htmlFor="image">
+                        Image:
+                        <span className="error">{ (errorKey === "image") ? errorMessage : null}</span>    
+                     </label>
+                     <br></br>
+                     <div id="imagecon">
+                        <img id="image" src={credentials.image} alt="anon pic" />
+                     </div>
+                     <br></br>
+                     <input
+                        type="file"
+                        id="image"
+                        onChange={handleImageChange}
+                     />
+               </div>
 
 
-              <div className="eifa">
-                  <label className="atei" htmlFor="notes">
-                     Notes:
-                     <span className="error">{ (errorKey === "notes") ? errorMessage : null}</span> 
-                  </label>
-                  <input
-                      type="textarea"
-                      id="notes"
-                      value={credentials.notes}
-                      onChange={handleChange}
-                  />
-              </div>
+               <div className="eifa">
+                     <label className="atei" htmlFor="notes">
+                        Notes:
+                        <span className="error">{ (errorKey === "notes") ? errorMessage : null}</span> 
+                     </label>
+                     <input
+                        type="textarea"
+                        id="notes"
+                        value={credentials.notes}
+                        onChange={handleChange}
+                     />
+               </div>
 
 
 
 
-              <div className="eibuttonwrapper">
-                  <button className="eibutton" ref={btnRefAdd} type="submit" onClick={handleSubmit}>  Update Item </button>
-                  <button className="eibutton" type="submit" onClick={cancelSubmit}>  Cancel </button>
-              </div>
-          </form>
-      </div>
-      </div>
-  );
+               <div className="eibuttonwrapper">
+                     <button className="eibutton" ref={btnRefAdd} type="submit" onClick={handleSubmit}>  Update Item </button>
+                     <button className="eibutton" type="submit" onClick={cancelSubmit}>  Cancel </button>
+               </div>
+            </form>
+         </div>
+         </div>
+      );
+   }
 }
 
 export default ItemEditForm;

@@ -8,6 +8,9 @@ function ItemEditPage() {
     const { id, listid } = useParams();
     const [editData, setEditData] = useState({})
     const [collectionData, setCollectionData] = useState({})
+    const [isLoading, setIsLoading] = useState(true);
+
+
     let token = localStorage.token;
 
     useEffect(() => {
@@ -21,9 +24,11 @@ function ItemEditPage() {
         })
             .then((results) => {
                if (!results.ok) {
+
                   console.log("***", results.statusText)
                   console.log("***", results.json())
                } else {
+                  setIsLoading(false)
                   return results.json();
                }
                console.log("--------RESULTS fetch data", results)
@@ -61,7 +66,7 @@ function ItemEditPage() {
         <div>
             {token !== null && (
                 <div>
-                    <ItemEditForm itemData={editData} collectionData={collectionData} />
+                    <ItemEditForm itemData={editData} collectionData={collectionData} isLoading={isLoading}/>
                 </div>
             )}
 
