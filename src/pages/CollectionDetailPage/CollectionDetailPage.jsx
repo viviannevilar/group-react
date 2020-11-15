@@ -14,7 +14,8 @@ import AddItemForm from "../../components/AddItemForm/AddItemForm";
 import "./CollectionDetailPage.css";
 
 // Swiper
-import Swiper, { Autoplay } from 'swiper';
+//import Swiper, { Autoplay } from 'swiper';
+import Swiper from 'swiper';
 import { Navigation, Pagination, Controller, Thumbs } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
 

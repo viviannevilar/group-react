@@ -114,7 +114,7 @@ function EditProfileForm() {
     e.preventDefault();
     postData()
       .then((response) => {
-        if (response != undefined) {
+        if (response !== undefined) {
           history.push("/collections/");
         } else {
           history.push("/collections/")
@@ -141,7 +141,7 @@ function EditProfileForm() {
     })
 
       .then((result) => {
-        if (result != undefined) {
+        if (result !== undefined) {
           history.push("/collections/");
           window.location.reload();
         } else {
