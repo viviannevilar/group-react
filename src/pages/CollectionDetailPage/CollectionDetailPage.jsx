@@ -14,7 +14,8 @@ import AddItemForm from "../../components/AddItemForm/AddItemForm";
 import "./CollectionDetailPage.css";
 
 // Swiper
-import Swiper, { Autoplay } from 'swiper';
+//import Swiper, { Autoplay } from 'swiper';
+import Swiper from 'swiper';
 import { Navigation, Pagination, Controller, Thumbs } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
 
@@ -79,7 +80,7 @@ function CollectionDetailPage() {
       shared_link = "private"
    }
 
-
+   // let response
    let key_information
    /////////////// methods
 
@@ -162,16 +163,23 @@ function CollectionDetailPage() {
 
    // Delete Item
    const handleDelete = (projectdat, e) => {
+      console.log("------------handleDelete")
 
       fetch(`${process.env.REACT_APP_API_URL}item/${projectdat.id}/`, {
          method: "delete",
          headers: {
-            "Content-Type": "application/json",
             Authorization: `Token ${token}`,
          },
-      }).then(() => {
-         history.push(`/collection/${id}/`)
-         window.location.reload();
+      })
+      .then((response) => {
+         if (response.ok) {
+            // history.push(`/collection/${id}/`)
+            // window.location.reload();
+         } else {
+            console.log(response)
+            setHasError(true)
+            setErrorMessage("Delete item: " + response.statusText + ". Please refresh page and try again.");
+         }
       });
    }
 
@@ -184,9 +192,16 @@ function CollectionDetailPage() {
             "Content-Type": "application/json",
             Authorization: `Token ${token}`,
          },
-      }).then(() => {
-         history.push(`/collection/${id}/`)
-         window.location.reload();
+      }).then((response) => {
+         if (response.ok) {
+            history.push(`/collection/${id}/`)
+            window.location.reload();
+            console.log("Archive response ---- :", response.ok)
+         } else {
+            setHasError(true)
+            setErrorMessage("Archive item: " + response.statusText + ". Please refresh page and try again.");
+            console.log(response)
+         }
       });
    }
 
@@ -498,16 +513,25 @@ function CollectionDetailPage() {
                         </div>
                      </div>
                   </div>
+
+         {/* Modal for AddItemForm */}
                   <div className={`modalBackground modalShowing-${modalState}`}>
                      <div className="modalInner">
                         <div className="modalText">
                            <AddItemForm id={id} collectionData={collectionData} />
                            <div>
-                              <button className="exitButton" onClick={() => addItemToggleModalState()}> exit </button>
+                              <button className="exitButton" onClick={() => {
+                                 addItemToggleModalState()
+                                 console.log("exit window")
+                                 }
+                                 
+                              }> exit </button>
                            </div>
                         </div>
                      </div>
                   </div>
+
+         {/* Modal for Summaries */}
                   <div className={`modalBackground modalShowing-${summaryModal}`}>
                      <div className="modalInner">
                         <div className="modalText">
