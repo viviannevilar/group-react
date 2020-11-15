@@ -233,6 +233,7 @@ div.buttoncontainer{
 
 img.changeicons{
   width: 30px;
+  height: 30px;
 
 }
 
@@ -267,11 +268,6 @@ div#Container-for-Filtering{
 
 @media screen and (max-height: 600px){
  
-.project-card img{
-  padding: 1px;
-  height: 176px;
-}
-
 div#Container-for-Filtering{
 font-size: 0.6em;
 text-transform: uppercase ;
@@ -284,11 +280,12 @@ text-transform: uppercase ;
 
 
 @media screen and (max-width: 400px){
+
+  img.changeicons{
+    width: 20px;
+    height: 20px;
+  }  
  
-  .project-card img{
-    padding: 1px;
-    height: 176px;
-  }
   
   div#Container-for-Filtering{
   font-size: 0.6em;

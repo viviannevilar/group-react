@@ -6,7 +6,7 @@ div.project-card {
     flex-direction: column;
     align-items: center;
   }
-  .project-card img {
+  img.item{
     width: 100%;
     height: 200px;
     object-fit: fill;
@@ -186,6 +186,12 @@ div.project-infosummary{
     img.changeicons{
       width: 20px;
     }
+
+    img.item{
+      width: 100%;
+      height: 175px;
+      object-fit: fill;
+    }
     
     div#scrolldowndetails{
       margin-top: 2px;
@@ -229,3 +235,22 @@ div.project-infosummary{
   }
 
   
+
+
+  @media screen and (max-width: 400px){
+
+    img.changeicons{
+      width: 20px;
+      height: 20px;
+    }  
+
+    img.item{
+      width: 100%;
+      height: 175px;
+      object-fit: fill;
+    }
+  
+    
+    
+    
+    }
