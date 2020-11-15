@@ -84,10 +84,23 @@ html {
 .cubutton {
   padding: 5px 10px;
   background: #b3b7a4;
-  border-radius: 30px;
-  color: white;
   border: none;
   justify-content: center;
+  border-radius: 25px;
+  width: 60%;
+  height: 40px;
+  font-size: 1.1rem;
+  color: white;
+  font-weight: 700;
+  background: linear-gradient(
+    90deg,
+    rgb(89, 91, 56, 81) 0%,
+    rgb(179, 183, 164) 100%
+  );
+  border: 0px;
+  cursor: pointer;
+  transition: opacity 0.25s ease-out;
+  margin: 20px;
 }
 
 #cubuttonwrapper {
@@ -185,6 +198,109 @@ textarea {
 }
 
 
+/* 
+#loginform {
+    max-width: 700px;
+    min-width: 300px;
+    max-height: 900px;
+    width: 50%;
+    height: 60%;
+    margin: 0px auto;
+    background-color: #ffffff;
+    border-radius: 25px;
+  }
+  
+  #contactusheadertitle {
+      font-family: "Roboto", sans-serif;
+      color: #004aad;
+      text-align: center;
+      margin: 0;
+      padding-top: 5%;
+  }
+  
+  .row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1.5rem;
+    max-width: 100%;
+  }
+  
+  .row input {
+    width: 80%;
+    box-sizing: border-box;
+    border: none;
+    font-size: 1.1rem;
+    padding-left: 1.5rem;
+    padding-bottom: 0.5rem;
+    box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
+    transition: box-shadow 0.2s ease-in;
+  }
+  
+  .row input:focus {
+    box-shadow: inset 0px -3px 0px 0px rgba(46, 44, 56, 0.7);
+    outline: none;
+  }
+  
+  .row input::-webkit-input-placeholder {
+    opacity: 1;
+    transition: opacity 0.25s ease-out;
+  }
+  
+  .row input:hover::-webkit-input-placeholder,
+  .row input:focus::-webkit-input-placeholder {
+    opacity: 0;
+  }
+  
+  .row label {
+    align-self: start;
+    padding-left: 4.5rem;
+    padding-bottom: 0.5rem;
+    color: rgba(187, 187, 187, 0.9);
+  }
+  
+  #button {
+    border-radius: 25px;
+    width: 60%;
+    height: 40px;
+    font-size: 1.1rem;
+    color: white;
+    font-weight: 700;
+    background: rgb(34, 193, 195);
+    background: linear-gradient(
+      90deg,
+      rgba(46, 44, 56, 0.7) 0%,
+      rgb(169, 168, 154) 100%
+    );
+    border: 0px;
+    cursor: pointer;
+    transition: opacity 0.25s ease-out;
+    margin: 20px;
+  }
+  
+  #button:hover {
+    opacity: 0.8;
+  }
+  
+  #test {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #linky {
+    margin-left: 4px;
+  }
+  
+  #errordiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 15px;
+    color: darkred;
+  }
+   */
 
 
 
