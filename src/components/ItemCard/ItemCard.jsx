@@ -32,11 +32,9 @@ function ItemCard(props) {
             <p>{projectData.name.toUpperCase()}</p>
 
             <div className="item">
-                <a href="#">
-                    {projectData.image !== null ? <img className="item" alt="Item" src={projectData.image} /> : <img className="item" alt="Item" src={nophoto} />}
-                    {parseInt(projectData.sale_amount) !== 0 && (<span className="notify-badge"> {projectData.sale_amount}% OFF</span>)}
+                {projectData.image !== null ? <img className="item" alt="Item" src={projectData.image} /> : <img className="item" alt="Item" src={nophoto} />}
+                {parseInt(projectData.sale_amount) !== 0 && (<span className="notify-badge"> {projectData.sale_amount}% OFF</span>)}
 
-                </a>
             </div>
 
 

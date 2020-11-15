@@ -135,10 +135,7 @@ align-items: center;}
   display: flex;
   flex-direction: column;
   height: 90vh;
-  border: #373a47;
-  border-style: dashed;
 }
-
 
 .buttonblue {
   color: white;
@@ -232,6 +229,10 @@ div.buttoncontainer{
 
 div.swiper-slide{
   height: 100%;
+  /* background-color:#f2f2f2; */
+  /* border: lightpink;
+  border-style: solid; */
+
 
 }
 

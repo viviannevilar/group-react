@@ -117,7 +117,6 @@ function CollectionDetailPage() {
          setCollectionData(data);
          setItemData(data.collection_items);
          setItemDisplayData(data.collection_items)
-         setIsLoading(false);
 
       } else {
          setHasError(true);
@@ -144,6 +143,7 @@ function CollectionDetailPage() {
 
    useEffect(() => {
       fetchProjects()
+      setIsLoading(false);
    }, [id]);
 
 
@@ -480,10 +480,10 @@ function CollectionDetailPage() {
                                           {shared_link === "private" && (
                                              <div className="buttoncontainer">
                                                 <Link to={`/item-edit/${el.id}/${collectionData.id}/`}>
-                                                   <button className="buttonblue" >Edit </button >
+                                                   <button className="" >Edit </button >
                                                 </Link>
-                                                <a><button className="buttonblue" onClick={() => archiveItem(el)}>{el.is_active ? "Archive" : "Unarchive"}</button></a>
-                                                <a><button className="buttonblue" onClick={() => handleDelete(el)}>Delete </button></a>
+                                                <a><button className="" onClick={() => archiveItem(el)}>{el.is_active ? "Archive" : "Unarchive"}</button></a>
+                                                <a><button className="" onClick={() => handleDelete(el)}>Delete </button></a>
                                              </div>
                                           )}
                                        </div>
