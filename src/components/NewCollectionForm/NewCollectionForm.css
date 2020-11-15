@@ -13,12 +13,19 @@
 #newcollectionheadertitle {
     font-family: "Roboto", sans-serif;
     color: #004aad;
-
+    text-align: center;
+    margin: 0;
+    padding-top: 5%;
 }
 
 .newcollectiontxt {
-    color: #696969
-
+    color: #7D8072;
+    font-family: "Roboto", sans-serif;
+    text-align: center;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    margin: 0;
+    padding-bottom: 5%;
 }
 
 .newcollectionform{
@@ -31,65 +38,47 @@
     border-radius: 25px;
   }
   
-  #headerTitle{
-    text-align: center;
-    font-family: 'open sans', sans-serif;
-    padding: 1.5rem 0;
-    margin: 0;
-    font-size: rem;
-  }
-  
-  .thra{
+.ncfa{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 5%;
+    max-width: 100%;
   }
 
-#headerTitle {
-  text-align: center;
-  padding: 1.5rem 0;
-  margin: 0;
-  font-size: rem;
+.at {
+    padding-bottom: 2%;
+    color: #004aad;
+    width: 80%;
+    text-align: center;
 }
 
-.thra {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-
-  max-width: 100%;
-}
-
-.thra input {
+.ncfa textarea {
   width: 80%;
   box-sizing: border-box;
   border: none;
-  font-size: 1.1rem;
-  padding-left: 1.5rem;
+  font-family: "Roboto", sans-serif;
+  color: #7D8072;
+  text-align: center;
   padding-bottom: 0.5rem;
   box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
   transition: box-shadow 0.2s ease-in;
 }
 
-.thra input:focus {
+.ncfa input:focus {
   box-shadow: inset 0px -3px 0px 0px rgba(46, 44, 56, 0.7);
   outline: none;
 }
 
-.collectionbutton {
+.newcollectionbutton {
   padding: 5px 10px;
-  background: #373a47;
+  background: #b3b7a4;
   border-radius: 30px;
-  font-size: 18px;
   color: white;
   border: none;
 }
 
-div.buttonwrapper {
+div.ncbuttonwrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -97,16 +86,81 @@ div.buttonwrapper {
   margin-top: 15px;
 }
 
-div.radiowrapper {
+div.ncradiowrapper {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   margin-top: 15px;
+  color: #7D8072;
 }
 
 textarea {
   outline: none;
   resize: none;
   width: 80%;
+}
+
+
+@media only screen and (max-width: 1450px) {
+    #newcollectionheadertitle {
+        font-size: 3.5rem;
+    }
+    .newcollectiontxt {
+        font-size: 2.0rem;
+    }
+    .at {
+        font-size: 2.0rem;
+    }
+    .ncfa textarea {
+        font-size: 2.0rem;
+    }
+    div.ncradiowrapper {
+        font-size: 2.0rem;
+    }
+    .newcollectionbutton {
+        font-size: 45px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    #newcollectionheadertitle {
+        font-size: 2.5rem;
+    }
+    .newcollectiontxt {
+        font-size: 1.8rem;
+    }
+    .at {
+        font-size: 1.5rem;
+    }
+    .ncfa textarea {
+        font-size: 1.5rem;
+    }
+    div.ncradiowrapper {
+        font-size: 1.5rem;
+    }
+    .newcollectionbutton {
+        font-size: 25px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    #newcollectionheadertitle {
+        font-size: 1.5rem;
+    }
+    .newcollectiontxt {
+        font-size: 0.8rem;
+    }
+    .at {
+        font-size: 0.8rem;
+    }
+    .ncfa textarea {
+        font-size: 0.8rem;
+    }
+    div.ncradiowrapper {
+        font-size: 0.8rem;
+    }
+    .newcollectionbutton {
+        font-size: 18px;
+    }
 }
