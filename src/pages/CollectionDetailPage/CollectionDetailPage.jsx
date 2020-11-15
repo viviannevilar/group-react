@@ -522,7 +522,7 @@ function CollectionDetailPage() {
                            <div>
                               <button className="exitButton" onClick={() => {
                                  addItemToggleModalState()
-                                 console.log("exit window")
+                                 window.location.reload()
                                  }
                                  
                               }> exit </button>
