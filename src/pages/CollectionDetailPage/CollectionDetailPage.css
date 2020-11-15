@@ -68,8 +68,7 @@
   height: 60vh;
   overflow: auto;
   background: white;
-  width: 900px;
-  max-width: calc(100% - 50px);
+  width: calc(100% - 50px);
   justify-content: center;
   margin: auto;
   display: flex;
@@ -162,13 +161,6 @@ align-items: center;}
   }
 }
 
-.buttoncontainer{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-
 
 #projectlistcenter{
   display: flex;
@@ -178,7 +170,11 @@ align-items: center;}
 }
 
 
+#SwiperInfoContainer p {
+  font-size: 1em;
+  text-transform: uppercase ;
 
+}
 
 #fexrow{
   display: flex;
@@ -195,12 +191,12 @@ align-items: center;}
   padding-bottom: 10px;
 }
 
-
-
-#SwiperInfoContainer p{
-  margin: 4px;
-  height: 4vh;
+#SwiperInfoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
 
 
 
@@ -218,7 +214,7 @@ div.swiper-container{
 }
 
 div.project-card{
-  overflow-y: scroll;
+  overflow-y: hidden;
   overflow-x: hidden;
   height: 90%;
 }
@@ -227,12 +223,21 @@ div.buttoncontainer{
   height: 10%;
 }
 
+
+.buttoncontainer{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+img.changeicons{
+  width: 30px;
+
+}
+
 div.swiper-slide{
   height: 100%;
-  /* background-color:#f2f2f2; */
-  /* border: lightpink;
-  border-style: solid; */
-
 
 }
 
@@ -240,3 +245,62 @@ div.swiper-wrapper{
   height: 90%;
 }
 
+div.buttoncontainer a{
+  display: flex;
+  width: fit-content;
+}
+
+
+ 
+.project-card img{
+  padding: 1px;
+}
+
+div#Container-for-Filtering{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  text-transform: uppercase ;
+  justify-content:space-between;
+}
+
+@media screen and (max-height: 600px){
+ 
+.project-card img{
+  padding: 1px;
+  height: 176px;
+}
+
+div#Container-for-Filtering{
+font-size: 0.6em;
+text-transform: uppercase ;
+
+}
+
+
+}
+
+
+
+@media screen and (max-width: 400px){
+ 
+  .project-card img{
+    padding: 1px;
+    height: 176px;
+  }
+  
+  div#Container-for-Filtering{
+  font-size: 0.6em;
+  text-transform: uppercase ;
+  
+  }
+
+  #SwiperInfoContainer p {
+    font-size: 0.6em;
+    text-transform: uppercase ;
+  
+  }
+  
+  
+  }

@@ -12,14 +12,6 @@ div.project-card {
     object-fit: fill;
   }
 
-div.project-infosummary{
-  width: 90%;
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
-
-
- }
 
 a {
   width: 99%;
@@ -31,10 +23,10 @@ div#project-closed.project-card{
   opacity: 0.7
 }
 
-#project-list a{text-decoration: none; color:#2e2c38;}
+/* #project-list a{text-decoration: none; color:#2e2c38;}
 #project-list a:visited { text-decoration: none; color:#2e2c38; }
-#project-list a:focus { text-decoration: none; color:#2e2c38; }
-#project-list p:hover, #project-list p:active { text-decoration: none; opacity: 0.7; }
+#project-list a:focus { text-decoration: none; color:#2e2c38; } */
+/* #project-list p:hover, #project-list p:active { text-decoration: none; opacity: 0.6; } */
 
 
 .item {
@@ -53,9 +45,11 @@ div#project-closed.project-card{
   padding:5px 10px;
   font-size:20px;
 }
-
-
 .priceSummary{
+  margin-top: 10px;
+}
+
+.priceSummary, .DiscountEndDate{
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -63,7 +57,7 @@ div#project-closed.project-card{
 }
 
 
-.priceSummary img{
+.priceSummary img, .DiscountEndDate img{
 width: 20%;
 max-width: 30px;
 max-height: 30px;
@@ -72,4 +66,166 @@ margin: 3px;}
 
 .priceSummary p{
   font-size: 1.3em;
+  margin: 1px;
 }
+.DiscountEndDate p{
+  font-size: 0.9em;
+}
+
+
+
+
+img.scrolldown {
+  width: 20%;
+  max-width: 30px;
+  max-height: 30px;
+  margin: 3px;
+}
+
+
+
+#scrolldowndetails{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.6em;
+}
+
+
+div.onDisplayInfo{
+  height: 100%;
+}
+
+
+
+div.project-infosummary{
+  height: 100%;
+  width: 90%;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+ }
+
+
+ div#onDisplayInfo p {
+   margin: 0;
+ }
+
+ 
+ div#scrolldowndetails {
+  margin-top: 0;
+  margin-bottom: 100px;
+}
+
+
+ #scrolldowndetails p:hover, #scrolldowndetails p:active { text-decoration: none; opacity: 0.7; }
+ #scrolldowndetails img:hover, #scrolldowndetails img:active { text-decoration: none; opacity: 0.7; }
+
+
+ div.testbig{
+   padding: 40px;
+   margin-top: 50px;
+   margin: 40px;
+ }
+
+
+ #titlep{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   font-size: 1.3em;
+   text-transform: uppercase ;
+
+ }
+
+
+ #attributetext{
+   font-weight: bolder;
+   text-transform: uppercase ;
+
+ }
+
+
+ .notesbox{
+   font-size: 0.8em;
+   border: black;
+   border-style: solid;
+   border-width: thin;
+   padding-top: 5px;
+   padding-left: 5px;
+   padding-bottom: 40px;
+  }
+
+ 
+
+  #emptyattributelsit{
+    font-size: 0.8em;
+  }
+
+
+  p.archiveitemp{
+    font-size: 0.8em;
+    text-transform: uppercase ;
+
+  }
+
+
+
+  @media screen and (max-height: 600px){
+    div.discountcontainer{
+      margin-top: 2px;
+      margin-bottom: 2px;
+      font-size: 0.6em;
+
+
+    }
+    #titlep{
+      font-size: 0.8em;
+    }
+
+    img.changeicons{
+      width: 20px;
+    }
+    
+    div#scrolldowndetails{
+      margin-top: 2px;
+      margin-bottom: 2px;
+      font-size: 0.7em;
+
+  }
+  .priceSummary {
+    margin-top: 0px;
+}
+
+  }
+
+
+
+
+
+
+  @media screen and (min-height: 900px){
+    div.discountcontainer{
+      margin-top: 30px;
+      margin-bottom: 80px;
+      font-size: 1.1em;
+
+
+    }
+    #titlep{
+      font-size: 1.4em;
+    }
+
+    img.changeicons{
+      width: 40px;
+    }
+    
+    div#scrolldowndetails{
+      margin-top: 30px;
+      margin-bottom: 80px;
+      font-size: 1.1em;
+
+  }
+  }
+
+  

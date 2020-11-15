@@ -10,6 +10,11 @@ import ItemCard from "../../components/ItemCard/ItemCard"
 import SummaryItemCard from "../../components/SummaryItemCard/SummaryItemCard";
 import AddItemForm from "../../components/AddItemForm/AddItemForm";
 
+
+import archiveicon from "../../images/archive.png"
+import deleteicon from "../../images/delete.png"
+import editicon from "../../images/edit.png"
+
 // styling
 import "./CollectionDetailPage.css";
 
@@ -39,6 +44,7 @@ function CollectionDetailPage() {
 
    // Loading and Modal States
    const [isLoading, setIsLoading] = useState(true);
+
    const [modalState, setModalState] = useState(false);
    const [summaryModal, setSummaryModal] = useState(false)
 
@@ -411,6 +417,7 @@ function CollectionDetailPage() {
                <div>
                   <div id="App">
 
+
                      {/* collection information */}
                      <div id="SwiperInfoContainer" >
 
@@ -420,7 +427,6 @@ function CollectionDetailPage() {
                               { itemDisplayData.length > 0 ? (<p>You are currently comparing {itemDisplayData.length} items in the {collectionData.title} list </p>) : (<p>You are yet to add any items to {collectionData.title}!</p>)}
 
                               {/* button to change order of items - go to a different url */}
-                              <Link to={{ pathname: `/collection/${id}/manual-sort/`, state: { itemsProps: itemData } }}><button >Change Default Order</button></Link>
                            </div>
 
                         ) : (<div>
@@ -444,30 +450,45 @@ function CollectionDetailPage() {
                            </select>
                            <button className="" onClick={() => summaryToggleState()}>GO</button>
                         </div>
+
+
+
                      </div>
+
                      <div id="store-filter-button-container" >
                         <div id="Container-for-Filtering" >
+                           <div id="seperatebuttons" >
+                              {/* first drop down - filter choices */}
+                              <select onChange={(e) => setFilterChoice(e.target.value)}>
+                                 <option value="all">All items</option>
+                                 <option value="active">Active items</option>
+                                 <option value="archived">Archived items</option>
+                              </select>
 
-                           {/* first drop down - filter choices */}
-                           <select onChange={(e) => setFilterChoice(e.target.value)}>
-                              <option value="all">All items</option>
-                              <option value="active">Active items</option>
-                              <option value="archived">Archived items</option>
-                           </select>
+                              {/* second drop down - order choices */}
+                              <select onChange={(e) => setOrderChoice(e.target.value)}>
+                                 <option value="default">Default</option>
+                                 <option value="alphabetical">Alphabetical order</option>
+                                 <option value="price-lh">Price - low to high</option>
+                                 <option value="price-hl">Price - high to low</option>
+                                 <option value="date-created">Date created</option>
+                                 <option value="date-modified">Date modified</option>
+                              </select>
+                              <Link to={{ pathname: `/collection/${id}/manual-sort/`, state: { itemsProps: itemData } }}><button >Change Default Order</button></Link>
 
-                           {/* second drop down - order choices */}
-                           <select onChange={(e) => setOrderChoice(e.target.value)}>
-                              <option value="default">Default</option>
-                              <option value="alphabetical">Alphabetical order</option>
-                              <option value="price-lh">Price - low to high</option>
-                              <option value="price-hl">Price - high to low</option>
-                              <option value="date-created">Date created</option>
-                              <option value="date-modified">Date modified</option>
-                           </select>
+                           </div>
+                           {collectionData.is_active ? (<button className="" onClick={() => addItemToggleModalState()}>Add Item</button>
+                           ) : ("")}
                         </div>
-                        {collectionData.is_active ? (<button className="" onClick={() => addItemToggleModalState()}>Add Item</button>
-                        ) : ("")}
+
                      </div>
+
+
+
+
+
+
+
                      <div id="project-list">
                         <div className="swiperMainContainer" style={modalState || summaryModal ? { pointerEvents: "none", opacity: "0.4" } : {}} >
 
@@ -477,16 +498,20 @@ function CollectionDetailPage() {
                                  {itemDisplayData != null && itemDisplayData.length > 0 ? itemDisplayData.map((el, key) => {
                                     return (
                                        <div className="swiper-slide" key={key}>
-                                          <ItemCard key={key} projectData={el} collectionData={collectionData} />
                                           {shared_link === "private" && (
-                                             <div className="buttoncontainer">
+                                             <div className="buttoncontainer" style={el.is_active ? {} : { opacity: "0.4" }} >
+                                                <img style={{ cursor: "pointer" }} className="changeicons" alt="archiveicon" src={archiveicon} onClick={() => archiveItem(el)} />
+
                                                 <Link to={`/item-edit/${el.id}/${collectionData.id}/`}>
-                                                   <button className="" >Edit </button >
+                                                   <img style={{ cursor: "pointer" }} className="changeicons" alt="editicon" src={editicon} />
                                                 </Link>
-                                                <a><button className="" onClick={() => archiveItem(el)}>{el.is_active ? "Archive" : "Unarchive"}</button></a>
-                                                <a><button className="" onClick={() => handleDelete(el)}>Delete </button></a>
+
+                                                <img style={{ cursor: "pointer" }} className="changeicons" alt="deleteicon" src={deleteicon} onClick={() => handleDelete(el)} />
+
                                              </div>
                                           )}
+                                          <ItemCard key={key} projectData={el} collectionData={collectionData} />
+
                                        </div>
                                     )
                                  }) : null}
@@ -497,6 +522,7 @@ function CollectionDetailPage() {
                            </div>
                         </div>
                      </div>
+
                   </div>
                   <div className={`modalBackground modalShowing-${modalState}`}>
                      <div className="modalInner">
