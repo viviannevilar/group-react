@@ -112,7 +112,7 @@ function ItemEditForm(props) {
          history.push(`/collection/${itemData.collection}/`);
          window.location.reload();
 
-      } else {
+         } else {
          response.text().then(text => {
                throw Error(text)
          }).catch(

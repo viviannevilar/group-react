@@ -37,12 +37,13 @@ function ItemEditPage() {
             .then((data) => {
                 console.log(data)
                 setEditData(data);
+
             })
     }, [id]);
 
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}collection/${listid}/`, {
+        fetch(`${process.env.REACT_APP_API_URL}collection/simple/${listid}/`, {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
