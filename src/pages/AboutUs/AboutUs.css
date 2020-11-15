@@ -5,7 +5,7 @@
   font-size: 18px;
 }
 
-p {
+p.aboutpagepagraph  {
   text-align: center;
   margin-right: 1cm;
   margin-left: 1cm;
@@ -62,7 +62,7 @@ p {
     font-size: 24px;
   }
 
-  p {
+  p.aboutpagepagraph {
     text-align: center;
     margin-right: 3cm;
     margin-left: 3cm;
@@ -75,7 +75,7 @@ p {
     font-size: 22px;
   }
 
-  p {
+  p.aboutpagepagraph {
     margin-right: 2cm;
     margin-left: 2cm;
     font-size: 20px;
@@ -98,7 +98,7 @@ p {
     font-size: 20px;
   }
 
-  p {
+  p.aboutpagepagraph  {
     margin-right: 1cm;
     margin-left: 1cm;
     font-size: 18px;
@@ -115,3 +115,6 @@ p {
     margin: 15px 15px;
   }
 }
+
+
+
