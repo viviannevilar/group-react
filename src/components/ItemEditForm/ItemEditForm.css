@@ -1,16 +1,12 @@
-.ecformlogo {
+.eiformlogo {
     display: flex;
     justify-content: center;
     flex: 1;
     padding-top: 5px;
 }
 
-#ecformlogoimage {
-    height: 40%;
-    width: 40%;
-  }
 
-#editcollectionheadertitle {
+#edititemheadertitle {
     font-family: "Roboto", sans-serif;
     color: #004aad;
     text-align: center;
@@ -21,7 +17,7 @@
     margin-left: 3%;
 }
 
-.editcollectionform{
+.edititemform{
     max-width: 800px;
     min-width: 300px;
     max-height: 900px;
@@ -31,7 +27,7 @@
     border-radius: 25px;
   }
   
-.ecfa{
+.eifa {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -39,14 +35,14 @@
     max-width: 100%;
   }
 
-.ate {
+.atei {
     padding-bottom: 2%;
     color: #004aad;
     width: 80%;
     text-align: center;
 }
 
-.ecfa textarea {
+.eifa textarea {
   width: 80%;
   box-sizing: border-box;
   border: none;
@@ -57,12 +53,12 @@
   transition: box-shadow 0.2s ease-in;
 }
 
-.ecfa input:focus {
+.eifa input:focus {
   box-shadow: inset 0px -3px 0px 0px rgba(46, 44, 56, 0.7);
   outline: none;
 }
 
-.ecbutton {
+.eibutton {
   padding: 5px 10px;
   background: #b3b7a4;
   border-radius: 30px;
@@ -70,7 +66,7 @@
   border: none;
 }
 
-div.ecbuttonwrapper {
+div.eibuttonwrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -78,7 +74,7 @@ div.ecbuttonwrapper {
   margin-top: 15px;
 }
 
-div.ecradiowrapper {
+div.eiradiowrapper {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -95,71 +91,71 @@ textarea {
 
 
 @media only screen and (max-width: 1450px) {
-    #ecformlogoimage {
+    #eiformlogoimage {
         height: 20%;
         width: 20%;
     }
-    #editcollectionheadertitle {
+    #edititemheadertitle {
         font-size: 2.0rem;
     }
-    .ate {
+    .atei {
         font-size: 1.0rem;
         padding-bottom: 1%;
     }
-    .ecfa textarea {
+    .eifa textarea {
         font-size: 1.0rem;
         padding-bottom: 0.5%;
     }
-    div.ecradiowrapper {
+    div.eiradiowrapper {
         font-size: 1.0rem;
     }
-    .ecbutton {
+    .eibutton {
         font-size: 20px;
     }
 }
 
 @media only screen and (max-width: 800px) {
-    #ecformlogoimage {
+    #eiformlogoimage {
         height: 20%;
         width: 20%;
     }
-    #editcollectionheadertitle {
+    #edititemheadertitle {
         font-size: 1.8rem;
     }
-    .ate {
+    .atei {
         font-size: 1.0rem;
         padding-bottom: 0.5%;
     }
-    .ecfa textarea {
+    .eifa textarea {
         font-size: 1.0rem;
         padding-bottom: 0.5%;
     }
-    div.ecradiowrapper {
+    div.eiradiowrapper {
         font-size: 1.0rem;
     }
-    .ecbutton {
+    .eibutton {
         font-size: 20px;
     }
 }
 
 @media only screen and (max-width: 500px) {
-    #ecformlogoimage {
+    #eiformlogoimage {
         height: 25%;
         width: 25%;
     }
-    #editcollectionheadertitle {
+    #edititemheadertitle {
         font-size: 1.5rem;
     }
-    .ate {
+    .atei {
         font-size: 0.8rem;
     }
-    .ecfa textarea {
+    .eifa textarea {
         font-size: 0.8rem;
     }
-    div.ecradiowrapper {
+    div.eiradiowrapper {
         font-size: 0.8rem;
     }
-    .ecbutton {
+    .eibutton {
         font-size: 18px;
     }
 }

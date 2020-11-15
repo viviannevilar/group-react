@@ -1,11 +1,11 @@
-.formlogo {
+.ncformlogo {
     display: flex;
     justify-content: center;
     flex: 1;
     padding-top: 5px;
 }
 
-#formlogoimage {
+#ncformlogoimage {
     height: 40%;
     width: 40%;
   }
@@ -60,7 +60,7 @@
   font-family: "Roboto", sans-serif;
   color: #7D8072;
   text-align: center;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.5%;
   box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
   transition: box-shadow 0.2s ease-in;
 }
@@ -103,41 +103,52 @@ textarea {
 
 
 @media only screen and (max-width: 1450px) {
+    #ncformlogoimage {
+        height: 20%;
+        width: 20%;
+    }
     #newcollectionheadertitle {
-        font-size: 3.5rem;
+        font-size: 1.8rem;
     }
     .newcollectiontxt {
-        font-size: 2.0rem;
+        font-size: 1.0rem;
+        padding-bottom: 0.5%;
     }
     .at {
-        font-size: 2.0rem;
+        font-size: 1.0rem;
+    }
+    .ncfa {
+        padding-top: 1%;
     }
     .ncfa textarea {
-        font-size: 2.0rem;
+        font-size: 1.0rem;
     }
     div.ncradiowrapper {
-        font-size: 2.0rem;
+        font-size: 1.0rem;
     }
     .newcollectionbutton {
-        font-size: 45px;
+        font-size: 20px;
     }
 }
 
 @media only screen and (max-width: 800px) {
     #newcollectionheadertitle {
-        font-size: 2.5rem;
+        font-size: 1.5rem;
     }
     .newcollectiontxt {
-        font-size: 1.8rem;
+        font-size: 1.3rem;
     }
     .at {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
+    }
+    .ncfa {
+        padding-top: 2%;
     }
     .ncfa textarea {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
     div.ncradiowrapper {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
     .newcollectionbutton {
         font-size: 25px;
@@ -146,7 +157,7 @@ textarea {
 
 @media only screen and (max-width: 500px) {
     #newcollectionheadertitle {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
     .newcollectiontxt {
         font-size: 0.8rem;

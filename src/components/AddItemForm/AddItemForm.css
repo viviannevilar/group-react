@@ -1,3 +1,128 @@
 .error {
    color: red;
 }
+
+.aiformlogo {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    padding-top: 5px;
+}
+
+#aiformlogoimage {
+    height: 40%;
+    width: 40%;
+  }
+
+#additemheadertitle {
+    font-family: "Roboto", sans-serif;
+    color: #004aad;
+    text-align: center;
+    padding-top: 5%;
+    margin-top: 0px;
+    margin-right: 3%;
+    margin-bottom: 0px;
+    margin-left: 3%;
+}
+
+.additemform {
+    max-width: 800px;
+    min-width: 300px;
+    max-height: 900px;
+    width: 100%;
+    margin: 0px auto;
+    background-color: #FFFFFF;
+    border-radius: 25px;
+  }
+  
+.aifa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5%;
+    max-width: 100%;
+  }
+
+.atai {
+    padding-bottom: 2%;
+    color: #004aad;
+    width: 80%;
+    text-align: center;
+}
+
+.aifa textarea {
+  width: 80%;
+  box-sizing: border-box;
+  border: none;
+  font-family: "Roboto", sans-serif;
+  color: #7D8072;
+  text-align: center;
+  padding-bottom: 0.5rem;
+  box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
+  transition: box-shadow 0.2s ease-in;
+}
+
+.aifa input:focus {
+  box-shadow: inset 0px -3px 0px 0px rgba(46, 44, 56, 0.7);
+  outline: none;
+}
+
+div.aibuttonwrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+textarea {
+  outline: none;
+  resize: none;
+  width: 80%;
+}
+
+
+@media only screen and (max-width: 1450px) {
+    #additemheadertitle {
+        font-size: 3.2rem;
+    }
+    .atai {
+        font-size: 2.0rem;
+    }
+    .aifa textarea {
+        font-size: 2.0rem;
+    }
+    .ecbutton {
+        font-size: 45px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    #additemheadertitle {
+        font-size: 2.5rem;
+    }
+    .atai {
+        font-size: 1.5rem;
+    }
+    .aifa textarea {
+        font-size: 1.5rem;
+    }
+    .ecbutton {
+        font-size: 25px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    #additemheadertitle {
+        font-size: 1.5rem;
+    }
+    .atai {
+        font-size: 0.8rem;
+    }
+    .aifa textarea {
+        font-size: 0.8rem;
+    }
+    .ecbutton {
+        font-size: 18px;
+    }
+}

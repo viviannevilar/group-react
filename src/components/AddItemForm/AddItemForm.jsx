@@ -1,7 +1,9 @@
 import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
-import "../../components/Nav/Nav.css";
 import "./AddItemForm.css"
+import Nav from "../../components/Nav/Nav";
+import "../../components/Nav/Nav.css";
+
 
 
 function AddItemForm(props) {
@@ -148,12 +150,22 @@ function AddItemForm(props) {
    
    return (
         <div>
-
-            <h2 id="headerTitle"> Add Item to {collectionData.title} </h2>
+              <div>
+                <Nav />
+            </div>
+            <div className="aiformlogo" >
+                <img
+                id="aiformlogoimage"
+                src={require("../../images/Comparalist_rectangle.png")}
+                alt="Company Logo"
+                />
+            </div >
+            <div className="additemform">
+            <h2 id="additemheadertitle"> Add Item to {collectionData.title} </h2>
             <form>
 
-               <div className="formattribute">
-                  <label htmlFor="name">
+               <div className="aifa">
+                  <label className="atai" htmlFor="name">
                      Name of Item: 
                      <span className="error">{errorMessage !== "" ? errorMessage : null}</span> 
                   </label>
@@ -164,8 +176,8 @@ function AddItemForm(props) {
                   />
                </div>
 
-                <div className="formattribute">
-                    <label htmlFor="price">Price of Item:</label>
+                <div className="aifa">
+                    <label className="atai" htmlFor="price">Price of Item:</label>
                     <input
                         type="number"
                         id="price"
@@ -173,8 +185,8 @@ function AddItemForm(props) {
                     />
                 </div>
 
-                <div className="formattribute">
-                    <label htmlFor="sale_amount">Is there a discount currently offered (%)?:</label>
+                <div className="aifa">
+                    <label className="atai" htmlFor="sale_amount">Is there a discount currently offered (%)?:</label>
                     <input
                         type="number"
                         id="sale_amount"
@@ -182,8 +194,8 @@ function AddItemForm(props) {
                     />
                 </div>
 
-                {parseInt(credentials.sale_amount) > 0 && (<div className="formattribute">
-                    <label htmlFor="sale_end_date">When does the discount expire?</label>
+                {parseInt(credentials.sale_amount) > 0 && (<div className="aifa">
+                    <label className="atai" htmlFor="sale_end_date">When does the discount expire?</label>
                     <input
                         type="date"
                         id="sale_end_date"
@@ -191,8 +203,8 @@ function AddItemForm(props) {
                     />
                 </div>)}
 
-                {collectionData.attribute1 !== "" && (<div className="formattribute">
-                    <label htmlFor="attribute1">{collectionData.attribute1}:</label>
+                {collectionData.attribute1 !== "" && (<div className="aifa">
+                    <label className="atai" htmlFor="attribute1">{collectionData.attribute1}:</label>
                     <input
                         type="text"
                         id="attribute1"
@@ -201,8 +213,8 @@ function AddItemForm(props) {
                 </div>)}
 
 
-                {collectionData.attribute2 !== "" && (<div className="formattribute">
-                    <label htmlFor="attribute2">{collectionData.attribute2}:</label>
+                {collectionData.attribute2 !== "" && (<div className="aifa">
+                    <label className="atai" htmlFor="attribute2">{collectionData.attribute2}:</label>
                     <input
                         type="text"
                         id="attribute2"
@@ -210,8 +222,8 @@ function AddItemForm(props) {
                     />
                 </div>)}
 
-                {collectionData.attribute3 !== "" && (<div className="formattribute">
-                    <label htmlFor="attribute3">{collectionData.attribute3}:</label>
+                {collectionData.attribute3 !== "" && (<div className="aifa">
+                    <label className="atai" htmlFor="attribute3">{collectionData.attribute3}:</label>
                     <input
                         type="text"
                         id="attribute3"
@@ -219,8 +231,8 @@ function AddItemForm(props) {
                     />
                 </div>)}
 
-                {collectionData.attribute4 !== "" && (<div className="formattribute">
-                    <label htmlFor="attribute4">{collectionData.attribute4}:</label>
+                {collectionData.attribute4 !== "" && (<div className="aifa">
+                    <label className="atai" htmlFor="attribute4">{collectionData.attribute4}:</label>
                     <input
                         type="text"
                         id="attribute4"
@@ -229,8 +241,8 @@ function AddItemForm(props) {
                 </div>)}
 
 
-                <div className="formattribute">
-                    <label htmlFor="image">Image:</label>
+                <div className="aifa">
+                    <label className="atai" htmlFor="image">Image:</label>
                     <input
                         type="file"
                         id="image"
@@ -239,8 +251,8 @@ function AddItemForm(props) {
                 </div>
 
 
-                <div className="formattribute">
-                    <label htmlFor="notes">Notes:</label>
+                <div className="aifa">
+                    <label className="atai" htmlFor="notes">Notes:</label>
                     <input
                         type="textarea"
                         id="notes"
@@ -249,10 +261,11 @@ function AddItemForm(props) {
                 </div>
 
 
-                <div className="buttonwrapper">
+                <div className="aibuttonwrapper">
                     <button ref={btnRefAdd} type="submit" onClick={handleSubmit}>  Add to List </button>
                 </div>
             </form>
+            </div>
         </div>
     );
 }

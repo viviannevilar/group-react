@@ -52,12 +52,19 @@ function ContactUsForm() {
      };
   
   return (
-    <div id="Nav">
+    <div>
     <div>
         <Nav />
     </div>
+    <div className="cuformlogo" >
+            <img
+            id="cuformlogoimage"
+            src={require("../../images/Comparalist_rectangle.png")}
+            alt="Company Logo"
+            />
+        </div>
     <div>
-      <h2 id="headerTitle">Contact Us</h2>
+      <h2 id="contactusheadertitle">Contact Us</h2>
       <form onSubmit={handleSubmit}>
       <div className="row">
         <label htmlFor="name">Name:</label>
