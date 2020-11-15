@@ -139,14 +139,14 @@ function AddItemForm(props) {
 
    return (
         <div>
-            <div>
-            <h2 id="headerTitle"> Add Item to {collectionData.title} </h2>
+            <div className="additemform">
+            <h2 id="additemheadertitle"> Add Item to {collectionData.title} </h2>
 
             <h4><span className="error">{ (errorKey === "detail") ? errorMessage : null}</span> </h4>
            
             <form>
-               <div className="formattribute">
-                  <label htmlFor="name">
+               <div className="aifa">
+                  <label className="atai" htmlFor="name">
                      Name of Item: 
                      <span className="error">{ (errorKey === "name") ? errorMessage : null}</span> 
                   </label>
@@ -157,8 +157,8 @@ function AddItemForm(props) {
                   />
                </div>
 
-                <div className="formattribute">
-                    <label htmlFor="price">
+                <div className="aifa">
+                    <label className="atai" htmlFor="price">
                        Price of Item:
                        <span className="error">{ (errorKey === "price") ? errorMessage : null}</span> 
                     </label>
@@ -169,8 +169,8 @@ function AddItemForm(props) {
                     />
                 </div>
 
-                <div className="formattribute">
-                     <label htmlFor="sale_amount">
+                <div className="aifa">
+                     <label className="atai" htmlFor="sale_amount">
                        Is there a discount currently offered (%)?:
                        <span className="error">{ (errorKey === "sale_amount") ? errorMessage : null}</span> 
                      </label>
@@ -181,8 +181,8 @@ function AddItemForm(props) {
                     />
                 </div>
 
-                {parseInt(credentials.sale_amount) > 0 && (<div className="formattribute">
-                    <label htmlFor="sale_end_date">
+                {parseInt(credentials.sale_amount) > 0 && (<div className="aifa">
+                    <label className="atai" htmlFor="sale_end_date">
                        When does the discount expire?
                        <span className="error">{ (errorKey === "sale_end_date") ? errorMessage : null}</span> 
                      </label>
@@ -193,8 +193,8 @@ function AddItemForm(props) {
                     />
                 </div>)}
 
-                {collectionData.attribute1 !== "" && (<div className="formattribute">
-                    <label htmlFor="attribute1">
+                {collectionData.attribute1 !== "" && (<div className="aifa">
+                    <label className="atai" htmlFor="attribute1">
                        {collectionData.attribute1}:
                        <span className="error">{ (errorKey === "attribute1") ? errorMessage : null}</span> 
                     </label>
@@ -206,8 +206,8 @@ function AddItemForm(props) {
                 </div>)}
 
 
-                {collectionData.attribute2 !== "" && (<div className="formattribute">
-                    <label htmlFor="attribute2">
+                {collectionData.attribute2 !== "" && (<div className="aifa">
+                    <label className="atai" htmlFor="attribute2">
                        {collectionData.attribute2}:
                        <span className="error">{ (errorKey === "attribute2") ? errorMessage : null}</span> 
                      </label>
@@ -218,8 +218,8 @@ function AddItemForm(props) {
                     />
                 </div>)}
 
-                {collectionData.attribute3 !== "" && (<div className="formattribute">
-                    <label htmlFor="attribute3">
+                {collectionData.attribute3 !== "" && (<div className="aifa">
+                    <label className="atai" htmlFor="attribute3">
                        {collectionData.attribute3}:
                        <span className="error">{ (errorKey === "attribute3") ? errorMessage : null}</span> 
                      </label>
@@ -230,8 +230,8 @@ function AddItemForm(props) {
                     />
                 </div>)}
 
-                {collectionData.attribute4 !== "" && (<div className="formattribute">
-                    <label htmlFor="attribute4">
+                {collectionData.attribute4 !== "" && (<div className="aifa">
+                    <label className="atai" htmlFor="attribute4">
                        {collectionData.attribute4}:
                        <span className="error">{ (errorKey === "attribute4") ? errorMessage : null}</span> 
                      </label>
@@ -243,8 +243,8 @@ function AddItemForm(props) {
                 </div>)}
 
 
-                <div className="formattribute">
-                    <label htmlFor="image">
+                <div className="aifa">
+                    <label className="atai" htmlFor="image">
                        Image:
                        <span className="error">{ (errorKey === "image") ? errorMessage : null}</span> 
                      </label>
@@ -256,8 +256,8 @@ function AddItemForm(props) {
                 </div>
 
 
-                <div className="formattribute">
-                    <label htmlFor="notes">
+                <div className="aifa">
+                    <label className="atai" htmlFor="notes">
                        Notes:
                        <span className="error">{ (errorKey === "notes") ? errorMessage : null}</span> 
                      </label>
@@ -270,7 +270,7 @@ function AddItemForm(props) {
 
 
                 <div className="aibuttonwrapper">
-                    <button ref={btnRefAdd} type="submit" onClick={handleSubmit}>  Add to List </button>
+                    <button className="additembutton" ref={btnRefAdd} type="submit" onClick={handleSubmit}>  Add to List </button>
                 </div>
             </form>
             </div>

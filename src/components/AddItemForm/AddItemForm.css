@@ -2,18 +2,6 @@
    color: red;
 }
 
-.aiformlogo {
-    display: flex;
-    justify-content: center;
-    flex: 1;
-    padding-top: 5px;
-}
-
-#aiformlogoimage {
-    height: 40%;
-    width: 40%;
-  }
-
 #additemheadertitle {
     font-family: "Roboto", sans-serif;
     color: #004aad;
@@ -73,6 +61,14 @@ div.aibuttonwrapper {
   justify-content: center;
   align-items: center;
   margin-top: 15px;
+}
+
+.additembutton {
+    padding: 5px 10px;
+    background: #b3b7a4;
+    border-radius: 30px;
+    color: white;
+    border: none;
 }
 
 textarea {
