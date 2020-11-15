@@ -26,11 +26,14 @@
         padding-left: 25%;
     }
     .navItem {
-        font-size: 0.8cm;
+        font-size: 0.5cm;
     }
 }
 
 @media only screen and (max-width: 800px) {
+    .navItem {
+        font-size: 0.4cm;
+    }
     .Navbarcontainer {
             padding-right: 10%;
             padding-left: 10%;
@@ -40,7 +43,7 @@
 
 @media only screen and (max-width: 500px) {
     .navItem {
-        font-size: 0.4cm;
+        font-size: 0.3cm;
     }
     .linkContainer {
         align-items: center;

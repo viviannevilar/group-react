@@ -19,7 +19,7 @@ function AboutUsPage() {
             <img
               className="image"
               src={require("../../images/Cath.jpg")}
-              alt="team image"
+              alt="Catherine Leighton"
             />
             <div className="middle">
               <div className="text">Catherine Leighton</div>
@@ -29,7 +29,7 @@ function AboutUsPage() {
             <img
               className="image"
               src={require("../../images/Ellen.jpg")}
-              alt="team image"
+              alt="Ellen Marinko"
             />
             <div className="middle">
               <div className="text">Ellen Marinko</div>
@@ -39,7 +39,7 @@ function AboutUsPage() {
             <img
               className="image"
               src={require("../../images/Nick.jpg")}
-              alt="team image"
+              alt="Nicolette Heath"
             />
             <div className="middle">
               <div className="text">Nicolette Heath</div>
@@ -49,7 +49,7 @@ function AboutUsPage() {
             <img
               className="image"
               src={require("../../images/Roshi.jpg")}
-              alt="team image"
+              alt="Roshi Ettehadi"
             />
             <div className="middle">
               <div className="text">Roshi Ettehadi</div>
@@ -59,7 +59,7 @@ function AboutUsPage() {
             <img
               className="image"
               src={require("../../images/Vivi.jpg")}
-              alt="team image"
+              alt="Vivianne Vilar"
             />
             <div className="middle">
               <div className="text">Vivianne Vilar</div>

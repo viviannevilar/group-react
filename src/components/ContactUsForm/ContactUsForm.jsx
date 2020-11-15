@@ -52,15 +52,22 @@ function ContactUsForm() {
      };
   
   return (
-    <div id="Nav">
+    <div>
     <div>
         <Nav />
     </div>
-    <div>
-      <h2 id="headerTitle">Contact Us</h2>
+    <div className="cuformlogo" >
+            <img
+            id="cuformlogoimage"
+            src={require("../../images/Comparalist_rectangle.png")}
+            alt="Company Logo"
+            />
+        </div>
+    <div id="contactusform">
+      <h2 id="contactusheadertitle">Contact Us</h2>
       <form onSubmit={handleSubmit}>
-      <div className="row">
-        <label htmlFor="name">Name:</label>
+      <div className="cufa">
+        <label className="atcu" htmlFor="name">Name:</label>
         <input
           name="username"
           type="text"
@@ -68,8 +75,8 @@ function ContactUsForm() {
           onChange={handleChange}
         />
       </div>
-      <div className="row">
-        <label htmlFor="email">Email:</label>
+      <div className="cufa">
+        <label className="atcu" htmlFor="email">Email:</label>
         <input
           name="email"
           type="email"
@@ -77,12 +84,12 @@ function ContactUsForm() {
           onChange={handleChange}
         />
       </div>
-      <div className="row">
-        <label htmlFor="message">Message:</label>
-        <input name="message" type="text" id="message" onChange={handleChange} />
+      <div className="cufa">
+        <label className="atcu" htmlFor="message">Message:</label>
+        <textarea className="atcublock" name="message" type="textarea" id="message" rows="8" onChange={handleChange} />
       </div>
-      <div id="test">
-        <button id="button" className="button" type="submit" onClick={handleSubmit}>
+      <div id="cubuttonwrapper">
+        <button id="cubutton" className="cubutton" type="submit" onClick={handleSubmit}>
           Send!
       </button>
       </div >

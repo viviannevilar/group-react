@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./NewCollectionForm.css";
 import "../../components/Nav/Nav.css";
@@ -82,9 +82,9 @@ function NewCollectionForm() {
         <div>
             <Nav />
         </div>
-        <div className="formlogo" >
+        <div className="ncformlogo" >
             <img
-            id="formlogoimage"
+            id="ncformlogoimage"
             src={require("../../images/Comparalist_rectangle.png")}
             alt="Company Logo"
             />
@@ -147,9 +147,6 @@ function NewCollectionForm() {
             onChange={handleChange}
           />
         </div>
-    
-
-
 
         <div className="ncfa">
           <label className="at" htmlFor="is_active">Is this Project Active on submission of this form?</label>
@@ -173,8 +170,6 @@ function NewCollectionForm() {
           <label htmlFor="false">Archived</label>
         </div>
         <br></br>
-
-
 
         <div className="ncbuttonwrapper">
           <button className="newcollectionbutton" type="submit" onClick={handleSubmit}>

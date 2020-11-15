@@ -1,35 +1,24 @@
-.ncformlogo {
+.eiformlogo {
     display: flex;
     justify-content: center;
     flex: 1;
     padding-top: 5px;
 }
 
-#ncformlogoimage {
-    height: 40%;
-    width: 40%;
-  }
 
-#newcollectionheadertitle {
+#edititemheadertitle {
     font-family: "Roboto", sans-serif;
     color: #004aad;
     text-align: center;
-    margin: 0;
     padding-top: 5%;
+    margin-top: 0px;
+    margin-right: 3%;
+    margin-bottom: 0px;
+    margin-left: 3%;
 }
 
-.newcollectiontxt {
-    color: #7D8072;
-    font-family: "Roboto", sans-serif;
-    text-align: center;
-    padding-right: 1rem;
-    padding-left: 1rem;
-    margin: 0;
-    padding-bottom: 5%;
-}
-
-.newcollectionform{
-    max-width: 700px;
+.edititemform{
+    max-width: 800px;
     min-width: 300px;
     max-height: 900px;
     width: 100%;
@@ -38,7 +27,7 @@
     border-radius: 25px;
   }
   
-.ncfa{
+.eifa {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -46,31 +35,30 @@
     max-width: 100%;
   }
 
-.at {
+.atei {
     padding-bottom: 2%;
     color: #004aad;
     width: 80%;
     text-align: center;
 }
 
-.ncfa textarea {
+.eifa textarea {
   width: 80%;
   box-sizing: border-box;
   border: none;
   font-family: "Roboto", sans-serif;
   color: #7D8072;
   text-align: center;
-  padding-bottom: 0.5%;
   box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
   transition: box-shadow 0.2s ease-in;
 }
 
-.ncfa input:focus {
+.eifa input:focus {
   box-shadow: inset 0px -3px 0px 0px rgba(46, 44, 56, 0.7);
   outline: none;
 }
 
-.newcollectionbutton {
+.eibutton {
   padding: 5px 10px;
   background: #b3b7a4;
   border-radius: 30px;
@@ -78,7 +66,7 @@
   border: none;
 }
 
-div.ncbuttonwrapper {
+div.eibuttonwrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -86,7 +74,7 @@ div.ncbuttonwrapper {
   margin-top: 15px;
 }
 
-div.ncradiowrapper {
+div.eiradiowrapper {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -103,75 +91,71 @@ textarea {
 
 
 @media only screen and (max-width: 1450px) {
-    #ncformlogoimage {
+    #eiformlogoimage {
         height: 20%;
         width: 20%;
     }
-    #newcollectionheadertitle {
-        font-size: 1.8rem;
+    #edititemheadertitle {
+        font-size: 2.0rem;
     }
-    .newcollectiontxt {
+    .atei {
+        font-size: 1.0rem;
+        padding-bottom: 1%;
+    }
+    .eifa textarea {
         font-size: 1.0rem;
         padding-bottom: 0.5%;
     }
-    .at {
+    div.eiradiowrapper {
         font-size: 1.0rem;
     }
-    .ncfa {
-        padding-top: 1%;
-    }
-    .ncfa textarea {
-        font-size: 1.0rem;
-    }
-    div.ncradiowrapper {
-        font-size: 1.0rem;
-    }
-    .newcollectionbutton {
+    .eibutton {
         font-size: 20px;
     }
 }
 
 @media only screen and (max-width: 800px) {
-    #newcollectionheadertitle {
-        font-size: 1.5rem;
+    #eiformlogoimage {
+        height: 20%;
+        width: 20%;
     }
-    .newcollectiontxt {
-        font-size: 1.3rem;
+    #edititemheadertitle {
+        font-size: 1.8rem;
     }
-    .at {
-        font-size: 1.3rem;
+    .atei {
+        font-size: 1.0rem;
+        padding-bottom: 0.5%;
     }
-    .ncfa {
-        padding-top: 2%;
+    .eifa textarea {
+        font-size: 1.0rem;
+        padding-bottom: 0.5%;
     }
-    .ncfa textarea {
-        font-size: 1.3rem;
+    div.eiradiowrapper {
+        font-size: 1.0rem;
     }
-    div.ncradiowrapper {
-        font-size: 1.3rem;
-    }
-    .newcollectionbutton {
-        font-size: 25px;
+    .eibutton {
+        font-size: 20px;
     }
 }
 
 @media only screen and (max-width: 500px) {
-    #newcollectionheadertitle {
-        font-size: 1.3rem;
+    #eiformlogoimage {
+        height: 25%;
+        width: 25%;
     }
-    .newcollectiontxt {
+    #edititemheadertitle {
+        font-size: 1.5rem;
+    }
+    .atei {
         font-size: 0.8rem;
     }
-    .at {
+    .eifa textarea {
         font-size: 0.8rem;
     }
-    .ncfa textarea {
+    div.eiradiowrapper {
         font-size: 0.8rem;
     }
-    div.ncradiowrapper {
-        font-size: 0.8rem;
-    }
-    .newcollectionbutton {
+    .eibutton {
         font-size: 18px;
     }
 }

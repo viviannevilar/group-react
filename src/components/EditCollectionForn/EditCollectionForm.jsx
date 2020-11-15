@@ -1,8 +1,9 @@
 
 import React, { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Nav from "../../components/Nav/Nav";
 import "../../components/Nav/Nav.css";
+import "./EditCollectionForm.css";
 import ContactUsPage from "../../pages/ContactUs/ContactUs";
 
 function EditCollectionForm(props) {
@@ -95,30 +96,38 @@ function EditCollectionForm(props) {
 
 
     return (
-        <div id="Nav">
+        <div>
             <div>
                 <Nav />
             </div>
+        
+            <div className="ecformlogo" >
+                <img
+                id="ecformlogoimage"
+                src={require("../../images/Comparalist_rectangle.png")}
+                alt="Company Logo"
+                />
+            </div>
     
-        <div id="pledgeform">
+        <div className="editcollectionform">
 
-            <h2 id="headerTitle"> Edit {collectionData.title} </h2>
+            <h2 id="editcollectionheadertitle"> Edit {collectionData.title} </h2>
             <form>
 
-                <div className="thra">
-                    <label htmlFor="title">Name of Collection:</label>
-                    <input
-                        type="text"
+                <div className="ecfa">
+                    <label className="ate" htmlFor="title">Name of Collection:</label>
+                    <textarea
+                        type="textarea"
                         id="title"
                         value={credentials.title}
                         onChange={handleChange}
                     />
                 </div>
 
-                {collectionData.attribute1 !== "" && (<div className="thra">
-                    <label htmlFor="attribute1">Attribute 1:</label>
-                    <input
-                        type="text"
+                {collectionData.attribute1 !== "" && (<div className="ecfa">
+                    <label className="ate" htmlFor="attribute1">Attribute 1:</label>
+                    <textarea
+                        type="textarea"
                         id="attribute1"
                         value={credentials.attribute1}
                         onChange={handleChange}
@@ -127,30 +136,30 @@ function EditCollectionForm(props) {
 
 
 
-                {collectionData.attribute2 !== "" && (<div className="thra">
-                    <label htmlFor="attribute2">Attribute 2:</label>
-                    <input
-                        type="text"
+                {collectionData.attribute2 !== "" && (<div className="ecfa">
+                    <label className="ate" htmlFor="attribute2">Attribute 2:</label>
+                    <textarea
+                        type="textarea"
                         id="attribute2"
                         value={credentials.attribute2}
                         onChange={handleChange}
                     />
                 </div>)}
 
-                {collectionData.attribute3 !== "" && (<div className="thra">
-                    <label htmlFor="attribute3">Attribute 3:</label>
-                    <input
-                        type="text"
+                {collectionData.attribute3 !== "" && (<div className="ecfa">
+                    <label className="ate" htmlFor="attribute3">Attribute 3:</label>
+                    <textarea
+                        type="textarea"
                         id="attribute3"
                         value={credentials.attribute3}
                         onChange={handleChange}
                     />
                 </div>)}
 
-                {collectionData.attribute4 !== "" && (<div className="thra">
-                    <label htmlFor="attribute4">Attribute 4:</label>
-                    <input
-                        type="text"
+                {collectionData.attribute4 !== "" && (<div className="ecfa">
+                    <label className="ate" htmlFor="attribute4">Attribute 4:</label>
+                    <textarea
+                        type="textarea"
                         id="attribute4"
                         value={credentials.attribute4}
                         onChange={handleChange}
@@ -159,12 +168,12 @@ function EditCollectionForm(props) {
 
 
 
-                <div className="thra">
-                    <label htmlFor="is_open">Would you like to archive this Collection and come back to it later?</label>
+                <div className="ecfa">
+                    <label className="ate" htmlFor="is_open">Would you like to archive this Collection and come back to it later?</label>
 
                 </div>
 
-                <div className="radiowrapper">
+                <div className="ecradiowrapper">
                     <input
                         type="radio"
                         id="is_active"
@@ -182,11 +191,13 @@ function EditCollectionForm(props) {
                     />
                     <label htmlFor="false">Archive</label>
                 </div>
+                <br></br>
 
-
-                <div className="buttonwrapper">
-                    <button className="pledgebutton" type="submit" onClick={handleSubmit}>  Update Collection </button>
+                <div className="ecbuttonwrapper">
+                    <button className="ecbutton" type="submit" onClick={handleSubmit}>  Update Collection </button>
                 </div>
+                <br></br>
+                <br></br>
             </form>
         </div>
         </div>

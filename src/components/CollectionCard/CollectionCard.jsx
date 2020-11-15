@@ -68,7 +68,7 @@ function CollectionCard(props) {
 
 
         <div className="collection-wrapper">
-            <p> <Link to={linkCollection}>{collectionData.title}</Link>
+            <p> <Link to={linkCollection}>{collectionData.title}</Link></p>
 
                 <p>Date Created {formatDate(collectionData.date_created)} </p>
                 <p>Last Updated {formatDate(collectionData.last_updated)} </p>
@@ -76,7 +76,7 @@ function CollectionCard(props) {
                 <button onClick={shareCollection}>Share Collection</button>
                 <Link to={`/editcollection/${collectionData.id}`}><button >Edit Collection</button></Link>
                 <button onClick={deleteCollection}>Delete Collection</button>
-            </p>
+            
         </div >
     )
 }

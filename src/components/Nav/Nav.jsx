@@ -17,7 +17,7 @@ function Nav(props) {
       window.localStorage.clear();
     };
     
-    const { image } = props;
+    //const { image } = props;
 
     return (
 
