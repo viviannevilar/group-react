@@ -109,10 +109,10 @@ function AddItemForm(props) {
                      keyName.focus();
                   }
 
-                  // this enables the submit button again
-                  if (btnRefAdd.current) {
-                     btnRefAdd.current.disabled = false
-                  }
+                  // // this enables the submit button again
+                  // if (btnRefAdd.current) {
+                  //    btnRefAdd.current.disabled = false
+                  // }
 
                }
          )
@@ -125,23 +125,27 @@ function AddItemForm(props) {
       e.preventDefault();
 
       // disables the button to submit form until there is a response
-      if (btnRefAdd.current) {
-         btnRefAdd.current.disabled = true
-      }
+      // if (btnRefAdd.current) {
+      //    btnRefAdd.current.disabled = true
+      // }
 
       postData().then((response) => {
 
          console.log("response: ", response)
          console.log("errorMessage: ", errorMessage)
 
+         // btnRefAdd.current.disabled = false
+         
          if (errorMessage === "Created") {
 
             console.log("--------------- hasError: ", hasError)
             
             // enable the "add item"/"submit" button again just in case
-            if (btnRefAdd.current) {
-               btnRefAdd.current.disabled = false
-            }
+            // if (btnRefAdd.current) {
+            //    btnRefAdd.current.disabled = false
+            // }
+
+            // btnRefAdd.current.disabled = false
 
             console.log("Error: ", errorMessage)
 

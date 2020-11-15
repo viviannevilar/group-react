@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Nav from "../../components/Nav/Nav";
 import "../../components/Nav/Nav.css";
 
@@ -16,7 +16,6 @@ function ItemEditForm(props) {
         price: "",
         sale_amount: 0,
         sale_end_date: null,
-        sale_amount: "",
         attribute1: "",
         attribute2: "",
         attribute3: "",

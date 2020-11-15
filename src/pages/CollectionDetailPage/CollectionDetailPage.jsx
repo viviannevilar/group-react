@@ -79,7 +79,7 @@ function CollectionDetailPage() {
       shared_link = "private"
    }
 
-
+   // let response
    let key_information
    /////////////// methods
 
@@ -162,16 +162,24 @@ function CollectionDetailPage() {
 
    // Delete Item
    const handleDelete = (projectdat, e) => {
+      console.log("------------handleDelete")
 
       fetch(`${process.env.REACT_APP_API_URL}item/${projectdat.id}/`, {
          method: "delete",
          headers: {
-            "Content-Type": "application/json",
             Authorization: `Token ${token}`,
          },
-      }).then(() => {
-         history.push(`/collection/${id}/`)
-         window.location.reload();
+      })
+      .then((response) => {
+
+         if (response.ok) {
+            //history.push(`/collection/${id}/`)
+            //window.location.reload();
+         } else {
+            console.log(response)
+            setHasError(true)
+            setErrorMessage(response.statusText);
+         }
       });
    }
 
@@ -498,6 +506,8 @@ function CollectionDetailPage() {
                         </div>
                      </div>
                   </div>
+
+         {/* Modal for AddItemForm */}
                   <div className={`modalBackground modalShowing-${modalState}`}>
                      <div className="modalInner">
                         <div className="modalText">
@@ -508,6 +518,8 @@ function CollectionDetailPage() {
                         </div>
                      </div>
                   </div>
+
+         {/* Modal for Summaries */}
                   <div className={`modalBackground modalShowing-${summaryModal}`}>
                      <div className="modalInner">
                         <div className="modalText">
