@@ -6,6 +6,7 @@ import "../ContactUs/ContactUs";
 import "../AboutUs/AboutUs";
 import "../LoginPage/LoginPage";
 import LogoutForm from "../../components/LogoutForm/LogoutForm";
+import { useParams, useHistory, useLocation, Link } from "react-router-dom";
 
 
 function HomePage() {
@@ -35,21 +36,21 @@ function HomePage() {
         />
       </div>
 
-        {loggedin ? 
-        (<div className="buttons-wrapper"> 
-        <Link to="/collections/" className="button1" >My Collections</Link>
-        <LogoutForm />
+      {loggedin ?
+        (<div className="buttons-wrapper">
+          <Link to="/collections/" className="button1" >My Collections</Link>
+          <LogoutForm />
         </div>
-      ) : (
-        <div className="buttons-wrapper">
-          <Link to="/signup" className="button1">
-            Sign Up
+        ) : (
+          <div className="buttons-wrapper">
+            <Link to="/signup" className="button1">
+              Sign Up
           </Link>
-          <Link to="/login" className="button1">
-            Log In
+            <Link to="/login" className="button1">
+              Log In
           </Link>
-        </div>
-      )}
+          </div>
+        )}
 
       <div className="footer">
         <Link className="footer1" to="/contactus">
