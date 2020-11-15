@@ -20,7 +20,14 @@ function ItemEditPage() {
             }
         })
             .then((results) => {
-                return results.json();
+               if (!results.ok) {
+                  console.log("***", results.statusText)
+                  console.log("***", results.json())
+               } else {
+                  return results.json();
+               }
+               console.log("--------RESULTS fetch data", results)
+                
             })
             .then((data) => {
                 console.log(data)

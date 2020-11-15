@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import Nav from "../../components/Nav/Nav";
 import "../../components/Nav/Nav.css";
 import "./ItemEditForm.css";
@@ -15,7 +15,7 @@ function ItemEditForm(props) {
     let btnRefAdd = useRef();
 
     const [credentials, setCredentials] = useState({
-        id: null,
+        //id: null,
         name: "",
         price: "",
         sale_amount: 0,
@@ -35,7 +35,7 @@ function ItemEditForm(props) {
         console.log(itemData)
         setCredentials((prevCredentials) => ({
             ...prevCredentials,
-            id: parseInt(itemData.id),
+            //id: parseInt(itemData.id),
             name: itemData.name,
             sale_amount: itemData.sale_amount,
             sale_end_date: itemData.sale_end_date,
@@ -75,9 +75,12 @@ function ItemEditForm(props) {
 
     const postData = async () => {
         let token = window.localStorage.getItem("token");
-
+         console.log("blah:          ", credentials.image)
+         console.log("blah:          ", (!credentials.image))
         let form_data = new FormData();
-        form_data.append('image', credentials.image);
+        if (credentials.image) {
+            form_data.append('image', credentials.image);
+        }
         form_data.append('attribute1', credentials.attribute1);
         form_data.append('attribute2', credentials.attribute2);
         form_data.append('attribute3', credentials.attribute3);
@@ -86,7 +89,10 @@ function ItemEditForm(props) {
         form_data.append('name', credentials.name);
         form_data.append('price', credentials.price);
         form_data.append('notes', credentials.notes);      
-        form_data.append('sale_amount', credentials.sale_amount);
+        if (credentials.sale_amount) {
+           console.log("---------- HERE, credentials sale amount: ", credentials.sale_amount)
+         form_data.append('sale_amount', credentials.sale_amount)
+        };
         if (credentials.sale_end_date !== null) {
             form_data.append('sale_end_date', credentials.sale_end_date);
         }
@@ -102,8 +108,7 @@ function ItemEditForm(props) {
         console.log(response)
 
         if (response.ok) {
-         // setErrorMessage("Item Created! Create another?")
-         // setErrorKey("detail")
+
          history.push(`/collection/${itemData.collection}/`);
          window.location.reload();
 
