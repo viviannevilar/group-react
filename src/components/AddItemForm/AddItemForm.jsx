@@ -124,10 +124,10 @@ function AddItemForm(props) {
 
       e.preventDefault();
 
-      // disables the button to submit form until there is a response
-      // if (btnRefAdd.current) {
-      //    btnRefAdd.current.disabled = true
-      // }
+      //disables the button to submit form until there is a response
+      if (btnRefAdd.current) {
+         btnRefAdd.current.disabled = true
+      }
 
       postData().then((response) => {
 

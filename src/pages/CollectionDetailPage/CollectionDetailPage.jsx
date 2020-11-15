@@ -174,12 +174,12 @@ function CollectionDetailPage() {
       .then((response) => {
 
          if (response.ok) {
-            //history.push(`/collection/${id}/`)
-            //window.location.reload();
+            // history.push(`/collection/${id}/`)
+            // window.location.reload();
          } else {
             console.log(response)
             setHasError(true)
-            setErrorMessage(response.statusText);
+            setErrorMessage("Delete item: " + response.statusText + ". Please refresh page and try again.");
          }
       });
    }
@@ -193,9 +193,14 @@ function CollectionDetailPage() {
             "Content-Type": "application/json",
             Authorization: `Token ${token}`,
          },
-      }).then(() => {
-         history.push(`/collection/${id}/`)
-         window.location.reload();
+      }).then((response) => {
+         if (response.ok) {
+            // history.push(`/collection/${id}/`)
+            // window.location.reload();
+         } else {
+            console.log(response)
+         }
+
       });
    }
 

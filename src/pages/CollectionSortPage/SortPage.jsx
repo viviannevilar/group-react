@@ -12,13 +12,13 @@ import arrayMove from 'array-move';
 //////////////////////////// components ////////////////////////////
 
 // sortables
-const SortableItem = SortableElement(({value}) => <ul>{value.name}, order: {value.ranking}</ul>);
+const SortableItem = SortableElement(({value, sortIndex}) => <ul>{value.name}, #{sortIndex}</ul>);
 
 const SortableList = SortableContainer(({items}) => {
     return (
         <ul>
         {items.map((value, index) => (
-            <SortableItem key={`item-${value.name}`} index={index} value={value} />
+            <SortableItem key={`item-${index}`} index={index} sortIndex={index} value={value} />
         ))}
         </ul>
     );
