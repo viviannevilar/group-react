@@ -165,9 +165,6 @@ align-items: center;}
   }
 }
 
-
-
-
 .buttoncontainer{
   display: flex;
   flex-direction: row;
@@ -180,6 +177,7 @@ align-items: center;}
   display: flex;
   flex-direction: column;
   width: 95%;
+  margin-left: 9px;
 }
 
 
@@ -208,4 +206,36 @@ align-items: center;}
 }
 
 
+
+#project-list{
+  height: 70vh;
+}
+
+
+div.swiperMainContainer{
+  height: 100%;
+}
+
+div.swiper-container{
+  height: 99%;
+}
+
+div.project-card{
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 90%;
+}
+
+div.buttoncontainer{
+  height: 10%;
+}
+
+div.swiper-slide{
+  height: 100%;
+
+}
+
+div.swiper-wrapper{
+  height: 90%;
+}
 
