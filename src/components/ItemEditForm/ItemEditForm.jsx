@@ -38,7 +38,6 @@ function ItemEditForm(props) {
             attribute2: itemData.attribute2,
             attribute3: itemData.attribute3,
             attribute4: itemData.attribute4,
-            //image: itemData.image,
             collection: parseInt(itemData.collection),
         }));
         console.log(credentials)

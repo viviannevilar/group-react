@@ -172,7 +172,6 @@ function CollectionDetailPage() {
          },
       })
       .then((response) => {
-
          if (response.ok) {
             // history.push(`/collection/${id}/`)
             // window.location.reload();
@@ -195,12 +194,14 @@ function CollectionDetailPage() {
          },
       }).then((response) => {
          if (response.ok) {
-            // history.push(`/collection/${id}/`)
-            // window.location.reload();
+            history.push(`/collection/${id}/`)
+            window.location.reload();
+            console.log("Archive response ---- :", response.ok)
          } else {
+            setHasError(true)
+            setErrorMessage("Archive item: " + response.statusText + ". Please refresh page and try again.");
             console.log(response)
          }
-
       });
    }
 
@@ -519,7 +520,12 @@ function CollectionDetailPage() {
                         <div className="modalText">
                            <AddItemForm id={id} collectionData={collectionData} />
                            <div>
-                              <button className="exitButton" onClick={() => addItemToggleModalState()}> exit </button>
+                              <button className="exitButton" onClick={() => {
+                                 addItemToggleModalState()
+                                 console.log("exit window")
+                                 }
+                                 
+                              }> exit </button>
                            </div>
                         </div>
                      </div>

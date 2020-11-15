@@ -16,7 +16,6 @@ function AddItemForm(props) {
    const [credentials, setCredentials] = useState({
       name: "",
       price: "",
-      // sale_amount: "",
       attribute1: "",
       attribute2: "",
       attribute3: "",
@@ -24,6 +23,7 @@ function AddItemForm(props) {
       image: "",
       sale_amount: 0,
       sale_end_date: null,
+      notes: "",
       collection: parseInt(id),
    });
 
@@ -50,6 +50,7 @@ function AddItemForm(props) {
    const history = useHistory();
 
    const postData = async () => {
+      setErrorKey()
       let token = window.localStorage.getItem("token");
 
       let form_data = new FormData();
@@ -62,6 +63,7 @@ function AddItemForm(props) {
       form_data.append('name', credentials.name);
       form_data.append('price', credentials.price);
       form_data.append('sale_amount', credentials.sale_amount);
+      form_data.append('notes', credentials.notes);
 
       if (credentials.sale_end_date !== null && parseInt(credentials.sale_amount) !== 0) {
          form_data.append('sale_end_date', credentials.sale_end_date);
@@ -78,16 +80,17 @@ function AddItemForm(props) {
          body: form_data,
       });
       if (response.ok) {
-         setHasError(false)
-         setErrorMessage(response.statusText);
-         return response.json();
+         // setErrorMessage("Item Created! Create another?")
+         // setErrorKey("detail")
+         history.push(`/collection/${id}/`);
+         window.location.reload();
+
 
       } else {
          response.text().then(text => {
                throw Error(text)
          }).catch(
                (error) => {
-
                   // this catches the error in a dictionary
                   // the key gives the key of the element that has a problem
                   // and the value gives gives the string with the error message
@@ -96,23 +99,19 @@ function AddItemForm(props) {
                   setHasError(true)
                   const errorObj = JSON.parse(error.message);
                   
+                  // this is the form element that has the problem (eg, "price")
                   setErrorKey(Object.keys(errorObj)[0])
+                  // this is the message of the error (eg, "this field is required")
                   setErrorMessage(errorObj[Object.keys(errorObj)[0]]);
-                  // "detail": "Invalid token." 
                   
-                  console.log("---------- Object.keys(errorObj)[0]: ", Object.keys(errorObj)[0])
-
-                  
+                  // Puts the cursor in the form input corresponding to the element that has an issue
                   let keyName = document.getElementById(`${Object.keys(errorObj)[0]}`)
+                  if (keyName) {keyName.focus();}
 
-                  if (keyName) {
-                     keyName.focus();
+                  // this enables the submit button again
+                  if (btnRefAdd.current) {
+                     btnRefAdd.current.disabled = false
                   }
-
-                  // // this enables the submit button again
-                  // if (btnRefAdd.current) {
-                  //    btnRefAdd.current.disabled = false
-                  // }
 
                }
          )
@@ -130,39 +129,11 @@ function AddItemForm(props) {
       }
 
       postData().then((response) => {
-
-         console.log("response: ", response)
-         console.log("errorMessage: ", errorMessage)
-
-         // btnRefAdd.current.disabled = false
-         
-         if (errorMessage === "Created") {
-
-            console.log("--------------- hasError: ", hasError)
-            
-            // enable the "add item"/"submit" button again just in case
-            // if (btnRefAdd.current) {
-            //    btnRefAdd.current.disabled = false
-            // }
-
-            // btnRefAdd.current.disabled = false
-
-            console.log("Error: ", errorMessage)
-
-         } else {
-            // history.push(`/collection/${id}/`);
-         //     window.location.reload();
-         }
-         //history.push(`/collection/${id}/`);
-         //window.location.reload();
-
+         //maybe I no longer need this bit!
       });
 
    };
    
-   //className={`error ${errorKey === ? "complete" : ""}`}
-   
-   // if ( errorKey === "name" )
 
    return (
         <div>
