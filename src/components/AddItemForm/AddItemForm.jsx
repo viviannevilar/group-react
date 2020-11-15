@@ -1,7 +1,9 @@
 import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
-import "../../components/Nav/Nav.css";
 import "./AddItemForm.css"
+import Nav from "../../components/Nav/Nav";
+import "../../components/Nav/Nav.css";
+
 
 
 function AddItemForm(props) {
@@ -137,7 +139,7 @@ function AddItemForm(props) {
 
    return (
         <div>
-
+            <div>
             <h2 id="headerTitle"> Add Item to {collectionData.title} </h2>
 
             <h4><span className="error">{ (errorKey === "detail") ? errorMessage : null}</span> </h4>
@@ -267,10 +269,11 @@ function AddItemForm(props) {
                 </div>
 
 
-                <div className="buttonwrapper">
+                <div className="aibuttonwrapper">
                     <button ref={btnRefAdd} type="submit" onClick={handleSubmit}>  Add to List </button>
                 </div>
             </form>
+            </div>
         </div>
     );
 }

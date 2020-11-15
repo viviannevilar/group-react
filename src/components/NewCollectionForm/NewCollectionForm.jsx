@@ -82,9 +82,9 @@ function NewCollectionForm() {
         <div>
             <Nav />
         </div>
-        <div className="formlogo" >
+        <div className="ncformlogo" >
             <img
-            id="formlogoimage"
+            id="ncformlogoimage"
             src={require("../../images/Comparalist_rectangle.png")}
             alt="Company Logo"
             />

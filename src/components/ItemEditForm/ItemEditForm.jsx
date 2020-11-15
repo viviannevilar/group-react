@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Nav from "../../components/Nav/Nav";
 import "../../components/Nav/Nav.css";
+import "./ItemEditForm.css";
 
 function ItemEditForm(props) {
 
@@ -117,18 +118,24 @@ function ItemEditForm(props) {
 
 
     return (
-        <div id="Nav">
+        <div>
             <div>
                 <Nav />
             </div>
-    
-        <div id="pledgeform">
+            <div className="eiformlogo" >
+                <img
+                id="eiformlogoimage"
+                src={require("../../images/Comparalist_rectangle.png")}
+                alt="Company Logo"
+                />
+            </div>
+        <div id="edititemform">
 
-            <h2 id="headerTitle"> Edit Item in {collectionData.title} </h2>
+            <h2 id="edititemheadertitle"> Edit Item in {collectionData.title} </h2>
             <form>
 
-                <div className="thra">
-                    <label htmlFor="name">Name of Item:</label>
+                <div className="eifa">
+                    <label className="atei" htmlFor="name">Name of Item:</label>
                     <input
                         type="text"
                         id="name"
@@ -138,8 +145,8 @@ function ItemEditForm(props) {
                 </div>
 
 
-                <div className="thra">
-                    <label htmlFor="price">Price of Item:</label>
+                <div className="eifa">
+                    <label className="atei" htmlFor="price">Price of Item:</label>
                     <input
                         type="number"
                         id="price"
@@ -150,8 +157,8 @@ function ItemEditForm(props) {
                 </div>
 
 
-                <div className="thra">
-                    <label htmlFor="sale_amount">Is there a discount currently offered (%)?:</label>
+                <div className="eifa">
+                    <label className="atei" htmlFor="sale_amount">Is there a discount currently offered (%)?:</label>
                     <input
                         type="number"
                         id="sale_amount"
@@ -162,8 +169,8 @@ function ItemEditForm(props) {
                 </div>
 
 
-                {parseInt(credentials.sale_amount) > 0 && (<div className="thra">
-                    <label htmlFor="sale_end_date">When does the discount expire?</label>
+                {parseInt(credentials.sale_amount) > 0 && (<div className="eifa">
+                    <label className="atei" htmlFor="sale_end_date">When does the discount expire?</label>
                     <input
                         type="date"
                         id="sale_end_date"
@@ -172,8 +179,8 @@ function ItemEditForm(props) {
                     />
                 </div>)}
 
-                {collectionData.attribute1 !== "" && (<div className="thra">
-                    <label htmlFor="attribute1">{collectionData.attribute1}:</label>
+                {collectionData.attribute1 !== "" && (<div className="eifa">
+                    <label className="atei" htmlFor="attribute1">{collectionData.attribute1}:</label>
                     <input
                         type="text"
                         id="attribute1"
@@ -184,8 +191,8 @@ function ItemEditForm(props) {
 
 
 
-                {collectionData.attribute2 !== "" && (<div className="thra">
-                    <label htmlFor="attribute2">{collectionData.attribute2}:</label>
+                {collectionData.attribute2 !== "" && (<div className="eifa">
+                    <label className="atei" htmlFor="attribute2">{collectionData.attribute2}:</label>
                     <input
                         type="text"
                         id="attribute2"
@@ -194,8 +201,8 @@ function ItemEditForm(props) {
                     />
                 </div>)}
 
-                {collectionData.attribute3 !== "" && (<div className="thra">
-                    <label htmlFor="attribute3">{collectionData.attribute3}:</label>
+                {collectionData.attribute3 !== "" && (<div className="eifa">
+                    <label className="atei" htmlFor="attribute3">{collectionData.attribute3}:</label>
                     <input
                         type="text"
                         id="attribute3"
@@ -204,8 +211,8 @@ function ItemEditForm(props) {
                     />
                 </div>)}
 
-                {collectionData.attribute4 !== "" && (<div className="thra">
-                    <label htmlFor="attribute4">{collectionData.attribute4}:</label>
+                {collectionData.attribute4 !== "" && (<div className="eifa">
+                    <label className="atei" htmlFor="attribute4">{collectionData.attribute4}:</label>
                     <input
                         type="text"
                         id="attribute4"
@@ -216,8 +223,8 @@ function ItemEditForm(props) {
 
 
 
-                <div className="thra">
-                    <label htmlFor="image">Image:</label>
+                <div className="eifa">
+                    <label className="atei" htmlFor="image">Image:</label>
                     <br></br>
                     <div id="imagecon">
                         <img id="image" src={credentials.image} alt="anon pic" />
@@ -231,8 +238,8 @@ function ItemEditForm(props) {
                 </div>
 
 
-                <div className="thra">
-                    <label htmlFor="notes">Notes:</label>
+                <div className="eifa">
+                    <label className="atei" htmlFor="notes">Notes:</label>
                     <input
                         type="textarea"
                         id="notes"
@@ -244,9 +251,9 @@ function ItemEditForm(props) {
 
 
 
-                <div className="buttonwrapper">
-                    <button className="pledgebutton" type="submit" onClick={handleSubmit}>  Update Item </button>
-                    <button className="pledgebutton" type="submit" onClick={cancelSubmit}>  Cancel </button>
+                <div className="eibuttonwrapper">
+                    <button className="eibutton" type="submit" onClick={handleSubmit}>  Update Item </button>
+                    <button className="eibutton" type="submit" onClick={cancelSubmit}>  Cancel </button>
                 </div>
             </form>
         </div>
