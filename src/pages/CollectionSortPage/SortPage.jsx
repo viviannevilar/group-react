@@ -11,21 +11,30 @@ import { setTokenSourceMapRange } from 'typescript';
 // styling
 import "./SortPage.css"
 import moveicon from "../../images/reorder.png"
+import nophoto from '../../images/noimage.PNG';
+
+// components
+import Nav from "../../components/Nav/Nav";
 
 
 //////////////////////////// components ////////////////////////////
 
 // sortables
+
+// each item
 const SortableItem = SortableElement(({value, sortIndex}) => {
    return(
-      <div className="sortable-item">
+      <div className={`sortable-item ${value.is_active ? "" : "archived-item"}`}>
+         {/* <div className={`${value.is_active ? "overlay-null" : "overlay"}`}></div> */}
          <img style={{ cursor: "pointer" }} className="changeicons sort-icons" alt="moveicon" src={moveicon} />
-         {value.name}, #{sortIndex}
+         {value.name}
+         {value.image !== null ? <img className="item-small" alt="Item" src={value.image} /> : <img className="item-small" alt="Item" src={nophoto} />}
+         
       </div>
    )
 });
 
-
+// the container with all items
 const SortableList = SortableContainer(({items}) => {
     return (
         <div id="sortable-container">
@@ -97,8 +106,8 @@ function SortableComponent(props) {
       postData().then((response) => {
          console.log("---------------- RESPONSE ", response)
          if (response.ok) {
-            // history.push(`/collection/${id}/`);
-            // window.location.reload();
+            history.push(`/collection/${id}/`);
+            window.location.reload();
          } else {
             console.log("items order ---- : ", response.detail)
             setErrorMessage(response.detail)
@@ -124,7 +133,11 @@ function SortableComponent(props) {
   
    /////////////// return
    return (
+      
       <div>
+         <div>
+            <Nav />
+         </div>
             {/* There is NO error */}
             {(!hasError) ? (<div>
                <SortableList items={items} onSortEnd={onSortEnd} />
