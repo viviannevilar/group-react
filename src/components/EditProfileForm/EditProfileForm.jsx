@@ -216,7 +216,7 @@ function EditProfileForm() {
               />
             </div >
             <div className="row"></div>
-            <button id="button" button type="submit" onClick={handleSubmitCredential}> EditProfile </button>
+            <button id="button" button type="submit" onClick={handleSubmitCredential}> Edit Profile </button>
             <h2>Change Password here</h2>
             <div className="row">
               <label htmlFor="old_password">Old Password:</label>
