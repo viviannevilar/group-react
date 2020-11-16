@@ -10,7 +10,7 @@ import ItemCard from "../../components/ItemCard/ItemCard"
 import SummaryItemCard from "../../components/SummaryItemCard/SummaryItemCard";
 import AddItemForm from "../../components/AddItemForm/AddItemForm";
 
-
+// icons
 import archiveicon from "../../images/archive.png"
 import deleteicon from "../../images/delete.png"
 import editicon from "../../images/edit.png"

@@ -16,7 +16,7 @@ function NewCollectionForm() {
     attribute2: "",
     attribute3: "",
     attribute4: "",
-    is_active: true,
+   //  is_active: true,
   });
 
   //methods
@@ -59,23 +59,28 @@ function NewCollectionForm() {
 
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+   const handleSubmit = (e) => {
+      e.preventDefault();
 
-    postData().then((response) => {
-      if (response != undefined) {
-        history.push("/collections/")
-      } else {
-        history.push("/newcollection/") 
-        // not sure about whether this should just be collection????????
-      }
-    }).catch(
-      (error) => {
-        console.log("error")
-      }
-    )
+      postData().then((response) => {
+         if (response != undefined) {
+         history.push("/collections/")
+         } else {
+         history.push("/newcollection/") 
+         // not sure about whether this should just be collection????????
+         }
+      }).catch(
+         (error) => {
+         console.log("error")
+         }
+      )
+   };
 
-  };
+
+
+  const cancelSubmit = (e) => {
+   history.push(`/collections/`);
+   }
 
   return (
     <div>
@@ -148,7 +153,7 @@ function NewCollectionForm() {
           />
         </div>
 
-        <div className="ncfa">
+        {/* <div className="ncfa">
           <label className="at" htmlFor="is_active">Is this Project Active on submission of this form?</label>
         </div>
         <div className="ncradiowrapper">
@@ -168,13 +173,14 @@ function NewCollectionForm() {
             onChange={handleChange}
           />
           <label htmlFor="false">Archived</label>
-        </div>
+        </div> */}
         <br></br>
 
         <div className="ncbuttonwrapper">
           <button className="newcollectionbutton" type="submit" onClick={handleSubmit}>
             Submit your Collection!
       </button>
+      <button className="newcollectionbutton" type="submit" onClick={cancelSubmit}>  Cancel </button>
           <br></br>
           <br></br>
 

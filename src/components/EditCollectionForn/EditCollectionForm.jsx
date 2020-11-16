@@ -20,7 +20,7 @@ function EditCollectionForm(props) {
         attribute2: "",
         attribute3: "",
         attribute4: "",
-        is_active: true,
+      //   is_active: true,
     });
 
     useEffect(() => {
@@ -32,19 +32,27 @@ function EditCollectionForm(props) {
             attribute2: collectionData.attribute2,
             attribute3: collectionData.attribute3,
             attribute4: collectionData.attribute4,
-            is_active: collectionData.is_active,
+            // is_active: collectionData.is_active,
         });
     }, [collectionData]);
 
 
     //methods
     const handleChange = (e) => {
+         console.log(";;;;;;;;;;;;;", e.target);
+
         const { id, value } = e.target;
         setCredentials((prevCredentials) => ({
             ...prevCredentials,
             [id]: value,
         }));
     };
+
+
+   //  useEffect(() => {
+   //     console.log("-----------------credentials.is_active: ", credentials.is_active)
+
+   //  }, [credentials.is_active])
 
     const handleImageChange = (e) => {
         e.persist();
@@ -65,7 +73,7 @@ function EditCollectionForm(props) {
         form_data.append('attribute2', credentials.attribute2);
         form_data.append('attribute3', credentials.attribute3);
         form_data.append('attribute4', credentials.attribute4);    
-        form_data.append('is_active', credentials.is_active);
+      //   form_data.append('is_active', credentials.is_active);
         form_data.append('title', credentials.title);
 
         //function you can call but carry on as well
@@ -92,6 +100,10 @@ function EditCollectionForm(props) {
         });
 
     };
+
+    const cancelSubmit = (e) => {
+      history.push(`/collections/`);
+      }
 
 
 
@@ -168,33 +180,40 @@ function EditCollectionForm(props) {
 
 
 
-                <div className="ecfa">
+                {/* <div className="ecfa">
                     <label className="ate" htmlFor="is_open">Would you like to archive this Collection and come back to it later?</label>
 
-                </div>
+                </div> */}
 
-                <div className="ecradiowrapper">
+                {/* <div className="ecradiowrapper">
+                   <label>
                     <input
                         type="radio"
                         id="is_active"
                         name="is_active"
+                        value="true"
+                        checked={credentials.is_active === true || "true"} 
                         onChange={handleChange}
                     />
-                    <label htmlFor="is_active">Active</label>
+                    Active</label>
 
+                     <label>
                     <input
                         type="radio"
                         id="is_active"
                         name="is_active"
                         value="false"
+                        checked={credentials.is_active === (false || "false")}
                         onChange={handleChange}
                     />
-                    <label htmlFor="false">Archive</label>
-                </div>
+                    Archived</label>
+                </div> */}
                 <br></br>
 
                 <div className="ecbuttonwrapper">
                     <button className="ecbutton" type="submit" onClick={handleSubmit}>  Update Collection </button>
+
+                    <button className="ecbutton" type="submit" onClick={cancelSubmit}>  Cancel </button>
                 </div>
                 <br></br>
                 <br></br>

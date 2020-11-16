@@ -10,7 +10,6 @@ function ItemEditForm(props) {
 
     const [errorMessage, setErrorMessage] = useState()
     const [errorKey, setErrorKey] = useState()
-    
 
     let btnRefAdd = useRef();
 
@@ -75,8 +74,7 @@ function ItemEditForm(props) {
 
     const postData = async () => {
         let token = window.localStorage.getItem("token");
-         console.log("blah:          ", credentials.image)
-         console.log("blah:          ", (!credentials.image))
+
         let form_data = new FormData();
         if (credentials.image) {
             form_data.append('image', credentials.image);
@@ -109,8 +107,8 @@ function ItemEditForm(props) {
 
         if (response.ok) {
 
-         history.push(`/collection/${itemData.collection}/`);
-         window.location.reload();
+         // history.push(`/collection/${itemData.collection}/`);
+         // window.location.reload();
 
          } else {
          response.text().then(text => {
@@ -158,14 +156,14 @@ function ItemEditForm(props) {
          }
         postData().then((response) => {
             console.log(response)
-            //history.push(`/collection/${collectionData.id}/`);
-            // window.location.reload();
+            history.push(`/collection/${collectionData.id}/`);
+            window.location.reload();
         });
 
     };
 
    const cancelSubmit = (e) => {
-   history.push(`/collection/${collectionData.id}/`);
+      history.push(`/collection/${collectionData.id}/`);
    }
 
 

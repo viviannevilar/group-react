@@ -85,8 +85,8 @@ function SortableComponent(props) {
       postData().then((response) => {
          console.log("---------------- RESPONSE ", response)
          if (response.ok) {
-            // history.push(`/collection/${id}/`);
-            // window.location.reload();
+            history.push(`/collection/${id}/`);
+            window.location.reload();
          } else {
             console.log("items order ---- : ", response.detail)
             setErrorMessage(response.detail)
