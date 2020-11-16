@@ -1,8 +1,9 @@
 
 import React, { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Nav from "../../components/Nav/Nav";
 import "../../components/Nav/Nav.css";
+import "./EditCollectionForm.css";
 import ContactUsPage from "../../pages/ContactUs/ContactUs";
 
 function EditCollectionForm(props) {
@@ -19,7 +20,7 @@ function EditCollectionForm(props) {
         attribute2: "",
         attribute3: "",
         attribute4: "",
-        is_active: true,
+      //   is_active: true,
     });
 
     useEffect(() => {
@@ -31,19 +32,27 @@ function EditCollectionForm(props) {
             attribute2: collectionData.attribute2,
             attribute3: collectionData.attribute3,
             attribute4: collectionData.attribute4,
-            is_active: collectionData.is_active,
+            // is_active: collectionData.is_active,
         });
     }, [collectionData]);
 
 
     //methods
     const handleChange = (e) => {
+         console.log(";;;;;;;;;;;;;", e.target);
+
         const { id, value } = e.target;
         setCredentials((prevCredentials) => ({
             ...prevCredentials,
             [id]: value,
         }));
     };
+
+
+   //  useEffect(() => {
+   //     console.log("-----------------credentials.is_active: ", credentials.is_active)
+
+   //  }, [credentials.is_active])
 
     const handleImageChange = (e) => {
         e.persist();
@@ -64,7 +73,7 @@ function EditCollectionForm(props) {
         form_data.append('attribute2', credentials.attribute2);
         form_data.append('attribute3', credentials.attribute3);
         form_data.append('attribute4', credentials.attribute4);    
-        form_data.append('is_active', credentials.is_active);
+      //   form_data.append('is_active', credentials.is_active);
         form_data.append('title', credentials.title);
 
         //function you can call but carry on as well
@@ -92,33 +101,45 @@ function EditCollectionForm(props) {
 
     };
 
+    const cancelSubmit = (e) => {
+      history.push(`/collections/`);
+      }
+
 
 
     return (
-        <div id="Nav">
+        <div>
             <div>
                 <Nav />
             </div>
+        
+            <div className="ecformlogo" >
+                <img
+                id="ecformlogoimage"
+                src={require("../../images/Comparalist_rectangle.png")}
+                alt="Company Logo"
+                />
+            </div>
     
-        <div id="pledgeform">
+        <div className="editcollectionform">
 
-            <h2 id="headerTitle"> Edit {collectionData.title} </h2>
+            <h2 id="editcollectionheadertitle"> Edit {collectionData.title} </h2>
             <form>
 
-                <div className="thra">
-                    <label htmlFor="title">Name of Collection:</label>
-                    <input
-                        type="text"
+                <div className="ecfa">
+                    <label className="ate" htmlFor="title">Name of Collection:</label>
+                    <textarea
+                        type="textarea"
                         id="title"
                         value={credentials.title}
                         onChange={handleChange}
                     />
                 </div>
 
-                {collectionData.attribute1 !== "" && (<div className="thra">
-                    <label htmlFor="attribute1">Attribute 1:</label>
-                    <input
-                        type="text"
+                {collectionData.attribute1 !== "" && (<div className="ecfa">
+                    <label className="ate" htmlFor="attribute1">Attribute 1:</label>
+                    <textarea
+                        type="textarea"
                         id="attribute1"
                         value={credentials.attribute1}
                         onChange={handleChange}
@@ -127,30 +148,30 @@ function EditCollectionForm(props) {
 
 
 
-                {collectionData.attribute2 !== "" && (<div className="thra">
-                    <label htmlFor="attribute2">Attribute 2:</label>
-                    <input
-                        type="text"
+                {collectionData.attribute2 !== "" && (<div className="ecfa">
+                    <label className="ate" htmlFor="attribute2">Attribute 2:</label>
+                    <textarea
+                        type="textarea"
                         id="attribute2"
                         value={credentials.attribute2}
                         onChange={handleChange}
                     />
                 </div>)}
 
-                {collectionData.attribute3 !== "" && (<div className="thra">
-                    <label htmlFor="attribute3">Attribute 3:</label>
-                    <input
-                        type="text"
+                {collectionData.attribute3 !== "" && (<div className="ecfa">
+                    <label className="ate" htmlFor="attribute3">Attribute 3:</label>
+                    <textarea
+                        type="textarea"
                         id="attribute3"
                         value={credentials.attribute3}
                         onChange={handleChange}
                     />
                 </div>)}
 
-                {collectionData.attribute4 !== "" && (<div className="thra">
-                    <label htmlFor="attribute4">Attribute 4:</label>
-                    <input
-                        type="text"
+                {collectionData.attribute4 !== "" && (<div className="ecfa">
+                    <label className="ate" htmlFor="attribute4">Attribute 4:</label>
+                    <textarea
+                        type="textarea"
                         id="attribute4"
                         value={credentials.attribute4}
                         onChange={handleChange}
@@ -159,34 +180,43 @@ function EditCollectionForm(props) {
 
 
 
-                <div className="thra">
-                    <label htmlFor="is_open">Would you like to archive this Collection and come back to it later?</label>
+                {/* <div className="ecfa">
+                    <label className="ate" htmlFor="is_open">Would you like to archive this Collection and come back to it later?</label>
 
-                </div>
+                </div> */}
 
-                <div className="radiowrapper">
+                {/* <div className="ecradiowrapper">
+                   <label>
                     <input
                         type="radio"
                         id="is_active"
                         name="is_active"
+                        value="true"
+                        checked={credentials.is_active === true || "true"} 
                         onChange={handleChange}
                     />
-                    <label htmlFor="is_active">Active</label>
+                    Active</label>
 
+                     <label>
                     <input
                         type="radio"
                         id="is_active"
                         name="is_active"
                         value="false"
+                        checked={credentials.is_active === (false || "false")}
                         onChange={handleChange}
                     />
-                    <label htmlFor="false">Archive</label>
-                </div>
+                    Archived</label>
+                </div> */}
+                <br></br>
 
-
-                <div className="buttonwrapper">
-                    <button className="pledgebutton" type="submit" onClick={handleSubmit}>  Update Collection </button>
+                <div className="ecbuttonwrapper">
+                    <button className="ecbutton" type="submit" onClick={handleSubmit}>  Update Collection </button>
+                    <br></br>
+                    <button className="ecbutton" type="submit" onClick={cancelSubmit}>  Cancel </button>
                 </div>
+                <br></br>
+                <br></br>
             </form>
         </div>
         </div>

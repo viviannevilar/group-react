@@ -10,11 +10,21 @@ import ItemCard from "../../components/ItemCard/ItemCard"
 import SummaryItemCard from "../../components/SummaryItemCard/SummaryItemCard";
 import AddItemForm from "../../components/AddItemForm/AddItemForm";
 
+// icons
+import archiveicon from "../../images/archive.png"
+import deleteicon from "../../images/delete.png"
+import editicon from "../../images/edit.png"
+import goicon from "../../images/goicon.png"
+
+import addicon from "../../images/add.png"
+
+
 // styling
 import "./CollectionDetailPage.css";
 
 // Swiper
-import Swiper, { Autoplay } from 'swiper';
+//import Swiper, { Autoplay } from 'swiper';
+import Swiper from 'swiper';
 import { Navigation, Pagination, Controller, Thumbs } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
 
@@ -23,8 +33,8 @@ import 'swiper/swiper-bundle.min.css';
 
 // format date for display
 function formatDate(string) {
-    var options = { year: "numeric", month: "long", day: "numeric" };
-    return new Date(string).toLocaleDateString([], options);
+   var options = { year: "numeric", month: "long", day: "numeric" };
+   return new Date(string).toLocaleDateString([], options);
 }
 
 
@@ -38,12 +48,13 @@ function CollectionDetailPage() {
    const { id } = useParams();
 
    // Loading and Modal States
-   const [isLoading, setisLoading] = useState(true);
+   const [isLoading, setIsLoading] = useState(true);
+
    const [modalState, setModalState] = useState(false);
    const [summaryModal, setSummaryModal] = useState(false)
 
    // Error
-   const [error, setError] = useState(false);
+   const [hasError, setHasError] = useState(false);
    const [errorMessage, setErrorMessage] = useState();
 
    // Data state variables
@@ -62,7 +73,7 @@ function CollectionDetailPage() {
    // summary variables:
    const [summaryChoice, setSummaryChoice] = useState("")
    const [summaryInfo, setSummaryInformation] = useState([])
-   const [summaryTitle, setsummaryTitle] = useState("Price")
+   const [summaryTitle, setSummaryTitle] = useState("No Summary Option Selected")
 
    // Public or private path (shared collection or own collection)
    let urlPath
@@ -79,7 +90,8 @@ function CollectionDetailPage() {
       shared_link = "private"
    }
 
-
+   // let response
+   let key_information
    /////////////// methods
 
    // Get collection and associated items' data
@@ -87,26 +99,26 @@ function CollectionDetailPage() {
       let response
       try {
          if (urlComponents.length === 4) {
-               response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/`, {
-                  method: "get",
-                  headers: {
-                     "Content-Type": "application/json",
-                     Authorization: `Token ${token}`,
-                  },
-               })
+            response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/`, {
+               method: "get",
+               headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Token ${token}`,
+               },
+            })
          } else {
-               response = await fetch(`${process.env.REACT_APP_API_URL}collection/${urlPath}/`, {
-                  method: "get",
-                  headers: {
-                     "Content-Type": "application/json",
-                  },
-               })
+            response = await fetch(`${process.env.REACT_APP_API_URL}collection/${urlPath}/`, {
+               method: "get",
+               headers: {
+                  "Content-Type": "application/json",
+               },
+            })
          }
       } catch (thisError) {
-         console.log("thisError: ", thisError)
-         setisLoading(false);
+         console.log("---------------thisError: ", thisError)
+         setIsLoading(false);
          setErrorMessage(thisError);
-         setError(true);
+         setHasError(true);
          return
       }
 
@@ -116,13 +128,24 @@ function CollectionDetailPage() {
          setCollectionData(data);
          setItemData(data.collection_items);
          setItemDisplayData(data.collection_items)
-         setisLoading(false);
+         setIsLoading(false);
 
       } else {
-         setisLoading(false);
-         setError(true);
-         console.log("DATA: ", data.detail)
+         setHasError(true);
          setErrorMessage(data.detail);
+         console.log("-------------DATA: ", data.detail)
+         setIsLoading(false);
+
+         // Here is a list of the errors I have gotten
+         // Not logged on
+         // data.detail = "Invalid token."
+
+         // Logged in with different account
+         // data.detail = "You do not have permission to perform this action."
+
+         // Collection doesn't exist
+         // data.detail = "Not found."
+         setIsLoading(false);
       }
 
    }
@@ -136,127 +159,139 @@ function CollectionDetailPage() {
    }, [id]);
 
 
-    // Modal state change functions
-    const addItemToggleModalState = () => {
-        setModalState(!modalState);
-        window.scrollTo(0, 0);
-    };
+   // Modal state change functions
+   const addItemToggleModalState = () => {
+      setModalState(!modalState);
+      window.scrollTo(0, 0);
+   };
 
-    const summaryToggleState = () => {
-        setSummaryModal(!summaryModal);
-        window.scrollTo(0, 0);
-    };
+   const summaryToggleState = () => {
+      setSummaryModal(!summaryModal);
+      window.scrollTo(0, 0);
+   };
 
 
-    // Delete Item
-    const handleDelete = (projectdat, e) => {
-        //let token = localStorage.getItem("token");
-        fetch(`${process.env.REACT_APP_API_URL}item/${projectdat.id}/`, {
-            method: "delete",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Token ${token}`,
-            },
-        }).then(() => {
+   // Delete Item
+   const handleDelete = (projectdat, e) => {
+      console.log("------------handleDelete")
+
+      fetch(`${process.env.REACT_APP_API_URL}item/${projectdat.id}/`, {
+         method: "delete",
+         headers: {
+            Authorization: `Token ${token}`,
+         },
+      })
+         .then((response) => {
+            if (response.ok) {
+               history.push(`/collection/${id}/`)
+               window.location.reload();
+            } else {
+               console.log(response)
+               setHasError(true)
+               setErrorMessage("Delete item: " + response.statusText + ". Please refresh page and try again.");
+            }
+         });
+   }
+
+   // Archive Item
+   const archiveItem = (item, e) => {
+      let token = window.localStorage.getItem("token");
+      fetch(`${process.env.REACT_APP_API_URL}item/${item.id}/archive/`, {
+         method: "post",
+         headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+         },
+      }).then((response) => {
+         if (response.ok) {
             history.push(`/collection/${id}/`)
             window.location.reload();
-        });
-    }
+            console.log("Archive response ---- :", response.ok)
+         } else {
+            setHasError(true)
+            setErrorMessage("Archive item: " + response.statusText + ". Please refresh page and try again.");
+            console.log(response)
+         }
+      });
+   }
 
-    // Archive Item
-    const archiveItem = (item, e) => {
-        let token = window.localStorage.getItem("token");
-        fetch(`${process.env.REACT_APP_API_URL}item/${item.id}/archive/`, {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Token ${token}`,
-            },
-        }).then(() => {
-            history.push(`/collection/${id}/`)
-            window.location.reload();
-        });
-    }
+   // FILTER active-archived-all items  
+   useEffect(() => {
 
-    // FILTER active-archived-all items  
-    useEffect(() => {
+      let filteredData
 
-        let filteredData
+      if (filterChoice === "active") {
+         filteredData = itemData.filter((item) => item.is_active)
+         setItemDisplayData(filteredData)
+         console.log("active filtering")
 
-        if (filterChoice === "active") {
-            filteredData = itemData.filter((item) => item.is_active)
-            setItemDisplayData(filteredData)
-            console.log("active filtering")
+      } else if (filterChoice === "archived") {
 
-        } else if (filterChoice === "archived") {
+         filteredData = itemData.filter((item) => !item.is_active)
+         setItemDisplayData(filteredData)
+         console.log("archive filtering")
 
-            filteredData = itemData.filter((item) => !item.is_active)
-            setItemDisplayData(filteredData)
-            console.log("archive filtering")
+      } else if (filterChoice === "all") {
 
-        } else if (filterChoice === "all") {
+         setItemDisplayData(itemData)
+         console.log("no filtering - all items")
 
-            setItemDisplayData(itemData)
-            console.log("no filtering - all items")
+      } else {
+         console.log("Error in filters. Filter chosen doesn't match any of the filter options. filterChoice = ", filterChoice)
+      }
 
-        } else {
-            console.log("Error in filters. Filter chosen doesn't match any of the filter options. filterChoice = ", filterChoice)
-        }
-
-    }, [filterChoice, itemData])
+   }, [filterChoice, itemData])
 
 
-    // ORDER items by price, date 
+   // ORDER items by price, date 
+   let sorted
 
-    let sorted
+   useEffect(() => {
 
-    useEffect(() => {
+      if (orderChoice === "price-lh") {
 
-        if (orderChoice === "price-lh") {
+         sorted = [...itemData].sort((a, b) => a.price - b.price)
+         //see explanation at the end of this file to understand this a bit more
+         setItemData(sorted)
+         //console.log("price-lh ordering")
 
-            sorted = [...itemData].sort((a, b) => a.price - b.price)
-            //see explanation at the end of this file to understand this a bit more
-            setItemData(sorted)
-            console.log("price-lh ordering")
+      } else if (orderChoice === "price-hl") {
 
-        } else if (orderChoice === "price-hl") {
+         sorted = [...itemData].sort((a, b) => a.price - b.price).reverse()
+         setItemData(sorted)
+         //console.log("price-hl ordering")
 
-            sorted = [...itemData].sort((a, b) => a.price - b.price).reverse()
-            setItemData(sorted)
-            console.log("price-hl ordering")
+      } else if (orderChoice === "date-created") {
 
+         sorted = [...itemData].sort((a, b) => a.id - b.id)
+         setItemData(sorted)
+         //console.log("date-created ordering")
 
-        } else if (orderChoice === "date-created") {
+      } else if (orderChoice === "alphabetical") {
 
-            sorted = [...itemData].sort((a, b) => a.id - b.id)
-            setItemData(sorted)
-            console.log("date-created ordering")
+         sorted = [...itemData].sort((a, b) => a.name > b.name ? 1 : -1)
+         setItemData(sorted)
+         //console.log("alphabetical ordering")
 
-         } else if (orderChoice === "alphabetical") {
+      } else if (orderChoice === "default") {
 
-            sorted = [...itemData].sort()
-            setItemData(sorted)
-            console.log("alphabetical ordering")
+         // sorted = [...itemData].sort((a, b) => a.last_updated - b.last_updated )
+         setItemData(collectionData.collection_items)
+         //console.log("default ordering")
 
-        } else if (orderChoice === "default") {
+      } else if (orderChoice === "date-modified") {
 
-            // sorted = [...itemData].sort((a, b) => a.last_updated - b.last_updated )
-            setItemData(collectionData.collection_items)
-            console.log("default ordering")
+         sorted = [...itemData].sort((a, b) => new Date(a.last_updated) - new Date(b.last_updated))
+         setItemData(sorted)
+         // console.log("date-modified ordering")
 
-         // } else if (orderChoice === "date-modified") {
+      } else {
 
-         //    sorted = [...itemData].sort((a, b) => new Date(a.last_updated) - new Date(b.last_updated))
-         //    setItemData(sorted)
-         //    console.log("date-modified ordering")
+         console.log("Error in ordering. Order chosen doesn't match any of the order options. orderChoice = ", orderChoice)
 
-        } else {
+      }
 
-            console.log("Error in ordering. Order chosen doesn't match any of the order options. orderChoice = ", orderChoice)
-
-        }
-
-    }, [orderChoice])
+   }, [orderChoice])
 
 
 
@@ -276,98 +311,97 @@ function CollectionDetailPage() {
          slidesPerView: 1,
          spaceBetween: 10,
          breakpoints: {
-               '@0.75': {
-                  slidesPerView: 2,
-                  spaceBetween: 20,
-               },
-               '@1.00': {
-                  slidesPerView: 3,
-                  spaceBetween: 40,
-               },
-               '@1.50': {
-                  slidesPerView: 4,
-                  spaceBetween: 50,
-               }
+            '@0.75': {
+               slidesPerView: 2,
+               spaceBetween: 20,
+            },
+            '@1.00': {
+               slidesPerView: 3,
+               spaceBetween: 40,
+            },
+            '@1.50': {
+               slidesPerView: 4,
+               spaceBetween: 50,
+            }
          },
          coverflowEffect: {
-               rotate: 50,
-               stretch: 0,
-               depth: 100,
-               modifier: 1,
-               slideShadows: true,
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
          },
          pagination: {
-               el: '.swiper-pagination',
-               clickable: true,
+            el: '.swiper-pagination',
+            dynamicBullets: true,
+            clickable: true,
          },
          navigation: {
-               nextEl: '.swiper-button-next',
-               prevEl: '.swiper-button-prev',
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
          }
       })
 
    }, [itemDisplayData, id])
 
 
-   
-// SUMMARY choices
+   // SUMMARY choices
    useEffect(() => {
 
       if (summaryChoice === "price") {
 
-         var key_information = itemDisplayData.map(function (item, index) {
-               return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.price };
+         key_information = itemDisplayData.map(function (item, index) {
+            return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.price, sale_amount: item.sale_amount, end_date: item.sale_end_date };
          })
          setSummaryInformation(key_information)
-         setsummaryTitle("Price")
+         setSummaryTitle("Price")
          console.log(key_information)
 
       } else if (summaryChoice === "sale_amount") {
 
-         var key_information = itemDisplayData.map(function (item, index) {
-               return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.sale_amount, end_date: item.sale_end_date };
+         key_information = itemDisplayData.map(function (item, index) {
+            return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.sale_amount, end_date: item.sale_end_date };
          })
          setSummaryInformation(key_information)
-         setsummaryTitle("Discount")
+         setSummaryTitle("Discount")
          console.log(key_information)
 
 
       } else if (summaryChoice === "attribute1") {
 
-         var key_information = itemDisplayData.map(function (item, index) {
-               return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute1 };
+         key_information = itemDisplayData.map(function (item, index) {
+            return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute1 };
          })
          setSummaryInformation(key_information)
-         setsummaryTitle(collectionData.attribute1)
+         setSummaryTitle(collectionData.attribute1)
          console.log(key_information)
 
       } else if (summaryChoice === "attribute2") {
 
-         var key_information = itemDisplayData.map(function (item, index) {
-               return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute2 };
+         key_information = itemDisplayData.map(function (item, index) {
+            return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute2 };
          })
          setSummaryInformation(key_information)
-         setsummaryTitle(collectionData.attribute2)
+         setSummaryTitle(collectionData.attribute2)
          console.log(key_information)
 
       } else if (summaryChoice === "attribute3") {
 
-         var key_information = itemDisplayData.map(function (item, index) {
-               return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute3 };
+         key_information = itemDisplayData.map(function (item, index) {
+            return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute3 };
          })
          setSummaryInformation(key_information)
-         setsummaryTitle(collectionData.attribute3)
+         setSummaryTitle(collectionData.attribute3)
 
          console.log(key_information)
 
       } else if (summaryChoice === "attribute4") {
 
-
-         var key_information = itemDisplayData.map(function (item, index) {
-               return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute4 };
+         key_information = itemDisplayData.map(function (item, index) {
+            return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute4 };
          })
          setSummaryInformation(key_information)
-         setsummaryTitle(collectionData.attribute4)
+         setSummaryTitle(collectionData.attribute4)
          console.log(key_information)
 
       } else {
@@ -382,146 +416,169 @@ function CollectionDetailPage() {
 
    /////////////// return
    return (
-   <div>
+      <div>
          <div>
             <Nav />
          </div>
          <div id="projectlistcenter">
 
             {/* No longer loading, there IS an error message */}
-            {!isLoading && error && (<div>
+            {!isLoading && hasError && (<div>
                <div id="errormessage">
-                     <br></br>
-                     <img className="backgroundimage" alt="Error!" src="https://www.pngitem.com/pimgs/m/119-1190787_warning-alert-attention-search-error-icon-hd-png.png" />
-                     <h2>{errorMessage}</h2>
-                     <h2 id="headerTitle">There is no collection with ID {id} </h2>
+                  <br></br>
+                  <img className="backgroundimage" alt="Error!" src="https://www.pngitem.com/pimgs/m/119-1190787_warning-alert-attention-search-error-icon-hd-png.png" />
+                  <h2>{errorMessage}</h2>
                </div>
             </div>)}
 
             {/* No longer loading, there is NO error message */}
-            {!isLoading && !error && (
+            {!isLoading && !hasError && (
                <div>
-                     <div id="App">
-
-                        {/* collection information */}
-                        <div id="SwiperInfoContainer" >
-                           {shared_link === "private" ? (
-                                 <div>
-                                    { itemDisplayData.length > 0 ? (<p>You are currently comparing {itemDisplayData.length} items in the {collectionData.title} list </p>) : (<p>You are yet to add any items to {collectionData.title}!</p>)}
+                  <div id="App">
 
 
-                                    <Link to={{pathname:`/collection/${id}/manual-sort/`, state: {itemsProps: itemData}}}><button >Change Default Order</button></Link>
+                     {/* collection information */}
+                     <div id="SwiperInfoContainer" >
 
+                        {collectionData.is_active ?
+                           (<div id="additem" onClick={() => addItemToggleModalState()}>
+                              <img style={{ cursor: "pointer" }} className="changeicons" alt="addicon" src={addicon} onClick={() => addItemToggleModalState()} />
+                              <p style={{ cursor: "pointer" }} onClick={() => addItemToggleModalState()} > Add Item</p>
 
-                                 </div>
-                           ) : (<div>
-                                 { itemDisplayData.length > 0 ? (<p>There are currently {itemDisplayData.length} items in the {collectionData.title} list for comparison. </p>) : (<p>There are no items added to list {collectionData.title}!</p>)}
-                           </div>)}
+                           </div>) : ("")}
+
+                        {itemDisplayData.length > 0 ? (
                            <div id="fexrow">
-                                 <p>Summarise by: </p>
-                                 <select onChange={(e) => setSummaryChoice(e.target.value)}>
-                                    <option value="none" selected disabled hidden></option>
-                                    <option value="price">Price</option>
-                                    <option value="sale_amount">Discount</option>
-                                    {collectionData.attribute1 !== "" && (<option value="attribute1">{collectionData.attribute1}</option>
-                                    )}
-                                    {collectionData.attribute2 !== "" && (<option value="attribute2">{collectionData.attribute2}</option>
-                                    )}
-                                    {collectionData.attribute3 !== "" && (<option value="attribute3">{collectionData.attribute3}</option>
-                                    )}
-                                    {collectionData.attribute4 !== "" && (<option value="attribute4">{collectionData.attribute4}</option>
-                                    )}
-                                 </select>
-                                 <button className="" onClick={() => summaryToggleState()}>GO</button>
+                              <p>Summarise {itemDisplayData.length} items in {collectionData.title} List by: </p>
+                              <select onChange={(e) => setSummaryChoice(e.target.value)}>
+                                 <option value="none" selected disabled hidden></option>
+                                 <option value="price">Price</option>
+                                 <option value="sale_amount">Discount</option>
+                                 {collectionData.attribute1 !== "" && (<option value="attribute1">{collectionData.attribute1}</option>
+                                 )}
+                                 {collectionData.attribute2 !== "" && (<option value="attribute2">{collectionData.attribute2}</option>
+                                 )}
+                                 {collectionData.attribute3 !== "" && (<option value="attribute3">{collectionData.attribute3}</option>
+                                 )}
+                                 {collectionData.attribute4 !== "" && (<option value="attribute4">{collectionData.attribute4}</option>
+                                 )}
+                              </select>
+                              <img style={{ cursor: "pointer" }} className="goicon" alt="goicon" src={goicon} onClick={() => summaryToggleState()} />
                            </div>
+                        ) : (<p>No Items in {collectionData.title}! </p>)}
+
+
+
+                     </div>
+
+                     <div id="store-filter-button-container" >
+                        <div id="Container-for-Filtering" >
+                           {/* first drop down - filter choices */}
+                           <select id="testselect" onChange={(e) => setFilterChoice(e.target.value)}>
+                              <option value="all">All items</option>
+                              <option value="active">Active items</option>
+                              <option value="archived">Archived items</option>
+                           </select>
+
+                           {/* second drop down - order choices */}
+                           <select id="testselect" onChange={(e) => setOrderChoice(e.target.value)}>
+                              <option value="default">Default</option>
+                              <option value="alphabetical">Alphabetical order</option>
+                              <option value="price-lh">Price - low to high</option>
+                              <option value="price-hl">Price - high to low</option>
+                              <option value="date-created">Date created</option>
+                              <option value="date-modified">Date modified</option>
+                           </select>
+                           <Link to={{ pathname: `/collection/${id}/manual-sort/`, state: { itemsProps: itemData } }}><button id="testselect"  >Change Default Order</button></Link>
+
                         </div>
-                        <div id="store-filter-button-container" >
-                           <div id="Container-for-Filtering" >
 
-                                 {/* first drop down - filter choices */}
-                                 <select onChange={(e) => setFilterChoice(e.target.value)}>
-                                    <option value="all">All items</option>
-                                    <option value="active">Active items</option>
-                                    <option value="archived">Archived items</option>
-                                 </select>
+                     </div>
 
-                                 {/* second drop down - order choices */}
-                                 <select onChange={(e) => setOrderChoice(e.target.value)}>
-                                    <option value="default">Default</option>
-                                    <option value="alphabetical">Alphabetical order</option>
-                                    <option value="price-lh">Price - low to high</option>
-                                    <option value="price-hl">Price - high to low</option>
-                                    <option value="date-created">Date created</option>
-                                 </select>
-                           </div>
-                           {collectionData.is_active ? (<button className="" onClick={() => addItemToggleModalState()}>Add Item</button>
-                           ) : ("")}
-                        </div>
-                        <div id="project-list">
-                           <div className="swiperMainContainer" style={modalState || summaryModal ? { pointerEvents: "none", opacity: "0.4" } : {}} >
 
-                                 {/* Swiper container */}
-                                 <div className="swiper-container">
-                                    <div className="swiper-wrapper">
-                                       {itemDisplayData != null && itemDisplayData.length > 0 ? itemDisplayData.map((el, key) => {
-                                             return (
-                                                <div className="swiper-slide" key={key}>
-                                                   <ItemCard key={key} projectData={el} collectionData={collectionData} />
-                                                   {shared_link === "private" && (
-                                                         <div className="buttoncontainer">
-                                                            <Link to={`/item-edit/${el.id}/${collectionData.id}/`}>
-                                                               <button className="buttonblue" >Edit </button >
-                                                            </Link>
-                                                            <a><button className="buttonblue" onClick={() => archiveItem(el)}>{el.is_active ? "Archive" : "Unarchive"}</button></a>
-                                                            <a><button className="buttonblue" onClick={() => handleDelete(el)}>Delete </button></a>
-                                                         </div>
-                                                   )}
-                                                </div>
-                                             )
-                                       }) : null}
-                                    </div>
 
-                                    {/* -- If we need pagination -- */}
-                                    <div className="swiper-pagination"></div>
-                                 </div>
+
+
+
+
+                     <div id="project-list">
+                        <div className="swiperMainContainer" style={modalState || summaryModal ? { pointerEvents: "none", opacity: "0.4" } : {}} >
+
+                           {/* Swiper container */}
+                           <div className="swiper-container">
+                              <div className="swiper-wrapper">
+                                 {itemDisplayData != null && itemDisplayData.length > 0 ? itemDisplayData.map((el, key) => {
+                                    return (
+                                       <div className="swiper-slide" key={key}>
+                                          {shared_link === "private" && (
+                                             <div className="buttoncontainer" style={el.is_active ? {} : { opacity: "0.4" }} >
+                                                <img style={{ cursor: "pointer" }} className="changeicons" alt="archiveicon" src={archiveicon} onClick={() => archiveItem(el)} />
+
+                                                <Link to={`/item-edit/${el.id}/${collectionData.id}/`}>
+                                                   <img style={{ cursor: "pointer" }} className="changeicons" alt="editicon" src={editicon} />
+                                                </Link>
+
+                                                <img style={{ cursor: "pointer" }} className="changeicons" alt="deleteicon" src={deleteicon} onClick={() => handleDelete(el)} />
+
+                                             </div>
+                                          )}
+                                          <ItemCard key={key} projectData={el} collectionData={collectionData} />
+
+                                       </div>
+                                    )
+                                 }) : null}
+                              </div>
+
+                              {/* -- If we need pagination -- */}
+                              <div className="swiper-pagination"></div>
                            </div>
                         </div>
                      </div>
-                     <div className={`modalBackground modalShowing-${modalState}`}>
-                        <div className="modalInner">
-                           <div className="modalText">
-                                 <AddItemForm id={id} collectionData={collectionData} />
-                                 <div>
-                                    <button className="exitButton" onClick={() => addItemToggleModalState()}> exit </button>
-                                 </div>
+
+                  </div>
+
+                  {/* Modal for AddItemForm */}
+                  <div className={`modalBackground modalShowing-${modalState}`}>
+                     <div className="modalInner">
+                        <div className="modalText">
+                           <AddItemForm id={id} collectionData={collectionData} />
+                           <div>
+                              <button className="exitButton" onClick={() => {
+                                 addItemToggleModalState()
+                                 window.location.reload()
+                              }
+
+                              }> exit </button>
                            </div>
                         </div>
                      </div>
-                     <div className={`modalBackground modalShowing-${summaryModal}`}>
-                        <div className="modalInner">
-                           <div className="modalText">
-                                 <SummaryItemCard summary_choice={summaryTitle} summary_info={summaryInfo} />
-                                 <div>
-                                    <button className="exitButton" onClick={() => summaryToggleState()}> exit </button>
-                                 </div>
+                  </div>
+
+                  {/* Modal for Summaries */}
+                  <div className={`modalBackground modalShowing-${summaryModal}`}>
+                     <div className="modalInner">
+                        <div className="modalText">
+                           <SummaryItemCard summary_choice={summaryTitle} summary_info={summaryInfo} />
+                           <div>
+                              <button className="exitButton" onClick={() => summaryToggleState()}> exit </button>
                            </div>
                         </div>
                      </div>
+                  </div>
                </div>
             )
             }
 
             {/* Is still loading (fetching the data) */}
             {isLoading && (
-                  <div>
-                     <div>Is Loading</div>
-                     {/* <Loader /> */}
-                  </div>
+               <div className="loadingpage">
+                  <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"} />
+               </div>
             )}
 
          </div >
-   </div>
-)
+      </div >
+   )
 }
 
 

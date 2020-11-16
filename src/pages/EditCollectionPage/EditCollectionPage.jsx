@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 function EditCollectionPage() {
     const { id, listid } = useParams();
     const [editData, setEditData] = useState({})
-    const [collectionData, setCollectionData] = useState({})
+    //const [collectionData, setCollectionData] = useState({})
     const [isLoading, setIsLoading] = useState(true)
     let token = localStorage.token;
 
@@ -36,7 +36,7 @@ function EditCollectionPage() {
     if (isLoading) {
 
         return (
-            <div>
+            <div className="loadingpage">
                 <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"} />
             </div>
         )

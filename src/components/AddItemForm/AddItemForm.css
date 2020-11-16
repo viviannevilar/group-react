@@ -1,0 +1,158 @@
+.error {
+   color: red;
+}
+
+#additemheadertitle {
+    font-family: "Roboto", sans-serif;
+    color: #004aad;
+    text-align: center;
+    padding-top: 5%;
+    margin-top: 0px;
+    margin-right: 3%;
+    margin-bottom: 0px;
+    margin-left: 3%;
+}
+
+.additemform {
+    max-width: 800px;
+    min-width: 300px;
+    max-height: 900px;
+    width: 100%;
+    margin: 0px auto;
+    background-color: #FFFFFF;
+    border-radius: 25px;
+  }
+  
+.aifa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5%;
+    max-width: 100%;
+  }
+
+.atai {
+    padding-bottom: 2%;
+    color: #004aad;
+    width: 80%;
+    text-align: center;
+}
+
+.aifa input {
+    width: 80%;
+    box-sizing: border-box;
+    border: none;
+    font-family: "Roboto", sans-serif;
+    color: #7D8072;
+    text-align: center;
+    padding-bottom: 0.5rem;
+    box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
+    transition: box-shadow 0.2s ease-in;
+}
+
+.aifa textarea {
+  width: 80%;
+  box-sizing: border-box;
+  border: none;
+  font-family: "Roboto", sans-serif;
+  color: #7D8072;
+  text-align: center;
+  padding-bottom: 0.5rem;
+  box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
+  transition: box-shadow 0.2s ease-in;
+}
+
+.aifa input:focus {
+  box-shadow: inset 0px -3px 0px 0px rgba(46, 44, 56, 0.7);
+  outline: none;
+}
+
+div.aibuttonwrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.additembutton {
+    padding: 5px 10px;
+    background: #b3b7a4;
+    border-radius: 25px;
+    color: white;
+    border: none;
+    justify-content: center;
+}
+
+textarea {
+  outline: none;
+  resize: none;
+  width: 80%;
+}
+
+
+@media only screen and (max-width: 1450px) {
+    #additemheadertitle {
+        font-size: 2rem;
+    }
+    .atai {
+        font-size: 1rem;
+    }
+    .aifa textarea {
+        font-size: 1.0rem;
+    }
+    .ecbutton {
+        font-size: 22px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    #additemheadertitle {
+        font-size: 1.5rem;
+    }
+    .atai {
+        font-size: 1.5rem;
+    }
+    .aifa textarea {
+        font-size: 1.5rem;
+    }
+    .ecbutton {
+        font-size: 17px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    #additemheadertitle {
+        font-size: 1.3rem;
+    }
+    .atai {
+        font-size: 0.8rem;
+    }
+    .aifa textarea {
+        font-size: 0.8rem;
+    }
+    .ecbutton {
+        font-size: 14px;
+    }
+}
+
+
+
+
+@media screen and (min-width: 800px){
+
+
+    div.modalInner {
+      background: white;
+      width: 70%;
+      max-width: 600px;
+      justify-content: center;
+      margin: auto;
+      display: flex;
+      flex-direction: row;
+      color: black;
+      text-align: left;
+    }
+    
+    
+    }

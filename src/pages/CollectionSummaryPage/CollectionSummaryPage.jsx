@@ -111,7 +111,7 @@ function CollectionDetailPage() {
 
 
     return (
-        <div id="Nav">
+        <div>
         <div>
             <Nav />
         </div>
