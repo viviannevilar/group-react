@@ -80,22 +80,22 @@ textarea {
 
 @media only screen and (max-width: 1450px) {
     #additemheadertitle {
-        font-size: 3.2rem;
+        font-size: 2rem;
     }
     .atai {
-        font-size: 2.0rem;
+        font-size: 1rem;
     }
     .aifa textarea {
-        font-size: 2.0rem;
+        font-size: 1.0rem;
     }
     .ecbutton {
-        font-size: 45px;
+        font-size: 22px;
     }
 }
 
 @media only screen and (max-width: 800px) {
     #additemheadertitle {
-        font-size: 2.5rem;
+        font-size: 1.5rem;
     }
     .atai {
         font-size: 1.5rem;
@@ -104,13 +104,13 @@ textarea {
         font-size: 1.5rem;
     }
     .ecbutton {
-        font-size: 25px;
+        font-size: 17px;
     }
 }
 
 @media only screen and (max-width: 500px) {
     #additemheadertitle {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
     .atai {
         font-size: 0.8rem;
@@ -119,6 +119,27 @@ textarea {
         font-size: 0.8rem;
     }
     .ecbutton {
-        font-size: 18px;
+        font-size: 14px;
     }
 }
+
+
+
+
+@media screen and (min-width: 800px){
+
+
+    div.modalInner {
+      background: white;
+      width: 70%;
+      max-width: 600px;
+      justify-content: center;
+      margin: auto;
+      display: flex;
+      flex-direction: row;
+      color: black;
+      text-align: left;
+    }
+    
+    
+    }
