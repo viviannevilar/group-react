@@ -1,0 +1,56 @@
+#collectionsheadertitle {
+    font-family: "Roboto", sans-serif;
+    color: #004aad;
+    text-align: center;
+    margin: 0;
+    padding-top: 5%;
+}
+
+.cpbuttoncontainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-bottom: 20px;
+  }
+
+.collectionspagebutton {
+    padding: 5px 10px;
+    background: #b3b7a4;
+    color: white;
+    border: none;
+    border-radius: 0.2em;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  @media only screen and (max-width: 1450px) {
+    .cpbuttoncontainer  {
+        padding-right: 25%;
+        padding-left: 25%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    a {
+        align-items: center;
+        /* padding-right: 5px;
+        padding-left: 5px; */
+    }
+    .cpbuttoncontainer  {
+            padding-right: 10%;
+            padding-left: 10%;
+    }
+}
+
+
+@media only screen and (max-width: 500px) {
+
+    .cpbuttoncontainer  {
+        padding-right: 5%;
+        padding-left: 5%;
+    }
+}
