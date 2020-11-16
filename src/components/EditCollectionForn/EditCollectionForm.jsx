@@ -212,7 +212,7 @@ function EditCollectionForm(props) {
 
                 <div className="ecbuttonwrapper">
                     <button className="ecbutton" type="submit" onClick={handleSubmit}>  Update Collection </button>
-
+                    <br></br>
                     <button className="ecbutton" type="submit" onClick={cancelSubmit}>  Cancel </button>
                 </div>
                 <br></br>
