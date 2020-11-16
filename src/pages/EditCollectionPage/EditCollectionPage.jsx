@@ -36,7 +36,7 @@ function EditCollectionPage() {
     if (isLoading) {
 
         return (
-            <div>
+            <div className="loadingpage">
                 <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"} />
             </div>
         )
