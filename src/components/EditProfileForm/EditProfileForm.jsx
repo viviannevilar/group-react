@@ -7,6 +7,8 @@ import "../../components/Nav/Nav.css";
 function EditProfileForm() {
   const [modalState, setModalState] = useState(false);
   const [profileData, setProfileData] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+
   const token = window.localStorage.getItem("token");
   const username = window.localStorage.getItem("username");
 
@@ -41,6 +43,7 @@ function EditProfileForm() {
     }).then((data) => {
       console.log(data)
       setProfileData(data);
+      setIsLoading(false);
     });
   }, []);
 
@@ -181,113 +184,123 @@ function EditProfileForm() {
         <Nav />
       </div>
 
-      {username === null ? (<div>You are not logged in </div>
-      ) : (<div>
-
-        <div id="loginform">
-          <form>
-            <h2>Edit Profile here</h2>
-            <div className="row">
-              <label htmlFor="username">Username:</label>
-              <input
-                type="username"
-                id="username"
-                value={credentials.username}
-                onChange={handleChangeCredentials}
-              />
-            </div>
-
-            <div className="row">
-              <label htmlFor="email">Email:</label>
-              <input
-                type="email"
-                id="email"
-                onChange={handleChangeCredentials}
-                value={credentials.email}
-              />
-            </div>
-            <div className="row">
-              <label htmlFor="preferred_name">Preferred Name:</label>
-              <input
-                type="preferred_name"
-                id="preferred_name"
-                onChange={handleChangeCredentials}
-                value={credentials.preferred_name}
-              />
-            </div >
-            <div className="row"></div>
-            <button id="button" button type="submit" onClick={handleSubmitCredential}> EditProfile </button>
-            <h2>Change Password here</h2>
-            <div className="row">
-              <label htmlFor="old_password">Old Password:</label>
-              <input
-                type="old_password"
-                id="old_password"
-                onChange={handleChangePasswords}
-                value={passwords.old_password}
-              />
-            </div>
-
-            <div className="row">
-            <div className="row"></div>
-              <label htmlFor="new_password">New Password:</label>
-              <input
-                type="new_password"
-                id="new_password"
-                onChange={handleChangePasswords}
-                value={passwords.new_password}
-              />
-            </div>
-
-            <div className="row">
-            <div className="row"></div>
-              <label htmlFor="confirm_new_password">Re-enter Password:</label>
-              <input
-                type="confirm_new_password"
-                id="confirm_new_password"
-                onChange={handleChangePasswords}
-                value={passwords.confirm_new_password}
-              />
-            </div>
-            <div className="row">
-              
-              <label htmlFor="delete_account"></label>
-
-
-            </div>
-
-            <div id="test"></div>
-            <button id="button" button type="submit" onClick={handleSubmitPassword}> Change Password </button>
-            
-            <h2>Delete Account here</h2>
-            <div className="form1-item">
-              <div className="row"></div>
-              <label htmlFor="delete_account"></label>
-
-
-            </div>
-
-
-
-          </form>
-          <div id="test"></div>
-          <button id="button" onClick={() => deleteAccountToggleState()}>Delete your Account</button>
-
+      {isLoading ? (
+        <div className="loadingpage">
+          <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"} />
         </div>
+      ) : (<div>
+        {username === null ? (<div>You are not logged in </div>
+        ) : (<div>
 
-        <div className={`modalBackground modalShowing-${modalState}`}>
-          <div className="modalInner">
-            <div className="modalText">
-              <p>Are you sure you want to delete your account? - This will remove all collection and item Data</p>
-              <button onClick={() => DeleteAccount()}>Yes Delete Account</button>
-              <div>
-                <button className="exitButton" onClick={() => deleteAccountToggleState()}> exit </button>
+          <div id="loginform">
+            <form>
+              <h2>Edit Profile here</h2>
+              <div className="row">
+                <label htmlFor="username">Username:</label>
+                <input
+                  type="username"
+                  id="username"
+                  value={credentials.username}
+                  onChange={handleChangeCredentials}
+                />
+              </div>
+
+              <div className="row">
+                <label htmlFor="email">Email:</label>
+                <input
+                  type="email"
+                  id="email"
+                  onChange={handleChangeCredentials}
+                  value={credentials.email}
+                />
+              </div>
+              <div className="row">
+                <label htmlFor="preferred_name">Preferred Name:</label>
+                <input
+                  type="preferred_name"
+                  id="preferred_name"
+                  onChange={handleChangeCredentials}
+                  value={credentials.preferred_name}
+                />
+              </div >
+              <div className="row"></div>
+              <button id="button" button type="submit" onClick={handleSubmitCredential}> EditProfile </button>
+              <h2>Change Password here</h2>
+              <div className="row">
+                <label htmlFor="old_password">Old Password:</label>
+                <input
+                  type="old_password"
+                  id="old_password"
+                  onChange={handleChangePasswords}
+                  value={passwords.old_password}
+                />
+              </div>
+
+              <div className="row">
+                <div className="row"></div>
+                <label htmlFor="new_password">New Password:</label>
+                <input
+                  type="new_password"
+                  id="new_password"
+                  onChange={handleChangePasswords}
+                  value={passwords.new_password}
+                />
+              </div>
+
+              <div className="row">
+                <div className="row"></div>
+                <label htmlFor="confirm_new_password">Re-enter Password:</label>
+                <input
+                  type="confirm_new_password"
+                  id="confirm_new_password"
+                  onChange={handleChangePasswords}
+                  value={passwords.confirm_new_password}
+                />
+              </div>
+              <div className="row">
+
+                <label htmlFor="delete_account"></label>
+
+
+              </div>
+
+              <div id="test"></div>
+              <button id="button" button type="submit" onClick={handleSubmitPassword}> Change Password </button>
+
+              <h2>Delete Account here</h2>
+              <div className="form1-item">
+                <div className="row"></div>
+                <label htmlFor="delete_account"></label>
+
+
+              </div>
+
+
+
+            </form>
+            <div id="test"></div>
+            <button id="button" onClick={() => deleteAccountToggleState()}>Delete your Account</button>
+
+          </div>
+
+          <div className={`modalBackground modalShowing-${modalState}`}>
+            <div className="modalInner">
+              <div className="modalText">
+                <p>Are you sure you want to delete your account? - This will remove all collection and item Data</p>
+                <button onClick={() => DeleteAccount()}>Yes Delete Account</button>
+                <div>
+                  <button className="exitButton" onClick={() => deleteAccountToggleState()}> exit </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
+        </div>)}
       </div>)}
+
+
+
+
 
 
     </div>
