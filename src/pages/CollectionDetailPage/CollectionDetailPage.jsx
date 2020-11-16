@@ -177,16 +177,16 @@ function CollectionDetailPage() {
             Authorization: `Token ${token}`,
          },
       })
-      .then((response) => {
-         if (response.ok) {
-            history.push(`/collection/${id}/`)
-            window.location.reload();
-         } else {
-            console.log(response)
-            setHasError(true)
-            setErrorMessage("Delete item: " + response.statusText + ". Please refresh page and try again.");
-         }
-      });
+         .then((response) => {
+            if (response.ok) {
+               history.push(`/collection/${id}/`)
+               window.location.reload();
+            } else {
+               console.log(response)
+               setHasError(true)
+               setErrorMessage("Delete item: " + response.statusText + ". Please refresh page and try again.");
+            }
+         });
    }
 
    // Archive Item
@@ -347,7 +347,7 @@ function CollectionDetailPage() {
       if (summaryChoice === "price") {
 
          key_information = itemDisplayData.map(function (item, index) {
-            return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.price };
+            return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.price, sale_amount: item.sale_amount, end_date: item.sale_end_date };
          })
          setSummaryInformation(key_information)
          setSummaryTitle("Price")
@@ -540,7 +540,7 @@ function CollectionDetailPage() {
 
                   </div>
 
-         {/* Modal for AddItemForm */}
+                  {/* Modal for AddItemForm */}
                   <div className={`modalBackground modalShowing-${modalState}`}>
                      <div className="modalInner">
                         <div className="modalText">
@@ -549,15 +549,15 @@ function CollectionDetailPage() {
                               <button className="exitButton" onClick={() => {
                                  addItemToggleModalState()
                                  window.location.reload()
-                                 }
-                                 
+                              }
+
                               }> exit </button>
                            </div>
                         </div>
                      </div>
                   </div>
 
-         {/* Modal for Summaries */}
+                  {/* Modal for Summaries */}
                   <div className={`modalBackground modalShowing-${summaryModal}`}>
                      <div className="modalInner">
                         <div className="modalText">
