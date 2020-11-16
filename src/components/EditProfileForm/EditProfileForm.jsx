@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Nav from "../../components/Nav/Nav";
 import "../../components/Nav/Nav.css";
+import "../../components/EditProfileForm/EditProfileForm.css";
+import warningicon from "../../images/warning2.png"
 
 
 function EditProfileForm() {
@@ -284,9 +286,13 @@ function EditProfileForm() {
           </div>
 
           <div className={`modalBackground modalShowing-${modalState}`}>
-            <div className="modalInner">
+            <div className="MODALeditprofile">
               <div className="modalText">
-                <p>Are you sure you want to delete your account? - This will remove all collection and item Data</p>
+                <img className="warningicons" alt="warningicon" src={warningicon} />
+
+                <p>Are you sure you want to delete your account? </p>
+                <p>This will remove all collection and item Data</p>
+
                 <button onClick={() => DeleteAccount()}>Yes Delete Account</button>
                 <div>
                   <button className="exitButton" onClick={() => deleteAccountToggleState()}> exit </button>
