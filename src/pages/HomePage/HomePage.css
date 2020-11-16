@@ -14,6 +14,7 @@
   border-radius: 0.2em;
   box-sizing: border-box;
   width: 50%;
+  max-width: 250px;
   height: 40px;
   font-size: 1rem;
   text-transform: uppercase;
@@ -68,7 +69,7 @@
   }
 
   .button1 {
-    height: 80px;
+    height: 50px;
     font-size: 1.8rem;
   }
 
@@ -82,7 +83,8 @@
   }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 900px) {
+
   .logo {
     margin-top: -70px;
   }
@@ -93,7 +95,7 @@
   }
 
   .button1 {
-    height: 80px;
+    height: 50px;
     font-size: 1.8rem;
   }
 
@@ -118,7 +120,7 @@
   }
 
   .button1 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
   .buttons-wrapper {
@@ -128,4 +130,67 @@
   .footer {
     font-size: 0.7cm;
   }
+}
+
+
+
+
+
+
+@media only screen and (min-width: 900px) {
+  .logo {
+    margin-top: -70px;
+  }
+
+  #logoimage {
+    height: 50%;
+    width: 50%;
+    max-width: 600px;
+    max-height: 600px;
+
+  }
+
+  
+.buttons-wrapper {
+  display: flex;
+  flex-direction: row;
+  margin-top: -80px;
+  justify-content: center;
+  align-items: center;
+  margin: 4px ;
+}
+
+
+  .button1 {
+    font-size: 1.5rem;
+    margin: 4px ;
+
+  }
+
+  .buttons-wrapper {
+    margin-top: -100px;
+  }
+
+  .footer {
+    font-size: 0.7cm;
+  }
+}
+
+
+
+
+
+
+@media only screen and (max-height: 800px) {
+  .logo {
+    margin-top: -70px;
+    height: 100%;
+    width: 100%;
+    max-width: 1000px;
+    max-height: 1000px;
+
+  }
+
+ 
+
 }
