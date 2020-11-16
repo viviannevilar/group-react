@@ -14,6 +14,10 @@ import AddItemForm from "../../components/AddItemForm/AddItemForm";
 import archiveicon from "../../images/archive.png"
 import deleteicon from "../../images/delete.png"
 import editicon from "../../images/edit.png"
+import goicon from "../../images/goicon.png"
+
+import addicon from "../../images/add.png"
+
 
 // styling
 import "./CollectionDetailPage.css";
@@ -69,7 +73,7 @@ function CollectionDetailPage() {
    // summary variables:
    const [summaryChoice, setSummaryChoice] = useState("")
    const [summaryInfo, setSummaryInformation] = useState([])
-   const [summaryTitle, setSummaryTitle] = useState("Price")
+   const [summaryTitle, setSummaryTitle] = useState("No Summary Option Selected")
 
    // Public or private path (shared collection or own collection)
    let urlPath
@@ -177,16 +181,16 @@ function CollectionDetailPage() {
             Authorization: `Token ${token}`,
          },
       })
-      .then((response) => {
-         if (response.ok) {
-            history.push(`/collection/${id}/`)
-            window.location.reload();
-         } else {
-            console.log(response)
-            setHasError(true)
-            setErrorMessage("Delete item: " + response.statusText + ". Please refresh page and try again.");
-         }
-      });
+         .then((response) => {
+            if (response.ok) {
+               history.push(`/collection/${id}/`)
+               window.location.reload();
+            } else {
+               console.log(response)
+               setHasError(true)
+               setErrorMessage("Delete item: " + response.statusText + ". Please refresh page and try again.");
+            }
+         });
    }
 
    // Archive Item
@@ -347,7 +351,7 @@ function CollectionDetailPage() {
       if (summaryChoice === "price") {
 
          key_information = itemDisplayData.map(function (item, index) {
-            return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.price };
+            return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.price, sale_amount: item.sale_amount, end_date: item.sale_end_date };
          })
          setSummaryInformation(key_information)
          setSummaryTitle("Price")
@@ -436,35 +440,32 @@ function CollectionDetailPage() {
                      {/* collection information */}
                      <div id="SwiperInfoContainer" >
 
-                        {shared_link === "private" ? (
-                           <div>
-                              {/* top text with the number of items in a collection */}
-                              { itemDisplayData.length > 0 ? (<p>You are currently comparing {itemDisplayData.length} items in the {collectionData.title} list </p>) : (<p>You are yet to add any items to {collectionData.title}!</p>)}
+                        {collectionData.is_active ?
+                           (<div id="additem" onClick={() => addItemToggleModalState()}>
+                              <img style={{ cursor: "pointer" }} className="changeicons" alt="addicon" src={addicon} onClick={() => addItemToggleModalState()} />
+                              <p style={{ cursor: "pointer" }} onClick={() => addItemToggleModalState()} > Add Item</p>
 
-                              {/* button to change order of items - go to a different url */}
+                           </div>) : ("")}
+
+                        {itemDisplayData.length > 0 ? (
+                           <div id="fexrow">
+                              <p>Summarise {itemDisplayData.length} items in {collectionData.title} List by: </p>
+                              <select onChange={(e) => setSummaryChoice(e.target.value)}>
+                                 <option value="none" selected disabled hidden></option>
+                                 <option value="price">Price</option>
+                                 <option value="sale_amount">Discount</option>
+                                 {collectionData.attribute1 !== "" && (<option value="attribute1">{collectionData.attribute1}</option>
+                                 )}
+                                 {collectionData.attribute2 !== "" && (<option value="attribute2">{collectionData.attribute2}</option>
+                                 )}
+                                 {collectionData.attribute3 !== "" && (<option value="attribute3">{collectionData.attribute3}</option>
+                                 )}
+                                 {collectionData.attribute4 !== "" && (<option value="attribute4">{collectionData.attribute4}</option>
+                                 )}
+                              </select>
+                              <img style={{ cursor: "pointer" }} className="goicon" alt="goicon" src={goicon} onClick={() => summaryToggleState()} />
                            </div>
-
-                        ) : (<div>
-                           { itemDisplayData.length > 0 ? (<p>There are currently {itemDisplayData.length} items in the {collectionData.title} list for comparison. </p>) : (<p>There are no items added to list {collectionData.title}!</p>)}
-                        </div>)}
-
-                        <div id="fexrow">
-                           <p>Summarise by: </p>
-                           <select onChange={(e) => setSummaryChoice(e.target.value)}>
-                              <option value="none" selected disabled hidden></option>
-                              <option value="price">Price</option>
-                              <option value="sale_amount">Discount</option>
-                              {collectionData.attribute1 !== "" && (<option value="attribute1">{collectionData.attribute1}</option>
-                              )}
-                              {collectionData.attribute2 !== "" && (<option value="attribute2">{collectionData.attribute2}</option>
-                              )}
-                              {collectionData.attribute3 !== "" && (<option value="attribute3">{collectionData.attribute3}</option>
-                              )}
-                              {collectionData.attribute4 !== "" && (<option value="attribute4">{collectionData.attribute4}</option>
-                              )}
-                           </select>
-                           <button className="" onClick={() => summaryToggleState()}>GO</button>
-                        </div>
+                        ) : (<p>No Items in {collectionData.title}! </p>)}
 
 
 
@@ -472,28 +473,24 @@ function CollectionDetailPage() {
 
                      <div id="store-filter-button-container" >
                         <div id="Container-for-Filtering" >
-                           <div id="seperatebuttons" >
-                              {/* first drop down - filter choices */}
-                              <select onChange={(e) => setFilterChoice(e.target.value)}>
-                                 <option value="all">All items</option>
-                                 <option value="active">Active items</option>
-                                 <option value="archived">Archived items</option>
-                              </select>
+                           {/* first drop down - filter choices */}
+                           <select id="testselect" onChange={(e) => setFilterChoice(e.target.value)}>
+                              <option value="all">All items</option>
+                              <option value="active">Active items</option>
+                              <option value="archived">Archived items</option>
+                           </select>
 
-                              {/* second drop down - order choices */}
-                              <select onChange={(e) => setOrderChoice(e.target.value)}>
-                                 <option value="default">Default</option>
-                                 <option value="alphabetical">Alphabetical order</option>
-                                 <option value="price-lh">Price - low to high</option>
-                                 <option value="price-hl">Price - high to low</option>
-                                 <option value="date-created">Date created</option>
-                                 <option value="date-modified">Date modified</option>
-                              </select>
-                              <Link to={{ pathname: `/collection/${id}/manual-sort/`, state: { itemsProps: itemData } }}><button >Change Default Order</button></Link>
+                           {/* second drop down - order choices */}
+                           <select id="testselect" onChange={(e) => setOrderChoice(e.target.value)}>
+                              <option value="default">Default</option>
+                              <option value="alphabetical">Alphabetical order</option>
+                              <option value="price-lh">Price - low to high</option>
+                              <option value="price-hl">Price - high to low</option>
+                              <option value="date-created">Date created</option>
+                              <option value="date-modified">Date modified</option>
+                           </select>
+                           <Link to={{ pathname: `/collection/${id}/manual-sort/`, state: { itemsProps: itemData } }}><button id="testselect"  >Change Default Order</button></Link>
 
-                           </div>
-                           {collectionData.is_active ? (<button className="" onClick={() => addItemToggleModalState()}>Add Item</button>
-                           ) : ("")}
                         </div>
 
                      </div>
@@ -540,7 +537,7 @@ function CollectionDetailPage() {
 
                   </div>
 
-         {/* Modal for AddItemForm */}
+                  {/* Modal for AddItemForm */}
                   <div className={`modalBackground modalShowing-${modalState}`}>
                      <div className="modalInner">
                         <div className="modalText">
@@ -549,15 +546,15 @@ function CollectionDetailPage() {
                               <button className="exitButton" onClick={() => {
                                  addItemToggleModalState()
                                  window.location.reload()
-                                 }
-                                 
+                              }
+
                               }> exit </button>
                            </div>
                         </div>
                      </div>
                   </div>
 
-         {/* Modal for Summaries */}
+                  {/* Modal for Summaries */}
                   <div className={`modalBackground modalShowing-${summaryModal}`}>
                      <div className="modalInner">
                         <div className="modalText">
@@ -581,7 +578,7 @@ function CollectionDetailPage() {
             )}
 
          </div >
-      </div>
+      </div >
    )
 }
 

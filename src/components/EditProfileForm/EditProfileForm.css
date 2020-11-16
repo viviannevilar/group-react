@@ -20,8 +20,9 @@
 
 .modalInner {
   background: white;
-  width: 900px;
-  max-width: calc(100% - 50px);
+  width: calc(100% - 50px);
+  max-width: 600px;
+
   justify-content: center;
   margin: auto;
   display: flex;
@@ -34,11 +35,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 15px;
+  padding: 5px;
 }
 
 .modalText p {
-  line-height: 180%;
+  line-height: 100%;
 }
 
 .modalText button {
@@ -62,3 +63,5 @@
 button.exitButton {
   align-items: center;
 }
+
+

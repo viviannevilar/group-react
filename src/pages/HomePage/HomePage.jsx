@@ -38,7 +38,7 @@ function HomePage() {
       {loggedin ?
         (<div className="buttons-wrapper">
           <Link to="/collections/" className="button1" >My Collections</Link>
-          <LogoutForm />
+          <LogoutForm className="button1" />
         </div>
         ) : (
           <div className="buttons-wrapper">

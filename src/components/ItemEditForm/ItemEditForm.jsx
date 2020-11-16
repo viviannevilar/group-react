@@ -349,6 +349,7 @@ function ItemEditForm(props) {
 
                <div className="eibuttonwrapper">
                      <button className="eibutton" ref={btnRefAdd} type="submit" onClick={handleSubmit}>  Update Item </button>
+                     <br></br>
                      <button className="eibutton" type="submit" onClick={cancelSubmit}>  Cancel </button>
                </div>
             </form>

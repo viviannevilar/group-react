@@ -248,7 +248,7 @@ function AddItemForm(props) {
                        Image:
                        <span className="error">{ (errorKey === "image") ? errorMessage : null}</span> 
                      </label>
-                    <input
+                    <input 
                         type="file"
                         id="image"
                         onChange={handleImageChange}
