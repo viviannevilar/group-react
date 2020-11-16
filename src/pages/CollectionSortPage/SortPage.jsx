@@ -129,8 +129,8 @@ function SortableComponent(props) {
  
    }, [token])
 
-   const cancelSubmit = (e) => {
-      history.push(`/collection/${id}`);
+   const cancelSubmit = () => {
+      history.push(`/collection/${id}/`);
    }
 
   
@@ -149,6 +149,8 @@ function SortableComponent(props) {
                </div>
                <SortableList items={items} onSortEnd={onSortEnd} />
             </div>) : null}
+
+
 
 
             {/* There IS an error message */}
