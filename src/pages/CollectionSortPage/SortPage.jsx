@@ -8,19 +8,31 @@ import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 import { setTokenSourceMapRange } from 'typescript';
 
+// styling
+import "./SortPage.css"
+import moveicon from "../../images/reorder.png"
+
 
 //////////////////////////// components ////////////////////////////
 
 // sortables
-const SortableItem = SortableElement(({value, sortIndex}) => <ul>{value.name}, #{sortIndex}</ul>);
+const SortableItem = SortableElement(({value, sortIndex}) => {
+   return(
+      <div className="sortable-item">
+         <img style={{ cursor: "pointer" }} className="changeicons sort-icons" alt="moveicon" src={moveicon} />
+         {value.name}, #{sortIndex}
+      </div>
+   )
+});
+
 
 const SortableList = SortableContainer(({items}) => {
     return (
-        <ul>
+        <div id="sortable-container">
         {items.map((value, index) => (
             <SortableItem key={`item-${index}`} index={index} sortIndex={index} value={value} />
         ))}
-        </ul>
+        </div>
     );
 });
 
@@ -85,8 +97,8 @@ function SortableComponent(props) {
       postData().then((response) => {
          console.log("---------------- RESPONSE ", response)
          if (response.ok) {
-            history.push(`/collection/${id}/`);
-            window.location.reload();
+            // history.push(`/collection/${id}/`);
+            // window.location.reload();
          } else {
             console.log("items order ---- : ", response.detail)
             setErrorMessage(response.detail)

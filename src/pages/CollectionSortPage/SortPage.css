@@ -1,0 +1,18 @@
+#sortable-container {
+   display: flex;
+   flex-direction: column;
+}
+
+
+.sortable-item {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   background-color: white;
+   min-height: 4em;
+   border: 1px solid gray;
+}
+
+.sort-icons {
+   padding: 0 10px;
+}
