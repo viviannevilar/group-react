@@ -65,22 +65,3 @@ button.exitButton {
 }
 
 
-
-
-@media screen and (min-width: 800px){
-
-
-  div.modalInner {
-    background: white;
-    width: 70%;
-    max-width: 600px;
-    justify-content: center;
-    margin: auto;
-    display: flex;
-    flex-direction: row;
-    color: black;
-    text-align: left;
-  }
-  
-  
-  }
