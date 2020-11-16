@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import "./NewCollectionForm.css";
 import "../../components/Nav/Nav.css";
@@ -6,10 +6,18 @@ import Nav from "../../components/Nav/Nav";
 // import "../../components/CollectionCard/CollectionCard.css";
 
 function NewCollectionForm() {
-    const [error, setError] = useState();
 
-  //variables
-  const [credentials, setCredentials] = useState({
+     //variables
+    const [error, setError] = useState();
+    const history = useHistory();
+
+    const [errorMessage, setErrorMessage] = useState()
+    const [errorKey, setErrorKey] = useState()
+    //const [hasError, setHasError] = useState(false)
+ 
+    let btnRefAdd = useRef();
+
+    const [credentials, setCredentials] = useState({
     date_created: "",
     title: "",
     attribute1: "",
@@ -28,7 +36,7 @@ function NewCollectionForm() {
     }));
   };
 
-  const history = useHistory();
+
 
   const postData = async () => {
     let token = window.localStorage.getItem("token");
@@ -44,15 +52,29 @@ function NewCollectionForm() {
     });
 
     if (response.ok) {
+       history.push("/collections/")
       return response.json();
     } else {
       response.text().then(text => {
         throw Error(text)
       }).catch(
         (error) => {
-          const errorObj = JSON.parse(error.message);
-          console.log(errorObj)
-          setError(errorObj);
+         //setHasError(true)
+         const errorObj = JSON.parse(error.message);
+
+         // this is the form element that has the problem (eg, "price")
+         setErrorKey(Object.keys(errorObj)[0])
+         // this is the message of the error (eg, "this field is required")
+         setErrorMessage(errorObj[Object.keys(errorObj)[0]]);
+         
+         // Puts the cursor in the form input corresponding to the element that has an issue
+         let keyName = document.getElementById(`${Object.keys(errorObj)[0]}`)
+         if (keyName) {keyName.focus();}
+
+         // this enables the submit button again
+         if (btnRefAdd.current) {
+            btnRefAdd.current.disabled = false
+         }
         }
       )
     }
@@ -62,18 +84,19 @@ function NewCollectionForm() {
    const handleSubmit = (e) => {
       e.preventDefault();
 
+      //disables the button to submit form until there is a response
+      if (btnRefAdd.current) {
+         btnRefAdd.current.disabled = true
+      }
+
       postData().then((response) => {
          if (response != undefined) {
-         history.push("/collections/")
+         
          } else {
-         history.push("/newcollection/") 
+         //history.push("/newcollection/") 
          // not sure about whether this should just be collection????????
          }
-      }).catch(
-         (error) => {
-         console.log("error")
-         }
-      )
+      })
    };
 
 
@@ -99,11 +122,14 @@ function NewCollectionForm() {
         <div className="newcollectionform">
             <h2 id="newcollectionheadertitle"> Create a new collection! </h2>
             <br></br>
-            <h4 className="newcollectiontxt">Your collection will automatically include the following attributes: Price, Sale Price, Date Sale Price Ends and Image Upload. </h4>
+            <h4 className="newcollectiontxt">Your items will automatically include the following attributes: <br/> Price, Sale Price, Date Sale Price Ends and Image. </h4>
+            <h4 className="newcollectiontxt"><span className="error">{ (errorKey === "detail") ? errorMessage : null}</span> </h4>
         </div>
       <form>
         <div className="ncfa">
-          <label className="at" htmlFor="title">Title:</label>
+          <label className="at" htmlFor="title">Title:
+          <span className="error">{ (errorKey === "title") ? errorMessage : null}</span> 
+          </label>
           <textarea 
             type="textarea"
             id="title"
@@ -114,7 +140,9 @@ function NewCollectionForm() {
         </div>
 
         <div className="ncfa">
-          <label className="at" htmlFor="attribute1">Attribute 1:</label>
+          <label className="at" htmlFor="attribute1">Attribute 1:
+          <span className="error">{ (errorKey === "attribute1") ? errorMessage : null}</span> 
+          </label>
           <textarea 
             type="textarea"
             id="attribute1"
@@ -124,7 +152,9 @@ function NewCollectionForm() {
         </div>
 
         <div className="ncfa">
-          <label className="at" htmlFor="attribute2">Attribute 2:</label>
+          <label className="at" htmlFor="attribute2">Attribute 2:
+          <span className="error">{ (errorKey === "attribute2") ? errorMessage : null}</span> 
+          </label>
           <textarea
             type="textarea"
             id="attribute2"
@@ -134,7 +164,9 @@ function NewCollectionForm() {
         </div>
 
         <div className="ncfa">
-          <label className="at" htmlFor="attribute3">Attribute 3:</label>
+          <label className="at" htmlFor="attribute3">Attribute 3:
+          <span className="error">{ (errorKey === "attribute3") ? errorMessage : null}</span> 
+          </label>
           <textarea
             type="textarea"
             id="attribute3"
@@ -144,7 +176,9 @@ function NewCollectionForm() {
         </div>
 
         <div className="ncfa">
-          <label className="at" htmlFor="attribute4">Attribute 4:</label>
+          <label className="at" htmlFor="attribute4">Attribute 4:
+          <span className="error">{ (errorKey === "attribute4") ? errorMessage : null}</span> 
+          </label>
           <textarea
             type="textarea"
             id="attribute4"
