@@ -139,14 +139,10 @@ function CollectionsPage() {
                                 <p style={{ cursor: "pointer" }} > See Archived Collections</p>
                             </Link>}
 
-
-
                         <Link className="addcollectioncontainer" to={`/newcollection/`}>
                             <img style={{ cursor: "pointer" }} className="changeicons" alt="addicon" src={addicon} />
                             <p style={{ cursor: "pointer" }} > Create Collection</p>
                         </Link>
-
-
 
                     </div>
                     {/* display list of collections */}

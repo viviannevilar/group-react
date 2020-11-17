@@ -138,9 +138,6 @@ function EditCollectionForm(props) {
 
     return (
         <div>
-            <div>
-                <Nav />
-            </div>
         
             <div className="ecformlogo" >
                 <img

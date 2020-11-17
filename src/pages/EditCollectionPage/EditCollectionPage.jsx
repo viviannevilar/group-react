@@ -1,6 +1,8 @@
 import EditCollectionForm from "../../components/EditCollectionForm/EditCollectionForm";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Footer from "../../components/Footer/Footer";
+import Nav from "../../components/Nav/Nav";
 
 
 function EditCollectionPage() {
@@ -31,33 +33,33 @@ function EditCollectionPage() {
     }, [id]);
 
 
-    if (isLoading) {
-
         return (
-            <div className="loadingpage">
-                <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"} />
-            </div>
-        )
-
-        // if the credentials match and there are collections to show
-    } else {
-
-        return (
-
             <div>
+               <div>
+                  <Nav />
+               </div>
+     
+               {token !== null && isLoading ? <div className="loadingpage">
+                  <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"} />
+               </div> : null}
 
-                {token !== null && (
+               {/* if the credentials match and there are collections to show */}
+
+               
+                {token !== null && !isLoading ? (
                     <div>
-
-
                         <EditCollectionForm collectionData={editData} />
                     </div>
-                )}
+                ) : null}
 
 
+               <Footer />
             </div>
+
         );
-    }
 }
 
+
 export default EditCollectionPage;
+
+
