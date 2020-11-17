@@ -191,15 +191,16 @@ function ItemEditForm(props) {
 
 
             <div id="edititemform">
+
                 <div className="sort-buttons-container buttons-top-right">
                   <a className="icon-a-tag" ref={btnRefAdd} onClick={handleSubmit}>
-                     <span title="Save" ><FaRegCheckSquare className="fa-icon-form fa-icon-save"/></span>
+                     <FaRegCheckSquare className="fa-icon-form fa-icon-save"/>
                      </a>
                   <a className="icon-a-tag fa-icon-close" onClick={cancelSubmit}><FaRegWindowClose className="fa-icon-form"/></a>
 
                   {/* this is the text that appears when you hover over the icons */}
-                  <p id="saveText">Save changes</p>
-                  <p id="closeText">Cancel</p>
+                  {/* <p id="saveText">Save changes</p>
+                  <p id="closeText">Cancel</p> */}
                </div>
 
                <h2 id="edititemheadertitle"> Edit Item in {collectionData.title} </h2>
@@ -236,7 +237,6 @@ function ItemEditForm(props) {
                         id="price"
                         onChange={handleChange}
                         value={credentials.price}
-
                      />
                   </div>
 
@@ -250,7 +250,6 @@ function ItemEditForm(props) {
                         id="sale_amount"
                         onChange={handleChange}
                         value={credentials.sale_amount}
-
                      />
                   </div>
 
@@ -285,8 +284,6 @@ function ItemEditForm(props) {
                   {/* Second column */}
                   <div className="form-column">
 
-
-
                   {collectionData.attribute1 !== "" && (<div className="eifa">
                      <label className="atei" htmlFor="attribute1">
                         {collectionData.attribute1}
@@ -299,8 +296,6 @@ function ItemEditForm(props) {
                         onChange={handleChange}
                      />
                   </div>)}
-
-
 
                   {collectionData.attribute2 !== "" && (<div className="eifa">
                      <label className="atei" htmlFor="attribute2">

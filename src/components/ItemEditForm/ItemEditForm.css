@@ -32,6 +32,7 @@
     border-radius: 5px;
     border: 0.1px solid #6a6a6a;
     border: 0.1px solid rgba(106, 106, 106, .5);
+    padding-bottom: 3em;
   }
   
 #form-columns {
@@ -83,10 +84,11 @@
     border: 0.1px solid rgba(106, 106, 106, .5);
     border-radius: 2px;
     font-family: "Roboto", sans-serif;
-    color: #7D8072;
-    text-align: center;
+    color: #6a6a6a;
+    text-align: left;
     box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
     transition: box-shadow 0.2s ease-in;
+    padding-left: 0.8em;
 }
 
 .eifa textarea {
@@ -95,7 +97,7 @@
   border: none;
   font-family: "Roboto", sans-serif;
   color: #7D8072;
-  text-align: center;
+  text-align: left;
   box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
   transition: box-shadow 0.2s ease-in;
 }
