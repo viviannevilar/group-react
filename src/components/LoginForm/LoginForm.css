@@ -2,14 +2,14 @@ html {
     font-size: 100%;
   }
   
-  .epformlogo {
+.liformlogo {
       display: flex;
       justify-content: center;
       flex: 1;
       padding-top: 5px;
   }
   
-  .editprofileform {
+.loginform {
     max-width: 700px;
     min-width: 300px;
     max-height: 900px;
@@ -18,10 +18,9 @@ html {
     margin: 0px auto;
     background-color: #ffffff;
     border-radius: 25px;
-    justify-content: center;
   }
   
-  .editprofileheadertitle {
+#loginformheadertitle {
       font-family: "Roboto", sans-serif;
       color: #004aad;
       text-align: center;
@@ -31,8 +30,25 @@ html {
       margin-bottom: 0px;
       margin-left: 3%;
   }
+
+.litext {
+    font-family: "Roboto", sans-serif;
+      color: #004aad;
+      text-align: center;
+}
+  
+  
+.loginform{
+      max-width: 800px;
+      min-width: 300px;
+      max-height: 900px;
+      width: 50%;
+      margin: 0px auto;
+      background-color: #FFFFFF;
+      border-radius: 25px;
+    }
     
-  .epfa {
+.lifa {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -40,14 +56,14 @@ html {
       max-width: 100%;
     }
   
-  .atep {
+.atli {
       padding-bottom: 2%;
       color: #004aad;
       width: 80%;
       text-align: center;
   }
   
-  .epfa input {
+.lifa input {
     width: 80%;
     box-sizing: border-box;
     border: none;
@@ -58,7 +74,7 @@ html {
     transition: box-shadow 0.2s ease-in;
   }
   
-  .epfa textarea {
+.lifa textarea {
       width: 80%;
       box-sizing: border-box;
       border: none;
@@ -70,17 +86,17 @@ html {
     }
   
   
-  .epfa input:focus {
+.lifa input:focus {
     box-shadow: inset 0px -3px 0px 0px rgba(46, 44, 56, 0.7);
     outline: none;
   }
   
-  .atepblock textarea {
+.atliblock textarea {
       box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
       transition: box-shadow 0.2s ease-in;
   }
   
-  .epbutton {
+.libutton {
     padding: 5px 10px;
     background: #b3b7a4;
     border: none;
@@ -96,7 +112,7 @@ html {
     margin: 20px;
   }
   
-  #epbuttonwrapper {
+#libuttonwrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -104,80 +120,78 @@ html {
     margin-top: 15px;
   }
   
-  
-  
   @media only screen and (max-width: 1450px) {
-      #epformlogoimage {
+      #liformlogoimage {
           height: 30%;
           width: 30%;
           padding-top: 3%;
           padding-bottom: 3%;
       }
-      .editprofileheadertitle {
+      #loginformheadertitle {
           font-size: 2.0rem;
           padding-bottom: 0%;
       }
-      .atep {
+      .atli {
           font-size: 1.0rem;
           padding-bottom: 3%;
       }
-      .epfa textarea {
+      .lifa textarea {
           font-size: 1.0rem;
           padding-bottom: 0.5%;
       }
-      .epbutton {
+      .libutton {
           font-size: 20px;
-          width: 50%;
+          width: 15%;
       }
   }
   
   @media only screen and (max-width: 800px) {
-      #epformlogoimage {
+      #liformlogoimage {
           height: 50%;
           width: 50%;
           padding-top: 10%;
           padding-bottom: 10%;
       }
-      .editprofileheadertitle {
+      #loginformheadertitle {
           font-size: 1.8rem;
           padding-bottom: 10%;
       }
-      .atep {
+      .atsli {
           font-size: 1.5rem;
           padding-bottom: 5%;
       }
-      .epfa textarea {
+      .lifa textarea {
           font-size: 1.5rem;
           padding-bottom: 0.5%;
       }
-      .epbutton {
+      .libutton {
           font-size: 20px;
-          width: 80%;
+          width: 25%;
       }
   }
   
   @media only screen and (max-width: 500px) {
-      #epformlogoimage {
+      #liformlogoimage {
           height: 40%;
           width: 40%;
           padding-top: 2%;
           padding-bottom: 2%;
       }
-      .editprofileheadertitle {
-          font-size: 1.3rem;
+      #loginformheadertitle {
+          font-size: 1.5rem;
           padding-bottom: 2%;
       }
-      .atep {
-          font-size: 0.5rem;
+      .atli {
+          font-size: 0.8rem;
           padding-bottom: 5%;
       }
   
-      .epfa textarea {
-          font-size: 0.5rem;
+      .lifa textarea {
+          font-size: 0.8rem;
       }
-      .epbutton {
+      .libutton {
           font-size: 18px;
-          width: 90%;
+          width: 30%;
           height: 30px;
       }
   }
@@ -189,92 +203,3 @@ html {
       padding-top: 15px;
       color: darkred;
     }
-
-
-/* .modalBackground {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease-in-out;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-}
-
-.modalShowing-true {
-  opacity: 1;
-  pointer-events: visible;
-}
-
-.modalEditPRofile {
-  background: white;
-  width: calc(100% - 50px);
-  max-width: 600px;
-height: fit-content;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-  display: flex;
-  flex-direction: row;
-  color: black;
-  text-align: left;
-}
-
-.modalText {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 5px;
-}
-
-.modalText p {
-  line-height: 100%;
-}
-
-.modalText button {
-  display: block;
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-
-.exitButton {
-  padding: 15px;
-  display: block;
-  width: 100%;
-  background-color: transparent;
-  border: 0;
-  text-align: center;
-  color: black;
-}
-
-button.exitButton {
-  align-items: center;
-}
-
-
-/* div#editprofilemodal{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin: 4px;
-} */
-
-/* 
-img.warningicons{
-  width: 40px;
-  height: 40px;
-
-}
-
-img#cuformlogoimage{
-max-width: 500px;
-} */ 

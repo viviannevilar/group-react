@@ -7,7 +7,7 @@ import addicon from "../../images/add.png"
 import archiveicon from "../../images/archive.png"
 import activeicon from "../../images/activeicon.png"
 import "../../components/CollectionCard/CollectionCard.css"
-
+import Nav from "../../components/Nav/Nav";
 import Footer from "../../components/Footer/Footer";
 import logoicon from "../../images/Comparalist_rectangle.png"
 
@@ -97,6 +97,10 @@ function CollectionsPage() {
     } else {
 
         return (
+            <div>
+                <div id="CollectionNav">
+                    <Nav />
+                </div>
             <div className="page-wrapper">
 
                 <div >
@@ -139,7 +143,7 @@ function CollectionsPage() {
                 </div>
                 <Footer />
             </div>
-
+            </div>
         )
     }
 

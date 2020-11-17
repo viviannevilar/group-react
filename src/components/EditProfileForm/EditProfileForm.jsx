@@ -247,11 +247,16 @@ function EditProfileForm() {
 
 
   return (
-    <div id="loginform">
+    <div className="editprofileform">
+      <div >
+        <Nav />
+      </div>
+      <div className="epformlogo" >
+    <div>
 
-      <div className="cuformlogo" >
+      <div className="epformlogo" >
         <img
-          id="cuformlogoimage"
+          id="epformlogoimage"
           src={require("../../images/Comparalist_rectangle.png")}
           alt="Company Logo"
         />
@@ -263,12 +268,12 @@ function EditProfileForm() {
         <ErrorComponent errorMessage="You are not logged in!" errorNumber="403" />
       ) : (<div>
 
-        <div id="contactusform">
+        <div>
           <form>
             {/*------------- Edit Profile -------------*/}
-            <h2 id="contactusheadertitle">Edit Profile</h2>
-            <div className="cufa">
-              <label className="atcu" htmlFor="username">Username:
+            <h2 className="editprofileheadertitle">EDIT PROFILE</h2>
+            <div className="epfa">
+              <label className="atep" htmlFor="username">USERNAME:
               <span className="error">{(errorKey === "username") ? errorMessage : null}</span>
               </label>
               <input
@@ -279,8 +284,8 @@ function EditProfileForm() {
               />
             </div>
 
-            <div className="cufa">
-              <label className="atcu" htmlFor="email">Email:
+            <div className="epfa">
+              <label className="atep" htmlFor="email">EMAIL:
               <span className="error">{(errorKey === "username") ? errorMessage : null}</span>
               </label>
               <input
@@ -290,8 +295,8 @@ function EditProfileForm() {
                 value={credentials.email}
               />
             </div>
-            <div className="cufa">
-              <label className="atcu" htmlFor="preferred_name">Preferred Name:
+            <div className="epfa">
+              <label className="atep" htmlFor="preferred_name">PREFFERED NAME:
               <span className="error">{(errorKey === "preferred_name") ? errorMessage : null}</span>
               </label>
               <input
@@ -302,15 +307,15 @@ function EditProfileForm() {
               />
             </div >
 
-            <div id="cubuttonwrapper">
-              <button ref={btnRefEdit} id="cubutton" className="cubutton" button type="submit" onClick={handleSubmitCredential}> Edit Profile </button>
+            <div id="epbuttonwrapper">
+              <button ref={btnRefEdit} id="epbutton" className="epbutton" button type="submit" onClick={handleSubmitCredential}> EDIT PROFILE </button>
             </div>
 
 
             {/*------------- Change Password -------------*/}
-            <h2 id="contactusheadertitle">Change Password</h2>
-            <div className="cufa">
-              <label className="atcu" htmlFor="old_password">Old Password:
+            <h2 className="editprofileheadertitle">CHANGE PASSWORD</h2>
+            <div className="epfa">
+              <label className="atep" htmlFor="old_password">OLD PASSWORD:
               <span className="error">{(errorKey === "old_password") ? errorMessage : null}</span>
               </label>
               <input
@@ -321,9 +326,9 @@ function EditProfileForm() {
               />
             </div>
 
-            <div className="cufa">
+            <div className="epfa">
 
-              <label className="atcu" htmlFor="new_password">New Password:
+              <label className="atep" htmlFor="new_password">NEW PASSWORD:
               <span className="error">{(errorKey === "new_password") ? errorMessage : null}</span>
               </label>
               <input
@@ -334,9 +339,9 @@ function EditProfileForm() {
               />
             </div>
 
-            <div className="cufa">
+            <div className="epfa">
 
-              <label className="atcu" htmlFor="confirm_new_password">Re-enter Password:
+              <label className="atep" htmlFor="confirm_new_password">RE-ENTER PASSWORD:
               <span className="error">{(errorKey === "confirm_new_password") ? errorMessage : null}</span>
               </label>
               <input
@@ -347,19 +352,19 @@ function EditProfileForm() {
               />
             </div>
 
-            {/* <div className="cufa">
-            <label className="atcu" htmlFor="delete_account"></label>
+            {/* <div className="epfa">
+            <label className="atep" htmlFor="delete_account"></label>
             </div> */}
 
-            <div id="cubuttonwrapper">
-              <button ref={btnRefChange} id="cubutton" className="cubutton" button type="submit" onClick={handleSubmitPassword}> Change Password </button>
+            <div id="epbuttonwrapper">
+              <button ref={btnRefChange} id="epbutton" className="epbutton" button type="submit" onClick={handleSubmitPassword}> CHANGE PASSWORD </button>
             </div>
 
 
 
             {/*------------- Change Password -------------*/}
-            <h2 id="contactusheadertitle">Delete Account</h2>
-            <div className="cufa">
+            <h2 className="editprofileheadertitle">DELETE ACCOUNT</h2>
+            <div className="epfa">
 
               <label htmlFor="delete_account"></label>
 
@@ -369,8 +374,8 @@ function EditProfileForm() {
 
 
           </form>
-          <div id="cubuttonwrapper">
-            <button id="cubutton" className="cubutton" onClick={() => deleteAccountToggleState()}>Delete your Account</button>
+          <div id="epbuttonwrapper">
+            <button id="epbutton" className="epbutton" onClick={() => deleteAccountToggleState()}>DELETE YOUR ACCOUNT</button>
           </div>
         </div>
 
@@ -378,20 +383,19 @@ function EditProfileForm() {
           <div className="modalEditPRofile">
             <div className="modalText">
               <img className="warningicons" alt="warningicon" src={warningicon} />
-              <p>Are you sure you want to delete your account? </p>
-              <p> This will remove all collection and item Data</p>
-              <button onClick={() => DeleteAccount()}>Yes Delete Account</button>
+              <p>ARE YOU SURE YOU WANT TO DELETE YOUR ACCOUNT? </p>
+              <p> THIS WILL REMOVE ALL COLLECTION AND ITEM DATA</p>
+              <button onClick={() => DeleteAccount()}>YES DELETE ACCOUNT</button>
               <div>
-                <button className="exitButton" onClick={() => deleteAccountToggleState()}> exit </button>
+                <button className="exitButton" onClick={() => deleteAccountToggleState()}> EXIT </button>
               </div>
             </div>
           </div>
         </div>
 
       </div>)}</div>}
-
-
-
+      </div>
+      </div>
     </div>
   );
 }

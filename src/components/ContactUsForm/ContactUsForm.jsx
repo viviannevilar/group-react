@@ -64,10 +64,10 @@ function ContactUsForm() {
             />
         </div>
     <div>
-      <h2 id="contactusheadertitle">Contact Us</h2>
+      <h2 id="contactusheadertitle">CONTACT US</h2>
       <form onSubmit={handleSubmit}>
       <div className="cufa">
-        <label className="atcu" htmlFor="name">Name:</label>
+        <label className="atcu" htmlFor="name">NAME:</label>
         <input 
           name="username"
           type="text"
@@ -76,7 +76,7 @@ function ContactUsForm() {
         />
       </div>
       <div className="cufa">
-        <label className="atcu" htmlFor="email">Email:</label>
+        <label className="atcu" htmlFor="email">EMAIL:</label>
         <input 
           name="email"
           type="email"
@@ -85,12 +85,12 @@ function ContactUsForm() {
         />
       </div>
       <div className="cufa">
-        <label className="atcu" htmlFor="message">Message:</label>
+        <label className="atcu" htmlFor="message">MESSAGE:</label>
         <textarea className="atcublock" name="message" type="textarea" id="message" rows="8" onChange={handleChange} />
       </div>
       <div id="cubuttonwrapper">
         <button id="cubutton" className="cubutton" type="submit" onClick={handleSubmit}>
-          Send!
+          SEND
       </button>
       </div >
     </form >

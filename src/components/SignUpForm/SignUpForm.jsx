@@ -64,10 +64,10 @@ function SignUpForm() {
     <form>
 
     
-      <h2 id="signupheadertitle">Create your Comparalist Account</h2>
+      <h2 id="signupheadertitle">CREATE YOUR COMPARALIST ACCOUNT</h2>
 
       <div className="sufa">
-        <label className="atsu" htmlFor="username">Username:</label>
+        <label className="atsu" htmlFor="username">USERNAME:</label>
         <input
           type="text"
           id="username"
@@ -77,7 +77,7 @@ function SignUpForm() {
 
       <div className="sufa">
         
-        <label className="atsu" htmlFor="email">Email:</label>
+        <label className="atsu" htmlFor="email">EMAIL:</label>
         <input
           type="email"
           id="email"
@@ -85,12 +85,12 @@ function SignUpForm() {
         />
       </div>
       <div className="sufa">
-        <label className="atsu" htmlFor="password">Password:</label>
+        <label className="atsu" htmlFor="password">PASSWORD:</label>
         <input type="password" id="password" placeholder="At least 6 characters" onChange={handleChange} />
       </div>
 
       <div className="sufa">
-        <label className="atsu" htmlFor="preferred_name">Your Preferred Name:</label>
+        <label className="atsu" htmlFor="preferred_name">YOUR PREFFERED NAME:</label>
         <input
           type="text"
           id="preferred_name"
@@ -99,7 +99,7 @@ function SignUpForm() {
       </div>
       <div id="subuttonwrapper">
         <button id="subutton" className="subutton" type="submit" onClick={handleSubmit}>
-          Create Account!
+          CREATE ACCOUNT
       </button>
       </div >
     </form >

@@ -104,7 +104,7 @@ function NewCollectionForm() {
    }
 
   return (
-    <div>
+    <div className="newcollectionform">
         <div>
             <Nav />
         </div>
@@ -116,18 +116,18 @@ function NewCollectionForm() {
             />
         </div>
 
-            <div className="newcollectionform">
-            <h2 id="newcollectionheadertitle"> Create a new collection! </h2>
+            <div>
+            <h2 id="newcollectionheadertitle"> CREATE A NEW COLLECTION </h2>
             <br></br>
-            <h4 className="newcollectiontxt">Your items will automatically include the following attributes: <br/> Price, Sale Price, Date Sale Price Ends and Image. </h4>
+            <h4 className="newcollectiontxt">YOUR ITEMS WILL AUTOMATICALLY INCLUDE THE FOLLOWING ATTRIBUTES: <br/> PRICE, SALE PRICE, DATE SALE PRICE ENDS AND IMAGE. </h4>
             <h4 className="newcollectiontxt"><span className="error">{ (errorKey === "detail") ? errorMessage : null}</span> </h4>
         </div>
       <form>
         <div className="ncfa">
-          <label className="at" htmlFor="title">Title:
+          <label className="at" htmlFor="title">TITLE:
           <span className="error">{ (errorKey === "title") ? errorMessage : null}</span> 
           </label>
-          <textarea 
+          <textarea id="at1"
             type="textarea"
             id="title"
             placeholder="What is the title of your collection?"
@@ -137,49 +137,49 @@ function NewCollectionForm() {
         </div>
 
         <div className="ncfa">
-          <label className="at" htmlFor="attribute1">Attribute 1:
+          <label className="at" htmlFor="attribute1">ATTRIBUTE 1:
           <span className="error">{ (errorKey === "attribute1") ? errorMessage : null}</span> 
           </label>
           <textarea 
             type="textarea"
             id="attribute1"
-            placeholder="Pick an attribute you would lilke to use to compare items"
+            placeholder="Pick an attribute to compare items by"
             onChange={handleChange}
           />
         </div>
 
         <div className="ncfa">
-          <label className="at" htmlFor="attribute2">Attribute 2:
+          <label className="at" htmlFor="attribute2">ATTRIBUTE 2:
           <span className="error">{ (errorKey === "attribute2") ? errorMessage : null}</span> 
           </label>
           <textarea
             type="textarea"
             id="attribute2"
-            placeholder="Pick an attribute you would lilke to use to compare items"
+            placeholder="Pick an attribute to compare items by"
             onChange={handleChange}
           />
         </div>
 
         <div className="ncfa">
-          <label className="at" htmlFor="attribute3">Attribute 3:
+          <label className="at" htmlFor="attribute3">ATTRIBUTE 3:
           <span className="error">{ (errorKey === "attribute3") ? errorMessage : null}</span> 
           </label>
           <textarea
             type="textarea"
             id="attribute3"
-            placeholder="Pick an attribute you would lilke to use to compare items"
+            placeholder="Pick an attribute to compare items by"
             onChange={handleChange}
           />
         </div>
 
         <div className="ncfa">
-          <label className="at" htmlFor="attribute4">Attribute 4:
+          <label className="at" htmlFor="attribute4">ATTRIBUTE 4:
           <span className="error">{ (errorKey === "attribute4") ? errorMessage : null}</span> 
           </label>
           <textarea
             type="textarea"
             id="attribute4"
-            placeholder="Pick an attribute you would lilke to use to compare items"
+            placeholder="Pick an attribute to compare items by"
             onChange={handleChange}
           />
         </div>
@@ -209,10 +209,10 @@ function NewCollectionForm() {
 
         <div className="ncbuttonwrapper">
          <button className="newcollectionbutton" ref={btnRefAdd} type="submit" onClick={handleSubmit}>
-            Submit your Collection!
+            SUBMIT YOUR COLLECTION
       </button>
       <br></br>
-      <button className="newcollectionbutton" type="submit" onClick={cancelSubmit}>  Cancel </button>
+      <button className="newcollectionbutton" type="submit" onClick={cancelSubmit}>  CANCEL </button>
           <br></br>
 
 
