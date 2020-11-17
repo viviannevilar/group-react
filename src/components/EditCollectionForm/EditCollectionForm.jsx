@@ -158,10 +158,16 @@ function EditCollectionForm(props) {
         <div className="editcollectionform">
 
             <h2 id="editcollectionheadertitle"> Edit {collectionData.title} </h2>
+
+            <h4 className="newcollectiontxt"><span className="error">{ (errorKey === "detail") ? errorMessage : null}</span> </h4>
+
             <form>
 
                 <div className="ecfa">
-                    <label className="ate" htmlFor="title">Name of Collection:</label>
+                    <label className="ate" htmlFor="title">
+                       Name of Collection:
+                       <span className="error">{ (errorKey === "title") ? errorMessage : null}</span> 
+                       </label>
                     <textarea
                         type="textarea"
                         id="title"
@@ -170,47 +176,55 @@ function EditCollectionForm(props) {
                     />
                 </div>
 
-                {collectionData.attribute1 !== "" && (<div className="ecfa">
-                    <label className="ate" htmlFor="attribute1">Attribute 1:</label>
+                <div className="ecfa">
+                    <label className="ate" htmlFor="attribute1">Attribute 1:
+                    <span className="error">{ (errorKey === "attribute1") ? errorMessage : null}</span> 
+                    </label>
                     <textarea
                         type="textarea"
                         id="attribute1"
                         value={credentials.attribute1}
                         onChange={handleChange}
                     />
-                </div>)}
+                </div>
 
 
 
-                {collectionData.attribute2 !== "" && (<div className="ecfa">
-                    <label className="ate" htmlFor="attribute2">Attribute 2:</label>
+                <div className="ecfa">
+                    <label className="ate" htmlFor="attribute2">Attribute 2:
+                    <span className="error">{ (errorKey === "attribute2") ? errorMessage : null}</span> 
+                    </label>
                     <textarea
                         type="textarea"
                         id="attribute2"
                         value={credentials.attribute2}
                         onChange={handleChange}
                     />
-                </div>)}
+                </div>
 
-                {collectionData.attribute3 !== "" && (<div className="ecfa">
-                    <label className="ate" htmlFor="attribute3">Attribute 3:</label>
+                <div className="ecfa">
+                    <label className="ate" htmlFor="attribute3">Attribute 3:
+                    <span className="error">{ (errorKey === "attribute3") ? errorMessage : null}</span> 
+                    </label>
                     <textarea
                         type="textarea"
                         id="attribute3"
                         value={credentials.attribute3}
                         onChange={handleChange}
                     />
-                </div>)}
+                </div>
 
-                {collectionData.attribute4 !== "" && (<div className="ecfa">
-                    <label className="ate" htmlFor="attribute4">Attribute 4:</label>
+                <div className="ecfa">
+                    <label className="ate" htmlFor="attribute4">Attribute 4:
+                    <span className="error">{ (errorKey === "attribute4") ? errorMessage : null}</span> 
+                    </label>
                     <textarea
                         type="textarea"
                         id="attribute4"
                         value={credentials.attribute4}
                         onChange={handleChange}
                     />
-                </div>)}
+                </div>
 
 
 
