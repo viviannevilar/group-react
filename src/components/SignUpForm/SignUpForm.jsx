@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "../SignUpForm/SignUpForm.css";
+import Nav from "../../components/Nav/Nav";
 
 
 function SignUpForm() {
@@ -49,7 +50,10 @@ function SignUpForm() {
 
   return (
 
-      <div id="loginform">
+      <div className="signupform">
+        <div>
+              <Nav />
+        </div>
         <div className="suformlogo" >
             <img
             id="suformlogoimage"
@@ -60,10 +64,10 @@ function SignUpForm() {
     <form>
 
     
-      <h2 id="signupheadertitle">Create an Account</h2>
+      <h2 id="signupheadertitle">Create your Comparalist Account</h2>
 
-      <div className="cufa">
-        <label htmlFor="username">Username:</label>
+      <div className="sufa">
+        <label className="atsu" htmlFor="username">Username:</label>
         <input
           type="text"
           id="username"
@@ -71,31 +75,31 @@ function SignUpForm() {
         />
       </div>
 
-      <div className="cufa">
+      <div className="sufa">
         
-        <label htmlFor="email">Email:</label>
+        <label className="atsu" htmlFor="email">Email:</label>
         <input
           type="email"
           id="email"
           onChange={handleChange}
         />
       </div>
-      <div className="cufa">
-        <label htmlFor="password">Password:</label>
+      <div className="sufa">
+        <label className="atsu" htmlFor="password">Password:</label>
         <input type="password" id="password" placeholder="At least 6 characters" onChange={handleChange} />
       </div>
 
-      <div className="cufa">
-        <label htmlFor="preferred_name">Your Preferred Name:</label>
+      <div className="sufa">
+        <label className="atsu" htmlFor="preferred_name">Your Preferred Name:</label>
         <input
           type="text"
           id="preferred_name"
           onChange={handleChange}
         />
       </div>
-      <div id="cubuttonwrapper">
-        <button id="cubutton" className="cubutton" type="submit" onClick={handleSubmit}>
-          Create your ComparaList Account!
+      <div id="subuttonwrapper">
+        <button id="subutton" className="subutton" type="submit" onClick={handleSubmit}>
+          Create Account!
       </button>
       </div >
     </form >

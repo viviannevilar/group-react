@@ -8,11 +8,6 @@ function SignUp() {
   let token = localStorage.token;
 
   return (
-      <div>
-          <div>
-              <Nav />
-          </div>
-    
     <div>
       {token == null && (
         <div>
@@ -28,7 +23,6 @@ function SignUp() {
           <LogoutForm />
         </div>
       )}
-    </div>
     </div>
   );
 }
