@@ -3,7 +3,10 @@
     color: #004aad;
     text-align: center;
     margin: 0;
-    padding-top: 5%;
+    padding-top: 1%;
+    font-size: 0.7em;
+    text-transform: uppercase ;
+
 }
 
 .cpbuttoncontainer {
@@ -11,7 +14,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    padding-bottom: 20px;
   }
 
 .collectionspagebutton {
@@ -27,12 +29,7 @@
     justify-content: space-evenly;
   }
 
-  @media only screen and (max-width: 1450px) {
-    .cpbuttoncontainer  {
-        padding-right: 25%;
-        padding-left: 25%;
-    }
-}
+ 
 
 @media only screen and (max-width: 800px) {
     a {
@@ -40,19 +37,13 @@
         /* padding-right: 5px;
         padding-left: 5px; */
     }
-    .cpbuttoncontainer  {
-            padding-right: 10%;
-            padding-left: 10%;
-    }
+   
 }
 
 
 @media only screen and (max-width: 500px) {
 
-    .cpbuttoncontainer  {
-        padding-right: 5%;
-        padding-left: 5%;
-    }
+  
 }
 
 
