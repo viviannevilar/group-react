@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import Nav from "../../components/Nav/Nav";
-import "../../components/EditProfileForm/EditProfileForm.css";
+import "./EditProfileForm.css";
 import warningicon from "../../images/warning2.png"
 import ErrorComponent from "../ErrorComponent/ErrorComponent"
 
@@ -252,6 +252,9 @@ function EditProfileForm() {
         <Nav />
       </div>
       <div className="epformlogo" >
+    <div>
+
+      <div className="epformlogo" >
         <img
           id="epformlogoimage"
           src={require("../../images/Comparalist_rectangle.png")}
@@ -391,7 +394,8 @@ function EditProfileForm() {
         </div>
 
       </div>)}</div>}
-
+      </div>
+      </div>
     </div>
   );
 }

@@ -9,6 +9,17 @@
 
 }
 
+.nodatacontainer {
+   margin: 0 auto;
+}
+
+
+/* p#no-data {
+   text-align: center;
+   border: 1px solid red;
+} */
+
+
 .cpbuttoncontainer {
     display: flex;
     flex-direction: row;

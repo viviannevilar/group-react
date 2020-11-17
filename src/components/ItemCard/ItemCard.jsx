@@ -17,12 +17,7 @@ function formatDate(string) {
 }
 
 function calculateDiscount(price, discount) {
-
-
     var total_saving = parseInt(price) * (discount / 100)
-    console.log("price: ", price)
-    console.log("discount: ", discount)
-    console.log("total saving: ", Math.round(total_saving, 3))
     return Math.round(total_saving, 3)
 }
 function calculateNewPrice(oldprice, totalsaving) {

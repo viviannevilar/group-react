@@ -4,7 +4,7 @@ import ContactUsForm from "../../components/ContactUsForm/ContactUsForm";
 function ContactUsPage(){
 
     return (   
-      <div>
+      <div className="page-wrapper">
         <ContactUsForm />
       </div>
     );

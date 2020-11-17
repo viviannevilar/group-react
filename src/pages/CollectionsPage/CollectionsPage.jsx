@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
 import CollectionCard from "../../components/CollectionCard/CollectionCard"
-import Nav from "../../components/Nav/Nav";
 import "./CollectionsPage.css";
 import ErrorComponent from "../../components/ErrorComponent/ErrorComponent";
 import addicon from "../../images/add.png"
 import archiveicon from "../../images/archive.png"
 import activeicon from "../../images/activeicon.png"
 import "../../components/CollectionCard/CollectionCard.css"
+import Nav from "../../components/Nav/Nav";
+import Footer from "../../components/Footer/Footer";
 import logoicon from "../../images/Comparalist_rectangle.png"
+
 
 function CollectionsPage() {
 
@@ -99,8 +101,9 @@ function CollectionsPage() {
                 <div id="CollectionNav">
                     <Nav />
                 </div>
+            <div className="page-wrapper">
 
-                <div className="containerwholecollectionpage">
+                <div >
                     <div id="collectionsheadertitle">
                         <h1>{(activePath === "active-collections/") ? "Collections" : "Archived Collections"} </h1>
                     </div>
@@ -118,30 +121,29 @@ function CollectionsPage() {
                                 <p style={{ cursor: "pointer" }} > See Archived Collections</p>
                             </Link>}
 
-
-
                         <Link className="addcollectioncontainer" to={`/newcollection/`}>
                             <img style={{ cursor: "pointer" }} className="changeicons" alt="addicon" src={addicon} />
                             <p style={{ cursor: "pointer" }} > Create Collection</p>
                         </Link>
 
-
-
                     </div>
                     {/* display list of collections */}
-                    {collectionsList.length > 0 ? (<div className="box-wrap">
+                    {collectionsList.length > 0 
+                    ? (<div className="box-wrap">
                         {collectionsList.map((collectionData, key) => {
                             return <CollectionCard key={key} collectionData={collectionData} />;
                         })}
-                    </div>) : (<div className="nodatacontainer">
-                        <img className="nodatalogo" alt="nodatalogo" src={logoicon} />
-                        <p>No collections have been added yet to your account</p>
-
-                    </div>)}
-
+                    </div>) 
+                    
+                    : (<div className="nodatacontainer">
+                         <img className="nodatalogo" alt="nodatalogo" src={logoicon} />
+                         <p id="no-data">You have no {location.pathname === "/collections/" ? "active" : "archived"} collections</p>
+                       </div>)}
 
                 </div>
-            </div >
+                <Footer />
+            </div>
+            </div>
         )
     }
 

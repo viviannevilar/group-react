@@ -5,6 +5,11 @@ import "./Nav.css";
 
 
 function Nav(props) {
+
+   const { myClassName } = props
+
+   
+   console.log(myClassName)
     const [isloggedIn, setisloggedin] = useState(false);
     const location = useLocation();
 
@@ -20,20 +25,19 @@ function Nav(props) {
     //const { image } = props;
 
     return (
-
         <nav className="Navbarcontainer">
             <div className="linkContainer">
-                <Link className="navItem" to="/">HOME</Link>
+                <Link className={`navItem ${myClassName ? myClassName : null}`} to="/">HOME</Link>
             </div>
 
             <div className="linkContainer">
-                <Link className="navItem" to="/edituserdetails">ACCOUNT</Link>
+                <Link className={`navItem ${myClassName ? myClassName : null}`} to="/edituserdetails">ACCOUNT</Link>
             </div>
             <div className="linkContainer">
-                <Link className="navItem" to="/collections/">COLLECTIONS</Link>
+                <Link className={`navItem ${myClassName ? myClassName : null}`} to="/collections/">COLLECTIONS</Link>
             </div>
             <div className="linkContainer">
-                {isloggedIn ? (<Link className="navItem" to="/login" onClick={handleLogout}>LOGOUT</Link>) : (<Link class="navItem" to="/login">LOGIN</Link>)}
+                {isloggedIn ? (<Link className={`navItem ${myClassName ? myClassName : null}`} to="/login" onClick={handleLogout}>LOGOUT</Link>) : (<Link className={`navItem ${myClassName ? myClassName : null}`} to="/login">LOGIN</Link>)}
             </div>
         </nav>
     );

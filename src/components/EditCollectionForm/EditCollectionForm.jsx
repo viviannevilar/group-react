@@ -141,6 +141,7 @@ function EditCollectionForm(props) {
             <div>
                 <Nav />
             </div>
+        <div >
         
             <div className="ecformlogo" >
                 <img
@@ -259,7 +260,8 @@ function EditCollectionForm(props) {
                 </div>
             </form>
         </div>
-        </div>
+      </div>
+      </div>
     );
 }
 
