@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./CollectionCard.css";
 import "../../components/Nav/Nav.css";
@@ -6,9 +6,10 @@ import "../../components/Nav/Nav.css";
 import archiveicon from "../../images/archive.png"
 import deleteicon from "../../images/delete.png"
 import editicon from "../../images/edit.png"
-import goicon from "../../images/goicon.png"
+import activeicon from "../../images/activebutton.PNG"
 import shareicon from "../../images/share.png"
-
+import lefticon from "../../images/lefticon.png"
+import { useEffect } from "react";
 
 function formatDate(string) {
     var options = { year: "numeric", month: "long", day: "numeric" };
@@ -21,6 +22,40 @@ function CollectionCard(props) {
     const { collectionData } = props
     const id = collectionData.id
     const linkCollection = "/collection/" + id + "/"
+    const [allAttributes, setAllAttributes] = useState([])
+
+    console.log(collectionData)
+
+    useEffect(() => {
+
+        if (collectionData !== undefined) {
+
+            let attributelist = []
+            attributelist.push("Price");
+            attributelist.push("Discount");
+
+            if (collectionData.attribute1 !== "" && collectionData.attribute1 !== null) {
+                attributelist.push(collectionData.attribute1);
+            }
+            if (collectionData.attribute2 !== "" && collectionData.attribute2 !== null) {
+                attributelist.push(collectionData.attribute2);
+            }
+            if (collectionData.attribute3 !== "" && collectionData.attribute3 !== null) {
+                attributelist.push(collectionData.attribute3);
+            }
+
+            if (collectionData.attribute4 !== "" && collectionData.attribute4 !== null) {
+                attributelist.push(collectionData.attribute4);
+            }
+            setAllAttributes(attributelist.join(", "))
+
+        }
+
+    }, [collectionData]);
+
+
+
+
 
 
     //////////////////////////// methods ////////////////////////////
@@ -55,7 +90,6 @@ function CollectionCard(props) {
     // Delete collection
 
     const deleteCollection = async (e) => {
-        e.preventDefault();
         let token = window.localStorage.getItem("token");
         let urlPath = "collection/" + collectionData.id
 
@@ -75,22 +109,37 @@ function CollectionCard(props) {
 
 
         <div className="collection-wrapper">
-            <div className="buttoncontainer" style={collectionData.is_active ? {} : { opacity: "0.4" }} >
-                <img style={{ cursor: "pointer" }} className="changeicons" alt="archiveicon" src={archiveicon} onClick={() => archiveCollection()} />
+            <div id="buttonrowcontainer" style={collectionData.is_active ? {} : { opacity: "0.4" }} >
+                {/* <img className="changeicons" alt="archiveicon" src={activeicon} /> */}
+                <div className="buttoncontainer">
+                    <img style={{ cursor: "pointer" }} className="changeicons" alt="archiveicon" src={archiveicon} onClick={() => archiveCollection()} />
 
-                <Link to={`/editcollection/${collectionData.id}`}>
-                    <img style={{ cursor: "pointer" }} className="changeicons" alt="editicon" src={editicon} />
+                    <Link to={`/editcollection/${collectionData.id}`}>
+                        <img style={{ cursor: "pointer" }} className="changeicons" alt="editicon" src={editicon} />
+                    </Link>
+
+                    <img style={{ cursor: "pointer" }} className="changeicons" alt="deleteicon" src={deleteicon} onClick={() => deleteCollection()} />
+                </div>
+            </div>
+
+
+            <div className="collectioninfocontainer">
+
+                <Link id="collectionlink" to={linkCollection}>
+                    <img style={{ cursor: "pointer" }} className="changeicons" alt="lefticon" src={lefticon} />
+
+                    <p style={{ cursor: "pointer" }} id="collectiontitle">{collectionData.title}</p>
                 </Link>
 
-                <img style={{ cursor: "pointer" }} className="changeicons" alt="deleteicon" src={deleteicon} onClick={() => deleteCollection()} />
+                {/* <p>Last Updated {formatDate(collectionData.)} </p> */}
 
-            </div>
-            <div className="collectioninfocontainer">
-                <p id="collectiontitle"> <Link to={linkCollection}>{collectionData.title}</Link></p>
+                <p id="compareatttributeslist">Comparing items by: {allAttributes} </p>
+
+
+
                 <div id="shareocllectioncontainer">
                     <img style={{ cursor: "pointer" }} className="shareicons" alt="shareicon" src={shareicon} onClick={() => shareCollection()} />
-
-                    <p onClick={shareCollection}>Share Collection</p>
+                    <p style={{ cursor: "pointer" }} onClick={shareCollection}>Share Collection</p>
                 </div>
 
                 <div id="dateupdatedcontainer">
