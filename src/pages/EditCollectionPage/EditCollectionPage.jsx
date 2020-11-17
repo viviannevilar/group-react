@@ -1,8 +1,6 @@
-import EditCollectionForm from "../../components/EditCollectionForn/EditCollectionForm";
+import EditCollectionForm from "../../components/EditCollectionForm/EditCollectionForm";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
-
 
 
 function EditCollectionPage() {
