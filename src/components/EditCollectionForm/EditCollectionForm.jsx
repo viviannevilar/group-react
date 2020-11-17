@@ -27,9 +27,6 @@ function EditCollectionForm(props) {
     });
 
 
-
-
-
     //methods
 
     useEffect(() => {
@@ -47,7 +44,6 @@ function EditCollectionForm(props) {
 
 
     const handleChange = (e) => {
-         console.log(";;;;;;;;;;;;;", e.target);
 
         const { id, value } = e.target;
         setCredentials((prevCredentials) => ({
@@ -121,6 +117,8 @@ function EditCollectionForm(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        console.log("---------------- button pressed! ")
 
       //disables the button to submit form until there is a response
       if (btnRefAdd.current) {
@@ -259,7 +257,7 @@ function EditCollectionForm(props) {
                 <br></br>
 
                 <div className="ecbuttonwrapper">
-                    <button className="ecbutton" type="submit" onClick={handleSubmit}>  Update Collection </button>
+                    <button className="ecbutton" ref={btnRefAdd} type="submit" onClick={handleSubmit}>  Update Collection </button>
                     <br></br>
                     <button className="ecbutton" type="submit" onClick={cancelSubmit}>  Cancel </button>
                 </div>

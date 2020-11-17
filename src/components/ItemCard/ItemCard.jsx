@@ -87,7 +87,7 @@ function ItemCard(props) {
             }
 
             setemptyAttributes(attributelist.join(", "))
-            console.log(projectData.price)
+            //console.log(projectData.price)
 
 
         }

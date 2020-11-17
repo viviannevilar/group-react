@@ -83,6 +83,7 @@ function NewCollectionForm() {
 
    const handleSubmit = (e) => {
       e.preventDefault();
+      console.log("---------------- button pressed! ")
 
       //disables the button to submit form until there is a response
       if (btnRefAdd.current) {
@@ -208,7 +209,7 @@ function NewCollectionForm() {
         <br></br>
 
         <div className="ncbuttonwrapper">
-          <button className="newcollectionbutton" type="submit" onClick={handleSubmit}>
+        ref={btnRefAdd} <button className="newcollectionbutton" type="submit" onClick={handleSubmit}>
             Submit your Collection!
       </button>
       <br></br>
