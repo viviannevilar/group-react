@@ -251,6 +251,11 @@ div.project-infosummary{
     }
   
     
-    
-    
+    }
+
+
+    .smalltext{
+      font-size: 0.5em;
+      text-transform: uppercase ;
+
     }

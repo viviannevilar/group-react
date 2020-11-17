@@ -111,7 +111,7 @@ function ItemCard(props) {
                         <img className="priceicon" alt="priceicon" src={pricetag} />
 
                         {projectData.price !== null || projectData.price !== "" ? (<div> { parseInt(projectData.sale_amount) !== 0 ? (<p className={parseInt(projectData.sale_amount) !== 0 ? "onsale" : "item"} > ${calculateNewPrice(projectData.price, calculateDiscount(projectData.price, projectData.sale_amount))}   (<strike>${projectData.price}</strike>) </p>) : <p>${projectData.price} </p>}
-                        </div>) : (<div><p>NO PRICE INFORMATION PROVIDED</p></div>)}
+                        </div>) : (<div><p className="smalltext">NO PRICE INFORMATION PROVIDED</p></div>)}
                     </div>
                     <div className="DiscountEndDate">
                         {parseInt(projectData.sale_amount) !== 0 && projectData.sale_end_date !== null && (<img className="priceicon" alt="discountend" src={discountend} />)}
@@ -133,7 +133,7 @@ function ItemCard(props) {
                         <p className="archiveitemp">Archived</p>
                     </div>) : ("")}
                     {projectData.price != null ? (<div> { parseInt(projectData.sale_amount) !== 0 ? (<p className={parseInt(projectData.sale_amount) !== 0 ? "onsale" : "item"} > <span id="attributetext"> Price </span>: ${calculateNewPrice(projectData.price, calculateDiscount(projectData.price, projectData.sale_amount))}   (<strike>${projectData.price}</strike>) </p>) : <p> <span id="attributetext"> Price </span> ${projectData.price} </p>}
-                    </div>) : (<div><p id="emptyattributelsit">No price provided</p></div>)}
+                    </div>) : (<div><p className="smalltext" id="emptyattributelsit">No price provided</p></div>)}
                     {collectionData.attribute1 !== "" && projectData.attribute1 !== "" ? (<p> <span id="attributetext"> {collectionData.attribute1} </span>:  {projectData.attribute1}</p>) : ("")}
                     {collectionData.attribute2 !== "" && projectData.attribute2 !== "" ? (<p><span id="attributetext"> {collectionData.attribute2}  </span>:  {projectData.attribute2}</p>) : ("")}
                     {collectionData.attribute3 !== "" && projectData.attribute3 !== "" ? (<p><span id="attributetext"> {collectionData.attribute3}  </span>:  {projectData.attribute3}</p>) : ("")}
