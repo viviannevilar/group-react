@@ -17,7 +17,12 @@ function formatDate(string) {
 }
 
 function calculateDiscount(price, discount) {
+
+
     var total_saving = parseInt(price) * (discount / 100)
+    console.log("price: ", price)
+    console.log("discount: ", discount)
+    console.log("total saving: ", Math.round(total_saving, 3))
     return Math.round(total_saving, 3)
 }
 function calculateNewPrice(oldprice, totalsaving) {
@@ -110,8 +115,13 @@ function ItemCard(props) {
                     <div className="priceSummary">
                         <img className="priceicon" alt="priceicon" src={pricetag} />
 
-                        {projectData.price !== null || projectData.price !== "" ? (<div> { parseInt(projectData.sale_amount) !== 0 ? (<p className={parseInt(projectData.sale_amount) !== 0 ? "onsale" : "item"} > ${calculateNewPrice(projectData.price, calculateDiscount(projectData.price, projectData.sale_amount))}   (<strike>${projectData.price}</strike>) </p>) : <p>${projectData.price} </p>}
-                        </div>) : (<div><p>NO PRICE INFORMATION PROVIDED</p></div>)}
+                        {projectData.price !== null && projectData.price !== ""  
+                        ? (<div> { parseInt(projectData.sale_amount) !== 0 && parseInt(projectData.sale_amount) !== null
+                           ? (<p className={parseInt(projectData.sale_amount) !== 0 && parseInt(projectData.sale_amount) !== null ? "onsale" : "item"} > 
+                           ${calculateNewPrice(projectData.price, calculateDiscount(projectData.price, projectData.sale_amount))}   (<strike>${projectData.price}</strike>) </p>) 
+                           : <p>${projectData.price} </p>}
+                           </div>) 
+                        : (<div><p>NO PRICE INFORMATION PROVIDED</p></div>)}
                     </div>
                     <div className="DiscountEndDate">
                         {parseInt(projectData.sale_amount) !== 0 && projectData.sale_end_date !== null && (<img className="priceicon" alt="discountend" src={discountend} />)}
