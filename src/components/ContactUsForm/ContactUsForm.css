@@ -31,7 +31,7 @@ img.cuformlogoimage{
     max-width: 800px;
     min-width: 300px;
     max-height: 900px;
-    width: 100%;
+    width: 50%;
     margin: 0px auto;
     background-color: #FFFFFF;
     border-radius: 25px;
@@ -138,8 +138,7 @@ textarea {
     }
     .atcu {
         font-size: 1.0rem;
-        padding-bottom: 1%;
-        padding-top: 1%;
+        padding-bottom: 3%;
     }
     .cufa textarea {
         font-size: 1.0rem;
@@ -151,6 +150,7 @@ textarea {
     }
     .cubutton {
         font-size: 20px;
+        width: 25%;
     }
 }
 
@@ -168,7 +168,6 @@ textarea {
     .atcu {
         font-size: 1.5rem;
         padding-bottom: 5%;
-        padding-top: 5%;
     }
     .cufa textarea {
         font-size: 1.5rem;
@@ -181,6 +180,7 @@ textarea {
     }
     .cubutton {
         font-size: 20px;
+        width: 40%;
     }
 }
 
@@ -208,6 +208,8 @@ textarea {
     }
     .cubutton {
         font-size: 18px;
+        width: 30%;
+        height: 30px;
     }
 }
 

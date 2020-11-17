@@ -52,7 +52,7 @@ function ContactUsForm() {
      };
   
   return (
-    <div id="loginform">
+    <div className="contactusform">
     <div>
         <Nav />
     </div>
@@ -63,7 +63,7 @@ function ContactUsForm() {
             alt="Company Logo"
             />
         </div>
-    <div id="contactusform">
+    <div>
       <h2 id="contactusheadertitle">Contact Us</h2>
       <form onSubmit={handleSubmit}>
       <div className="cufa">

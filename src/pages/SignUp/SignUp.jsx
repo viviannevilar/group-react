@@ -9,7 +9,7 @@ function SignUp() {
 
   return (
       <div>
-          <div id="Nav">
+          <div>
               <Nav />
           </div>
     
