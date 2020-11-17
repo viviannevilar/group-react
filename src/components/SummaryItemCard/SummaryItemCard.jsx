@@ -30,7 +30,7 @@ function SummaryItemCard(props) {
 
     return (
 
-        <div>
+        <div id="summarycomponent">
             {summary_choice !== undefined ? (
                 <div className="summarybox">
                     <h4 id="summartytitle" >Comparison of Items by {summary_choice}</h4>
