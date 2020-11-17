@@ -137,10 +137,11 @@ function EditCollectionForm(props) {
 
 
     return (
-        <div>
+        <div className="editcollectionform">
             <div>
                 <Nav />
             </div>
+        <div >
         
             <div className="ecformlogo" >
                 <img
@@ -149,10 +150,9 @@ function EditCollectionForm(props) {
                 alt="Company Logo"
                 />
             </div>
-    
-        <div className="editcollectionform">
+        <div>
 
-            <h2 id="editcollectionheadertitle"> Edit {collectionData.title} </h2>
+            <h2 id="editcollectionheadertitle"> EDIT {collectionData.title} </h2>
 
             <h4 className="newcollectiontxt"><span className="error">{ (errorKey === "detail") ? errorMessage : null}</span> </h4>
 
@@ -160,7 +160,7 @@ function EditCollectionForm(props) {
 
                 <div className="ecfa">
                     <label className="ate" htmlFor="title">
-                       Name of Collection:
+                       NAME OF COLLECTION:
                        <span className="error">{ (errorKey === "title") ? errorMessage : null}</span> 
                        </label>
                     <textarea
@@ -172,7 +172,7 @@ function EditCollectionForm(props) {
                 </div>
 
                 <div className="ecfa">
-                    <label className="ate" htmlFor="attribute1">Attribute 1:
+                    <label className="ate" htmlFor="attribute1">ATTRIBUTE 1:
                     <span className="error">{ (errorKey === "attribute1") ? errorMessage : null}</span> 
                     </label>
                     <textarea
@@ -186,7 +186,7 @@ function EditCollectionForm(props) {
 
 
                 <div className="ecfa">
-                    <label className="ate" htmlFor="attribute2">Attribute 2:
+                    <label className="ate" htmlFor="attribute2">ATTRIBUTE 2:
                     <span className="error">{ (errorKey === "attribute2") ? errorMessage : null}</span> 
                     </label>
                     <textarea
@@ -198,7 +198,7 @@ function EditCollectionForm(props) {
                 </div>
 
                 <div className="ecfa">
-                    <label className="ate" htmlFor="attribute3">Attribute 3:
+                    <label className="ate" htmlFor="attribute3">ATTRIBUTE 3:
                     <span className="error">{ (errorKey === "attribute3") ? errorMessage : null}</span> 
                     </label>
                     <textarea
@@ -210,7 +210,7 @@ function EditCollectionForm(props) {
                 </div>
 
                 <div className="ecfa">
-                    <label className="ate" htmlFor="attribute4">Attribute 4:
+                    <label className="ate" htmlFor="attribute4">ATTRIBUTE 4:
                     <span className="error">{ (errorKey === "attribute4") ? errorMessage : null}</span> 
                     </label>
                     <textarea
@@ -251,18 +251,17 @@ function EditCollectionForm(props) {
                     />
                     Archived</label>
                 </div> */}
-                <br></br>
+
 
                 <div className="ecbuttonwrapper">
-                    <button className="ecbutton" ref={btnRefAdd} type="submit" onClick={handleSubmit}>  Update Collection </button>
-                    <br></br>
-                    <button className="ecbutton" type="submit" onClick={cancelSubmit}>  Cancel </button>
+                    <button className="ecbutton" ref={btnRefAdd} type="submit" onClick={handleSubmit}>  UPDATE COLLECTION </button>
+ 
+                    <button className="ecbutton" type="submit" onClick={cancelSubmit}>  CANCEL </button>
                 </div>
-                <br></br>
-                <br></br>
             </form>
         </div>
-        </div>
+      </div>
+      </div>
     );
 }
 

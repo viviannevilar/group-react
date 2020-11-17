@@ -1,17 +1,31 @@
 
 .Navbarcontainer {
-  width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    padding: 10px;
-    }
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: space-evenly;
+   top: 0;
+   position: fixed;
+   background: white;
+   padding: 1rem;
+   }
+
+  
 
 .Navbarcontainer a{
     /* flex-basis: 100%; */
-    color:#004aad
-    }
+    color:#004aad;
+}
+
+.Navbarcontainer a{
+   /* flex-basis: 100%; */
+   color:#004aad;
+}
+
+.Navbarcontainer a.hidden-nav {
+   color: white;
+}
 
 .linkContainer {
     align-items: center;
@@ -20,6 +34,7 @@
 #Navitem1 {
     align-content: center;
 }
+
 
 @media only screen and (max-width: 1450px) {
 

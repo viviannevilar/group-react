@@ -6,6 +6,7 @@ import Footer from "../../components/Footer/Footer";
 
 
 function EditProfilePage() {
+   
   return (
      <div>
          <Nav />

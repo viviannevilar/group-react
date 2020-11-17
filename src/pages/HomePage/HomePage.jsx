@@ -4,8 +4,10 @@ import "../SignUp/SignUp";
 import "../ContactUs/ContactUs";
 import "../AboutUs/AboutUs";
 import "../LoginPage/LoginPage";
+import Footer from "../../components/Footer/Footer";
+import Nav from "../../components/Nav/Nav";
 import LogoutForm from "../../components/LogoutForm/LogoutForm";
-import { useParams, useHistory, useLocation, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 function HomePage() {
@@ -26,7 +28,9 @@ function HomePage() {
   }, []);
 
   return (
-    <div className="homepage">
+    <React.Fragment className="homepage">
+       <Nav myClassName={"hidden-nav"}/>
+
       <div className="logo">
         <img
           id="logoimage"
@@ -51,15 +55,16 @@ function HomePage() {
           </div>
         )}
 
-      <div className="footer">
+      <Footer />
+      {/* <div className="footer">
         <Link className="footer1" to="/contactus">
           CONTACT US
         </Link>
         <Link className="footer1" to="/aboutus">
           ABOUT US
         </Link>
-      </div>
-    </div>
+      </div> */}
+    </React.Fragment>
   );
 }
 

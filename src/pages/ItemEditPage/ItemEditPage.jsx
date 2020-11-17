@@ -63,14 +63,11 @@ function ItemEditPage() {
 
 
     return (
+        <div className="page-wrapper">
 
-        <div>
             {token !== null && (
-                <div>
                     <ItemEditForm itemData={editData} collectionData={collectionData} isLoading={isLoading}/>
-                </div>
             )}
-
 
         </div>
     );

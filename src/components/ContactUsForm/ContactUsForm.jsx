@@ -52,7 +52,7 @@ function ContactUsForm() {
      };
   
   return (
-    <div id="loginform">
+    <div className="contactusform">
     <div>
         <Nav />
     </div>
@@ -63,12 +63,12 @@ function ContactUsForm() {
             alt="Company Logo"
             />
         </div>
-    <div id="contactusform">
-      <h2 id="contactusheadertitle">Contact Us</h2>
+    <div>
+      <h2 id="contactusheadertitle">CONTACT US</h2>
       <form onSubmit={handleSubmit}>
       <div className="cufa">
-        <label className="atcu" htmlFor="name">Name:</label>
-        <input
+        <label className="atcu" htmlFor="name">NAME:</label>
+        <input 
           name="username"
           type="text"
           id="name"
@@ -76,8 +76,8 @@ function ContactUsForm() {
         />
       </div>
       <div className="cufa">
-        <label className="atcu" htmlFor="email">Email:</label>
-        <input
+        <label className="atcu" htmlFor="email">EMAIL:</label>
+        <input 
           name="email"
           type="email"
           id="email"
@@ -85,12 +85,12 @@ function ContactUsForm() {
         />
       </div>
       <div className="cufa">
-        <label className="atcu" htmlFor="message">Message:</label>
+        <label className="atcu" htmlFor="message">MESSAGE:</label>
         <textarea className="atcublock" name="message" type="textarea" id="message" rows="8" onChange={handleChange} />
       </div>
       <div id="cubuttonwrapper">
         <button id="cubutton" className="cubutton" type="submit" onClick={handleSubmit}>
-          Send!
+          SEND
       </button>
       </div >
     </form >

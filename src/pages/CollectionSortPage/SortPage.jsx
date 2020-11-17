@@ -142,10 +142,8 @@ function SortableComponent(props) {
    /////////////// return
    return (
       
-      <div>
-         <div>
-            <Nav />
-         </div>
+      <div className="page-wrapper">
+
             {/* There is NO error */}
             {(!hasError) ? (<div>
                <div className="sort-buttons-container">
