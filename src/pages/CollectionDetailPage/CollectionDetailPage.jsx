@@ -17,6 +17,8 @@ import editicon from "../../images/edit.png"
 import goicon from "../../images/goicon.png"
 
 import addicon from "../../images/add.png"
+import "../../components/CollectionCard/CollectionCard.css"
+import logoicon from "../../images/Comparalist_rectangle.png"
 
 
 // styling
@@ -465,36 +467,42 @@ function CollectionDetailPage() {
                               </select>
                               <img style={{ cursor: "pointer" }} className="goicon" alt="goicon" src={goicon} onClick={() => summaryToggleState()} />
                            </div>
-                        ) : (<p>No Items in {collectionData.title}! </p>)}
+                        ) : (
+
+                              <div className="nodatacontainer">
+                                 <img className="nodatalogo" alt="nodatalogo" src={logoicon} />
+                                 <p>No Items in list {collectionData.title}! </p>
+                              </div>
+                           )}
 
 
 
                      </div>
+                     {itemDisplayData.length > 0 ? (
+                        <div id="store-filter-button-container" >
+                           <div id="Container-for-Filtering" >
+                              {/* first drop down - filter choices */}
+                              <select id="testselect" onChange={(e) => setFilterChoice(e.target.value)}>
+                                 <option value="all">All items</option>
+                                 <option value="active">Active items</option>
+                                 <option value="archived">Archived items</option>
+                              </select>
 
-                     <div id="store-filter-button-container" >
-                        <div id="Container-for-Filtering" >
-                           {/* first drop down - filter choices */}
-                           <select id="testselect" onChange={(e) => setFilterChoice(e.target.value)}>
-                              <option value="all">All items</option>
-                              <option value="active">Active items</option>
-                              <option value="archived">Archived items</option>
-                           </select>
+                              {/* second drop down - order choices */}
+                              <select id="testselect" onChange={(e) => setOrderChoice(e.target.value)}>
+                                 <option value="default">Default</option>
+                                 <option value="alphabetical">Alphabetical order</option>
+                                 <option value="price-lh">Price - low to high</option>
+                                 <option value="price-hl">Price - high to low</option>
+                                 <option value="date-created">Date created</option>
+                                 <option value="date-modified">Date modified</option>
+                              </select>
+                              <Link to={{ pathname: `/collection/${id}/manual-sort/`, state: { itemsProps: itemData } }}><button id="testselect"  >Change Default Order</button></Link>
 
-                           {/* second drop down - order choices */}
-                           <select id="testselect" onChange={(e) => setOrderChoice(e.target.value)}>
-                              <option value="default">Default</option>
-                              <option value="alphabetical">Alphabetical order</option>
-                              <option value="price-lh">Price - low to high</option>
-                              <option value="price-hl">Price - high to low</option>
-                              <option value="date-created">Date created</option>
-                              <option value="date-modified">Date modified</option>
-                           </select>
-                           <Link to={{ pathname: `/collection/${id}/manual-sort/`, state: { itemsProps: itemData } }}><button id="testselect"  >Change Default Order</button></Link>
+                           </div>
 
                         </div>
-
-                     </div>
-
+                     ) : ("")}
 
 
 
