@@ -92,10 +92,7 @@ function NewCollectionForm() {
       postData().then((response) => {
          if (response != undefined) {
          
-         } else {
-         //history.push("/newcollection/") 
-         // not sure about whether this should just be collection????????
-         }
+         } 
       })
    };
 

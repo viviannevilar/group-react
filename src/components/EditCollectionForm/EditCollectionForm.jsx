@@ -1,18 +1,21 @@
 
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import Nav from "../../components/Nav/Nav";
+import Nav from "../Nav/Nav";
 import "../../components/Nav/Nav.css";
 import "./EditCollectionForm.css";
-import ContactUsPage from "../../pages/ContactUs/ContactUs";
+//import ContactUsPage from "../../pages/ContactUs/ContactUs";
 
 function EditCollectionForm(props) {
 
-
+    //variables
     const { collectionData } = props;
 
-    console.log(collectionData)
-    //variables
+    let btnRefAdd = useRef();
+
+    const [errorMessage, setErrorMessage] = useState()
+    const [errorKey, setErrorKey] = useState()
+
     const [credentials, setCredentials] = useState({
         id: null,
         title: "",
@@ -23,21 +26,26 @@ function EditCollectionForm(props) {
       //   is_active: true,
     });
 
-    useEffect(() => {
 
-        setCredentials({
-            id: parseInt(collectionData.id),
-            title: collectionData.title,
-            attribute1: collectionData.attribute1,
-            attribute2: collectionData.attribute2,
-            attribute3: collectionData.attribute3,
-            attribute4: collectionData.attribute4,
-            // is_active: collectionData.is_active,
-        });
-    }, [collectionData]);
+
 
 
     //methods
+
+    useEffect(() => {
+
+      setCredentials({
+          id: parseInt(collectionData.id),
+          title: collectionData.title,
+          attribute1: collectionData.attribute1,
+          attribute2: collectionData.attribute2,
+          attribute3: collectionData.attribute3,
+          attribute4: collectionData.attribute4,
+          // is_active: collectionData.is_active,
+      });
+  }, [collectionData]);
+
+
     const handleChange = (e) => {
          console.log(";;;;;;;;;;;;;", e.target);
 
@@ -48,11 +56,6 @@ function EditCollectionForm(props) {
         }));
     };
 
-
-   //  useEffect(() => {
-   //     console.log("-----------------credentials.is_active: ", credentials.is_active)
-
-   //  }, [credentials.is_active])
 
     const handleImageChange = (e) => {
         e.persist();
@@ -86,16 +89,47 @@ function EditCollectionForm(props) {
             body: form_data,
             // body: JSON.stringify(credentials),
         });
-        return response.json();
+
+         if (response.ok) {
+            history.push(`/collection/${collectionData.id}/`);
+            return response.json();
+
+         } else {
+
+            response.text().then(text => {
+            throw Error(text)
+
+         }).catch((error) => {
+           //setHasError(true)
+           const errorObj = JSON.parse(error.message);
+             setErrorKey(Object.keys(errorObj)[0])
+           setErrorMessage(errorObj[Object.keys(errorObj)[0]]);
+           
+           // Puts the cursor in the form input corresponding to the element that has an issue
+           let keyName = document.getElementById(`${Object.keys(errorObj)[0]}`)
+           if (keyName) {keyName.focus();}
+  
+           // this enables the submit button again
+           if (btnRefAdd.current) {
+              btnRefAdd.current.disabled = false
+           }
+          }
+        )
+      }
+
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("handlesubmit")
-        console.log(credentials);
+
+      //disables the button to submit form until there is a response
+      if (btnRefAdd.current) {
+         btnRefAdd.current.disabled = true
+      }
+
         postData().then((response) => {
-            console.log(response)
-            history.push(`/collection/${collectionData.id}/`);
+            // console.log(response)
+            // history.push(`/collection/${collectionData.id}/`);
             // window.location.reload();
         });
 
