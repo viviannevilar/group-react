@@ -3,6 +3,12 @@ import { Link, useLocation } from "react-router-dom"
 import CollectionCard from "../../components/CollectionCard/CollectionCard"
 import Nav from "../../components/Nav/Nav";
 import "./CollectionsPage.css";
+import ErrorComponent from "../../components/ErrorComponent/ErrorComponent";
+import addicon from "../../images/add.png"
+import archiveicon from "../../images/archive.png"
+import activeicon from "../../images/activeicon.png"
+import "../../components/CollectionCard/CollectionCard.css"
+import logoicon from "../../images/Comparalist_rectangle.png"
 
 function CollectionsPage() {
 
@@ -74,47 +80,18 @@ function CollectionsPage() {
     } else if (errorCode === 404) {
 
         return (
-            <div>
-                <div>
-                    <Nav />
-                </div>
-                <h1> Collection not found! </h1>
-            </div>
+
+            <ErrorComponent errorMessage="Collection not found!" errorNumber="404" />
+
         )
         // if not logged in or wrong credentials
     } else if ((errorCode === 401) || (errorCode === 403)) {
 
         return (
-            <div>
-                <div>
-                    <Nav />
-                </div>
-                <h1>You don't have permission to see this page! </h1>
-            </div>
+            <ErrorComponent errorMessage="You don't have permission to see this page!" errorNumber="401" />
         )
 
         // if there are no collections to show
-    } else if (!collectionsList || collectionsList.length === 0) {
-
-        return (
-            <div>
-                <div>
-                    <Nav />
-                </div>
-                <h1>No collections to show</h1>
-
-                {/* button to see archived collections or active collections */}
-                {
-                    (activePath === "archived-collections/") ?
-                        <Link to={`/collections/`}><button >See active collections</button></Link> :
-                        <Link to={`/collections-archive/`}><button >See archived collections</button></Link>
-                }
-
-                <Link to={`/newcollection/`}><button >Create New Collection</button></Link>
-            </div>
-        )
-
-        // if the credentials match and there are collections to show
     } else {
 
         return (
@@ -123,26 +100,48 @@ function CollectionsPage() {
                     <Nav />
                 </div>
 
-                <div>
+                <div className="containerwholecollectionpage">
                     <div id="collectionsheadertitle">
-                    <h1>{(activePath === "active-collections/") ? "Collections" : "Archived Collections"} </h1>
+                        <h1>{(activePath === "active-collections/") ? "Collections" : "Archived Collections"} </h1>
                     </div>
                     <div className="cpbuttoncontainer">
-                    {/* button to see archived collections or active collections */}
-                    {
-                        (activePath === "archived-collections/") ?
-                            <Link to={`/collections/`}><button className="collectionspagebutton">See active collections</button></Link> :
-                            <Link to={`/collections-archive/`}><button className="collectionspagebutton">See archived collections</button></Link>
-                    }
+                        {/* button to see archived collections or active collections */}
+                        {(activePath === "archived-collections/") ?
 
-                    <Link to={`/newcollection/`}><button className="collectionspagebutton">Create New Collection</button></Link>
+                            <Link className="addcollectioncontainer" to={`/collections/`}>
+                                <img style={{ cursor: "pointer" }} className="changeicons" alt="activeicon" src={activeicon} />
+                                <p style={{ cursor: "pointer" }} > See Active Collections</p>
+                            </Link>
+                            :
+                            <Link className="addcollectioncontainer" to={`/collections-archive/`}>
+                                <img style={{ cursor: "pointer" }} className="changeicons" alt="archiveicon" src={archiveicon} />
+                                <p style={{ cursor: "pointer" }} > See Archived Collections</p>
+                            </Link>}
+
+
+
+                        <Link className="addcollectioncontainer" to={`/newcollection/`}>
+                            <img style={{ cursor: "pointer" }} className="changeicons" alt="addicon" src={addicon} />
+                            <p style={{ cursor: "pointer" }} > Create Collection</p>
+                        </Link>
+
+
+
                     </div>
                     {/* display list of collections */}
-                    {collectionsList.map((collectionData, key) => {
-                        return <CollectionCard key={key} collectionData={collectionData} />;
-                    })}
+                    {collectionsList.length > 0 ? (<div className="box-wrap">
+                        {collectionsList.map((collectionData, key) => {
+                            return <CollectionCard key={key} collectionData={collectionData} />;
+                        })}
+                    </div>) : (<div className="nodatacontainer">
+                        <img className="nodatalogo" alt="nodatalogo" src={logoicon} />
+                        <p>No collections have been added yet to your account</p>
+
+                    </div>)}
+
+
                 </div>
-            </div>
+            </div >
         )
     }
 

@@ -1,18 +1,16 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:600|Work+Sans:400,500,600,700&display=swap");
 
-body {
-  background: #004aad;
-  color: #fff;
-  font-family: "Roboto", sans-serif;
-  max-height: 700px;
-  overflow: hidden;
-}
+
 .c {
   text-align: center;
   display: block;
   position: relative;
   width: 80%;
   margin: 100px auto;
+}
+
+div.c {
+  color: #004aad;
 }
 ._404 {
   font-size: 220px;

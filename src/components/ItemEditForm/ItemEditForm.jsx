@@ -31,7 +31,7 @@ function ItemEditForm(props) {
 
    //  Populate the form with previous data
    useEffect(() => {
-      console.log(itemData)
+      //console.log(itemData)
       setCredentials((prevCredentials) => ({
          ...prevCredentials,
          //id: parseInt(itemData.id),
@@ -46,7 +46,7 @@ function ItemEditForm(props) {
          notes: itemData.notes,
          collection: parseInt(itemData.collection),
       }));
-      console.log(credentials)
+      //console.log(credentials)
 
 
    }, [itemData]);
@@ -88,7 +88,6 @@ function ItemEditForm(props) {
       form_data.append('price', credentials.price);
       form_data.append('notes', credentials.notes);
       if (credentials.sale_amount) {
-         console.log("---------- HERE, credentials sale amount: ", credentials.sale_amount)
          form_data.append('sale_amount', credentials.sale_amount)
       };
       if (credentials.sale_end_date !== null) {
@@ -103,12 +102,12 @@ function ItemEditForm(props) {
          },
          body: form_data,
       });
-      console.log(response)
+      //console.log(response)
 
       if (response.ok) {
 
-         // history.push(`/collection/${itemData.collection}/`);
-         // window.location.reload();
+         history.push(`/collection/${collectionData.id}/`);
+         window.location.reload();
 
       } else {
          response.text().then(text => {
@@ -119,7 +118,6 @@ function ItemEditForm(props) {
                // the key gives the key of the element that has a problem
                // and the value gives gives the string with the error message
                // then focus on the input of the element that has a problem
-
 
                const errorObj = JSON.parse(error.message);
 
@@ -147,17 +145,17 @@ function ItemEditForm(props) {
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      console.log("handlesubmit")
-      console.log(credentials);
+      // console.log("handlesubmit")
+      // console.log(credentials);
 
       //disables the button to submit form until there is a response
       if (btnRefAdd.current) {
          btnRefAdd.current.disabled = true
       }
       postData().then((response) => {
-         console.log(response)
-         history.push(`/collection/${collectionData.id}/`);
-         window.location.reload();
+         // console.log(response)
+         // history.push(`/collection/${collectionData.id}/`);
+         // window.location.reload();
       });
 
    };
@@ -318,11 +316,11 @@ function ItemEditForm(props) {
                         Image:
                         <span className="error">{(errorKey === "image") ? errorMessage : null}</span>
                      </label>
-                     <br></br>
+                     {/* <br></br>
                      <div id="imagecon">
                         <img id="image" src={credentials.image} alt="anon pic" />
                      </div>
-                     <br></br>
+                     <br></br> */}
                      <input
                         type="file"
                         id="image"
@@ -343,8 +341,6 @@ function ItemEditForm(props) {
                         onChange={handleChange}
                      />
                   </div>
-
-
 
 
                   <div className="eibuttonwrapper">

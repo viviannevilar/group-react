@@ -266,7 +266,9 @@ div#Container-for-Filtering{
   justify-content:space-between;
 }
 
-
+div#Container-for-Filtering a{
+  display: flex;
+}
 
 
 #additem{
@@ -370,3 +372,43 @@ p#additem{
     justify-content: center;
 
   }
+
+
+  @media screen and (max-width: 600px){
+ 
+    .box-wrap{
+        display:flex;
+        flex-direction: column;
+        align-items:center;
+        justify-content:center;
+        margin: 5%;
+        margin-top: 2%;
+      }
+    
+      .box{
+        padding:30px;
+        margin:2%;
+        background:white;
+        width:80%;
+        border:1px solid #d6d6d6;
+        box-shadow:0 2px 3px 0px rgba(0,0,0,0.25);
+        border-radius:3px;
+        transition:.2s all; 
+      }
+
+      a.addcollectioncontainer p {
+        font-size: 0.5em;
+        text-transform: uppercase;
+        margin: 2px;
+    }
+
+    .cpbuttoncontainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 100%;
+    }
+
+    
+    }

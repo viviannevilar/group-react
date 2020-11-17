@@ -83,6 +83,7 @@ function NewCollectionForm() {
 
    const handleSubmit = (e) => {
       e.preventDefault();
+      console.log("---------------- button pressed! ")
 
       //disables the button to submit form until there is a response
       if (btnRefAdd.current) {
@@ -92,10 +93,7 @@ function NewCollectionForm() {
       postData().then((response) => {
          if (response != undefined) {
          
-         } else {
-         //history.push("/newcollection/") 
-         // not sure about whether this should just be collection????????
-         }
+         } 
       })
    };
 
@@ -118,8 +116,7 @@ function NewCollectionForm() {
             />
         </div>
 
-    
-        <div className="newcollectionform">
+            <div className="newcollectionform">
             <h2 id="newcollectionheadertitle"> Create a new collection! </h2>
             <br></br>
             <h4 className="newcollectiontxt">Your items will automatically include the following attributes: <br/> Price, Sale Price, Date Sale Price Ends and Image. </h4>
@@ -211,7 +208,7 @@ function NewCollectionForm() {
         <br></br>
 
         <div className="ncbuttonwrapper">
-          <button className="newcollectionbutton" type="submit" onClick={handleSubmit}>
+         <button className="newcollectionbutton" ref={btnRefAdd} type="submit" onClick={handleSubmit}>
             Submit your Collection!
       </button>
       <br></br>

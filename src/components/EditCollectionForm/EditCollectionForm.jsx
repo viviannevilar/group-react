@@ -1,18 +1,21 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
-import Nav from "../../components/Nav/Nav";
+import Nav from "../Nav/Nav";
 import "../../components/Nav/Nav.css";
 import "./EditCollectionForm.css";
-import ContactUsPage from "../../pages/ContactUs/ContactUs";
+//import ContactUsPage from "../../pages/ContactUs/ContactUs";
 
 function EditCollectionForm(props) {
 
-
+    //variables
     const { collectionData } = props;
 
-    console.log(collectionData)
-    //variables
+    let btnRefAdd = useRef();
+
+    const [errorMessage, setErrorMessage] = useState()
+    const [errorKey, setErrorKey] = useState()
+
     const [credentials, setCredentials] = useState({
         id: null,
         title: "",
@@ -23,23 +26,24 @@ function EditCollectionForm(props) {
       //   is_active: true,
     });
 
-    useEffect(() => {
-
-        setCredentials({
-            id: parseInt(collectionData.id),
-            title: collectionData.title,
-            attribute1: collectionData.attribute1,
-            attribute2: collectionData.attribute2,
-            attribute3: collectionData.attribute3,
-            attribute4: collectionData.attribute4,
-            // is_active: collectionData.is_active,
-        });
-    }, [collectionData]);
-
 
     //methods
+
+    useEffect(() => {
+
+      setCredentials({
+          id: parseInt(collectionData.id),
+          title: collectionData.title,
+          attribute1: collectionData.attribute1,
+          attribute2: collectionData.attribute2,
+          attribute3: collectionData.attribute3,
+          attribute4: collectionData.attribute4,
+          // is_active: collectionData.is_active,
+      });
+  }, [collectionData]);
+
+
     const handleChange = (e) => {
-         console.log(";;;;;;;;;;;;;", e.target);
 
         const { id, value } = e.target;
         setCredentials((prevCredentials) => ({
@@ -48,11 +52,6 @@ function EditCollectionForm(props) {
         }));
     };
 
-
-   //  useEffect(() => {
-   //     console.log("-----------------credentials.is_active: ", credentials.is_active)
-
-   //  }, [credentials.is_active])
 
     const handleImageChange = (e) => {
         e.persist();
@@ -73,7 +72,6 @@ function EditCollectionForm(props) {
         form_data.append('attribute2', credentials.attribute2);
         form_data.append('attribute3', credentials.attribute3);
         form_data.append('attribute4', credentials.attribute4);    
-      //   form_data.append('is_active', credentials.is_active);
         form_data.append('title', credentials.title);
 
         //function you can call but carry on as well
@@ -86,16 +84,47 @@ function EditCollectionForm(props) {
             body: form_data,
             // body: JSON.stringify(credentials),
         });
-        return response.json();
+
+         if (response.ok) {
+            history.push(`/collection/${collectionData.id}/`);
+            return response.json();
+
+         } else {
+
+         response.text().then(text => {
+            throw Error(text)
+
+         }).catch((error) => {
+           //setHasError(true)
+           const errorObj = JSON.parse(error.message);
+             setErrorKey(Object.keys(errorObj)[0])
+           setErrorMessage(errorObj[Object.keys(errorObj)[0]]);
+           
+           // Puts the cursor in the form input corresponding to the element that has an issue
+           let keyName = document.getElementById(`${Object.keys(errorObj)[0]}`)
+           if (keyName) {keyName.focus();}
+  
+           // this enables the submit button again
+           if (btnRefAdd.current) {
+              btnRefAdd.current.disabled = false
+           }
+          }
+        )
+      }
+
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("handlesubmit")
-        console.log(credentials);
+
+      //disables the button to submit form until there is a response
+      if (btnRefAdd.current) {
+         btnRefAdd.current.disabled = true
+      }
+
         postData().then((response) => {
-            console.log(response)
-            history.push(`/collection/${collectionData.id}/`);
+            // console.log(response)
+            // history.push(`/collection/${collectionData.id}/`);
             // window.location.reload();
         });
 
@@ -124,10 +153,16 @@ function EditCollectionForm(props) {
         <div className="editcollectionform">
 
             <h2 id="editcollectionheadertitle"> Edit {collectionData.title} </h2>
+
+            <h4 className="newcollectiontxt"><span className="error">{ (errorKey === "detail") ? errorMessage : null}</span> </h4>
+
             <form>
 
                 <div className="ecfa">
-                    <label className="ate" htmlFor="title">Name of Collection:</label>
+                    <label className="ate" htmlFor="title">
+                       Name of Collection:
+                       <span className="error">{ (errorKey === "title") ? errorMessage : null}</span> 
+                       </label>
                     <textarea
                         type="textarea"
                         id="title"
@@ -136,47 +171,55 @@ function EditCollectionForm(props) {
                     />
                 </div>
 
-                {collectionData.attribute1 !== "" && (<div className="ecfa">
-                    <label className="ate" htmlFor="attribute1">Attribute 1:</label>
+                <div className="ecfa">
+                    <label className="ate" htmlFor="attribute1">Attribute 1:
+                    <span className="error">{ (errorKey === "attribute1") ? errorMessage : null}</span> 
+                    </label>
                     <textarea
                         type="textarea"
                         id="attribute1"
                         value={credentials.attribute1}
                         onChange={handleChange}
                     />
-                </div>)}
+                </div>
 
 
 
-                {collectionData.attribute2 !== "" && (<div className="ecfa">
-                    <label className="ate" htmlFor="attribute2">Attribute 2:</label>
+                <div className="ecfa">
+                    <label className="ate" htmlFor="attribute2">Attribute 2:
+                    <span className="error">{ (errorKey === "attribute2") ? errorMessage : null}</span> 
+                    </label>
                     <textarea
                         type="textarea"
                         id="attribute2"
                         value={credentials.attribute2}
                         onChange={handleChange}
                     />
-                </div>)}
+                </div>
 
-                {collectionData.attribute3 !== "" && (<div className="ecfa">
-                    <label className="ate" htmlFor="attribute3">Attribute 3:</label>
+                <div className="ecfa">
+                    <label className="ate" htmlFor="attribute3">Attribute 3:
+                    <span className="error">{ (errorKey === "attribute3") ? errorMessage : null}</span> 
+                    </label>
                     <textarea
                         type="textarea"
                         id="attribute3"
                         value={credentials.attribute3}
                         onChange={handleChange}
                     />
-                </div>)}
+                </div>
 
-                {collectionData.attribute4 !== "" && (<div className="ecfa">
-                    <label className="ate" htmlFor="attribute4">Attribute 4:</label>
+                <div className="ecfa">
+                    <label className="ate" htmlFor="attribute4">Attribute 4:
+                    <span className="error">{ (errorKey === "attribute4") ? errorMessage : null}</span> 
+                    </label>
                     <textarea
                         type="textarea"
                         id="attribute4"
                         value={credentials.attribute4}
                         onChange={handleChange}
                     />
-                </div>)}
+                </div>
 
 
 
@@ -211,7 +254,7 @@ function EditCollectionForm(props) {
                 <br></br>
 
                 <div className="ecbuttonwrapper">
-                    <button className="ecbutton" type="submit" onClick={handleSubmit}>  Update Collection </button>
+                    <button className="ecbutton" ref={btnRefAdd} type="submit" onClick={handleSubmit}>  Update Collection </button>
                     <br></br>
                     <button className="ecbutton" type="submit" onClick={cancelSubmit}>  Cancel </button>
                 </div>

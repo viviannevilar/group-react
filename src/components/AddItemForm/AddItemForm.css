@@ -13,7 +13,10 @@
     margin-left: 3%;
 }
 
+
 .additemform {
+    overflow: auto;
+    height: 50vh; 
     max-width: 800px;
     min-width: 300px;
     max-height: 900px;
@@ -21,6 +24,16 @@
     margin: 0px auto;
     background-color: #FFFFFF;
     border-radius: 25px;
+  }
+
+  .additemform::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .additemform {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
   }
   
 .aifa {

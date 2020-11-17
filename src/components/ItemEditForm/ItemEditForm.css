@@ -17,11 +17,11 @@
     margin-left: 3%;
 }
 
-.edititemform{
+#edititemform{
     max-width: 800px;
     min-width: 300px;
     max-height: 900px;
-    width: 100%;
+    /* width: 100%; */
     margin: 0px auto;
     background-color: #FFFFFF;
     border-radius: 25px;
