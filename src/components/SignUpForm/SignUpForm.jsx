@@ -50,9 +50,9 @@ function SignUpForm() {
   return (
 
       <div id="loginform">
-        <div className="cuformlogo" >
+        <div className="suformlogo" >
             <img
-            id="cuformlogoimage"
+            id="suformlogoimage"
             src={require("../../images/Comparalist_rectangle.png")}
             alt="Company Logo"
             />
@@ -60,7 +60,7 @@ function SignUpForm() {
     <form>
 
     
-      <h2 id="contactusheadertitle">Create an Account</h2>
+      <h2 id="signupheadertitle">Create an Account</h2>
 
       <div className="cufa">
         <label htmlFor="username">Username:</label>

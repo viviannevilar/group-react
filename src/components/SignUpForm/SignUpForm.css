@@ -15,7 +15,7 @@ html {
   border-radius: 25px;
 }
 
-#headerTitle {
+#signupheadertitle {
   text-align: center;
   padding: 1.5rem 0;
   margin: 0;
@@ -28,6 +28,7 @@ html {
   align-items: center;
   padding-top: 0.5rem;
   max-width: 100%;
+  color: #004aad;
 }
 
 .row input {

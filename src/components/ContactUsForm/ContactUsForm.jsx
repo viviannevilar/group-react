@@ -68,7 +68,7 @@ function ContactUsForm() {
       <form onSubmit={handleSubmit}>
       <div className="cufa">
         <label className="atcu" htmlFor="name">Name:</label>
-        <input
+        <input 
           name="username"
           type="text"
           id="name"
@@ -77,7 +77,7 @@ function ContactUsForm() {
       </div>
       <div className="cufa">
         <label className="atcu" htmlFor="email">Email:</label>
-        <input
+        <input 
           name="email"
           type="email"
           id="email"
