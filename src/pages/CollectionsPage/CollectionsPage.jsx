@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom"
 import CollectionCard from "../../components/CollectionCard/CollectionCard"
 import Nav from "../../components/Nav/Nav";
 import "./CollectionsPage.css";
+import ErrorComponent from "../../components/ErrorComponent/ErrorComponent";
 
 function CollectionsPage() {
 
@@ -74,23 +75,15 @@ function CollectionsPage() {
     } else if (errorCode === 404) {
 
         return (
-            <div>
-                <div>
-                    <Nav />
-                </div>
-                <h1> Collection not found! </h1>
-            </div>
+
+            <ErrorComponent errorMessage="Collection not found!" errorNumber="404" />
+
         )
         // if not logged in or wrong credentials
     } else if ((errorCode === 401) || (errorCode === 403)) {
 
         return (
-            <div>
-                <div>
-                    <Nav />
-                </div>
-                <h1>You don't have permission to see this page! </h1>
-            </div>
+            <ErrorComponent errorMessage="You don't have permission to see this page!" errorNumber="401" />
         )
 
         // if there are no collections to show
@@ -125,17 +118,17 @@ function CollectionsPage() {
 
                 <div>
                     <div id="collectionsheadertitle">
-                    <h1>{(activePath === "active-collections/") ? "Collections" : "Archived Collections"} </h1>
+                        <h1>{(activePath === "active-collections/") ? "Collections" : "Archived Collections"} </h1>
                     </div>
                     <div className="cpbuttoncontainer">
-                    {/* button to see archived collections or active collections */}
-                    {
-                        (activePath === "archived-collections/") ?
-                            <Link to={`/collections/`}><button className="collectionspagebutton">See active collections</button></Link> :
-                            <Link to={`/collections-archive/`}><button className="collectionspagebutton">See archived collections</button></Link>
-                    }
+                        {/* button to see archived collections or active collections */}
+                        {
+                            (activePath === "archived-collections/") ?
+                                <Link to={`/collections/`}><button className="collectionspagebutton">See active collections</button></Link> :
+                                <Link to={`/collections-archive/`}><button className="collectionspagebutton">See archived collections</button></Link>
+                        }
 
-                    <Link to={`/newcollection/`}><button className="collectionspagebutton">Create New Collection</button></Link>
+                        <Link to={`/newcollection/`}><button className="collectionspagebutton">Create New Collection</button></Link>
                     </div>
                     {/* display list of collections */}
                     {collectionsList.map((collectionData, key) => {
