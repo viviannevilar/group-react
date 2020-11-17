@@ -104,7 +104,7 @@ function ItemCard(props) {
 
         <div className="project-card" id={projectData.is_active === false ? "project-closed" : "project-open"}>
             <div id="onDisplayInfo">
-                <p id="titlep" ref={hideDetailsRef} >{projectData.name.toUpperCase()}</p>
+                <p id="titlep" style={{ color: "#004aad" }} ref={hideDetailsRef} >{projectData.name.toUpperCase()}</p>
                 {projectData.image !== null ? <img className="item" alt="Item" src={projectData.image} /> : <img className="item" alt="Item" src={nophoto} />}
 
                 {/* <div className="item">
