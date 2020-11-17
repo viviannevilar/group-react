@@ -72,7 +72,6 @@ function EditCollectionForm(props) {
         form_data.append('attribute2', credentials.attribute2);
         form_data.append('attribute3', credentials.attribute3);
         form_data.append('attribute4', credentials.attribute4);    
-      //   form_data.append('is_active', credentials.is_active);
         form_data.append('title', credentials.title);
 
         //function you can call but carry on as well
@@ -92,7 +91,7 @@ function EditCollectionForm(props) {
 
          } else {
 
-            response.text().then(text => {
+         response.text().then(text => {
             throw Error(text)
 
          }).catch((error) => {

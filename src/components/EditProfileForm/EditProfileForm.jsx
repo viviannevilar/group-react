@@ -88,7 +88,7 @@ function EditProfileForm() {
   };
 
 
-
+  /////// Change username, email, preferred name
   const postData = async () => {
     let username = localStorage.username;
     let token = localStorage.token;
@@ -109,6 +109,9 @@ function EditProfileForm() {
     if (response.ok) {
       localStorage.removeItem("username");
       window.localStorage.setItem("username", credentials.username);
+      history.push("/collections/");
+      window.location.reload();
+      
       return response.json();
     } else {
       response.text().then(text => {
@@ -138,8 +141,6 @@ function EditProfileForm() {
     }
   };
 
-
-
   const handleSubmitCredential = (e) => {
     e.preventDefault();
 
@@ -162,29 +163,37 @@ function EditProfileForm() {
 
   };
 
-  const handleSubmitPassword = (e) => {
+  //// Change password
+  const handleSubmitPassword = async (e) => {
 
-    e.preventDefault();
-    fetch(`${process.env.REACT_APP_API_URL}change-password/`, {
+   e.preventDefault();
+
+   // this disables the submit button
+   if (btnRefChange.current) {
+      btnRefChange.current.disabled = true
+   }
+
+
+    const responsePassword = await fetch(`${process.env.REACT_APP_API_URL}change-password/`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${token}`
       },
       body: JSON.stringify(passwords)
-
     })
 
-      .then((result) => {
-        if (result != undefined) {
-          //history.push("/collections/");
-          //window.location.reload();
-        } else {
-          //history.push("/edituserdetails/")
-        }
+    if (responsePassword.ok) {
 
-      }).catch(
-        (error) => {
+      history.push("/collections/");
+      window.location.reload();
+
+   } else {
+    
+    responsePassword.text().then(text => {
+      throw Error(text)
+
+    }).catch((error) => {
 
          console.log("-------------------------Error")
          const errorObj = JSON.parse(error.message);
@@ -205,8 +214,16 @@ function EditProfileForm() {
 
           console.log(errorObj[Object.keys(errorObj)[0]])
         }
-      )
-  };
+   )
+  }};
+
+//   .then((result) => {
+//    if (result != undefined) {
+//      //history.push("/collections/");
+//      //window.location.reload();
+//    } else {
+//      //history.push("/edituserdetails/")
+//    }
 
 
   const DeleteAccount = async (e) => {
@@ -223,8 +240,8 @@ function EditProfileForm() {
     console.log(response)
     localStorage.removeItem("username");
     localStorage.removeItem("token");
-    history.push("/");
-    window.location.reload();
+   history.push("/");
+   window.location.reload();
   };
 
 
