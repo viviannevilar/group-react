@@ -116,8 +116,7 @@ function NewCollectionForm() {
             />
         </div>
 
-    
-        <div className="newcollectionform">
+            <div className="newcollectionform">
             <h2 id="newcollectionheadertitle"> Create a new collection! </h2>
             <br></br>
             <h4 className="newcollectiontxt">Your items will automatically include the following attributes: <br/> Price, Sale Price, Date Sale Price Ends and Image. </h4>
@@ -209,7 +208,7 @@ function NewCollectionForm() {
         <br></br>
 
         <div className="ncbuttonwrapper">
-        ref={btnRefAdd} <button className="newcollectionbutton" type="submit" onClick={handleSubmit}>
+         <button className="newcollectionbutton" ref={btnRefAdd} type="submit" onClick={handleSubmit}>
             Submit your Collection!
       </button>
       <br></br>
