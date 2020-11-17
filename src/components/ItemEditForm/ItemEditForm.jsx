@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import Nav from "../../components/Nav/Nav";
+import { FaRegCheckSquare, FaRegWindowClose  } from 'react-icons/fa';
 import "../../components/Nav/Nav.css";
 import "./ItemEditForm.css";
+
 function ItemEditForm(props) {
 
    //variables
@@ -189,18 +191,31 @@ function ItemEditForm(props) {
 
 
             <div id="edititemform">
+                <div className="sort-buttons-container buttons-top-right">
+                  <a className="icon-a-tag" ref={btnRefAdd} onClick={handleSubmit}>
+                     <span title="Save" ><FaRegCheckSquare className="fa-icon-form fa-icon-save"/></span>
+                     </a>
+                  <a className="icon-a-tag fa-icon-close" onClick={cancelSubmit}><FaRegWindowClose className="fa-icon-form"/></a>
+
+                  {/* this is the text that appears when you hover over the icons */}
+                  <p id="saveText">Save changes</p>
+                  <p id="closeText">Cancel</p>
+               </div>
 
                <h2 id="edititemheadertitle"> Edit Item in {collectionData.title} </h2>
 
-
-
                <h4><span className="error">{(errorKey === "detail") ? errorMessage : null}</span> </h4>
 
-               <form>
+               <form id="edit-item-form">
+
+                  <div id="form-columns">
+
+                  {/* First column */}
+                  <div className="form-column">
 
                   <div className="eifa">
                      <label className="atei" htmlFor="name">
-                        Name of Item:
+                        Name
                      <span className="error">{(errorKey === "name") ? errorMessage : null}</span>
                      </label>
                      <input
@@ -211,10 +226,9 @@ function ItemEditForm(props) {
                      />
                   </div>
 
-
                   <div className="eifa">
                      <label className="atei" htmlFor="price">
-                        Price of Item:
+                        Price
                         <span className="error">{(errorKey === "price") ? errorMessage : null}</span>
                      </label>
                      <input
@@ -226,10 +240,9 @@ function ItemEditForm(props) {
                      />
                   </div>
 
-
                   <div className="eifa">
                      <label className="atei" htmlFor="sale_amount">
-                        Is there a discount currently offered (%)?:
+                        Discount
                         <span className="error">{(errorKey === "sale_amount") ? errorMessage : null}</span>
                      </label>
                      <input
@@ -241,10 +254,9 @@ function ItemEditForm(props) {
                      />
                   </div>
 
-
-                  {parseInt(credentials.sale_amount) > 0 && (<div className="eifa">
+                  <div className={`eifa ${parseInt(credentials.sale_amount) > 0 ? null : "form-hide"}`}>
                      <label className="atei" htmlFor="sale_end_date">
-                        When does the discount expire?
+                        Discount Expiry
                         <span className="error">{(errorKey === "sale_end_date") ? errorMessage : null}</span>
                      </label>
                      <input
@@ -253,11 +265,31 @@ function ItemEditForm(props) {
                         value={credentials.sale_end_date}
                         onChange={handleChange}
                      />
-                  </div>)}
+                  </div>
+
+                  <div className="eifa">
+                     <label className="atei" htmlFor="notes">
+                        Notes
+                        <span className="error">{(errorKey === "notes") ? errorMessage : null}</span>
+                     </label>
+                     <input
+                        type="textarea"
+                        id="notes"
+                        value={credentials.notes}
+                        onChange={handleChange}
+                     />
+                  </div>
+
+                  </div>
+
+                  {/* Second column */}
+                  <div className="form-column">
+
+
 
                   {collectionData.attribute1 !== "" && (<div className="eifa">
                      <label className="atei" htmlFor="attribute1">
-                        {collectionData.attribute1}:
+                        {collectionData.attribute1}
                         <span className="error">{(errorKey === "attribute1") ? errorMessage : null}</span>
                      </label>
                      <input
@@ -272,7 +304,7 @@ function ItemEditForm(props) {
 
                   {collectionData.attribute2 !== "" && (<div className="eifa">
                      <label className="atei" htmlFor="attribute2">
-                        {collectionData.attribute2}:
+                        {collectionData.attribute2}
                         <span className="error">{(errorKey === "attribute2") ? errorMessage : null}</span>
                      </label>
                      <input
@@ -285,7 +317,7 @@ function ItemEditForm(props) {
 
                   {collectionData.attribute3 !== "" && (<div className="eifa">
                      <label className="atei" htmlFor="attribute3">
-                        {collectionData.attribute3}:
+                        {collectionData.attribute3}
                         <span className="error">{(errorKey === "attribute3") ? errorMessage : null}</span>
                      </label>
                      <input
@@ -298,7 +330,7 @@ function ItemEditForm(props) {
 
                   {collectionData.attribute4 !== "" && (<div className="eifa">
                      <label className="atei" htmlFor="attribute4">
-                        {collectionData.attribute4}:
+                        {collectionData.attribute4}
                         <span className="error">{(errorKey === "attribute4") ? errorMessage : null}</span>
                      </label>
                      <input
@@ -309,17 +341,15 @@ function ItemEditForm(props) {
                      />
                   </div>)}
 
-
-
                   <div className="eifa">
                      <label className="atei" htmlFor="image">
                         Image:
                         <span className="error">{(errorKey === "image") ? errorMessage : null}</span>
                      </label>
                      <br></br>
-                     <div id="imagecon">
+                     {/* <div id="imagecon">
                         <img id="image" src={credentials.image} alt="anon pic" />
-                     </div>
+                     </div> */}
                      <br></br>
                      <input
                         type="file"
@@ -328,28 +358,21 @@ function ItemEditForm(props) {
                      />
                   </div>
 
+                  </div>
 
-                  <div className="eifa">
-                     <label className="atei" htmlFor="notes">
-                        Notes:
-                        <span className="error">{(errorKey === "notes") ? errorMessage : null}</span>
-                     </label>
-                     <input
-                        type="textarea"
-                        id="notes"
-                        value={credentials.notes}
-                        onChange={handleChange}
-                     />
                   </div>
 
 
-
-
-                  <div className="eibuttonwrapper">
+                  {/* <div className="eibuttonwrapper">
                      <button className="eibutton" ref={btnRefAdd} type="submit" onClick={handleSubmit}>  Update Item </button>
-                     <br></br>
+                     
                      <button className="eibutton" type="submit" onClick={cancelSubmit}>  Cancel </button>
-                  </div>
+                  </div> */}
+
+
+
+
+
                </form>
             </div>
          </div>
