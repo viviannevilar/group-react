@@ -5,6 +5,7 @@ import "../ContactUs/ContactUs";
 import "../AboutUs/AboutUs";
 import "../LoginPage/LoginPage";
 import Footer from "../../components/Footer/Footer";
+import Nav from "../../components/Nav/Nav";
 import LogoutForm from "../../components/LogoutForm/LogoutForm";
 import { Link } from "react-router-dom";
 
@@ -27,7 +28,9 @@ function HomePage() {
   }, []);
 
   return (
-    <div className="homepage">
+    <React.Fragment className="homepage">
+       <Nav myClassName={"hidden-nav"}/>
+
       <div className="logo">
         <img
           id="logoimage"
@@ -61,7 +64,7 @@ function HomePage() {
           ABOUT US
         </Link>
       </div> */}
-    </div>
+    </React.Fragment>
   );
 }
 

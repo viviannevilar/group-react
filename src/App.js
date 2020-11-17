@@ -1,14 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useLocation } from "react-router-dom"
 import "./App.css";
-import Nav from "./components/Nav/Nav";
+import EditProfilePage from "./pages/EditProfile/Editprofile";
 import HomePage from "./pages/HomePage/HomePage";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import ContactUs from "./pages/ContactUs/ContactUs";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import LogoutPage from "./components/LogoutForm/LogoutForm";
 import SignUp from "./pages/SignUp/SignUp";
-import EditProfileForm from './components/EditProfileForm/EditProfileForm';
+import Nav from "./components/Nav/Nav";
 import NewCollection from './pages/NewCollection/NewCollection';
 import CollectionDetailPage from "./pages/CollectionDetailPage/CollectionDetailPage";
 import CollectionsPage from "./pages/CollectionsPage/CollectionsPage";
@@ -21,10 +22,13 @@ import EditCollectionPage from "./pages/EditCollectionPage/EditCollectionPage";
 
 function App() {
 
+
+
     return (
         <Router>
             <div>
 
+               <Nav /> 
                 {/* <header>
                     
                     <Nav username={username} />
@@ -56,7 +60,8 @@ function App() {
                     </Route>
 
                     <Route exact path="/edituserdetails">
-                        <EditProfileForm />
+                        <EditProfilePage />
+                        {/* <EditProfileForm /> */}
                     </Route>
 
                     <Route exact path="/newcollection">

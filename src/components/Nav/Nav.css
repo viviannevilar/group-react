@@ -13,7 +13,16 @@
 
 .Navbarcontainer a{
     /* flex-basis: 100%; */
-    color:#004aad
+    color:#004aad;
+}
+
+.Navbarcontainer a{
+   /* flex-basis: 100%; */
+   color:#004aad;
+}
+
+.Navbarcontainer a.hidden-nav {
+   color: white;
 }
 
 .linkContainer {
@@ -23,6 +32,7 @@
 #Navitem1 {
     align-content: center;
 }
+
 
 @media only screen and (max-width: 1450px) {
 
