@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
 import CollectionCard from "../../components/CollectionCard/CollectionCard"
 import Nav from "../../components/Nav/Nav";
+import "./CollectionsPage.css";
 
 function CollectionsPage() {
 
@@ -64,7 +65,7 @@ function CollectionsPage() {
     if (isLoading) {
 
         return (
-            <div>
+            <div className="loadingpage">
                 <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"} />
             </div>
         )
@@ -74,7 +75,7 @@ function CollectionsPage() {
 
         return (
             <div>
-                <div id="Nav">
+                <div>
                     <Nav />
                 </div>
                 <h1> Collection not found! </h1>
@@ -85,7 +86,7 @@ function CollectionsPage() {
 
         return (
             <div>
-                <div id="Nav">
+                <div>
                     <Nav />
                 </div>
                 <h1>You don't have permission to see this page! </h1>
@@ -97,17 +98,17 @@ function CollectionsPage() {
 
         return (
             <div>
-                <div id="Nav">
+                <div>
                     <Nav />
                 </div>
                 <h1>No collections to show</h1>
 
-                  {/* button to see archived collections or active collections */}
-                  {
-                     (activePath === "archived-collections/") ?
-                           <Link to={`/collections/`}><button >See active collections</button></Link> :
-                           <Link to={`/collections-archive/`}><button >See archived collections</button></Link>
-                  }
+                {/* button to see archived collections or active collections */}
+                {
+                    (activePath === "archived-collections/") ?
+                        <Link to={`/collections/`}><button >See active collections</button></Link> :
+                        <Link to={`/collections-archive/`}><button >See archived collections</button></Link>
+                }
 
                 <Link to={`/newcollection/`}><button >Create New Collection</button></Link>
             </div>
@@ -118,36 +119,32 @@ function CollectionsPage() {
 
         return (
             <div>
-            <div>
-                <Nav />
-            </div>
+                <div>
+                    <Nav />
+                </div>
 
                 <div>
-
+                    <div id="collectionsheadertitle">
                     <h1>{(activePath === "active-collections/") ? "Collections" : "Archived Collections"} </h1>
+                    </div>
+                    <div className="cpbuttoncontainer">
+                    {/* button to see archived collections or active collections */}
+                    {
+                        (activePath === "archived-collections/") ?
+                            <Link to={`/collections/`}><button className="collectionspagebutton">See active collections</button></Link> :
+                            <Link to={`/collections-archive/`}><button className="collectionspagebutton">See archived collections</button></Link>
+                    }
 
+                    <Link to={`/newcollection/`}><button className="collectionspagebutton">Create New Collection</button></Link>
+                    </div>
                     {/* display list of collections */}
                     {collectionsList.map((collectionData, key) => {
                         return <CollectionCard key={key} collectionData={collectionData} />;
                     })}
-
-                    <br></br>
-
-                    {/* button to see archived collections or active collections */}
-                    {
-                        (activePath === "archived-collections/") ?
-                            <Link to={`/collections/`}><button >See active collections</button></Link> :
-                            <Link to={`/collections-archive/`}><button >See archived collections</button></Link>
-                    }
-
-                    <Link to={`/newcollection/`}><button >Create New Collection</button></Link>
-
-
                 </div>
             </div>
         )
     }
-
 
 }
 

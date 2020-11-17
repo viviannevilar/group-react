@@ -1,22 +1,26 @@
-import React from "react"
+import React from "react";
 import Nav from "../../components/Nav/Nav";
+import "./NotFoundPage.css";
 
-
-
-function NotFoundPage () {
-
-    return (
-        <div>
-            <div>
-                <Nav />
-            </div>
-        <div>
-            <h1>You seem to be lost... This page doesn't exist!</h1>
-        </div>
-        </div>
-    )
-
-    
+function NotFoundPage() {
+  return (
+    <div>
+      <div>
+        <Nav />
+      </div>
+      <div className="c">
+        <div className="_404">404</div>
+        <div className="_1">THE PAGE</div>
+        <br></br>
+        <div className="_2">WAS NOT FOUND</div>
+        <br></br>
+        <br></br>
+        <a className="btn" href="../">
+          BACK TO HOMEPAGE
+        </a>
+      </div>
+    </div>
+  );
 }
 
-export default NotFoundPage
+export default NotFoundPage;

@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:600|Work+Sans:400,500,600,700&display=swap");
+
+
+.c {
+  text-align: center;
+  display: block;
+  position: relative;
+  width: 80%;
+  margin: 100px auto;
+}
+
+div.c {
+  color: #004aad;
+}
+._404 {
+  font-size: 220px;
+  position: relative;
+  display: inline-block;
+  z-index: 2;
+  height: 250px;
+  letter-spacing: 15px;
+}
+._1 {
+  text-align: center;
+  display: block;
+  position: relative;
+  letter-spacing: 12px;
+  font-size: 4em;
+  line-height: 80%;
+}
+._2 {
+  text-align: center;
+  display: block;
+  position: relative;
+  letter-spacing: 12px;
+  font-size: 4em;
+  line-height: 80%;
+}
+
+.btn {
+  border-radius: 0.2em;
+  box-sizing: border-box;
+  width: 50%;
+  height: 40px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: white;
+  background: #b3b7a4;
+  border: 0.1em solid #ffffff;
+  transition: all 0.2s;
+  margin: 10px auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 1200px) {
+  .c {
+    width: 80%;
+    margin: 100px auto;
+  }
+  ._404 {
+    font-size: 220px;
+    height: 250px;
+    letter-spacing: 15px;
+  }
+  ._1 {
+    font-size: 4em;
+    line-height: 80%;
+  }
+  ._2 {
+    font-size: 4em;
+    line-height: 80%;
+  }
+
+  .btn {
+    border-radius: 0.2em;
+    width: 50%;
+    height: 80px;
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .c {
+    width: 80%;
+    margin: 100px auto;
+  }
+  ._404 {
+    font-size: 180px;
+    height: 200px;
+    letter-spacing: 15px;
+  }
+  ._1 {
+    font-size: 3em;
+    line-height: 80%;
+  }
+  ._2 {
+    font-size: 3em;
+    line-height: 80%;
+  }
+  .btn {
+    border-radius: 0.2em;
+    width: 50%;
+    height: 80px;
+    font-size: 1.5rem;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .c {
+    width: 80%;
+    margin: 100px auto;
+  }
+  ._404 {
+    font-size: 140px;
+    height: 170px;
+    letter-spacing: 15px;
+  }
+  ._1 {
+    font-size: 2em;
+    line-height: 80%;
+  }
+  ._2 {
+    font-size: 2em;
+    line-height: 180%;
+  }
+  .btn {
+    border-radius: 0.2em;
+    width: 50%;
+    height: 80px;
+    font-size: 1.5rem;
+  }
+}
