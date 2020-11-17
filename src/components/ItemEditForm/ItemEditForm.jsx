@@ -316,11 +316,11 @@ function ItemEditForm(props) {
                         Image:
                         <span className="error">{(errorKey === "image") ? errorMessage : null}</span>
                      </label>
-                     <br></br>
+                     {/* <br></br>
                      <div id="imagecon">
                         <img id="image" src={credentials.image} alt="anon pic" />
                      </div>
-                     <br></br>
+                     <br></br> */}
                      <input
                         type="file"
                         id="image"
@@ -341,8 +341,6 @@ function ItemEditForm(props) {
                         onChange={handleChange}
                      />
                   </div>
-
-
 
 
                   <div className="eibuttonwrapper">
