@@ -29,7 +29,27 @@
     justify-content: space-evenly;
   }
 
- 
+  a.addcollectioncontainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: black;
+}
+
+a.addcollectioncontainer:visited{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: black;
+}
+a.addcollectioncontainer p{
+    text-transform: uppercase ;
+    margin: 2px;
+    font-size: 0.7em;
+
+}
 
 @media only screen and (max-width: 800px) {
     a {
@@ -44,7 +64,7 @@
 @media only screen and (max-width: 500px) {
 
   
-}
+
 
 
 
@@ -65,8 +85,10 @@ a.addcollectioncontainer:visited{
 }
 
 a.addcollectioncontainer p{
-    font-size: 0.8em;
     text-transform: uppercase ;
-    margin: 5px;
+    font-size: 0.5em;
+    margin: 2px;
+}
+
 
 }
