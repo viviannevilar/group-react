@@ -6,12 +6,20 @@
   }
 
 
-  #summarybox{
-      height: 40vh;
+  .summarybox{
+      height: 43vh;
       overflow-y: auto;
   }
 
-
+  .summarybox::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .summarybox {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 
 div.pledgescroll {
     width: 600px;
@@ -84,6 +92,10 @@ div#summaryitemcontainer {
   text-transform: uppercase ;
 }
 
+
+#summarycomponent{
+  height: 80%;
+}
   
 
 
