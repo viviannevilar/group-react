@@ -1,48 +1,50 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:600|Work+Sans:400,500,600,700&display=swap");
 
-
 .c {
   text-align: center;
   display: block;
   position: relative;
-  width: 80%;
-  margin: 100px auto;
+  /* width: 80%;
+  margin: 100px auto; */
+  font-family: "Roboto", sans-serif;
 }
 
 div.c {
   color: #004aad;
 }
 ._404 {
-  font-size: 220px;
+  font-size: 150px;
   position: relative;
   display: inline-block;
   z-index: 2;
-  height: 250px;
-  letter-spacing: 15px;
+  /* height: 190px; */
+  letter-spacing: auto;
 }
 ._1 {
   text-align: center;
   display: block;
   position: relative;
-  letter-spacing: 12px;
-  font-size: 4em;
+  letter-spacing: 1px;
+  font-size: 2em;
   line-height: 80%;
+  font-weight: bold;
 }
 ._2 {
   text-align: center;
   display: block;
   position: relative;
-  letter-spacing: 12px;
-  font-size: 4em;
+  letter-spacing: auto;
+  font-size: 2em;
   line-height: 80%;
+  font-weight: bold;
 }
 
 .btn {
   border-radius: 0.2em;
   box-sizing: border-box;
   width: 50%;
-  height: 40px;
-  font-size: 1rem;
+  height: 80px;
+  font-size: 2rem;
   text-transform: uppercase;
   color: white;
   background: #b3b7a4;
@@ -61,16 +63,15 @@ div.c {
     margin: 100px auto;
   }
   ._404 {
-    font-size: 220px;
-    height: 250px;
-    letter-spacing: 15px;
+    font-size: 150px;
+    /* height: 190px; */
   }
   ._1 {
-    font-size: 4em;
+    font-size: 2em;
     line-height: 80%;
   }
   ._2 {
-    font-size: 4em;
+    font-size: 2em;
     line-height: 80%;
   }
 
@@ -88,16 +89,15 @@ div.c {
     margin: 100px auto;
   }
   ._404 {
-    font-size: 180px;
-    height: 200px;
-    letter-spacing: 15px;
+    font-size: 150px;
+    height: 170px;
   }
   ._1 {
-    font-size: 3em;
+    font-size: 2em;
     line-height: 80%;
   }
   ._2 {
-    font-size: 3em;
+    font-size: 2em;
     line-height: 80%;
   }
   .btn {
@@ -114,22 +114,21 @@ div.c {
     margin: 100px auto;
   }
   ._404 {
-    font-size: 140px;
-    height: 170px;
-    letter-spacing: 15px;
+    font-size: 80px;
+    height: 130px;
   }
   ._1 {
-    font-size: 2em;
+    font-size: 1em;
     line-height: 80%;
   }
   ._2 {
-    font-size: 2em;
+    font-size: 1em;
     line-height: 180%;
   }
   .btn {
     border-radius: 0.2em;
     width: 50%;
     height: 80px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 }

@@ -1,5 +1,85 @@
-.ErrorMessageContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.ErrorMessageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:600|Work+Sans:400,500,600,700&display=swap");
+
+.c {
+  text-align: center;
+  display: block;
+  position: relative;
+  /* width: 80%; */
+  margin: 100px auto;
+  font-family: "Roboto", sans-serif;
+}
+
+._404 {
+  font-size: 200px;
+  position: relative;
+  display: inline-block;
+  z-index: 2;
+  /* height: 190px; */
+  letter-spacing: auto;
+}
+
+._1 {
+  text-align: center;
+  display: block;
+  position: relative;
+  letter-spacing: 1px;
+  font-size: 3em;
+  line-height: 80%;
+  font-weight: bold;
+}
+
+div.c {
+  color: #004aad;
+}
+
+@media only screen and (max-width: 1200px) {
+  .c {
+    width: 80%;
+    margin: 100px auto;
+  }
+  ._404 {
+    font-size: 150px;
+    /* height: 190px; */
+  }
+  ._1 {
+    font-size: 2em;
+    line-height: 80%;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .c {
+    width: 80%;
+    margin: 100px auto;
+  }
+  ._404 {
+    font-size: 150px;
+    height: 170px;
+  }
+  ._1 {
+    font-size: 2em;
+    line-height: 80%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .c {
+    width: 80%;
+    margin: 100px auto;
+  }
+  ._404 {
+    font-size: 80px;
+    height: 130px;
+  }
+  ._1 {
+    font-size: 1em;
+    line-height: 80%;
+  }
 }
