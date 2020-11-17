@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
 import CollectionCard from "../../components/CollectionCard/CollectionCard"
-import Nav from "../../components/Nav/Nav";
 import "./CollectionsPage.css";
 import ErrorComponent from "../../components/ErrorComponent/ErrorComponent";
 import addicon from "../../images/add.png"
@@ -98,12 +97,9 @@ function CollectionsPage() {
     } else {
 
         return (
-            <div>
-                <div>
-                    <Nav />
-                </div>
+            <div className="page-wrapper">
 
-                <div className="containerwholecollectionpage">
+                <div >
                     <div id="collectionsheadertitle">
                         <h1>{(activePath === "active-collections/") ? "Collections" : "Archived Collections"} </h1>
                     </div>
@@ -128,15 +124,17 @@ function CollectionsPage() {
 
                     </div>
                     {/* display list of collections */}
-                    {collectionsList.length > 0 ? (<div className="box-wrap">
+                    {collectionsList.length > 0 
+                    ? (<div className="box-wrap">
                         {collectionsList.map((collectionData, key) => {
                             return <CollectionCard key={key} collectionData={collectionData} />;
                         })}
-                    </div>) : (<div className="nodatacontainer">
-                        <img className="nodatalogo" alt="nodatalogo" src={logoicon} />
-                        <p>No collections have been added yet to your account</p>
-
-                    </div>)}
+                    </div>) 
+                    
+                    : (<div className="nodatacontainer">
+                         <img className="nodatalogo" alt="nodatalogo" src={logoicon} />
+                         <p id="no-data">You have no {location.pathname === "/collections/" ? "active" : "archived"} collections</p>
+                       </div>)}
 
                 </div>
                 <Footer />

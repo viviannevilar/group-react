@@ -1,8 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useLocation } from "react-router-dom"
 import "./App.css";
-import EditProfilePage from "./pages/EditProfile/Editprofile";
+import EditProfilePage from "./pages/EditProfile/EditProfile";
 import HomePage from "./pages/HomePage/HomePage";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import ContactUs from "./pages/ContactUs/ContactUs";
@@ -10,6 +9,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import LogoutPage from "./components/LogoutForm/LogoutForm";
 import SignUp from "./pages/SignUp/SignUp";
 import Nav from "./components/Nav/Nav";
+import Footer from "./components/Footer/Footer";
 import NewCollection from './pages/NewCollection/NewCollection';
 import CollectionDetailPage from "./pages/CollectionDetailPage/CollectionDetailPage";
 import CollectionsPage from "./pages/CollectionsPage/CollectionsPage";
@@ -104,6 +104,8 @@ function App() {
                     <Route path="*" component={NotFoundPage} />
 
                 </Switch>
+
+                <Footer />
             </div>
 
         </Router>

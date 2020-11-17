@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import Nav from "../../components/Nav/Nav";
 import "../../components/Nav/Nav.css";
 import "./ItemEditForm.css";
 function ItemEditForm(props) {
@@ -167,6 +166,7 @@ function ItemEditForm(props) {
 
    if (isLoading) {
       return (
+
          <div className="loadingpage">
             <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"} />
          </div>
@@ -175,10 +175,6 @@ function ItemEditForm(props) {
 
       return (
          <div>
-
-            <div>
-               <Nav />
-            </div>
             <div className="eiformlogo" >
                <img
                   id="eiformlogoimage"

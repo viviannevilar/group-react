@@ -418,10 +418,7 @@ function CollectionDetailPage() {
 
    /////////////// return
    return (
-      <div>
-         <div>
-            <Nav />
-         </div>
+      <div className="page-wrapper">
          <div id="projectlistcenter">
 
             {/* No longer loading, there IS an error message */}

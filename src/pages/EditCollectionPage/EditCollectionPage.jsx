@@ -34,10 +34,7 @@ function EditCollectionPage() {
 
 
         return (
-            <div>
-               <div>
-                  <Nav />
-               </div>
+            <div className="page-wrapper">
      
                {token !== null && isLoading ? <div className="loadingpage">
                   <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"} />
