@@ -25,14 +25,15 @@ function Nav(props) {
             <div className="linkContainer">
                 <Link className="navItem" to="/">HOME</Link>
             </div>
-            <div className="linkContainer">
-                {isloggedIn ? (<Link className="navItem" to="/login" onClick={handleLogout}>LOGOUT</Link>) : (<Link class="navItem" to="/login">LOGIN</Link>)}
-            </div>
+
             <div className="linkContainer">
                 <Link className="navItem" to="/edituserdetails">ACCOUNT</Link>
             </div>
             <div className="linkContainer">
                 <Link className="navItem" to="/collections/">COLLECTIONS</Link>
+            </div>
+            <div className="linkContainer">
+                {isloggedIn ? (<Link className="navItem" to="/login" onClick={handleLogout}>LOGOUT</Link>) : (<Link class="navItem" to="/login">LOGIN</Link>)}
             </div>
         </nav>
     );
