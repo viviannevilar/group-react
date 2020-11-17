@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import Nav from "../../components/Nav/Nav";
-import "../../components/Nav/Nav.css";
+import "../../components/EditProfileForm/EditProfileForm.css";
+import warningicon from "../../images/warning2.png"
 
 
 function EditProfileForm() {
   const [modalState, setModalState] = useState(false);
   const [profileData, setProfileData] = useState({});
+  const [isLoading, setIsLoading] = useState(true)
   const token = window.localStorage.getItem("token");
   const username = window.localStorage.getItem("username");
 
@@ -41,6 +43,7 @@ function EditProfileForm() {
     }).then((data) => {
       console.log(data)
       setProfileData(data);
+      setIsLoading(false)
     });
   }, []);
 
@@ -181,13 +184,16 @@ function EditProfileForm() {
         <Nav />
       </div>
       <div className="cuformlogo" >
-            <img
-            id="cuformlogoimage"
-            src={require("../../images/Comparalist_rectangle.png")}
-            alt="Company Logo"
-            />
-        </div>
-      {username === null ? (<div>You are not logged in </div>
+        <img
+          id="cuformlogoimage"
+          src={require("../../images/Comparalist_rectangle.png")}
+          alt="Company Logo"
+        />
+      </div>
+
+      {isLoading ? (<div className="loadingpage">
+        <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"} />
+      </div>) : <div>  {username === null ? (<div>You are not logged in </div>
       ) : (<div>
 
         <div id="contactusform">
@@ -236,7 +242,7 @@ function EditProfileForm() {
             </div>
 
             <div className="cufa">
-            
+
               <label className="atcu" htmlFor="new_password">New Password:</label>
               <input
                 type="new_password"
@@ -247,7 +253,7 @@ function EditProfileForm() {
             </div>
 
             <div className="cufa">
-            
+
               <label className="atcu" htmlFor="confirm_new_password">Re-enter Password:</label>
               <input
                 type="confirm_new_password"
@@ -257,18 +263,18 @@ function EditProfileForm() {
               />
             </div>
             <div className="cufa">
-              
+
               <label className="atcu" htmlFor="delete_account"></label>
 
 
             </div>
 
             <div id="cubuttonwrapper">
-            <button id="cubutton" className="cubutton" button type="submit" onClick={handleSubmitPassword}> Change Password </button>
+              <button id="cubutton" className="cubutton" button type="submit" onClick={handleSubmitPassword}> Change Password </button>
             </div>
             <h2 id="contactusheadertitle">Delete Account</h2>
             <div className="cufa">
-              
+
               <label htmlFor="delete_account"></label>
 
 
@@ -278,14 +284,16 @@ function EditProfileForm() {
 
           </form>
           <div id="cubuttonwrapper">
-          <button id="cubutton" className="cubutton" onClick={() => deleteAccountToggleState()}>Delete your Account</button>
+            <button id="cubutton" className="cubutton" onClick={() => deleteAccountToggleState()}>Delete your Account</button>
           </div>
         </div>
 
         <div className={`modalBackground modalShowing-${modalState}`}>
-          <div className="modalInner">
+          <div className="modalEditPRofile">
             <div className="modalText">
-              <p>Are you sure you want to delete your account? - This will remove all collection and item Data</p>
+              <img className="warningicons" alt="warningicon" src={warningicon} />
+              <p>Are you sure you want to delete your account? </p>
+              <p> This will remove all collection and item Data</p>
               <button onClick={() => DeleteAccount()}>Yes Delete Account</button>
               <div>
                 <button className="exitButton" onClick={() => deleteAccountToggleState()}> exit </button>
@@ -294,7 +302,8 @@ function EditProfileForm() {
           </div>
         </div>
 
-      </div>)}
+      </div>)}</div>}
+
 
 
     </div>

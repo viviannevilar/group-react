@@ -18,7 +18,7 @@
   pointer-events: visible;
 }
 
-.MODALeditprofile {
+.modalEditPRofile {
   background: white;
   width: calc(100% - 50px);
   max-width: 600px;
