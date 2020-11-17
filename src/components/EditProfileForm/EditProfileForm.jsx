@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import Nav from "../../components/Nav/Nav";
 import "../../components/EditProfileForm/EditProfileForm.css";
@@ -11,6 +11,15 @@ function EditProfileForm() {
   const [isLoading, setIsLoading] = useState(true)
   const token = window.localStorage.getItem("token");
   const username = window.localStorage.getItem("username");
+
+
+  const [errorMessage, setErrorMessage] = useState()
+  const [errorKey, setErrorKey] = useState()
+
+  let btnRefEdit = useRef();
+  let btnRefChange = useRef();
+
+
 
   const deleteAccountToggleState = () => {
     setModalState(!modalState);
@@ -98,14 +107,32 @@ function EditProfileForm() {
     );
 
     if (response.ok) {
+      localStorage.removeItem("username");
+      window.localStorage.setItem("username", credentials.username);
       return response.json();
     } else {
       response.text().then(text => {
         throw Error(text)
       }).catch(
         (error) => {
-          const errorObj = JSON.parse(error.message);
-          console.log(errorObj);
+
+         const errorObj = JSON.parse(error.message);
+
+         // this is the form element that has the problem (eg, "price")
+         setErrorKey(Object.keys(errorObj)[0])
+         // this is the message of the error (eg, "this field is required")
+         setErrorMessage(errorObj[Object.keys(errorObj)[0]]);
+
+         // Puts the cursor in the form input corresponding to the element that has an issue
+         let keyName = document.getElementById(`${Object.keys(errorObj)[0]}`)
+         if (keyName) { keyName.focus(); }
+
+         // this enables the submit button again
+         if (btnRefEdit.current) {
+            btnRefEdit.current.disabled = false
+         }
+
+
         }
       )
     }
@@ -115,12 +142,17 @@ function EditProfileForm() {
 
   const handleSubmitCredential = (e) => {
     e.preventDefault();
+
+    if (btnRefEdit.current) {
+      btnRefEdit.current.disabled = true
+   }
+
     postData()
       .then((response) => {
         if (response != undefined) {
-          history.push("/collections/");
+          //history.push("/collections/");
         } else {
-          history.push("/collections/")
+          //history.push("/collections/")
         }
       }).catch(
         (error) => {
@@ -145,15 +177,33 @@ function EditProfileForm() {
 
       .then((result) => {
         if (result != undefined) {
-          history.push("/collections/");
-          window.location.reload();
+          //history.push("/collections/");
+          //window.location.reload();
         } else {
-          history.push("/edituserdetails/")
+          //history.push("/edituserdetails/")
         }
 
       }).catch(
         (error) => {
-          console.log("error")
+
+         console.log("-------------------------Error")
+         const errorObj = JSON.parse(error.message);
+
+         // this is the form element that has the problem (eg, "price")
+         setErrorKey(Object.keys(errorObj)[0])
+         // this is the message of the error (eg, "this field is required")
+         setErrorMessage(errorObj[Object.keys(errorObj)[0]]);
+
+         // Puts the cursor in the form input corresponding to the element that has an issue
+         let keyName = document.getElementById(`${Object.keys(errorObj)[0]}`)
+         if (keyName) { keyName.focus(); }
+
+         // this enables the submit button again
+         if (btnRefChange.current) {
+            btnRefChange.current.disabled = false
+         }
+
+          console.log(errorObj[Object.keys(errorObj)[0]])
         }
       )
   };
@@ -198,9 +248,12 @@ function EditProfileForm() {
 
         <div id="contactusform">
           <form>
+             {/*------------- Edit Profile -------------*/}
             <h2 id="contactusheadertitle">Edit Profile</h2>
             <div className="cufa">
-              <label className="atcu" htmlFor="username">Username:</label>
+              <label className="atcu" htmlFor="username">Username:
+              <span className="error">{ (errorKey === "username") ? errorMessage : null}</span> 
+              </label>
               <input
                 type="username"
                 id="username"
@@ -210,7 +263,9 @@ function EditProfileForm() {
             </div>
 
             <div className="cufa">
-              <label className="atcu" htmlFor="email">Email:</label>
+              <label className="atcu" htmlFor="email">Email:
+              <span className="error">{ (errorKey === "username") ? errorMessage : null}</span> 
+              </label>
               <input
                 type="email"
                 id="email"
@@ -219,7 +274,9 @@ function EditProfileForm() {
               />
             </div>
             <div className="cufa">
-              <label className="atcu" htmlFor="preferred_name">Preferred Name:</label>
+              <label className="atcu" htmlFor="preferred_name">Preferred Name:
+              <span className="error">{ (errorKey === "preferred_name") ? errorMessage : null}</span> 
+              </label>
               <input
                 type="preferred_name"
                 id="preferred_name"
@@ -227,12 +284,18 @@ function EditProfileForm() {
                 value={credentials.preferred_name}
               />
             </div >
+
             <div id="cubuttonwrapper">
-              <button id="cubutton" className="cubutton" button type="submit" onClick={handleSubmitCredential}> Edit Profile </button>
+              <button ref={btnRefEdit} id="cubutton" className="cubutton" button type="submit" onClick={handleSubmitCredential}> Edit Profile </button>
             </div>
+
+
+            {/*------------- Change Password -------------*/}
             <h2 id="contactusheadertitle">Change Password</h2>
             <div className="cufa">
-              <label className="atcu" htmlFor="old_password">Old Password:</label>
+              <label className="atcu" htmlFor="old_password">Old Password:
+              <span className="error">{ (errorKey === "old_password") ? errorMessage : null}</span> 
+              </label>
               <input
                 type="old_password"
                 id="old_password"
@@ -243,7 +306,9 @@ function EditProfileForm() {
 
             <div className="cufa">
 
-              <label className="atcu" htmlFor="new_password">New Password:</label>
+              <label className="atcu" htmlFor="new_password">New Password:
+              <span className="error">{ (errorKey === "new_password") ? errorMessage : null}</span> 
+              </label>
               <input
                 type="new_password"
                 id="new_password"
@@ -254,7 +319,9 @@ function EditProfileForm() {
 
             <div className="cufa">
 
-              <label className="atcu" htmlFor="confirm_new_password">Re-enter Password:</label>
+              <label className="atcu" htmlFor="confirm_new_password">Re-enter Password:
+              <span className="error">{ (errorKey === "confirm_new_password") ? errorMessage : null}</span> 
+              </label>
               <input
                 type="confirm_new_password"
                 id="confirm_new_password"
@@ -262,16 +329,18 @@ function EditProfileForm() {
                 value={passwords.confirm_new_password}
               />
             </div>
-            <div className="cufa">
 
-              <label className="atcu" htmlFor="delete_account"></label>
-
-
-            </div>
+            {/* <div className="cufa">
+            <label className="atcu" htmlFor="delete_account"></label>
+            </div> */}
 
             <div id="cubuttonwrapper">
-              <button id="cubutton" className="cubutton" button type="submit" onClick={handleSubmitPassword}> Change Password </button>
+              <button ref={btnRefChange} id="cubutton" className="cubutton" button type="submit" onClick={handleSubmitPassword}> Change Password </button>
             </div>
+
+
+
+            {/*------------- Change Password -------------*/}
             <h2 id="contactusheadertitle">Delete Account</h2>
             <div className="cufa">
 

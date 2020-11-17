@@ -118,8 +118,6 @@ function EditCollectionForm(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log("---------------- button pressed! ")
-
       //disables the button to submit form until there is a response
       if (btnRefAdd.current) {
          btnRefAdd.current.disabled = true
