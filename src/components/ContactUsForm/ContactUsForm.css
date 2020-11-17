@@ -12,6 +12,10 @@ html {
     padding-top: 5px;
 }
 
+img.cuformlogoimage{
+  max-width: 500px;
+}
+
   #contactusheadertitle {
     font-family: "Roboto", sans-serif;
     color: #004aad;

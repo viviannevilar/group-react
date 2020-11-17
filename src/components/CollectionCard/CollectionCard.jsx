@@ -39,9 +39,10 @@ function CollectionCard(props) {
 
     function shareCollection() {
 
-        const linkText = "https://warm-falls-74169.herokuapp.com/collection/shared/" + collectionData.signed_pk + "/"
+        const linkText = "https://glacial-badlands-43820.herokuapp.com/collection/shared/" + collectionData.signed_pk + "/"
 
         navigator.clipboard.writeText(linkText)
+        alert("Your collection URL was copied to your clipboard!")
 
     }
 
@@ -70,13 +71,13 @@ function CollectionCard(props) {
         <div className="collection-wrapper">
             <p> <Link to={linkCollection}>{collectionData.title}</Link></p>
 
-                <p>Date Created {formatDate(collectionData.date_created)} </p>
-                <p>Last Updated {formatDate(collectionData.last_updated)} </p>
-                <button onClick={archiveCollection}>{collectionData.is_active ? "Archive" : "Unarchive"}</button>
-                <button onClick={shareCollection}>Share Collection</button>
-                <Link to={`/editcollection/${collectionData.id}`}><button >Edit Collection</button></Link>
-                <button onClick={deleteCollection}>Delete Collection</button>
-            
+            <p>Date Created {formatDate(collectionData.date_created)} </p>
+            <p>Last Updated {formatDate(collectionData.last_updated)} </p>
+            <button onClick={archiveCollection}>{collectionData.is_active ? "Archive" : "Unarchive"}</button>
+            <button onClick={shareCollection}>Share Collection</button>
+            <Link to={`/editcollection/${collectionData.id}`}><button >Edit Collection</button></Link>
+            <button onClick={deleteCollection}>Delete Collection</button>
+
         </div >
     )
 }

@@ -20,11 +20,11 @@
     clear: both;
 }
 
-
 #edititemform{
     max-width: 800px;
     min-width: 300px;
     /* max-height: 900px; */
+
     /* width: 100%; */
     margin: 0px auto;
     background-color:lightgray;
@@ -35,7 +35,6 @@
   }
   
 #form-columns {
-
    display: flex;
    flex-direction: row;
    /* -webkit-columns: 2 300px;

@@ -3,7 +3,7 @@ import { useParams, useHistory } from "react-router-dom";
 import Nav from "../../components/Nav/Nav";
 import "../../components/EditProfileForm/EditProfileForm.css";
 import warningicon from "../../images/warning2.png"
-
+import ErrorComponent from "../ErrorComponent/ErrorComponent"
 
 function EditProfileForm() {
   const [modalState, setModalState] = useState(false);
@@ -111,7 +111,7 @@ function EditProfileForm() {
       window.localStorage.setItem("username", credentials.username);
       history.push("/collections/");
       window.location.reload();
-      
+
       return response.json();
     } else {
       response.text().then(text => {
@@ -119,21 +119,21 @@ function EditProfileForm() {
       }).catch(
         (error) => {
 
-         const errorObj = JSON.parse(error.message);
+          const errorObj = JSON.parse(error.message);
 
-         // this is the form element that has the problem (eg, "price")
-         setErrorKey(Object.keys(errorObj)[0])
-         // this is the message of the error (eg, "this field is required")
-         setErrorMessage(errorObj[Object.keys(errorObj)[0]]);
+          // this is the form element that has the problem (eg, "price")
+          setErrorKey(Object.keys(errorObj)[0])
+          // this is the message of the error (eg, "this field is required")
+          setErrorMessage(errorObj[Object.keys(errorObj)[0]]);
 
-         // Puts the cursor in the form input corresponding to the element that has an issue
-         let keyName = document.getElementById(`${Object.keys(errorObj)[0]}`)
-         if (keyName) { keyName.focus(); }
+          // Puts the cursor in the form input corresponding to the element that has an issue
+          let keyName = document.getElementById(`${Object.keys(errorObj)[0]}`)
+          if (keyName) { keyName.focus(); }
 
-         // this enables the submit button again
-         if (btnRefEdit.current) {
+          // this enables the submit button again
+          if (btnRefEdit.current) {
             btnRefEdit.current.disabled = false
-         }
+          }
 
 
         }
@@ -146,7 +146,7 @@ function EditProfileForm() {
 
     if (btnRefEdit.current) {
       btnRefEdit.current.disabled = true
-   }
+    }
 
     postData()
       .then((response) => {
@@ -166,12 +166,12 @@ function EditProfileForm() {
   //// Change password
   const handleSubmitPassword = async (e) => {
 
-   e.preventDefault();
+    e.preventDefault();
 
-   // this disables the submit button
-   if (btnRefChange.current) {
+    // this disables the submit button
+    if (btnRefChange.current) {
       btnRefChange.current.disabled = true
-   }
+    }
 
 
     const responsePassword = await fetch(`${process.env.REACT_APP_API_URL}change-password/`, {
@@ -188,42 +188,43 @@ function EditProfileForm() {
       history.push("/collections/");
       window.location.reload();
 
-   } else {
-    
-    responsePassword.text().then(text => {
-      throw Error(text)
+    } else {
 
-    }).catch((error) => {
+      responsePassword.text().then(text => {
+        throw Error(text)
 
-         console.log("-------------------------Error")
-         const errorObj = JSON.parse(error.message);
+      }).catch((error) => {
 
-         // this is the form element that has the problem (eg, "price")
-         setErrorKey(Object.keys(errorObj)[0])
-         // this is the message of the error (eg, "this field is required")
-         setErrorMessage(errorObj[Object.keys(errorObj)[0]]);
+        console.log("-------------------------Error")
+        const errorObj = JSON.parse(error.message);
 
-         // Puts the cursor in the form input corresponding to the element that has an issue
-         let keyName = document.getElementById(`${Object.keys(errorObj)[0]}`)
-         if (keyName) { keyName.focus(); }
+        // this is the form element that has the problem (eg, "price")
+        setErrorKey(Object.keys(errorObj)[0])
+        // this is the message of the error (eg, "this field is required")
+        setErrorMessage(errorObj[Object.keys(errorObj)[0]]);
 
-         // this enables the submit button again
-         if (btnRefChange.current) {
-            btnRefChange.current.disabled = false
-         }
+        // Puts the cursor in the form input corresponding to the element that has an issue
+        let keyName = document.getElementById(`${Object.keys(errorObj)[0]}`)
+        if (keyName) { keyName.focus(); }
 
-          console.log(errorObj[Object.keys(errorObj)[0]])
+        // this enables the submit button again
+        if (btnRefChange.current) {
+          btnRefChange.current.disabled = false
         }
-   )
-  }};
 
-//   .then((result) => {
-//    if (result != undefined) {
-//      //history.push("/collections/");
-//      //window.location.reload();
-//    } else {
-//      //history.push("/edituserdetails/")
-//    }
+        console.log(errorObj[Object.keys(errorObj)[0]])
+      }
+      )
+    }
+  };
+
+  //   .then((result) => {
+  //    if (result != undefined) {
+  //      //history.push("/collections/");
+  //      //window.location.reload();
+  //    } else {
+  //      //history.push("/edituserdetails/")
+  //    }
 
 
   const DeleteAccount = async (e) => {
@@ -240,8 +241,8 @@ function EditProfileForm() {
     console.log(response)
     localStorage.removeItem("username");
     localStorage.removeItem("token");
-   history.push("/");
-   window.location.reload();
+    history.push("/");
+    window.location.reload();
   };
 
 
@@ -260,16 +261,17 @@ function EditProfileForm() {
 
       {isLoading ? (<div className="loadingpage">
         <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"} />
-      </div>) : <div>  {username === null ? (<div>You are not logged in </div>
+      </div>) : <div>  {username === null ? (
+        <ErrorComponent errorMessage="You are not logged in!" errorNumber="403" />
       ) : (<div>
 
         <div id="contactusform">
           <form>
-             {/*------------- Edit Profile -------------*/}
+            {/*------------- Edit Profile -------------*/}
             <h2 id="contactusheadertitle">Edit Profile</h2>
             <div className="cufa">
               <label className="atcu" htmlFor="username">Username:
-              <span className="error">{ (errorKey === "username") ? errorMessage : null}</span> 
+              <span className="error">{(errorKey === "username") ? errorMessage : null}</span>
               </label>
               <input
                 type="username"
@@ -281,7 +283,7 @@ function EditProfileForm() {
 
             <div className="cufa">
               <label className="atcu" htmlFor="email">Email:
-              <span className="error">{ (errorKey === "username") ? errorMessage : null}</span> 
+              <span className="error">{(errorKey === "username") ? errorMessage : null}</span>
               </label>
               <input
                 type="email"
@@ -292,7 +294,7 @@ function EditProfileForm() {
             </div>
             <div className="cufa">
               <label className="atcu" htmlFor="preferred_name">Preferred Name:
-              <span className="error">{ (errorKey === "preferred_name") ? errorMessage : null}</span> 
+              <span className="error">{(errorKey === "preferred_name") ? errorMessage : null}</span>
               </label>
               <input
                 type="preferred_name"
@@ -311,7 +313,7 @@ function EditProfileForm() {
             <h2 id="contactusheadertitle">Change Password</h2>
             <div className="cufa">
               <label className="atcu" htmlFor="old_password">Old Password:
-              <span className="error">{ (errorKey === "old_password") ? errorMessage : null}</span> 
+              <span className="error">{(errorKey === "old_password") ? errorMessage : null}</span>
               </label>
               <input
                 type="old_password"
@@ -324,7 +326,7 @@ function EditProfileForm() {
             <div className="cufa">
 
               <label className="atcu" htmlFor="new_password">New Password:
-              <span className="error">{ (errorKey === "new_password") ? errorMessage : null}</span> 
+              <span className="error">{(errorKey === "new_password") ? errorMessage : null}</span>
               </label>
               <input
                 type="new_password"
@@ -337,7 +339,7 @@ function EditProfileForm() {
             <div className="cufa">
 
               <label className="atcu" htmlFor="confirm_new_password">Re-enter Password:
-              <span className="error">{ (errorKey === "confirm_new_password") ? errorMessage : null}</span> 
+              <span className="error">{(errorKey === "confirm_new_password") ? errorMessage : null}</span>
               </label>
               <input
                 type="confirm_new_password"
