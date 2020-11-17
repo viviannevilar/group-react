@@ -84,10 +84,10 @@ function LoginForm() {
             />
         </div>
       <form>
-      <h2 id="loginformheadertitle">Login</h2>
+      <h2 id="loginformheadertitle">LOGIN</h2>
       
         <div className="lifa">
-          <label className="atli" htmlFor="username">Username:</label>
+          <label className="atli" htmlFor="username">USERNAME:</label>
           <input
             type="text"
             id="username"
@@ -96,7 +96,7 @@ function LoginForm() {
           />
         </div>
         <div className="lifa">
-          <label className="atli" htmlFor="password">Password:</label>
+          <label className="atli" htmlFor="password">PASSWORD:</label>
           <input
             type="password"
             id="password"
@@ -106,13 +106,13 @@ function LoginForm() {
         </div>
         <div id="libuttonwrapper">
           <button id="libutton" className="libutton" type="submit" onClick={handleSubmit}>
-            Login
+            LOGIN
       </button>
         </div>
       </form>
 
       <div id="libuttonwrapper">
-        <div className="litext"> Don't have an account? Sign up </div> <div id="linky"><Link to={`/signup/`}>{`  here`} </Link></div>
+        <div className="litext"> DON'T HAVE AN ACCOUNT? SIGN UP </div> <div id="linky"><Link to={`/signup/`}>{`  HERE`} </Link></div>
       </div>
 
       {

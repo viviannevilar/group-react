@@ -59,14 +59,7 @@ a.addcollectioncontainer p{
     }
    
 }
-
-
 @media only screen and (max-width: 500px) {
-
-  
-
-
-
 
 a.addcollectioncontainer{
     display: flex;
@@ -89,7 +82,6 @@ a.addcollectioncontainer p{
     font-size: 0.5em;
     margin: 2px;
 }
-
 
 }
 
@@ -118,3 +110,18 @@ div.nodatacontainer p{
     font-size: 0.8em;
 
 }
+
+.Navbarcontainer {
+    justify-content: space-around;
+}
+
+#CollectionNav {
+    max-width: 800px;
+    min-width: 300px;
+    max-height: 900px;
+    width: 50%;
+    margin: 0px auto;
+    background-color: #FFFFFF;
+    border-radius: 25px;
+}
+

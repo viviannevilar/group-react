@@ -140,14 +140,14 @@ function AddItemForm(props) {
    return (
         <div>
             <div className="additemform">
-            <h2 id="additemheadertitle"> Add Item to {collectionData.title} </h2>
+            <h2 id="additemheadertitle"> ADD ITEM TO {collectionData.title} </h2>
 
             <h4><span className="error">{ (errorKey === "detail") ? errorMessage : null}</span> </h4>
            
             <form>
                <div className="aifa">
                   <label className="atai" htmlFor="name">
-                     Name of Item: 
+                     NAME OF ITEM: 
                      <span className="error">{ (errorKey === "name") ? errorMessage : null}</span> 
                   </label>
                   <input
@@ -159,7 +159,7 @@ function AddItemForm(props) {
 
                 <div className="aifa">
                     <label className="atai" htmlFor="price">
-                       Price of Item:
+                       PRICE OF ITEM:
                        <span className="error">{ (errorKey === "price") ? errorMessage : null}</span> 
                     </label>
                     <input
@@ -171,7 +171,7 @@ function AddItemForm(props) {
 
                 <div className="aifa">
                      <label className="atai" htmlFor="sale_amount">
-                       Is there a discount currently offered (%)?:
+                       IS THERE A DISCOUNT CURRENTLY OFFERED (%)?:
                        <span className="error">{ (errorKey === "sale_amount") ? errorMessage : null}</span> 
                      </label>
                     <input
@@ -183,7 +183,7 @@ function AddItemForm(props) {
 
                 {parseInt(credentials.sale_amount) > 0 && (<div className="aifa">
                     <label className="atai" htmlFor="sale_end_date">
-                       When does the discount expire?
+                       WHEN DOES THE DISCOUNT EXPIRE?
                        <span className="error">{ (errorKey === "sale_end_date") ? errorMessage : null}</span> 
                      </label>
                     <input
@@ -245,7 +245,7 @@ function AddItemForm(props) {
 
                 <div className="aifa">
                     <label className="atai" htmlFor="image">
-                       Image:
+                       IMAGE:
                        <span className="error">{ (errorKey === "image") ? errorMessage : null}</span> 
                      </label>
                     <input 
@@ -258,7 +258,7 @@ function AddItemForm(props) {
 
                 <div className="aifa">
                     <label className="atai" htmlFor="notes">
-                       Notes:
+                       NOTES:
                        <span className="error">{ (errorKey === "notes") ? errorMessage : null}</span> 
                      </label>
                     <input
@@ -270,7 +270,7 @@ function AddItemForm(props) {
 
 
                 <div className="aibuttonwrapper">
-                    <button className="additembutton" ref={btnRefAdd} type="submit" onClick={handleSubmit}>  Add to List </button>
+                    <button className="additembutton" ref={btnRefAdd} type="submit" onClick={handleSubmit}>  ADD TO LIST </button>
                 </div>
             </form>
             </div>

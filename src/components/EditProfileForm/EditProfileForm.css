@@ -1,4 +1,197 @@
-.modalBackground {
+html {
+    font-size: 100%;
+  }
+  
+  .epformlogo {
+      display: flex;
+      justify-content: center;
+      flex: 1;
+      padding-top: 5px;
+  }
+  
+  .editprofileform {
+    max-width: 700px;
+    min-width: 300px;
+    max-height: 900px;
+    width: 50%;
+    height: 60%;
+    margin: 0px auto;
+    background-color: #ffffff;
+    border-radius: 25px;
+    justify-content: center;
+  }
+  
+  .editprofileheadertitle {
+      font-family: "Roboto", sans-serif;
+      color: #004aad;
+      text-align: center;
+      padding-top: 3%;
+      margin-top: 0px;
+      margin-right: 3%;
+      margin-bottom: 0px;
+      margin-left: 3%;
+  }
+    
+  .epfa {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 5%;
+      max-width: 100%;
+    }
+  
+  .atep {
+      padding-bottom: 2%;
+      color: #004aad;
+      width: 80%;
+      text-align: center;
+  }
+  
+  .epfa input {
+    width: 80%;
+    box-sizing: border-box;
+    border: none;
+    font-family: "Roboto", sans-serif;
+    color: #7D8072;
+    text-align: center;
+    box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
+    transition: box-shadow 0.2s ease-in;
+  }
+  
+  .epfa textarea {
+      width: 80%;
+      box-sizing: border-box;
+      border: none;
+      font-family: "Roboto", sans-serif;
+      color: #7D8072;
+      text-align: center;
+      box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
+      transition: box-shadow 0.2s ease-in;
+    }
+  
+  
+  .epfa input:focus {
+    box-shadow: inset 0px -3px 0px 0px rgba(46, 44, 56, 0.7);
+    outline: none;
+  }
+  
+  .atepblock textarea {
+      box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
+      transition: box-shadow 0.2s ease-in;
+  }
+  
+  .epbutton {
+    padding: 5px 10px;
+    background: #b3b7a4;
+    border: none;
+    justify-content: center;
+    border-radius: 25px;
+    width: 60%;
+    height: 40px;
+    font-size: 1.1rem;
+    color: white;
+    font-weight: 700;
+    border: 0px;
+    cursor: pointer;
+    margin: 20px;
+  }
+  
+  #epbuttonwrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+  }
+  
+  
+  
+  @media only screen and (max-width: 1450px) {
+      #epformlogoimage {
+          height: 30%;
+          width: 30%;
+          padding-top: 3%;
+          padding-bottom: 3%;
+      }
+      .editprofileheadertitle {
+          font-size: 2.0rem;
+          padding-bottom: 0%;
+      }
+      .atep {
+          font-size: 1.0rem;
+          padding-bottom: 3%;
+      }
+      .epfa textarea {
+          font-size: 1.0rem;
+          padding-bottom: 0.5%;
+      }
+      .epbutton {
+          font-size: 20px;
+          width: 50%;
+      }
+  }
+  
+  @media only screen and (max-width: 800px) {
+      #epformlogoimage {
+          height: 50%;
+          width: 50%;
+          padding-top: 10%;
+          padding-bottom: 10%;
+      }
+      .editprofileheadertitle {
+          font-size: 1.8rem;
+          padding-bottom: 10%;
+      }
+      .atep {
+          font-size: 1.5rem;
+          padding-bottom: 5%;
+      }
+      .epfa textarea {
+          font-size: 1.5rem;
+          padding-bottom: 0.5%;
+      }
+      .epbutton {
+          font-size: 20px;
+          width: 80%;
+      }
+  }
+  
+  @media only screen and (max-width: 500px) {
+      #epformlogoimage {
+          height: 40%;
+          width: 40%;
+          padding-top: 2%;
+          padding-bottom: 2%;
+      }
+      .editprofileheadertitle {
+          font-size: 1.3rem;
+          padding-bottom: 2%;
+      }
+      .atep {
+          font-size: 0.5rem;
+          padding-bottom: 5%;
+      }
+  
+      .epfa textarea {
+          font-size: 0.5rem;
+      }
+      .epbutton {
+          font-size: 18px;
+          width: 90%;
+          height: 30px;
+      }
+  }
+  
+  #errordiv {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 15px;
+      color: darkred;
+    }
+
+
+/* .modalBackground {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease-in-out;
@@ -75,14 +268,13 @@ button.exitButton {
   margin: 4px;
 } */
 
-
+/* 
 img.warningicons{
   width: 40px;
   height: 40px;
 
 }
 
-
 img#cuformlogoimage{
 max-width: 500px;
-}
+} */ 

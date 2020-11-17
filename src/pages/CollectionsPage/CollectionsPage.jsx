@@ -96,7 +96,7 @@ function CollectionsPage() {
 
         return (
             <div>
-                <div>
+                <div id="CollectionNav">
                     <Nav />
                 </div>
 
