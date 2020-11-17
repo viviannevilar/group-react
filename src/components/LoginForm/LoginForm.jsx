@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Nav from "../../components/Nav/Nav";
+import "../LoginForm/LoginForm.css";
 
 function LoginForm() {
   //variables
@@ -71,19 +72,22 @@ function LoginForm() {
 
       
 
-    <div id="loginform">
-      <div className="cuformlogo" >
+    <div className="loginform">
+        <div>
+              <Nav />
+        </div>
+      <div className="liformlogo" >
             <img
-            id="cuformlogoimage"
+            id="liformlogoimage"
             src={require("../../images/Comparalist_rectangle.png")}
             alt="Company Logo"
             />
         </div>
       <form>
-      <h2 id="contactusheadertitle">Login</h2>
+      <h2 id="loginformheadertitle">Login</h2>
       
-        <div className="cufa">
-          <label className="atcu" htmlFor="username">Username:</label>
+        <div className="lifa">
+          <label className="atli" htmlFor="username">Username:</label>
           <input
             type="text"
             id="username"
@@ -91,8 +95,8 @@ function LoginForm() {
             onChange={handleChange}
           />
         </div>
-        <div className="cufa">
-          <label className="atcu" htmlFor="password">Password:</label>
+        <div className="lifa">
+          <label className="atli" htmlFor="password">Password:</label>
           <input
             type="password"
             id="password"
@@ -100,15 +104,15 @@ function LoginForm() {
             onChange={handleChange}
           />
         </div>
-        <div id="cubuttonwrapper">
-          <button id="cubutton" className="cubutton" type="submit" onClick={handleSubmit}>
+        <div id="libuttonwrapper">
+          <button id="libutton" className="libutton" type="submit" onClick={handleSubmit}>
             Login
       </button>
         </div>
       </form>
 
-      <div id="cubuttonwrapper">
-        <div> Don't have an account? Sign up </div> <div id="linky"><Link to={`/signup/`}>{`  here`} </Link></div>
+      <div id="libuttonwrapper">
+        <div className="litext"> Don't have an account? Sign up </div> <div id="linky"><Link to={`/signup/`}>{`  here`} </Link></div>
       </div>
 
       {
