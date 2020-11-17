@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import Nav from "../../components/Nav/Nav";
-import "../../components/Nav/Nav.css";
+import "../../components/EditProfileForm/EditProfileForm.css";
+import warningicon from "../../images/warning2.png"
 
 
 function EditProfileForm() {
   const [modalState, setModalState] = useState(false);
   const [profileData, setProfileData] = useState({});
+  const [isLoading, setIsLoading] = useState(true)
   const token = window.localStorage.getItem("token");
   const username = window.localStorage.getItem("username");
 
@@ -41,6 +43,7 @@ function EditProfileForm() {
     }).then((data) => {
       console.log(data)
       setProfileData(data);
+      setIsLoading(false)
     });
   }, []);
 
@@ -114,7 +117,7 @@ function EditProfileForm() {
     e.preventDefault();
     postData()
       .then((response) => {
-        if (response !== undefined) {
+        if (response != undefined) {
           history.push("/collections/");
         } else {
           history.push("/collections/")
@@ -141,7 +144,7 @@ function EditProfileForm() {
     })
 
       .then((result) => {
-        if (result !== undefined) {
+        if (result != undefined) {
           history.push("/collections/");
           window.location.reload();
         } else {
@@ -176,19 +179,28 @@ function EditProfileForm() {
 
 
   return (
-    <div >
-      <div id="loginform">
+    <div id="loginform">
+      <div >
         <Nav />
       </div>
+      <div className="cuformlogo" >
+        <img
+          id="cuformlogoimage"
+          src={require("../../images/Comparalist_rectangle.png")}
+          alt="Company Logo"
+        />
+      </div>
 
-      {username === null ? (<div>You are not logged in </div>
+      {isLoading ? (<div className="loadingpage">
+        <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"} />
+      </div>) : <div>  {username === null ? (<div>You are not logged in </div>
       ) : (<div>
 
-        <div id="loginform">
+        <div id="contactusform">
           <form>
-            <h2>Edit Profile here</h2>
-            <div className="row">
-              <label htmlFor="username">Username:</label>
+            <h2 id="contactusheadertitle">Edit Profile</h2>
+            <div className="cufa">
+              <label className="atcu" htmlFor="username">Username:</label>
               <input
                 type="username"
                 id="username"
@@ -197,8 +209,8 @@ function EditProfileForm() {
               />
             </div>
 
-            <div className="row">
-              <label htmlFor="email">Email:</label>
+            <div className="cufa">
+              <label className="atcu" htmlFor="email">Email:</label>
               <input
                 type="email"
                 id="email"
@@ -206,8 +218,8 @@ function EditProfileForm() {
                 value={credentials.email}
               />
             </div>
-            <div className="row">
-              <label htmlFor="preferred_name">Preferred Name:</label>
+            <div className="cufa">
+              <label className="atcu" htmlFor="preferred_name">Preferred Name:</label>
               <input
                 type="preferred_name"
                 id="preferred_name"
@@ -215,11 +227,12 @@ function EditProfileForm() {
                 value={credentials.preferred_name}
               />
             </div >
-            <div className="row"></div>
-            <button id="button" button type="submit" onClick={handleSubmitCredential}> EditProfile </button>
-            <h2>Change Password here</h2>
-            <div className="row">
-              <label htmlFor="old_password">Old Password:</label>
+            <div id="cubuttonwrapper">
+              <button id="cubutton" className="cubutton" button type="submit" onClick={handleSubmitCredential}> Edit Profile </button>
+            </div>
+            <h2 id="contactusheadertitle">Change Password</h2>
+            <div className="cufa">
+              <label className="atcu" htmlFor="old_password">Old Password:</label>
               <input
                 type="old_password"
                 id="old_password"
@@ -228,9 +241,9 @@ function EditProfileForm() {
               />
             </div>
 
-            <div className="row">
-            <div className="row"></div>
-              <label htmlFor="new_password">New Password:</label>
+            <div className="cufa">
+
+              <label className="atcu" htmlFor="new_password">New Password:</label>
               <input
                 type="new_password"
                 id="new_password"
@@ -239,9 +252,9 @@ function EditProfileForm() {
               />
             </div>
 
-            <div className="row">
-            <div className="row"></div>
-              <label htmlFor="confirm_new_password">Re-enter Password:</label>
+            <div className="cufa">
+
+              <label className="atcu" htmlFor="confirm_new_password">Re-enter Password:</label>
               <input
                 type="confirm_new_password"
                 id="confirm_new_password"
@@ -249,19 +262,19 @@ function EditProfileForm() {
                 value={passwords.confirm_new_password}
               />
             </div>
-            <div className="row">
-              
-              <label htmlFor="delete_account"></label>
+            <div className="cufa">
+
+              <label className="atcu" htmlFor="delete_account"></label>
 
 
             </div>
 
-            <div id="test"></div>
-            <button id="button" button type="submit" onClick={handleSubmitPassword}> Change Password </button>
-            
-            <h2>Delete Account here</h2>
-            <div className="form1-item">
-              <div className="row"></div>
+            <div id="cubuttonwrapper">
+              <button id="cubutton" className="cubutton" button type="submit" onClick={handleSubmitPassword}> Change Password </button>
+            </div>
+            <h2 id="contactusheadertitle">Delete Account</h2>
+            <div className="cufa">
+
               <label htmlFor="delete_account"></label>
 
 
@@ -270,15 +283,17 @@ function EditProfileForm() {
 
 
           </form>
-          <div id="test"></div>
-          <button id="button" onClick={() => deleteAccountToggleState()}>Delete your Account</button>
-
+          <div id="cubuttonwrapper">
+            <button id="cubutton" className="cubutton" onClick={() => deleteAccountToggleState()}>Delete your Account</button>
+          </div>
         </div>
 
         <div className={`modalBackground modalShowing-${modalState}`}>
-          <div className="modalInner">
+          <div className="modalEditPRofile">
             <div className="modalText">
-              <p>Are you sure you want to delete your account? - This will remove all collection and item Data</p>
+              <img className="warningicons" alt="warningicon" src={warningicon} />
+              <p>Are you sure you want to delete your account? </p>
+              <p> This will remove all collection and item Data</p>
               <button onClick={() => DeleteAccount()}>Yes Delete Account</button>
               <div>
                 <button className="exitButton" onClick={() => deleteAccountToggleState()}> exit </button>
@@ -287,7 +302,8 @@ function EditProfileForm() {
           </div>
         </div>
 
-      </div>)}
+      </div>)}</div>}
+
 
 
     </div>

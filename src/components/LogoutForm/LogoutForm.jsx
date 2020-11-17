@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import "../../components/LogoutForm/LogoutForm.css";
 
 function LogoutForm() {
   const history = useHistory();
@@ -13,7 +14,7 @@ function LogoutForm() {
 
   return (
     <div>
-      <button onClick={handleSubmit}>Logout</button>
+      <button className="buttonupdate" onClick={handleSubmit}>Logout</button>
     </div>
   );
 }

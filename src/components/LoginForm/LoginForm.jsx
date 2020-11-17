@@ -69,14 +69,21 @@ function LoginForm() {
 
   return (
 
-      <div>
+      
 
     <div id="loginform">
-
-      <h2 id="headerTitle">Login</h2>
+      <div className="cuformlogo" >
+            <img
+            id="cuformlogoimage"
+            src={require("../../images/Comparalist_rectangle.png")}
+            alt="Company Logo"
+            />
+        </div>
       <form>
-        <div className="row">
-          <label htmlFor="username">Username:</label>
+      <h2 id="contactusheadertitle">Login</h2>
+      
+        <div className="cufa">
+          <label className="atcu" htmlFor="username">Username:</label>
           <input
             type="text"
             id="username"
@@ -84,8 +91,8 @@ function LoginForm() {
             onChange={handleChange}
           />
         </div>
-        <div className="row">
-          <label htmlFor="password">Password:</label>
+        <div className="cufa">
+          <label className="atcu" htmlFor="password">Password:</label>
           <input
             type="password"
             id="password"
@@ -93,14 +100,14 @@ function LoginForm() {
             onChange={handleChange}
           />
         </div>
-        <div id="test">
-          <button id="button" className="button" type="submit" onClick={handleSubmit}>
+        <div id="cubuttonwrapper">
+          <button id="cubutton" className="cubutton" type="submit" onClick={handleSubmit}>
             Login
       </button>
         </div>
       </form>
 
-      <div id="test">
+      <div id="cubuttonwrapper">
         <div> Don't have an account? Sign up </div> <div id="linky"><Link to={`/signup/`}>{`  here`} </Link></div>
       </div>
 
@@ -113,7 +120,7 @@ function LoginForm() {
       }
 
     </div >
-    </div>
+    
 
   );
 }

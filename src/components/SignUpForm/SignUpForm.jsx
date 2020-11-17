@@ -49,13 +49,20 @@ function SignUpForm() {
 
   return (
 
-      <div>
-    <form id="loginform">
+      <div id="loginform">
+        <div className="cuformlogo" >
+            <img
+            id="cuformlogoimage"
+            src={require("../../images/Comparalist_rectangle.png")}
+            alt="Company Logo"
+            />
+        </div>
+    <form>
 
     
-      <h2 id="headerTitle">Create an Account</h2>
+      <h2 id="contactusheadertitle">Create an Account</h2>
 
-      <div className="row">
+      <div className="cufa">
         <label htmlFor="username">Username:</label>
         <input
           type="text"
@@ -64,7 +71,8 @@ function SignUpForm() {
         />
       </div>
 
-      <div className="row">
+      <div className="cufa">
+        
         <label htmlFor="email">Email:</label>
         <input
           type="email"
@@ -72,12 +80,12 @@ function SignUpForm() {
           onChange={handleChange}
         />
       </div>
-      <div className="row">
+      <div className="cufa">
         <label htmlFor="password">Password:</label>
         <input type="password" id="password" placeholder="At least 6 characters" onChange={handleChange} />
       </div>
 
-      <div className="row">
+      <div className="cufa">
         <label htmlFor="preferred_name">Your Preferred Name:</label>
         <input
           type="text"
@@ -85,8 +93,8 @@ function SignUpForm() {
           onChange={handleChange}
         />
       </div>
-      <div id="test">
-        <button id="button" className="button" type="submit" onClick={handleSubmit}>
+      <div id="cubuttonwrapper">
+        <button id="cubutton" className="cubutton" type="submit" onClick={handleSubmit}>
           Create your ComparaList Account!
       </button>
       </div >
