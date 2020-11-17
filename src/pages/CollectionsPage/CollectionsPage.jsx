@@ -4,7 +4,10 @@ import CollectionCard from "../../components/CollectionCard/CollectionCard"
 import Nav from "../../components/Nav/Nav";
 import "./CollectionsPage.css";
 import ErrorComponent from "../../components/ErrorComponent/ErrorComponent";
-
+import addicon from "../../images/add.png"
+import archiveicon from "../../images/archive.png"
+import activeicon from "../../images/activeicon.png"
+import "../../components/CollectionCard/CollectionCard.css"
 function CollectionsPage() {
 
     //////////////////////////// variables ////////////////////////////
@@ -116,24 +119,40 @@ function CollectionsPage() {
                     <Nav />
                 </div>
 
-                <div>
+                <div className="containerwholecollectionpage">
                     <div id="collectionsheadertitle">
                         <h1>{(activePath === "active-collections/") ? "Collections" : "Archived Collections"} </h1>
                     </div>
                     <div className="cpbuttoncontainer">
                         {/* button to see archived collections or active collections */}
-                        {
-                            (activePath === "archived-collections/") ?
-                                <Link to={`/collections/`}><button className="collectionspagebutton">See active collections</button></Link> :
-                                <Link to={`/collections-archive/`}><button className="collectionspagebutton">See archived collections</button></Link>
-                        }
+                        {(activePath === "archived-collections/") ?
 
-                        <Link to={`/newcollection/`}><button className="collectionspagebutton">Create New Collection</button></Link>
+                            <Link className="addcollectioncontainer" to={`/collections/`}>
+                                <img style={{ cursor: "pointer" }} className="changeicons" alt="activeicon" src={activeicon} />
+                                <p style={{ cursor: "pointer" }} > See Active Collections</p>
+                            </Link>
+                            :
+                            <Link className="addcollectioncontainer" to={`/collections-archive/`}>
+                                <img style={{ cursor: "pointer" }} className="changeicons" alt="archiveicon" src={archiveicon} />
+                                <p style={{ cursor: "pointer" }} > See Archived Collections</p>
+                            </Link>}
+
+
+
+                        <Link className="addcollectioncontainer" to={`/newcollection/`}>
+                            <img style={{ cursor: "pointer" }} className="changeicons" alt="addicon" src={addicon} />
+                            <p style={{ cursor: "pointer" }} > Create Collection</p>
+                        </Link>
+
+
+
                     </div>
                     {/* display list of collections */}
-                    {collectionsList.map((collectionData, key) => {
-                        return <CollectionCard key={key} collectionData={collectionData} />;
-                    })}
+                    <div className="box-wrap">
+                        {collectionsList.map((collectionData, key) => {
+                            return <CollectionCard key={key} collectionData={collectionData} />;
+                        })}
+                    </div>
                 </div>
             </div>
         )

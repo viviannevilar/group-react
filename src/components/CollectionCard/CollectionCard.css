@@ -1,6 +1,16 @@
 .collection-wrapper {
     border: 2px solid blue;
     padding: 5px;
+    width: 90%;
+    max-width: 700px;
+}
+
+
+.containerwholecollectionpage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 
@@ -90,3 +100,42 @@ div.collectioninfocontainer a {
     text-transform: uppercase ;
     text-align: center;
 }
+
+
+body{
+    /* background:#f1f1f1; */
+    /* font-family: 'Inconsolata', monospace; */
+    /* font-weight:bold; */
+    text-align:center;
+    -webkit-font-smoothing: antialiased;
+  }
+  .box-wrap{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin: 5%;
+    margin-top: 2%;
+
+  }
+  .box{
+    padding:30px;
+    margin:2%;
+    background:white;
+    width:30%;
+    border:1px solid #d6d6d6;
+    box-shadow:0 2px 3px 0px rgba(0,0,0,0.25);
+    border-radius:3px;
+    transition:.2s all; 
+  }
+  .box-wrap:hover .box{
+    filter:blur(3px);
+    opacity:.5;
+    transform: scale(.98);
+    box-shadow:none;
+  }
+  .box-wrap:hover .box:hover{
+    transform:scale(1);
+    filter:blur(0px);
+    opacity:1;
+    box-shadow:0 8px 20px 0px rgba(0,0,0,0.125);
+  }

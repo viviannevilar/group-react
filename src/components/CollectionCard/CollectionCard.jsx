@@ -6,7 +6,6 @@ import "../../components/Nav/Nav.css";
 import archiveicon from "../../images/archive.png"
 import deleteicon from "../../images/delete.png"
 import editicon from "../../images/edit.png"
-import activeicon from "../../images/activebutton.PNG"
 import shareicon from "../../images/share.png"
 import lefticon from "../../images/lefticon.png"
 import { useEffect } from "react";
@@ -108,7 +107,7 @@ function CollectionCard(props) {
     return (
 
 
-        <div className="collection-wrapper">
+        <div className="box">
             <div id="buttonrowcontainer" style={collectionData.is_active ? {} : { opacity: "0.4" }} >
                 {/* <img className="changeicons" alt="archiveicon" src={activeicon} /> */}
                 <div className="buttoncontainer">
