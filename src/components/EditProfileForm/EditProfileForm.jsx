@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import Nav from "../../components/Nav/Nav";
-import "../../components/EditProfileForm/EditProfileForm.css";
+import "./EditProfileForm.css";
 import warningicon from "../../images/warning2.png"
 import ErrorComponent from "../ErrorComponent/ErrorComponent"
 
@@ -248,9 +248,7 @@ function EditProfileForm() {
 
   return (
     <div id="loginform">
-      <div >
-        <Nav />
-      </div>
+
       <div className="cuformlogo" >
         <img
           id="cuformlogoimage"
