@@ -8,6 +8,8 @@ import addicon from "../../images/add.png"
 import archiveicon from "../../images/archive.png"
 import activeicon from "../../images/activeicon.png"
 import "../../components/CollectionCard/CollectionCard.css"
+import Footer from "../../components/Footer/Footer";
+
 function CollectionsPage() {
 
     //////////////////////////// variables ////////////////////////////
@@ -154,6 +156,7 @@ function CollectionsPage() {
                         })}
                     </div>
                 </div>
+                <Footer />
             </div>
         )
     }

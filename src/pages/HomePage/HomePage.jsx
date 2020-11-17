@@ -4,8 +4,9 @@ import "../SignUp/SignUp";
 import "../ContactUs/ContactUs";
 import "../AboutUs/AboutUs";
 import "../LoginPage/LoginPage";
+import Footer from "../../components/Footer/Footer";
 import LogoutForm from "../../components/LogoutForm/LogoutForm";
-import { useParams, useHistory, useLocation, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 function HomePage() {
@@ -51,14 +52,15 @@ function HomePage() {
           </div>
         )}
 
-      <div className="footer">
+      <Footer />
+      {/* <div className="footer">
         <Link className="footer1" to="/contactus">
           CONTACT US
         </Link>
         <Link className="footer1" to="/aboutus">
           ABOUT US
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 }

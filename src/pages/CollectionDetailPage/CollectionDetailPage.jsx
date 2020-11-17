@@ -9,13 +9,13 @@ import Nav from "../../components/Nav/Nav";
 import ItemCard from "../../components/ItemCard/ItemCard"
 import SummaryItemCard from "../../components/SummaryItemCard/SummaryItemCard";
 import AddItemForm from "../../components/AddItemForm/AddItemForm";
+import Footer from "../../components/Footer/Footer";
 
 // icons
 import archiveicon from "../../images/archive.png"
 import deleteicon from "../../images/delete.png"
 import editicon from "../../images/edit.png"
 import goicon from "../../images/goicon.png"
-
 import addicon from "../../images/add.png"
 
 
@@ -577,6 +577,7 @@ function CollectionDetailPage() {
             )}
 
          </div >
+         <Footer />
       </div >
    )
 }
