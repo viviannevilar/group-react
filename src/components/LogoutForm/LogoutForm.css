@@ -1,0 +1,77 @@
+
+  .buttonupdate {
+    border-radius: 0.2em;
+    box-sizing: border-box;
+    max-width: 250px;
+    height: 40px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: white;
+    background: #b3b7a4;
+    border: 0.1em solid #ffffff;
+    transition: all 0.2s;
+    margin: 10px auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .buttonupdate:hover {
+    color: #004aad;
+  }
+  
+
+  
+  @media only screen and (max-width: 1200px) {
+  
+    .buttonupdate {
+      height: 50px;
+      font-size: 1.8rem;
+    }
+  
+  
+  }
+  
+  @media only screen and (max-width: 900px) {
+  
+    
+  
+  
+    .buttonupdate {
+      height: 50px;
+      font-size: 1.8rem;
+    }
+  
+   
+  }
+  
+  @media only screen and (max-width: 500px) {
+ 
+  
+    .buttonupdate {
+      font-size: 1.3rem;
+    }
+  
+  }
+  
+  
+  
+  
+  
+  
+  @media only screen and (min-width: 900px) {
+ 
+  
+    .buttonupdate {
+      font-size: 1.5rem;
+      margin: 4px ;
+  
+    }
+  
+  
+  }
+  
+  
+  
+  

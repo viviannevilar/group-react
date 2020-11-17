@@ -186,7 +186,7 @@ function CollectionSortPage() {
                             {itemDisplayData.map((item, key) => {
                                 return (
                                     <ItemCardSmall itemData={item} collectionData={collectionData} />
-                                    )
+                                )
                             })}
                         </div>
 

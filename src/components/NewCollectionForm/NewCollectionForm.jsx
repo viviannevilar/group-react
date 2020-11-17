@@ -214,9 +214,10 @@ function NewCollectionForm() {
           <button className="newcollectionbutton" type="submit" onClick={handleSubmit}>
             Submit your Collection!
       </button>
+      <br></br>
       <button className="newcollectionbutton" type="submit" onClick={cancelSubmit}>  Cancel </button>
           <br></br>
-          <br></br>
+
 
         </div>
       </form>

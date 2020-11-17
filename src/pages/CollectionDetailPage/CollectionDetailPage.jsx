@@ -571,9 +571,8 @@ function CollectionDetailPage() {
 
             {/* Is still loading (fetching the data) */}
             {isLoading && (
-               <div>
-                  <div>Is Loading</div>
-                  {/* <Loader /> */}
+               <div className="loadingpage">
+                  <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"} />
                </div>
             )}
 
