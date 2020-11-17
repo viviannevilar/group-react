@@ -3,7 +3,10 @@
     color: #004aad;
     text-align: center;
     margin: 0;
-    padding-top: 5%;
+    padding-top: 1%;
+    font-size: 0.7em;
+    text-transform: uppercase ;
+
 }
 
 .cpbuttoncontainer {
@@ -11,7 +14,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    padding-bottom: 20px;
   }
 
 .collectionspagebutton {
@@ -27,11 +29,26 @@
     justify-content: space-evenly;
   }
 
-  @media only screen and (max-width: 1450px) {
-    .cpbuttoncontainer  {
-        padding-right: 25%;
-        padding-left: 25%;
-    }
+  a.addcollectioncontainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: black;
+}
+
+a.addcollectioncontainer:visited{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: black;
+}
+a.addcollectioncontainer p{
+    text-transform: uppercase ;
+    margin: 2px;
+    font-size: 0.7em;
+
 }
 
 @media only screen and (max-width: 800px) {
@@ -40,17 +57,64 @@
         /* padding-right: 5px;
         padding-left: 5px; */
     }
-    .cpbuttoncontainer  {
-            padding-right: 10%;
-            padding-left: 10%;
-    }
+   
 }
 
 
 @media only screen and (max-width: 500px) {
 
-    .cpbuttoncontainer  {
-        padding-right: 5%;
-        padding-left: 5%;
-    }
+  
+
+
+
+
+a.addcollectioncontainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: black;
+}
+
+a.addcollectioncontainer:visited{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: black;
+}
+
+a.addcollectioncontainer p{
+    text-transform: uppercase ;
+    font-size: 0.5em;
+    margin: 2px;
+}
+
+
+}
+
+
+
+
+
+.nodatacontainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    margin-top: 10px;
+}
+
+
+img.nodatalogo{
+    display: flex;
+    width: 50%;
+    max-width: 400px;
+}
+
+div.nodatacontainer p{
+    text-transform: uppercase ;
+    font-size: 0.8em;
+
 }
