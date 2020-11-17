@@ -8,7 +8,10 @@ import addicon from "../../images/add.png"
 import archiveicon from "../../images/archive.png"
 import activeicon from "../../images/activeicon.png"
 import "../../components/CollectionCard/CollectionCard.css"
+
 import Footer from "../../components/Footer/Footer";
+import logoicon from "../../images/Comparalist_rectangle.png"
+
 
 function CollectionsPage() {
 
@@ -92,27 +95,6 @@ function CollectionsPage() {
         )
 
         // if there are no collections to show
-    } else if (!collectionsList || collectionsList.length === 0) {
-
-        return (
-            <div>
-                <div>
-                    <Nav />
-                </div>
-                <h1>No collections to show</h1>
-
-                {/* button to see archived collections or active collections */}
-                {
-                    (activePath === "archived-collections/") ?
-                        <Link to={`/collections/`}><button >See active collections</button></Link> :
-                        <Link to={`/collections-archive/`}><button >See archived collections</button></Link>
-                }
-
-                <Link to={`/newcollection/`}><button >Create New Collection</button></Link>
-            </div>
-        )
-
-        // if the credentials match and there are collections to show
     } else {
 
         return (
@@ -146,14 +128,20 @@ function CollectionsPage() {
 
                     </div>
                     {/* display list of collections */}
-                    <div className="box-wrap">
+                    {collectionsList.length > 0 ? (<div className="box-wrap">
                         {collectionsList.map((collectionData, key) => {
                             return <CollectionCard key={key} collectionData={collectionData} />;
                         })}
-                    </div>
+                    </div>) : (<div className="nodatacontainer">
+                        <img className="nodatalogo" alt="nodatalogo" src={logoicon} />
+                        <p>No collections have been added yet to your account</p>
+
+                    </div>)}
+
                 </div>
                 <Footer />
             </div>
+
         )
     }
 

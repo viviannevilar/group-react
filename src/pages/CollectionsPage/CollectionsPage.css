@@ -92,3 +92,29 @@ a.addcollectioncontainer p{
 
 
 }
+
+
+
+
+
+.nodatacontainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    margin-top: 10px;
+}
+
+
+img.nodatalogo{
+    display: flex;
+    width: 50%;
+    max-width: 400px;
+}
+
+div.nodatacontainer p{
+    text-transform: uppercase ;
+    font-size: 0.8em;
+
+}
