@@ -35,12 +35,27 @@
  .sort-buttons-container {
     max-width: 300px;
     margin: 0 auto;
-    border: 1px solid red;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     padding: 6px;
  }
+
+
+ .fa-icon {
+   font-size: 20px;
+ }
+
+ a.icon-a-tag {
+   display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+
+ .icon-a-tag:hover {
+   cursor: pointer;
+}
+
 
 /* img.item-small:active {
    width: 50px;

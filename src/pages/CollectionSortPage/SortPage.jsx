@@ -15,7 +15,12 @@ import nophoto from '../../images/noimage.PNG';
 
 // components
 import Nav from "../../components/Nav/Nav";
+//mport Icons from "../../components/Icons/Icons";
 
+
+import { FaRegCheckSquare, FaRegWindowClose  } from 'react-icons/fa';
+
+// import BsCheckBox from 'react-icons/lib/fa/pencil'
 
 //////////////////////////// components ////////////////////////////
 
@@ -144,8 +149,8 @@ function SortableComponent(props) {
             {/* There is NO error */}
             {(!hasError) ? (<div>
                <div className="sort-buttons-container">
-                  <button onClick={handleSubmit}>Save</button>
-                  <button onClick={cancelSubmit}>Cancel</button>
+                  <a className="icon-a-tag" onClick={handleSubmit}><FaRegCheckSquare className="fa-icon"/></a>
+                  <a className="icon-a-tag" onClick={cancelSubmit}><FaRegWindowClose className="fa-icon"/></a>
                </div>
                <SortableList items={items} onSortEnd={onSortEnd} />
             </div>) : null}
@@ -168,3 +173,6 @@ function SortableComponent(props) {
 }
 
 export default SortableComponent
+
+
+
