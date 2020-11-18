@@ -72,14 +72,16 @@
 .eibutton {
   padding: 5px 10px;
   background: #b3b7a4;
-  border-radius: 30px;
+  border-radius: 0.5rem;
   color: white;
   border: none;
+  margin: 0.5rem 1rem;
+  min-width: 8rem;
 }
 
 div.eibuttonwrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   margin-top: 15px;

@@ -89,7 +89,7 @@ html {
     background: #b3b7a4;
     border: none;
     justify-content: center;
-    border-radius: 25px;
+    border-radius: 0.5rem;
     width: 60%;
     height: 40px;
     font-size: 1.1rem;

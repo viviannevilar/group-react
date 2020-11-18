@@ -173,7 +173,7 @@ function ItemEditForm(props) {
    } else {
 
       return (
-         <div>
+         <div >
             <div className="eiformlogo" >
                <img
                   id="eiformlogoimage"
@@ -351,6 +351,7 @@ function ItemEditForm(props) {
 
                </form>
             </div>
+            <br></br>
          </div>
       );
    }
