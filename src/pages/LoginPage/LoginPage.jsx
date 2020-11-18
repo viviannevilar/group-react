@@ -10,12 +10,8 @@ function LoginPage() {
   let token = localStorage.token;
 
   return (
-    <div>
-      {token == null && (
-        <div>
-          <LoginForm />{" "}
-        </div>
-      )}
+    <div className="page-wrapper">
+      {token == null && ( <LoginForm /> )}
       {token != null && (
         <div>
           <h2>You are already logged in as user {username}! Please log out!</h2>

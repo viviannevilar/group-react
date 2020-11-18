@@ -261,7 +261,6 @@ function EditProfileForm() {
         />
       </div>
 
-        {username === null ? <ErrorComponent errorMessage="You are not logged in!" errorNumber="403" /> : null }
            
 
 

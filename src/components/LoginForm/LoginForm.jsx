@@ -70,12 +70,8 @@ function LoginForm() {
 
   return (
 
-      
-
     <div className="loginform">
-        <div>
-              <Nav />
-        </div>
+
       <div className="liformlogo" >
             <img
             id="liformlogoimage"
