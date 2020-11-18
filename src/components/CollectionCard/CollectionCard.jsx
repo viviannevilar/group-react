@@ -23,7 +23,7 @@ function CollectionCard(props) {
     const linkCollection = "/collection/" + id + "/"
     const [allAttributes, setAllAttributes] = useState([])
 
-    console.log(collectionData)
+
 
     useEffect(() => {
 
@@ -105,7 +105,6 @@ function CollectionCard(props) {
 
 
     return (
-
 
         <div className="box">
             <div id="buttonrowcontainer" style={collectionData.is_active ? {} : { opacity: "0.4" }} >

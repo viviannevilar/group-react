@@ -9,13 +9,13 @@ function Loader() {
 
 return (
    <div id="loader-wrapper">
-      <div class="slinky-loader">
-         <div class="slinky-loader__rotator">
-            <div class="slinky-loader__bar"></div>
-            <div class="slinky-loader__bar"></div>
-            <div class="slinky-loader__bar"></div>
-            <div class="slinky-loader__bar"></div>
-            <div class="slinky-loader__bar"></div>
+      <div className="slinky-loader">
+         <div className="slinky-loader__rotator">
+            <div className="slinky-loader__bar"></div>
+            <div className="slinky-loader__bar"></div>
+            <div className="slinky-loader__bar"></div>
+            <div className="slinky-loader__bar"></div>
+            <div className="slinky-loader__bar"></div>
          </div>
       </div>
    </div>

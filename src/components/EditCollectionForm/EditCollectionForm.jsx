@@ -146,8 +146,8 @@ function EditCollectionForm(props) {
             {/* <div>
                 <Nav />
             </div> */}
-        <div >
-        
+          <div>
+
             <div className="ecformlogo" >
                 <img
                 id="ecformlogoimage"
@@ -259,9 +259,9 @@ function EditCollectionForm(props) {
 
 
                 <div className="ecbuttonwrapper">
-                    <button className="ecbutton" ref={btnRefAdd} type="submit" onClick={handleSubmit}>  UPDATE COLLECTION </button>
+                    <button className="ecbutton" ref={btnRefAdd} type="submit" onClick={handleSubmit}>  UPDATE </button>
  
-                    <button className="ecbutton" type="submit" onClick={cancelSubmit}>  CANCEL </button>
+                    <button id="button-cancel" className="ecbutton" type="submit" onClick={cancelSubmit}>  CANCEL </button>
                 </div>
             </form>
         </div>
