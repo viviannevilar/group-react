@@ -44,7 +44,7 @@ function HomePage() {
           <Link to="/collections/" className="button1">
             My Collections
           </Link>
-          <LogoutForm className="button1" />
+          <LogoutForm />
         </div>
       ) : (
         <div className="buttons-wrapper">
@@ -57,7 +57,7 @@ function HomePage() {
         </div>
       )}
 
-      <Footer />
+      {/* <Footer /> */}
       {/* <div className="footer">
         <Link className="footer1" to="/contactus">
           CONTACT US
