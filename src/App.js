@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
-import EditProfilePage from "./pages/EditProfile/EditProfile";
+import EditProfilePage from "./pages/Editprofile/EditProfile";
 import HomePage from "./pages/HomePage/HomePage";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import ContactUs from "./pages/ContactUs/ContactUs";
