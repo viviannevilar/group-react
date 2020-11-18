@@ -5,6 +5,9 @@
   /* margin-right: 50px; */
 }
 
+.logo-down {
+   padding-top: 3rem;
+}
 
 #homepage-wrapper {
    display: flex;
