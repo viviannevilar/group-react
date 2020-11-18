@@ -2,6 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import "../../components/Nav/Nav.css";
 import "./ItemEditForm.css";
+import Loader from "../../components/Loader/Loader";
+
+
 function ItemEditForm(props) {
 
    //variables
@@ -9,6 +12,7 @@ function ItemEditForm(props) {
 
    const [errorMessage, setErrorMessage] = useState()
    const [errorKey, setErrorKey] = useState()
+
 
    let btnRefAdd = useRef();
 
@@ -165,12 +169,7 @@ function ItemEditForm(props) {
 
 
    if (isLoading) {
-      return (
-
-         <div className="loadingpage">
-            <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"} />
-         </div>
-      )
+      return <Loader />
    } else {
 
       return (
@@ -340,15 +339,25 @@ function ItemEditForm(props) {
 
 
                   <div className="eibuttonwrapper">
-                     <button className="eibutton" ref={btnRefAdd} type="submit" onClick={handleSubmit}>  Update Item </button>
+                     <button className="eibutton" ref={btnRefAdd} type="submit" onClick={handleSubmit}>  
+                        Update Item 
+                     </button>
                      <br></br>
-                     <button className="eibutton" type="submit" onClick={cancelSubmit}>  Cancel </button>
+
+                     <button className="eibutton" type="submit" onClick={cancelSubmit}>  
+                        Cancel 
+                     </button>
                   </div>
+
                </form>
             </div>
          </div>
       );
    }
+
 }
 
 export default ItemEditForm;
+
+
+

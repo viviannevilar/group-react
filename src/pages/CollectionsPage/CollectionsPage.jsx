@@ -9,6 +9,7 @@ import activeicon from "../../images/activeicon.png"
 import "../../components/CollectionCard/CollectionCard.css"
 import Nav from "../../components/Nav/Nav";
 import Footer from "../../components/Footer/Footer";
+import Loader from "../../components/Loader/Loader";
 import logoicon from "../../images/Comparalist_rectangle.png"
 
 
@@ -72,11 +73,7 @@ function CollectionsPage() {
     // while it is fetching the data show .gif
     if (isLoading) {
 
-        return (
-            <div className="loadingpage">
-                <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"} />
-            </div>
-        )
+        return <Loader />
 
         // if not found (project doesn't exist) 
     } else if (errorCode === 404) {

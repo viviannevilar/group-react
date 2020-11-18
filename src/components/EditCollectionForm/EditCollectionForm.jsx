@@ -2,14 +2,17 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import Nav from "../Nav/Nav";
-import "../../components/Nav/Nav.css";
+import Loader from "../Loader/Loader";
+// import "../../components/Nav/Nav.css";
 import "./EditCollectionForm.css";
 //import ContactUsPage from "../../pages/ContactUs/ContactUs";
 
 function EditCollectionForm(props) {
 
     //variables
-    const { collectionData } = props;
+    const { collectionData, isLoading } = props;
+
+    console.log(isLoading)
 
     let btnRefAdd = useRef();
 
@@ -134,13 +137,15 @@ function EditCollectionForm(props) {
       history.push(`/collections/`);
       }
 
-
+   if (isLoading) {
+      return <Loader />
+   } else {
 
     return (
         <div className="editcollectionform">
-            <div>
+            {/* <div>
                 <Nav />
-            </div>
+            </div> */}
         <div >
         
             <div className="ecformlogo" >
@@ -263,6 +268,7 @@ function EditCollectionForm(props) {
       </div>
       </div>
     );
+   }
 }
 
 export default EditCollectionForm;

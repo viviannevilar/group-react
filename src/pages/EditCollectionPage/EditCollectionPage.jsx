@@ -36,16 +36,16 @@ function EditCollectionPage() {
         return (
             <div className="page-wrapper">
      
-               {token !== null && isLoading ? <div className="loadingpage">
+               {/* {token !== null && isLoading ? <div className="loadingpage">
                   <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"} />
-               </div> : null}
+               </div> : null} */}
 
                {/* if the credentials match and there are collections to show */}
 
                
-                {token !== null && !isLoading ? (
+                {token !== null ? (
                     <div>
-                        <EditCollectionForm collectionData={editData} />
+                        <EditCollectionForm collectionData={editData} isLoading={isLoading}/>
                     </div>
                 ) : null}
 

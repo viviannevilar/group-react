@@ -60,8 +60,8 @@ function CollectionCard(props) {
     //////////////////////////// methods ////////////////////////////
 
     // Archive collection
-    const archiveCollection = async (e) => {
-        e.preventDefault();
+    const archiveCollection = async () => {
+      //   e.preventDefault();
         let token = window.localStorage.getItem("token");
 
         const response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/archive/`, {

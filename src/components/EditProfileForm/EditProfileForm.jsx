@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import Nav from "../../components/Nav/Nav";
+import Loader from "../../components/Loader/Loader";
 import "./EditProfileForm.css";
 import warningicon from "../../images/warning2.png"
 import ErrorComponent from "../ErrorComponent/ErrorComponent"
@@ -246,11 +247,15 @@ function EditProfileForm() {
   };
 
 
-  return (
+   if (isLoading) {
+      return <Loader />
+   } else {
+      return (
     <div className="editprofileform">
-      <div >
+      {/* <div >
         <Nav />
-      </div>
+      </div> */}
+
       <div className="epformlogo" >
     <div>
 
@@ -393,10 +398,11 @@ function EditProfileForm() {
           </div>
         </div>
 
-      </div>)}</div>}
+      </div>)} 
+      </div>}
       </div>
       </div>
     </div>
-  );
+  );}
 }
 export default EditProfileForm;

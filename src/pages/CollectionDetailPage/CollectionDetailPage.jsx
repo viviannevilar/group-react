@@ -10,6 +10,7 @@ import ItemCard from "../../components/ItemCard/ItemCard"
 import SummaryItemCard from "../../components/SummaryItemCard/SummaryItemCard";
 import AddItemForm from "../../components/AddItemForm/AddItemForm";
 import Footer from "../../components/Footer/Footer";
+import Loader from "../../components/Loader/Loader";
 
 // icons
 import archiveicon from "../../images/archive.png"
@@ -575,13 +576,15 @@ function CollectionDetailPage() {
             }
 
             {/* Is still loading (fetching the data) */}
-            {isLoading && (
+
+            {/* {isLoading && (
                <div className="loadingpage">
                   <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"} />
                </div>
-            )}
+            )} */}
 
          </div >
+         {isLoading ? <Loader /> : null }
          <Footer />
       </div >
    )
