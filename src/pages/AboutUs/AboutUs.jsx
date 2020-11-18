@@ -69,7 +69,7 @@ function AboutUsPage() {
           <br></br>
         </div>
 
-        
+
         <div style={{ backgroundColor: "#e1e3d8" }}>
           <br></br>
           <h1 id="about" style={{ color: "#004aad" }}>
@@ -90,7 +90,7 @@ function AboutUsPage() {
         <div>
           <br></br>
           <h1 id="about" style={{ color: "#004aad" }}>
-            How to use it!
+            How to use!
           </h1>
           <p className="aboutpagepagraph">
             It is personal use app, which allows you to easily compare and
@@ -99,12 +99,12 @@ function AboutUsPage() {
             list, name it and add your items.{" "}
           </p>
           <p className="aboutpagepagraph">
-            You can add five attributes as well as uploading image to the list,
-            so you need to narrow down what matters most to you.
+            You can add four attributes as well as uploading an image to the list,
+            so you can narrow down what matters most to you.
           </p>
           <p className="aboutpagepagraph">
-            The items are editable and after you made your decision, you can
-            archive your collections for future use or delete it.
+            The items are editable and after you have made your decision, you can
+            archive your collections for future use or delete them.
           </p>
           <br></br>
           <br></br>
