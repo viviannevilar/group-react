@@ -66,13 +66,14 @@
 .ecbutton {
     padding: 5px 10px;
     background: #b3b7a4;
-    border-radius: 25px;
+    border-radius: 0.5rem;
     color: white;
     border: none;
     justify-content: center;
     border: 0px;
     cursor: pointer;
     margin: 10px;
+    min-width: 8rem;
   }
 
 div.ecbuttonwrapper {
