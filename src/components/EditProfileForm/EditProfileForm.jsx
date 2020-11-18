@@ -374,7 +374,7 @@ function EditProfileForm() {
 
 
 
-        {/* <div className={`modalBackground modalShowing-${modalState}`}>
+        <div className={`modalBackground modalShowing-${modalState}`}>
           <div className="modalEditPRofile">
             <div className="modalText">
               <img className="warningicons" alt="warningicon" src={warningicon} />
@@ -388,11 +388,6 @@ function EditProfileForm() {
           </div>
         </div>
 
-      </div>)} 
-      </div>
-      </div>
-
-    </div> */}
    </div>
   );}
 

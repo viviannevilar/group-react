@@ -9,6 +9,8 @@ function SignUp() {
 
   return (
     <div>
+
+
       {token == null && (
         <div>
           <SignUpForm />

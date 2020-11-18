@@ -85,7 +85,8 @@ function CollectionCard(props) {
         const linkText = "https://glacial-badlands-43820.herokuapp.com/collection/shared/" + collectionData.signed_pk + "/"
 
         navigator.clipboard.writeText(linkText)
-        alert("Share this collection with others - your collection URL was copied to your clipboard!")
+        
+      //   alert("Share this collection with others - your collection URL was copied to your clipboard!")
 
     }
 

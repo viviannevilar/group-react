@@ -51,9 +51,8 @@ function SignUpForm() {
   return (
 
       <div className="signupform">
-        <div>
-              <Nav />
-        </div>
+
+  
         <div className="suformlogo" >
             <img
             id="suformlogoimage"

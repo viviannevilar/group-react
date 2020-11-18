@@ -28,7 +28,7 @@ function HomePage() {
 
   return (
     <div id="homepage-wrapper">
-       {/* <Nav myClassName={"hidden-nav"}/> */}
+       <Nav myClassName={"hidden-nav"}/>
 
       <div className="logo logo-down">
         <img

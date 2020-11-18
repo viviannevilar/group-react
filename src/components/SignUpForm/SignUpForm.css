@@ -41,7 +41,7 @@ html {
     width: 50%;
     margin: 0px auto;
     background-color: #FFFFFF;
-    border-radius: 25px;
+    border-radius: 0.5rem;
   }
   
 .sufa {
@@ -97,7 +97,7 @@ html {
   background: #b3b7a4;
   border: none;
   justify-content: center;
-  border-radius: 25px;
+  border-radius: 0.5rem;
   width: 60%;
   height: 40px;
   font-size: 1.1rem;
@@ -106,6 +106,7 @@ html {
   border: 0px;
   cursor: pointer;
   margin: 20px;
+  min-width: 13rem;
 }
 
 #subuttonwrapper {
