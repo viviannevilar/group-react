@@ -35,7 +35,7 @@
     width: 100%;
     margin: 0px auto;
     background-color: #FFFFFF;
-    border-radius: 25px;
+    border-radius: 0.5rem;
   }
   
 .ncfa{
@@ -72,14 +72,17 @@
 .newcollectionbutton {
   padding: 5px 10px;
   background: #b3b7a4;
-  border-radius: 25px;
+  border-radius: 0.5rem;
   color: white;
   border: none;
+  min-width: 8rem;
+  margin: 0 0.5rem;
 }
 
 div.ncbuttonwrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   margin-top: 15px;

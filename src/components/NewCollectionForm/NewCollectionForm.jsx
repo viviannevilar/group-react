@@ -209,7 +209,7 @@ function NewCollectionForm() {
 
         <div className="ncbuttonwrapper">
          <button className="newcollectionbutton" ref={btnRefAdd} type="submit" onClick={handleSubmit}>
-            SUBMIT YOUR COLLECTION
+            SUBMIT
       </button>
       <br></br>
       <button className="newcollectionbutton" type="submit" onClick={cancelSubmit}>  CANCEL </button>
