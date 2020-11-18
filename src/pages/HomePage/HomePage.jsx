@@ -27,11 +27,10 @@ function HomePage() {
   }, []);
 
   return (
-    <React.Fragment>
+    <div id="homepage-wrapper">
        <Nav myClassName={"hidden-nav"}/>
 
-
-      <div className="logo1">
+      <div className="logo">
         <img
           id="logoimage"
           src={require("../../images/Logo.png")}
@@ -44,7 +43,7 @@ function HomePage() {
           <Link to="/collections/" className="button1">
             My Collections
           </Link>
-          
+
           <LogoutForm />
         </div>
       ) : (
@@ -67,7 +66,7 @@ function HomePage() {
           ABOUT US
         </Link>
       </div> */}
-    </React.Fragment>
+    </div>
   );
 }
 

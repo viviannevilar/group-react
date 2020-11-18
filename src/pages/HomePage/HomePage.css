@@ -5,9 +5,20 @@
   /* margin-right: 50px; */
 }
 
+
+#homepage-wrapper {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   /* align-items: center; */
+}
+
 #logoimage {
-  height: 450px;
-  width: 450px;
+  /* height: 450px;
+  width: 450px; */
+  max-width: 90%;
+  height: auto;
+
 }
 
 .button1 {
@@ -28,6 +39,7 @@
   justify-content: center;
   align-items: center;
   padding: 0 0.2rem;
+  min-width: 15rem;
 }
 
 .button:hover {
@@ -37,8 +49,10 @@
 .buttons-wrapper {
   display: flex;
   flex-direction: column;
-  margin-top: -80px;
+  padding-top: 10rem;
   align-content: space-between;
+  /* border: 1px solid red; */
+  /* width: 100%; */
 }
 
 .footer {
@@ -79,7 +93,7 @@
   }
 
   .buttons-wrapper {
-    margin-top: -180px;
+    padding-top: 3rem;
   }
 
   .footer {
@@ -114,12 +128,12 @@
 
 @media only screen and (max-width: 500px) {
   .logo {
-    margin-top: -70px;
+    margin-top: -50px;
   }
 
   #logoimage {
-    height: 400px;
-    width: 400px;
+    height: 300px;
+    width: 300px;
   }
 
   .button1 {
@@ -150,10 +164,11 @@
   .buttons-wrapper {
     display: flex;
     flex-direction: row;
-    margin-top: -80px;
+    /* margin-top: -80px; */
+    padding-top: 2rem;
     justify-content: center;
     align-items: center;
-    margin: 4px;
+    /* margin: 4px; */
   }
 
   .button1 {
