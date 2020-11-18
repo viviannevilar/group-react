@@ -9,7 +9,6 @@ import Nav from "../../components/Nav/Nav";
 import LogoutForm from "../../components/LogoutForm/LogoutForm";
 import { Link } from "react-router-dom";
 
-
 function HomePage() {
   const [loggedin, setLoggedIn] = useState(false);
 
@@ -31,7 +30,8 @@ function HomePage() {
     <React.Fragment>
        <Nav myClassName={"hidden-nav"}/>
 
-      <div className="logo">
+
+      <div className="logo1">
         <img
           id="logoimage"
           src={require("../../images/Logo.png")}
@@ -39,21 +39,23 @@ function HomePage() {
         />
       </div>
 
-      {loggedin ?
-        (<div className="buttons-wrapper">
-          <Link to="/collections/" className="button1" >My Collections</Link>
+      {loggedin ? (
+        <div className="buttons-wrapper">
+          <Link to="/collections/" className="button1">
+            My Collections
+          </Link>
           <LogoutForm className="button1" />
         </div>
-        ) : (
-          <div className="buttons-wrapper">
-            <Link to="/signup" className="button1">
-              Sign Up
+      ) : (
+        <div className="buttons-wrapper">
+          <Link to="/signup" className="button1">
+            Sign Up
           </Link>
-            <Link to="/login" className="button1">
-              Log In
+          <Link to="/login" className="button1">
+            Log In
           </Link>
-          </div>
-        )}
+        </div>
+      )}
 
       <Footer />
       {/* <div className="footer">
