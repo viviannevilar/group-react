@@ -94,14 +94,14 @@ function CollectionsPage() {
     } else {
 
         return (
-            <div>
-                <div id="CollectionNav">
-                    <Nav />
-                </div>
             <div className="page-wrapper">
+                {/* <div id="CollectionNav">
+                    <Nav />
+                </div> */}
+            <div >
 
                 <div >
-                    <div id="collectionsheadertitle">
+                    <div className="collectionsheadertitle">
                         <h1>{(activePath === "active-collections/") ? "Collections" : "Archived Collections"} </h1>
                     </div>
                     <div className="cpbuttoncontainer">

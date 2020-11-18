@@ -1,4 +1,4 @@
-#collectionsheadertitle {
+.collectionsheadertitle {
     font-family: "Roboto", sans-serif;
     color: #004aad;
     text-align: center;
@@ -6,7 +6,6 @@
     padding-top: 1%;
     font-size: 0.7em;
     text-transform: uppercase ;
-
 }
 
 .nodatacontainer {

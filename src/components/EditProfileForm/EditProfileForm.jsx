@@ -274,6 +274,7 @@ function EditProfileForm() {
         <div>
           <form>
             {/*------------- Edit Profile -------------*/}
+            
             <h2 className="editprofileheadertitle">EDIT PROFILE</h2>
             <div className="epfa">
               <label className="atep" htmlFor="username">USERNAME:
@@ -367,21 +368,21 @@ function EditProfileForm() {
 
             {/*------------- Change Password -------------*/}
             <h2 className="editprofileheadertitle">DELETE ACCOUNT</h2>
-            <div className="epfa">
-
+            {/* <div className="epfa">
               <label htmlFor="delete_account"></label>
-            </div>
+            </div> */}
 
             <div id="epbuttonwrapper">
                <button id="epbutton" className="epbutton" onClick={() => deleteAccountToggleState()}>DELETE YOUR ACCOUNT</button>
             </div>
-
+            <br></br>
+            <br></br>
 
           </form>
 
         </div>
 
-        {/* <div className={`modalBackground modalShowing-${modalState}`}>
+        <div className={`modalBackground modalShowing-${modalState}`}>
           <div className="modalEditPRofile">
             <div className="modalText">
               <img className="warningicons" alt="warningicon" src={warningicon} />
@@ -393,7 +394,7 @@ function EditProfileForm() {
               </div>
             </div>
           </div>
-        </div> */}
+        </div>
 
       </div>)} 
       </div>
