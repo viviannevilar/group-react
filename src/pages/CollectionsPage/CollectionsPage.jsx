@@ -7,8 +7,8 @@ import addicon from "../../images/add.png"
 import archiveicon from "../../images/archive.png"
 import activeicon from "../../images/activeicon.png"
 import "../../components/CollectionCard/CollectionCard.css"
-import Nav from "../../components/Nav/Nav";
-import Footer from "../../components/Footer/Footer";
+// import Nav from "../../components/Nav/Nav";
+// import Footer from "../../components/Footer/Footer";
 import Loader from "../../components/Loader/Loader";
 import logoicon from "../../images/Comparalist_rectangle.png"
 
@@ -138,7 +138,7 @@ function CollectionsPage() {
                        </div>)}
 
                 </div>
-                <Footer />
+                {/* <Footer /> */}
             </div>
             </div>
         )

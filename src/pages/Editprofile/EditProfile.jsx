@@ -1,5 +1,6 @@
 import React from "react";
 import EditProfileForm from "../../components/EditProfileForm/EditProfileForm";
+import ErrorComponent from "../../components/ErrorComponent/ErrorComponent";
 // import Nav from "../../components/Nav/Nav";
 // import Footer from "../../components/Footer/Footer";
 
