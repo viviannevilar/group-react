@@ -252,12 +252,6 @@ function EditProfileForm() {
    } else {
       return (
     <div className="editprofileform">
-      {/* <div >
-        <Nav />
-      </div> */}
-
-      <div className="epformlogo" >
-    <div>
 
       <div className="epformlogo" >
         <img
@@ -267,11 +261,10 @@ function EditProfileForm() {
         />
       </div>
 
-      <div>  {username === null 
-         ? ( <ErrorComponent errorMessage="You are not logged in!" errorNumber="403" /> ) 
-         : (<div>
+        {username === null ? <ErrorComponent errorMessage="You are not logged in!" errorNumber="403" /> : null }
+           
 
-        <div>
+
           <form>
             {/*------------- Edit Profile -------------*/}
             
@@ -373,16 +366,16 @@ function EditProfileForm() {
             </div> */}
 
             <div id="epbuttonwrapper">
-               <button id="epbutton" className="epbutton" onClick={() => deleteAccountToggleState()}>DELETE YOUR ACCOUNT</button>
+               <button id="epbutton" className="epbutton" onClick={() => deleteAccountToggleState()}>DELETE ACCOUNT</button>
             </div>
             <br></br>
             <br></br>
 
           </form>
 
-        </div>
 
-        <div className={`modalBackground modalShowing-${modalState}`}>
+
+        {/* <div className={`modalBackground modalShowing-${modalState}`}>
           <div className="modalEditPRofile">
             <div className="modalText">
               <img className="warningicons" alt="warningicon" src={warningicon} />
@@ -399,8 +392,10 @@ function EditProfileForm() {
       </div>)} 
       </div>
       </div>
-      </div>
-    </div>
+
+    </div> */}
+          </div>
   );}
+
 }
 export default EditProfileForm;

@@ -44,6 +44,7 @@ function HomePage() {
           <Link to="/collections/" className="button1">
             My Collections
           </Link>
+          
           <LogoutForm />
         </div>
       ) : (
