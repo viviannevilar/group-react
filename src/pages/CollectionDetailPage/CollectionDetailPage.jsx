@@ -303,7 +303,7 @@ function CollectionDetailPage() {
 
       swiper.current = new Swiper('.swiper-container', {
          // observer: true,
-         loop: true,
+         // loop: true,
          effect: 'coverflow',
          // grabCursor: false,
          simulateTouch: true,
@@ -576,10 +576,10 @@ function CollectionDetailPage() {
             }
 
             {/* Is still loading (fetching the data) */}
-            {isLoading ? <Loader/> : null}
+            {isLoading ? <Loader /> : null}
 
          </div >
-         
+
       </div >
    )
 }

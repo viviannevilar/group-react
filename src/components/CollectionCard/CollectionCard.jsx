@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useParams, useHistory, useLocation, Link } from "react-router-dom";
 import "./CollectionCard.css";
 import "../../components/Nav/Nav.css";
 
@@ -22,6 +22,7 @@ function CollectionCard(props) {
     const id = collectionData.id
     const linkCollection = "/collection/" + id + "/"
     const [allAttributes, setAllAttributes] = useState([])
+    const history = useHistory();
 
 
 
@@ -61,7 +62,7 @@ function CollectionCard(props) {
 
     // Archive collection
     const archiveCollection = async () => {
-      //   e.preventDefault();
+        //   e.preventDefault();
         let token = window.localStorage.getItem("token");
 
         const response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/archive/`, {
@@ -73,6 +74,8 @@ function CollectionCard(props) {
         });
 
         window.location.reload();
+        history.push("/collections/");
+
         return response.json();
     }
 

@@ -98,48 +98,48 @@ function CollectionsPage() {
                 {/* <div id="CollectionNav">
                     <Nav />
                 </div> */}
-            <div >
-
                 <div >
-                    <div className="collectionsheadertitle">
-                        <h1>{(activePath === "active-collections/") ? "Collections" : "Archived Collections"} </h1>
-                    </div>
-                    <div className="cpbuttoncontainer">
-                        {/* button to see archived collections or active collections */}
-                        {(activePath === "archived-collections/") ?
 
-                            <Link className="addcollectioncontainer" to={`/collections/`}>
-                                <img style={{ cursor: "pointer" }} className="changeicons" alt="activeicon" src={activeicon} />
-                                <p style={{ cursor: "pointer" }} > See Active Collections</p>
+                    <div >
+                        <div className="collectionsheadertitle">
+                            <h1>{(activePath === "active-collections/") ? "Collections" : "Archived Collections"} </h1>
+                        </div>
+                        <div className="cpbuttoncontainer">
+                            {/* button to see archived collections or active collections */}
+                            {(activePath === "archived-collections/") ?
+
+                                <Link className="addcollectioncontainer" to={`/collections/`}>
+                                    <img style={{ cursor: "pointer" }} className="changeicons" alt="activeicon" src={activeicon} />
+                                    <p style={{ cursor: "pointer" }} > See Active Collections</p>
+                                </Link>
+                                :
+                                <Link className="addcollectioncontainer" to={`/collections-archive/`}>
+                                    <img style={{ cursor: "pointer" }} className="changeicons" alt="archiveicon" src={archiveicon} />
+                                    <p style={{ cursor: "pointer" }} > See Archived Collections</p>
+                                </Link>}
+
+                            <Link className="addcollectioncontainer" to={`/newcollection/`}>
+                                <img style={{ cursor: "pointer" }} className="changeicons" alt="addicon" src={addicon} />
+                                <p style={{ cursor: "pointer" }} > Create Collection</p>
                             </Link>
-                            :
-                            <Link className="addcollectioncontainer" to={`/collections-archive/`}>
-                                <img style={{ cursor: "pointer" }} className="changeicons" alt="archiveicon" src={archiveicon} />
-                                <p style={{ cursor: "pointer" }} > See Archived Collections</p>
-                            </Link>}
 
-                        <Link className="addcollectioncontainer" to={`/newcollection/`}>
-                            <img style={{ cursor: "pointer" }} className="changeicons" alt="addicon" src={addicon} />
-                            <p style={{ cursor: "pointer" }} > Create Collection</p>
-                        </Link>
+                        </div>
+                        {/* display list of collections */}
+                        {collectionsList.length > 0
+                            ? (<div className="box-wrap">
+                                {collectionsList.map((collectionData, key) => {
+                                    return <CollectionCard key={key} collectionData={collectionData} />;
+                                })}
+                            </div>)
+
+                            : (<div className="nodatacontainer">
+                                <img className="nodatalogo" alt="nodatalogo" src={logoicon} />
+                                <p id="no-data">You have no {location.pathname === "/collections/" ? "active" : "archived"} collections</p>
+                            </div>)}
 
                     </div>
-                    {/* display list of collections */}
-                    {collectionsList.length > 0 
-                    ? (<div className="box-wrap">
-                        {collectionsList.map((collectionData, key) => {
-                            return <CollectionCard key={key} collectionData={collectionData} />;
-                        })}
-                    </div>) 
-                    
-                    : (<div className="nodatacontainer">
-                         <img className="nodatalogo" alt="nodatalogo" src={logoicon} />
-                         <p id="no-data">You have no {location.pathname === "/collections/" ? "active" : "archived"} collections</p>
-                       </div>)}
-
+                    {/* <Footer /> */}
                 </div>
-                {/* <Footer /> */}
-            </div>
             </div>
         )
     }
