@@ -55,6 +55,7 @@
   text-align: center;
   box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
   transition: box-shadow 0.2s ease-in;
+  margin-bottom: -0.2rem;
 }
 
 .ecfa input:focus {
@@ -112,7 +113,7 @@ textarea {
     }
     .ecfa textarea {
         font-size: 1.0rem;
-        padding-bottom: 0.5%;
+        /* padding-bottom: 0.5%; */
     }
     div.ecradiowrapper {
         font-size: 1.0rem;
@@ -136,7 +137,7 @@ textarea {
     }
     .ecfa textarea {
         font-size: 1.0rem;
-        padding-bottom: 0.5%;
+        /* padding-bottom: 0.5%; */
     }
     div.ecradiowrapper {
         font-size: 1.0rem;
