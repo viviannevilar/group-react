@@ -5,12 +5,12 @@ import React, { useRef, useEffect, useState } from "react";
 import { useParams, useHistory, useLocation, Link } from "react-router-dom";
 
 // components
-import Nav from "../../components/Nav/Nav";
+// import Nav from "../../components/Nav/Nav";
 import Loader from "../../components/Loader/Loader";
 import ItemCard from "../../components/ItemCard/ItemCard"
 import SummaryItemCard from "../../components/SummaryItemCard/SummaryItemCard";
 import AddItemForm from "../../components/AddItemForm/AddItemForm";
-import Footer from "../../components/Footer/Footer";
+// import Footer from "../../components/Footer/Footer";
 
 // icons
 import archiveicon from "../../images/archive.png"
@@ -579,7 +579,7 @@ function CollectionDetailPage() {
             {isLoading ? <Loader/> : null}
 
          </div >
-         <Footer />
+         
       </div >
    )
 }

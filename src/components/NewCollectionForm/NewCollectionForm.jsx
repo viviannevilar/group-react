@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import "./NewCollectionForm.css";
 import "../../components/Nav/Nav.css";
-import Nav from "../../components/Nav/Nav";
+
 // import "../../components/CollectionCard/CollectionCard.css";
 
 function NewCollectionForm() {
@@ -105,9 +105,7 @@ function NewCollectionForm() {
 
   return (
     <div className="newcollectionform">
-        <div>
-            <Nav />
-        </div>
+
         <div className="ncformlogo" >
             <img
             id="ncformlogoimage"
