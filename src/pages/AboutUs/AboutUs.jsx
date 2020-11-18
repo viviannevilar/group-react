@@ -93,9 +93,9 @@ function AboutUsPage() {
             How to use!
           </h1>
           <p className="aboutpagepagraph">
-            It is personal use app, which allows you to easily compare and
-            contrast different options for the same item. For this purpose, you
-            first need to create an account, then you will be able to create a
+            Comparalist is a personal use app, which allows you to easily compare and
+            contrast different options for the same item. First you
+            need to create an account, then you will be able to create a
             list, name it and add your items.{" "}
           </p>
           <p className="aboutpagepagraph">
