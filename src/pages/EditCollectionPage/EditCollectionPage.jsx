@@ -43,11 +43,10 @@ function EditCollectionPage() {
                {/* if the credentials match and there are collections to show */}
 
                
-                {token !== null ? (
-                    <div>
-                        <EditCollectionForm collectionData={editData} isLoading={isLoading}/>
-                    </div>
-                ) : null}
+                {token !== null 
+                ? <EditCollectionForm collectionData={editData} isLoading={isLoading}/>
+
+                 : null}
 
 
                {/* <Footer /> */}

@@ -4,7 +4,7 @@ import NewCollectionForm from "../../components/NewCollectionForm/NewCollectionF
 
 function NewCollection() {
   return (
-    <div>
+    <div className="page-wrapper">
       <NewCollectionForm />
     </div>
 

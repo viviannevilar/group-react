@@ -5,12 +5,12 @@ import React, { useRef, useEffect, useState } from "react";
 import { useParams, useHistory, useLocation, Link } from "react-router-dom";
 
 // components
-import Nav from "../../components/Nav/Nav";
+// import Nav from "../../components/Nav/Nav";
+import Loader from "../../components/Loader/Loader";
 import ItemCard from "../../components/ItemCard/ItemCard"
 import SummaryItemCard from "../../components/SummaryItemCard/SummaryItemCard";
 import AddItemForm from "../../components/AddItemForm/AddItemForm";
-import Footer from "../../components/Footer/Footer";
-import Loader from "../../components/Loader/Loader";
+// import Footer from "../../components/Footer/Footer";
 
 // icons
 import archiveicon from "../../images/archive.png"
@@ -469,7 +469,7 @@ function CollectionDetailPage() {
 
                               <div className="nodatacontainer">
                                  <img className="nodatalogo" alt="nodatalogo" src={logoicon} />
-                                 <p>No Items in list {collectionData.title}! </p>
+                                 <p>No Items in list {collectionData.title}! Unarchive this collection to add items.</p>
                               </div>
                            )}
 
@@ -576,16 +576,10 @@ function CollectionDetailPage() {
             }
 
             {/* Is still loading (fetching the data) */}
-
-            {/* {isLoading && (
-               <div className="loadingpage">
-                  <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"} />
-               </div>
-            )} */}
+            {isLoading ? <Loader/> : null}
 
          </div >
-         {isLoading ? <Loader /> : null }
-         <Footer />
+         
       </div >
    )
 }
