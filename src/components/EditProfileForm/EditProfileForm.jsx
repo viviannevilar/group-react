@@ -267,11 +267,9 @@ function EditProfileForm() {
         />
       </div>
 
-      {isLoading ? (<div className="loadingpage">
-        <img alt="" src={"https://i.imgur.com/3BOX1wi.gif"} />
-      </div>) : <div>  {username === null ? (
-        <ErrorComponent errorMessage="You are not logged in!" errorNumber="403" />
-      ) : (<div>
+      <div>  {username === null 
+         ? ( <ErrorComponent errorMessage="You are not logged in!" errorNumber="403" /> ) 
+         : (<div>
 
         <div>
           <form>
@@ -372,19 +370,18 @@ function EditProfileForm() {
             <div className="epfa">
 
               <label htmlFor="delete_account"></label>
+            </div>
 
-
+            <div id="epbuttonwrapper">
+               <button id="epbutton" className="epbutton" onClick={() => deleteAccountToggleState()}>DELETE YOUR ACCOUNT</button>
             </div>
 
 
-
           </form>
-          <div id="epbuttonwrapper">
-            <button id="epbutton" className="epbutton" onClick={() => deleteAccountToggleState()}>DELETE YOUR ACCOUNT</button>
-          </div>
+
         </div>
 
-        <div className={`modalBackground modalShowing-${modalState}`}>
+        {/* <div className={`modalBackground modalShowing-${modalState}`}>
           <div className="modalEditPRofile">
             <div className="modalText">
               <img className="warningicons" alt="warningicon" src={warningicon} />
@@ -396,10 +393,10 @@ function EditProfileForm() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
       </div>)} 
-      </div>}
+      </div>
       </div>
       </div>
     </div>

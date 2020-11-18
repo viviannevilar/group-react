@@ -7,12 +7,12 @@ import Footer from "../../components/Footer/Footer";
 
 function EditProfilePage() {
   return (
-     <div>
-         <Nav />
+     <div className="page-wrapper">
+         {/* <Nav /> */}
          
          <EditProfileForm />
 
-         <Footer />
+         {/* <Footer /> */}
      </div>
   )
 }

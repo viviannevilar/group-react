@@ -28,7 +28,7 @@ function HomePage() {
   }, []);
 
   return (
-    <React.Fragment className="homepage">
+    <React.Fragment>
        <Nav myClassName={"hidden-nav"}/>
 
       <div className="logo">

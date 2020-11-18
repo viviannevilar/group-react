@@ -50,7 +50,7 @@ function EditCollectionPage() {
                 ) : null}
 
 
-               <Footer />
+               {/* <Footer /> */}
             </div>
 
         );

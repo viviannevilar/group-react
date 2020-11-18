@@ -9,6 +9,7 @@
    position: fixed;
    background: white;
    padding: 1rem;
+   z-index: 10;
    }
 
   

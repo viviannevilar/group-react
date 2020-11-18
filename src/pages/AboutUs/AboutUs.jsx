@@ -4,10 +4,10 @@ import Nav from "../../components/Nav/Nav";
 
 function AboutUsPage() {
   return (
-    <div>
-      <div id="Nav">
+    <div className="page-wrapper">
+      {/* <div id="Nav">
         <Nav />
-      </div>
+      </div> */}
       <div className="aboutus">
         <br></br>
         <br></br>
@@ -68,6 +68,8 @@ function AboutUsPage() {
           </div>
           <br></br>
         </div>
+
+        
         <div style={{ backgroundColor: "#e1e3d8" }}>
           <br></br>
           <h1 id="about" style={{ color: "#004aad" }}>
