@@ -57,7 +57,7 @@ function HomePage() {
         </div>
       )}
 
-      {/* <Footer /> */}
+      <Footer />
       {/* <div className="footer">
         <Link className="footer1" to="/contactus">
           CONTACT US

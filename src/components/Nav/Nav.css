@@ -1,17 +1,18 @@
 
 .Navbarcontainer {
-   width: 100%;
+   width: 92.5%;
    max-width: 100%;
    display: flex;
    flex-direction: row;
    align-items: center;
    justify-content: space-evenly;
-   top: 0;
-   position: fixed;
+   /* top: 0;
+   position: fixed; */
    background: white;
    padding: 0.5rem;
    z-index: 10;
-   }
+   border: 1px solid red;
+}
 
   
 
@@ -43,12 +44,21 @@
     .navItem {
         font-size: 0.5cm;
     }
+
+    .Navbarcontainer {
+      width: 100%;
+
+   }
 }
 
 @media only screen and (max-width: 800px) {
     .navItem {
         font-size: 0.4cm;
     }
+    .Navbarcontainer {
+      width: 100%;
+
+   }
  
     }
 
@@ -64,6 +74,10 @@
         padding-left: 5px; */
     }
   
+    .Navbarcontainer {
+       width: 100%;
+
+    }
 
 
 }

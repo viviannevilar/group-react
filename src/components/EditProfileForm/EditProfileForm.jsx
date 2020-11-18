@@ -260,11 +260,10 @@ function EditProfileForm() {
           alt="Company Logo"
         />
       </div>
+       
 
-           
 
-
-          <form>
+          <form id="test">
             {/*------------- Edit Profile -------------*/}
             
             <h2 className="editprofileheadertitle">EDIT PROFILE</h2>
@@ -367,8 +366,9 @@ function EditProfileForm() {
             <div id="epbuttonwrapper">
                <button id="epbutton" className="epbutton" onClick={() => deleteAccountToggleState()}>DELETE ACCOUNT</button>
             </div>
-            <br></br>
-            <br></br>
+
+
+            
 
           </form>
 
@@ -393,7 +393,7 @@ function EditProfileForm() {
       </div>
 
     </div> */}
-          </div>
+   </div>
   );}
 
 }
