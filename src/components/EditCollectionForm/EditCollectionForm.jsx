@@ -143,11 +143,8 @@ function EditCollectionForm(props) {
 
     return (
         <div className="editcollectionform">
-            {/* <div>
-                <Nav />
-            </div> */}
-          <div>
 
+          <div>
             <div className="ecformlogo" >
                 <img
                 id="ecformlogoimage"

@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import LogoutPage from "./components/LogoutForm/LogoutForm";
 import SignUp from "./pages/SignUp/SignUp";
 import Nav from "./components/Nav/Nav";
+import Loader from "./components/Loader/Loader";
 import Footer from "./components/Footer/Footer";
 import NewCollection from './pages/NewCollection/NewCollection';
 import CollectionDetailPage from "./pages/CollectionDetailPage/CollectionDetailPage";
@@ -100,6 +101,9 @@ function App() {
                         {/* <CollectionSortPage /> */}
                     </Route>
 
+                    <Route exact path="/loader/">
+                        <Loader />
+                    </Route>
 
                     <Route path="*" component={NotFoundPage} />
 

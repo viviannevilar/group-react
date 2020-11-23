@@ -575,10 +575,12 @@ function CollectionDetailPage() {
             )
             }
 
-            {/* Is still loading (fetching the data) */}
-            {isLoading ? <Loader /> : null}
+
 
          </div >
+
+         {/* Is still loading (fetching the data) */}
+         {isLoading ? <Loader /> : null}
 
       </div >
    )
