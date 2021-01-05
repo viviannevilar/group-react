@@ -30,11 +30,9 @@ $numOfBars: 5;
 //  $barMrg: 8px; 
  $barW: 5rem;
  $barH: 0.8rem;
- $barMrg: 0.8rem;
+ $barMrg: 0.5rem;
  $totalH: $barH * $numOfBars + $barMrg * ($numOfBars - 1);
  
-
-
 
 
 
@@ -85,15 +83,23 @@ $numOfBars: 5;
    position: relative;
    width: $barW;
    height: $totalH;
+   // -webkit-animation: contMovement $animTime infinite;
+   // -webkit-animation-name: contMovement;
+   // -webkit-animation-duration: $animTime;
+   // -webkit-animation-iteration-count: infinite;
    animation: contMovement $animTime infinite;
    will-change: transform;
    
    &__rotator {
-     position: relative;
-     height: 100%;
-     animation: contRotate $animTime infinite;
-     transform-origin: 100% 100%;
-     will-change: transform;
+      position: relative;
+      height: 100%;
+      // -webkit-animation: contMovement $animTime infinite;
+      // -webkit-animation-name: contMovement;
+      // -webkit-animation-duration: $animTime;
+      // -webkit-animation-iteration-count: infinite;
+      animation: contRotate $animTime infinite;
+      transform-origin: 100% 100%;
+      will-change: transform;
    }
    
    &__bar {
@@ -132,6 +138,11 @@ $numOfBars: 5;
        &:nth-child(#{$i}) {
          background: nth($colors, $i);
          transform-origin: 100% ($totalH/2 - ($barH + $barMrg) * ($i - 1));
+         // -webkit-animation: barMovement#{$i} $animTime infinite cubic-bezier(.55,.2,.29,1.24);
+         // -webkit-animation-name: barMovement#{$i};
+         // -webkit-animation-duration: $animTime;
+         // -webkit-animation-iteration-count: infinite;
+         // -webkit-animation-timing-function: cubic-bezier(.55,.2,.29,1.24);
          animation: barMovement#{$i} $animTime infinite cubic-bezier(.55,.2,.29,1.24);
        }
      }

@@ -10,7 +10,6 @@ import LogoutPage from "./components/LogoutForm/LogoutForm";
 import SignUp from "./pages/SignUp/SignUp";
 import Nav from "./components/Nav/Nav";
 import Loader from "./components/Loader/Loader";
-import Footer from "./components/Footer/Footer";
 import NewCollection from './pages/NewCollection/NewCollection';
 import CollectionDetailPage from "./pages/CollectionDetailPage/CollectionDetailPage";
 import CollectionsPage from "./pages/CollectionsPage/CollectionsPage";
@@ -22,7 +21,6 @@ import EditCollectionPage from "./pages/EditCollectionPage/EditCollectionPage";
 
 
 function App() {
-
 
 
     return (

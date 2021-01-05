@@ -1,13 +1,9 @@
 import React from "react";
-import Nav from "../../components/Nav/Nav";
 import "./NotFoundPage.css";
 
 function NotFoundPage() {
   return (
     <div>
-      <div>
-        <Nav />
-      </div>
       <div className="c">
         <div className="_404">404</div>
         <div className="_1">THE PAGE</div>

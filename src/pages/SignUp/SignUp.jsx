@@ -1,7 +1,6 @@
 import React from "react";
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
 import LogoutForm from "../../components/LogoutForm/LogoutForm";
-import Nav from "../../components/Nav/Nav";
 
 function SignUp() {
   let username = localStorage.username;

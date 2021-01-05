@@ -19,7 +19,7 @@ import editicon from "../../images/edit.png"
 import goicon from "../../images/goicon.png"
 import addicon from "../../images/add.png"
 import "../../components/CollectionCard/CollectionCard.css"
-import logoicon from "../../images/Comparalist_rectangle.png"
+//import logoicon from "../../images/Comparalist_rectangle.png"
 
 
 // styling
@@ -169,8 +169,16 @@ function CollectionDetailPage() {
    };
 
    const summaryToggleState = () => {
+     console.log("%c summary choice: ", "font-size: 20px; color: red", summaryChoice === "" )
+     
+     if (summaryChoice !== "" && itemDisplayData.length > 0) {
+
       setSummaryModal(!summaryModal);
       window.scrollTo(0, 0);
+
+     }
+    
+      
    };
 
 
@@ -436,7 +444,6 @@ function CollectionDetailPage() {
                <div>
                   <div id="App">
 
-
                      {/* collection information */}
                      <div id="SwiperInfoContainer" >
 
@@ -447,7 +454,7 @@ function CollectionDetailPage() {
 
                            </div>) : ("")}
 
-                        {itemDisplayData.length > 0 ? (
+                        {/* {itemDisplayData.length > 0 ? ( */}
                            <div id="fexrow">
                               <p>Summarise {itemDisplayData.length} items in {collectionData.title} List by: </p>
                               <select onChange={(e) => setSummaryChoice(e.target.value)}>
@@ -465,18 +472,18 @@ function CollectionDetailPage() {
                               </select>
                               <img style={{ cursor: "pointer" }} className="goicon" alt="goicon" src={goicon} onClick={() => summaryToggleState()} />
                            </div>
-                        ) : (
+                        {/* ) : (
 
                               <div className="nodatacontainer">
                                  <img className="nodatalogo" alt="nodatalogo" src={logoicon} />
-                                 <p>No Items in list {collectionData.title}! Unarchive this collection to add items.</p>
+                                 <p>No items in list {collectionData.title}! Unarchive this collection to add items.</p>
                               </div>
-                           )}
+                           )} */}
 
 
 
                      </div>
-                     {itemDisplayData.length > 0 ? (
+                     {/* {itemDisplayData.length > 0 ? ( */}
                         <div id="store-filter-button-container" >
                            <div id="Container-for-Filtering" >
                               {/* first drop down - filter choices */}
@@ -500,7 +507,7 @@ function CollectionDetailPage() {
                            </div>
 
                         </div>
-                     ) : ("")}
+                     {/* ) : ("")} */}
 
 
 
@@ -513,7 +520,8 @@ function CollectionDetailPage() {
                            {/* Swiper container */}
                            <div className="swiper-container">
                               <div className="swiper-wrapper">
-                                 {itemDisplayData != null && itemDisplayData.length > 0 ? itemDisplayData.map((el, key) => {
+                                 {itemDisplayData != null && itemDisplayData.length > 0 
+                                 ? itemDisplayData.map((el, key) => {
                                     return (
                                        <div className="swiper-slide" key={key}>
                                           {shared_link === "private" && (
@@ -532,7 +540,13 @@ function CollectionDetailPage() {
 
                                        </div>
                                     )
-                                 }) : null}
+                                 }) 
+                                 : ( 
+                                <div className="nodatacontainer">
+                                  {/* <img className="nodatalogo" alt="nodatalogo" src={logoicon} /> */}
+                                  <p>There are no {filterChoice === "all" ? "" : filterChoice} items in list {collectionData.title}! </p>
+                                </div>                                
+                                 )}
                               </div>
 
                               {/* -- If we need pagination -- */}

@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useParams, useHistory } from "react-router-dom";
-import Nav from "../../components/Nav/Nav";
+import { useHistory } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 import "./EditProfileForm.css";
 import warningicon from "../../images/warning2.png"
-import ErrorComponent from "../ErrorComponent/ErrorComponent"
 
 function EditProfileForm() {
   const [modalState, setModalState] = useState(false);

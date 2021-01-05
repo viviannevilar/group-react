@@ -3,7 +3,7 @@ import { useParams, useHistory, useLocation, Link } from "react-router-dom";
 import ItemCard from "../../components/ItemCard/ItemCard";
 import AddItemForm from "../../components/AddItemForm/AddItemForm";
 import "./CollectionDetailPage.css";
-import Nav from "../../components/Nav/Nav";
+
 
 
 function formatDate(string) {
@@ -111,10 +111,7 @@ function CollectionDetailPage() {
 
 
     return (
-        <div>
-        <div>
-            <Nav />
-        </div>
+        <div className="page-wrapper">
         <div id="projectlistcenter">
 
             {!isLoading && errorMessage && (<div>

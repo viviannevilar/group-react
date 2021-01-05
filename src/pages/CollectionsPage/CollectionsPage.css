@@ -8,9 +8,7 @@
     text-transform: uppercase ;
 }
 
-.nodatacontainer {
-   margin: 0 auto;
-}
+
 
 
 /* p#no-data {
@@ -97,14 +95,13 @@ a.addcollectioncontainer p{
 
 
 
-
-
 .nodatacontainer{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 80%;
+    margin: 0 auto;
     margin-top: 10px;
 }
 
@@ -117,7 +114,7 @@ img.nodatalogo{
 
 div.nodatacontainer p{
     text-transform: uppercase ;
-    font-size: 0.8em;
+    font-size: 1.2em;
 
 }
 

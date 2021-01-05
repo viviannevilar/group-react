@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
-import Nav from "../../components/Nav/Nav";
 import "../LoginForm/LoginForm.css";
 
 function LoginForm() {

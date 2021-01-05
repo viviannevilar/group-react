@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "../ContactUsForm/ContactUsForm.css";
-import Nav from "../../components/Nav/Nav";
 import "../../components/Nav/Nav.css";
 
 function ContactUsForm() {
@@ -53,9 +52,7 @@ function ContactUsForm() {
   
   return (
     <div className="contactusform">
-    <div>
-        <Nav />
-    </div>
+
     <div className="cuformlogo" >
             <img
             id="cuformlogoimage"

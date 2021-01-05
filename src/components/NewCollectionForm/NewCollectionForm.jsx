@@ -91,7 +91,7 @@ function NewCollectionForm() {
       }
 
       postData().then((response) => {
-         if (response != undefined) {
+         if (response !== undefined) {
          
          } 
       })
