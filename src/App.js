@@ -18,13 +18,19 @@ import ItemEditPage from "./pages/ItemEditPage/ItemEditPage";
 import CollectionSortPage from "./pages/CollectionSortPage/CollectionSortPage";
 import SortableComponent from "./pages/CollectionSortPage/SortPage"
 import EditCollectionPage from "./pages/EditCollectionPage/EditCollectionPage";
+import { Helmet } from 'react-helmet'
 
 
 function App() {
 
+  const TITLE = 'ComparaList: Smart Shopping'
+
 
     return (
         <Router>
+              <Helmet>
+                <title>{ TITLE }</title>
+              </Helmet>
                <Nav /> 
                 <br></br>
                 <Switch>
