@@ -25,14 +25,7 @@ function App() {
 
     return (
         <Router>
-            <div>
-
                <Nav /> 
-                {/* <header>
-                    
-                    <Nav username={username} />
-                </header> */}
-
                 <br></br>
                 <Switch>
                     {/* <Route path="/login/">
@@ -108,8 +101,6 @@ function App() {
                 </Switch>
 
                 {/* <Footer /> */}
-            </div>
-
         </Router>
 
     )

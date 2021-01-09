@@ -57,6 +57,13 @@ div.c {
   align-items: center;
 }
 
+#not-found {
+  margin-top: -3rem;
+  height: 30%;
+  width: 30%;
+  padding-bottom: 3%;
+}
+
 @media only screen and (max-width: 1200px) {
   .c {
     width: 80%;
@@ -80,7 +87,16 @@ div.c {
     width: 50%;
     height: 80px;
     font-size: 2rem;
+    margin-top: 3rem;
   }
+
+  #not-found {
+    margin-top: 3rem;
+    height: 70%;
+    width: 70%;
+    padding-bottom: 10%;
+  }
+  
 }
 
 @media only screen and (max-width: 800px) {
@@ -89,7 +105,7 @@ div.c {
     margin: 100px auto;
   }
   ._404 {
-    font-size: 150px;
+    font-size: 8rem;
     height: 170px;
   }
   ._1 {
@@ -102,9 +118,16 @@ div.c {
   }
   .btn {
     border-radius: 0.2em;
-    width: 50%;
+    width: 70%;
     height: 80px;
     font-size: 1.5rem;
+  }
+
+  #not-found {
+    margin-top: -3rem;
+    height: 70%;
+    width: 70%;
+    padding-bottom: 8%;
   }
 }
 
@@ -127,8 +150,8 @@ div.c {
   }
   .btn {
     border-radius: 0.2em;
-    width: 50%;
-    height: 80px;
-    font-size: 1.2rem;
+    width: 70%;
+    height: 60px;
+    font-size: 1rem;
   }
 }

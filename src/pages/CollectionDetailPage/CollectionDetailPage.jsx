@@ -5,12 +5,11 @@ import React, { useRef, useEffect, useState } from "react";
 import { useParams, useHistory, useLocation, Link } from "react-router-dom";
 
 // components
-// import Nav from "../../components/Nav/Nav";
 import Loader from "../../components/Loader/Loader";
 import ItemCard from "../../components/ItemCard/ItemCard"
 import SummaryItemCard from "../../components/SummaryItemCard/SummaryItemCard";
 import AddItemForm from "../../components/AddItemForm/AddItemForm";
-// import Footer from "../../components/Footer/Footer";
+import ErrorComponent from "../../components/ErrorComponent/ErrorComponent";
 
 // icons
 import archiveicon from "../../images/archive.png"
@@ -169,7 +168,7 @@ function CollectionDetailPage() {
    };
 
    const summaryToggleState = () => {
-     console.log("%c summary choice: ", "font-size: 20px; color: red", summaryChoice === "" )
+     console.log("%cSummary choice: ", "font-size: 20px; color: white; background-color: red", summaryChoice === "" )
      
      if (summaryChoice !== "" && itemDisplayData.length > 0) {
 
@@ -432,11 +431,7 @@ function CollectionDetailPage() {
 
             {/* No longer loading, there IS an error message */}
             {!isLoading && hasError && (<div>
-               <div id="errormessage">
-                  <br></br>
-                  <img className="backgroundimage" alt="Error!" src="https://www.pngitem.com/pimgs/m/119-1190787_warning-alert-attention-search-error-icon-hd-png.png" />
-                  <h2>{errorMessage}</h2>
-               </div>
+              <ErrorComponent errorMessage={errorMessage} errorNumber="401" />
             </div>)}
 
             {/* No longer loading, there is NO error message */}

@@ -5,7 +5,6 @@ import "../ContactUs/ContactUs";
 import "../AboutUs/AboutUs";
 import "../LoginPage/LoginPage";
 import Footer from "../../components/Footer/Footer";
-import Nav from "../../components/Nav/Nav";
 import LogoutForm from "../../components/LogoutForm/LogoutForm";
 import { Link } from "react-router-dom";
 
@@ -28,19 +27,19 @@ function HomePage() {
 
   return (
     <div id="homepage-wrapper">
-       <Nav myClassName={"hidden-nav"}/>
+      {/* <Nav myClassName={"hidden-nav"}/> */}
 
-      <div className="logo logo-down">
+      <div className="logo">
         <img
           id="logoimage"
-          src={require("../../images/Logo.png")}
+          src={require("../../images/LogoCrop.png")}
           alt="Company Logo"
         />
       </div>
 
       {loggedin ? (
         <div className="buttons-wrapper">
-          <Link to="/collections/" className="button1">
+          <Link to="/collections/" className="button-home">
             My Collections
           </Link>
 
@@ -48,10 +47,10 @@ function HomePage() {
         </div>
       ) : (
         <div className="buttons-wrapper">
-          <Link to="/signup" className="button1">
+          <Link to="/signup" className="button-home">
             Sign Up
           </Link>
-          <Link to="/login" className="button1">
+          <Link to="/login" className="button-home">
             Log In
           </Link>
         </div>

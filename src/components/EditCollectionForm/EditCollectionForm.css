@@ -71,7 +71,7 @@
     border: none;
     justify-content: center;
     border: 0px;
-    cursor: pointer;
+    /* cursor: pointer; */
     margin: 10px;
     min-width: 8rem;
   }
@@ -98,6 +98,7 @@ textarea {
   resize: none;
   width: 80%;
 }
+
 
 
 @media only screen and (max-width: 1450px) {

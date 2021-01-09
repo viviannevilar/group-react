@@ -12,7 +12,7 @@ function LogoutForm() {
     window.location.reload();
   };
 
-  return ( <button className="button1" onClick={handleSubmit}>Logout</button> );
+  return ( <button className="button-home" onClick={handleSubmit}>Logout</button> );
 }
 
 export default LogoutForm;

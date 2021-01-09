@@ -1,61 +1,9 @@
-.logo {
-  display: flex;
-  justify-content: center;
-  flex: 1;
-  /* margin-right: 50px; */
-}
-
-.logo-down {
-   padding-top: 3rem;
-}
-
 #homepage-wrapper {
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   /* align-items: center; */
-}
-
-#logoimage {
-  /* height: 450px;
-  width: 450px; */
-  max-width: 90%;
-  height: auto;
-
-}
-
-.button1 {
-  border-radius: 0.5rem;
-  box-sizing: border-box;
-  width: 50%;
-  max-width: 280px;
-  height: 80px;
-  font-size: 1rem;
-  text-transform: uppercase;
-  color: white;
-  background: #b3b7a4;
-  border: 0.1em solid #ffffff;
-  transition: all 0.2s;
-  margin: 10px auto;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 0.2rem;
-  min-width: 15rem;
-}
-
-.button:hover {
-  color: #004aad;
-}
-
-.buttons-wrapper {
   display: flex;
   flex-direction: column;
-  padding-top: 10rem;
-  align-content: space-between;
-  /* border: 1px solid red; */
-  /* width: 100%; */
+  justify-content: space-evenly;
+  height: 80vh;
+  align-items: center;
 }
 
 .footer {
@@ -63,15 +11,13 @@
   flex-direction: row;
   justify-content: space-evenly;
   position: fixed;
-  /* bottom: 1rem; */
-  padding: 0.75rem;
+  /* left: 0; */
+  bottom: 0;
+  /* padding: 0.75rem; */
   width: 100%;
   font-size: 1.2em;
   text-align: center;
   background-color: white;
-  /* border: 1px solid red; */
-  bottom: 0;
- 
 }
 
 .footer a {
@@ -82,119 +28,69 @@
   color: #004aad;
 }
 
-@media only screen and (max-width: 1200px) {
-  .logo {
-    margin-top: -110px;
-  }
-  #logoimage {
-    height: 600px;
-    width: 600px;
-  }
 
-  .button1 {
-    height: 80px;
-    font-size: 1.8rem;
-  }
-
-  .buttons-wrapper {
-    padding-top: 3rem;
-  }
-
-  .footer {
-    /* bottom: 1rem; */
-    font-size: 0.7cm;
-  }
+.buttons-wrapper {
+  display: flex;
+  flex-direction: row;
+  /* padding-top: 10rem; */
+  justify-content: space-around;
+  /* width: 100%; */
+  max-width: 100vw;
 }
 
-@media only screen and (max-width: 900px) {
-  .logo {
-    margin-top: -70px;
-  }
 
-  #logoimage {
-    height: 550px;
-    width: 550px;
-  }
-
-  .button1 {
-    height: 50px;
-    font-size: 1.8rem;
-  }
-
-  .buttons-wrapper {
-    margin-top: -180px;
-  }
-
-  .footer {
-    font-size: 0.7cm;
-  }
+.button-home {
+  border-radius: 0.5rem;
+  height: 60px;
+  font-size: 1.4rem;
+  box-sizing: border-box;
+  text-transform: uppercase;
+  color: white;
+  background: #b3b7a4;
+  border: 0.1em solid #ffffff;
+  transition: all 0.2s;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0.5rem;
+  margin: 0 0.8rem;
+  min-width: 12rem;
 }
+
+.button:hover {
+  color: #004aad;
+  cursor: pointer;
+}
+
+#logoimage {
+  max-width: 90%;
+  height: auto;
+}
+
 
 @media only screen and (max-width: 500px) {
-  .logo {
-    margin-top: -50px;
-  }
 
-  #logoimage {
-    height: 300px;
-    width: 300px;
-  }
-
-  .button1 {
-    font-size: 1.3rem;
-  }
-
-  .buttons-wrapper {
-    margin-top: -100px;
-  }
-
-  .footer {
-    font-size: 0.7cm;
-  }
+.button-home {
+  font-size: 1rem;
+  min-width: 10rem;
 }
 
-@media only screen and (min-width: 900px) {
-  .logo {
-    margin-top: -70px;
-  }
-
-  #logoimage {
-    height: 50%;
-    width: 50%;
-    max-width: 600px;
-    max-height: 600px;
-  }
-
-  .buttons-wrapper {
-    display: flex;
-    flex-direction: row;
-    /* margin-top: -80px; */
-    padding-top: 2rem;
-    justify-content: center;
-    align-items: center;
-    /* margin: 4px; */
-  }
-
-  .button1 {
-    font-size: 1.5rem;
-    margin: 4px;
-  }
-
-  .buttons-wrapper {
-    margin-top: -100px;
-  }
-
-  /* .footer {
-    font-size: 0.7cm;
-  } */
 }
 
-@media only screen and (max-height: 800px) {
-  .logo {
-    margin-top: -70px;
-    height: 100%;
-    width: 100%;
-    max-width: 1000px;
-    max-height: 1000px;
+
+@media only screen and (max-width: 350px) {
+
+  .button-home {
+    font-size: 0.8rem;
+    margin: 0.2rem;
+    /* min-width: 10rem; */
   }
+
+  .buttons-wrapper {
+    flex-direction: column;
+
+  }
+
+
 }
