@@ -23,13 +23,6 @@
  }
 
 
- img.item-small{
-    width: 50px;
-   height: 100%;
-   /* height: 50px; */
-   object-fit: cover;
-   /* margin: 0 10px; */
- }
 
 
  .sort-buttons-container {
@@ -41,6 +34,11 @@
     padding: 6px;
  }
 
+ img.item-small{
+  max-width: 50px;
+  max-height: 50px;
+  object-fit: contain;
+}
 
  .fa-icon {
    font-size: 20px;

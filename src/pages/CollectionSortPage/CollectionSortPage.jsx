@@ -1,3 +1,8 @@
+/// ATTENTION ///
+// this page is not currently active. Code from this was used for another page.
+// Use SortPage.jsx instead
+
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ItemCardSmall from "../../components/ItemCardSmall/ItemCardSmall";

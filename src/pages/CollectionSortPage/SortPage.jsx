@@ -13,18 +13,14 @@ import "./SortPage.css"
 import moveicon from "../../images/reorder.png"
 import nophoto from '../../images/noimage.PNG';
 
-// components
-import Nav from "../../components/Nav/Nav";
-//mport Icons from "../../components/Icons/Icons";
-
-
+// icons
 import { FaRegCheckSquare, FaRegWindowClose  } from 'react-icons/fa';
 
-// import BsCheckBox from 'react-icons/lib/fa/pencil'
+
 
 //////////////////////////// components ////////////////////////////
 
-// sortables
+/////////// Sortables
 
 // each item
 const SortableItem = SortableElement(({value, sortIndex}) => {
@@ -33,7 +29,7 @@ const SortableItem = SortableElement(({value, sortIndex}) => {
          {/* <div className={`${value.is_active ? "overlay-null" : "overlay"}`}></div> */}
          <img style={{ cursor: "pointer" }} className="changeicons sort-icons" alt="moveicon" src={moveicon} />
          {value.name}
-         {value.image !== null ? <img className="item-small" alt="Item" src={value.image} /> : <img className="item-small" alt="Item" src={nophoto} />}
+         <img className="item-small" alt="Item" src={`${value.image !== null ? value.image : nophoto}`} />
          
       </div>
    )

@@ -58,7 +58,7 @@
   min-width: 12rem;
 }
 
-.button:hover {
+.button-home:hover {
   color: #004aad;
   cursor: pointer;
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import "./ItemCard.css";
 import nophoto from '../../images/noimage.PNG';
 import pricetag from "../../images/img_568452.png"
@@ -7,8 +7,6 @@ import discountend from "../../images/download.png"
 import scrolldown from "../../images/scrolldown.png"
 import scrollup from "../../images/scrollup.png"
 import archiveicon from "../../images/archive.png"
-
-
 import "../../components/Nav/Nav.css";
 
 function formatDate(string) {
@@ -25,9 +23,6 @@ function calculateNewPrice(oldprice, totalsaving) {
     return updateprice
 }
 
-
-
-
 // Phone detail handling:
 
 
@@ -36,13 +31,10 @@ function ItemCard(props) {
     const { projectData, collectionData } = props;
     const myRef = useRef(null)
     const hideDetailsRef = useRef(null)
-
     const [displayDetails, setdisplayDetails] = useState(false)
     const [buttonDetails, setbuttonDetails] = useState(true)
     const [dateDiff, setDateState] = useState(null)
     const [emptyAttributes, setemptyAttributes] = useState([])
-
-
 
     const executeScroll = () => {
         setbuttonDetails(false)
@@ -88,8 +80,6 @@ function ItemCard(props) {
 
             setemptyAttributes(attributelist.join(", "))
             //console.log(projectData.price)
-
-
         }
 
     }, [projectData, collectionData]);
@@ -100,12 +90,11 @@ function ItemCard(props) {
         <div className="project-card" id={projectData.is_active === false ? "project-closed" : "project-open"}>
             <div id="onDisplayInfo">
                 <p id="titlep" style={{ color: "#004aad" }} ref={hideDetailsRef} >{projectData.name.toUpperCase()}</p>
-                {projectData.image !== null ? <img className="item" alt="Item" src={projectData.image} /> : <img className="item" alt="Item" src={nophoto} />}
-
-                {/* <div className="item">
-                    {projectData.image !== null ? <img className="item" alt="Item" src={projectData.image} /> : <img className="item" alt="Item" src={nophoto} />}
-                    {parseInt(projectData.sale_amount) !== 0 && (<span className="notify-badge"> {projectData.sale_amount}% OFF</span>)}
-                </div> */}
+                <div className="item-card-img-container">
+                  <img className="item" alt="Item" src={`${projectData.image !== null ? projectData.image : nophoto}`} /> 
+                  {/* <div className="item-card-img-container-overlay"></div> */}
+                </div>
+               
                 <div className="discountcontainer">
                     <div className="priceSummary">
                         <img className="priceicon" alt="priceicon" src={pricetag} />
