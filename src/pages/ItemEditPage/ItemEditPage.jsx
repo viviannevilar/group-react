@@ -15,7 +15,7 @@ function ItemEditPage() {
 
     useEffect(() => {
 
-        fetch(`${process.env.REACT_APP_API_URL}item/${id}/`, {
+        fetch(`${process.env.REACT_APP_API_URL}item/${listid}/${id}/`, {
             method: "get",
             headers: {
                 "Content-Type": "application/json",

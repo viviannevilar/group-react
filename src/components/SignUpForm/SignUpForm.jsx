@@ -89,7 +89,7 @@ function SignUpForm() {
       </div>
 
       <div className="sufa">
-        <label className="atsu" htmlFor="preferred_name">YOUR PREFFERED NAME:</label>
+        <label className="atsu" htmlFor="preferred_name">PREFERRED NAME:</label>
         <input
           type="text"
           id="preferred_name"

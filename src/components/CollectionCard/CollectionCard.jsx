@@ -82,7 +82,7 @@ function CollectionCard(props) {
 
     function shareCollection() {
 
-        const linkText = "https://glacial-badlands-43820.herokuapp.com/collection/shared/" + collectionData.signed_pk + "/"
+        const linkText = "https://comparalist.herokuapp.com/collection/shared/" + collectionData.signed_pk + "/"
 
         navigator.clipboard.writeText(linkText).then(function() {
            alert("URL copied to clipboard")

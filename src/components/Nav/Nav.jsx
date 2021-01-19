@@ -7,6 +7,7 @@ import "./Nav.css";
 function Nav(props) {
 
    const { myClassName } = props
+   const [ username, setUsername ] = useState()
 
    
    console.log(myClassName)
@@ -15,6 +16,8 @@ function Nav(props) {
 
     useEffect(() => {
         const token = window.localStorage.getItem("token");
+        setUsername(window.localStorage.getItem("username"))
+        console.log(username)
         token != null ? setisloggedin(true) : setisloggedin(false);
     }, [location]);
 
@@ -29,10 +32,12 @@ function Nav(props) {
             <div className="linkContainer">
                 <Link className={`navItem ${myClassName ? myClassName : null}`} to="/">HOME</Link>
             </div>
-
             <div className="linkContainer">
-                <Link className={`navItem ${myClassName ? myClassName : null}`} to="/edituserdetails">ACCOUNT</Link>
+                {isloggedIn ? (<Link className={`navItem ${myClassName ? myClassName : null}`} to="/edituserdetails">{username}</Link>) : (<Link className={`navItem ${myClassName ? myClassName : null}`} to="/signup">REGISTER</Link>) }
             </div>
+            {/* <div className="linkContainer">
+                <Link className={`navItem ${myClassName ? myClassName : null}`} to="/edituserdetails">ACCOUNT</Link>
+            </div> */}
             <div className="linkContainer">
                 <Link className={`navItem ${myClassName ? myClassName : null}`} to="/collections/">COLLECTIONS</Link>
             </div>

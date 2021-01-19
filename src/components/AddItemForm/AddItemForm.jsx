@@ -74,7 +74,7 @@ function AddItemForm(props) {
 
       console.log("form_data: ", form_data)
 
-      const response = await fetch(`${process.env.REACT_APP_API_URL}items/`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}collection/${credentials.collection}/items/`, {
          method: "post",
          headers: {
                Authorization: `Token ${token}`,

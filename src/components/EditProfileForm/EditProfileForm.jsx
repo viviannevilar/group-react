@@ -289,7 +289,7 @@ function EditProfileForm() {
               />
             </div>
             <div className="epfa">
-              <label className="atep" htmlFor="preferred_name">PREFFERED NAME:
+              <label className="atep" htmlFor="preferred_name">PREFERRED NAME:
               <span className="error">{(errorKey === "preferred_name") ? errorMessage : null}</span>
               </label>
               <input

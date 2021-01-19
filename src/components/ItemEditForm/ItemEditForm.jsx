@@ -98,7 +98,7 @@ function ItemEditForm(props) {
       }
 
       //function you can call but carry on as well
-      const response = await fetch(`${process.env.REACT_APP_API_URL}item/${itemData.id}/`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}item/${credentials.collection}/${itemData.id}/`, {
          method: "put",
          headers: {
             Authorization: `Token ${token}`,

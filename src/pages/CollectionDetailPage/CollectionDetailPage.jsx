@@ -100,22 +100,42 @@ function CollectionDetailPage() {
    const fetchProjects = async () => {
       let response
       try {
-         if (urlComponents.length === 4) {
-            response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/`, {
-               method: "get",
-               headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Token ${token}`,
-               },
-            })
-         } else {
-            response = await fetch(`${process.env.REACT_APP_API_URL}collection/${urlPath}/`, {
-               method: "get",
-               headers: {
-                  "Content-Type": "application/json",
-               },
-            })
-         }
+           response = await fetch(`${process.env.REACT_APP_API_URL}collection/${urlPath}/`, {
+              method: "get",
+              headers: {
+                 "Content-Type": "application/json",
+                 Authorization: `Token ${token}`,
+              },
+            
+           })
+           console.log(response)
+        // } else {
+        //    response = await fetch(`${process.env.REACT_APP_API_URL}collection/${urlPath}/`, {
+        //       method: "get",
+        //       headers: {
+        //          "Content-Type": "application/json",
+        //       },
+        //    })
+        //    console.log(response)
+        //}
+      // try {
+      //    if (urlComponents.length === 4) {
+      //       response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/`, {
+      //          method: "get",
+      //          headers: {
+      //             "Content-Type": "application/json",
+      //             Authorization: `Token ${token}`,
+      //          },
+      //       })
+      //    } else {
+      //       response = await fetch(`${process.env.REACT_APP_API_URL}collection/${urlPath}/`, {
+      //          method: "get",
+      //          headers: {
+      //             "Content-Type": "application/json",
+      //          },
+      //       })
+      //       console.log(response)
+      //    }
       } catch (thisError) {
          console.log("---------------thisError: ", thisError)
          setIsLoading(false);
@@ -185,7 +205,7 @@ function CollectionDetailPage() {
    const handleDelete = (projectdat, e) => {
       console.log("------------handleDelete")
 
-      fetch(`${process.env.REACT_APP_API_URL}item/${projectdat.id}/`, {
+      fetch(`${process.env.REACT_APP_API_URL}item/${id}/${projectdat.id}/`, {
          method: "delete",
          headers: {
             Authorization: `Token ${token}`,
@@ -206,7 +226,7 @@ function CollectionDetailPage() {
    // Archive Item
    const archiveItem = (item, e) => {
       let token = window.localStorage.getItem("token");
-      fetch(`${process.env.REACT_APP_API_URL}item/${item.id}/archive/`, {
+      fetch(`${process.env.REACT_APP_API_URL}item/${id}/${item.id}/archive/`, {
          method: "post",
          headers: {
             "Content-Type": "application/json",
