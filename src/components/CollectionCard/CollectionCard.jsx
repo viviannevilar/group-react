@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useHistory, useLocation, Link } from "react-router-dom";
 import "./CollectionCard.css";
 import "../../components/Nav/Nav.css";
@@ -8,7 +8,9 @@ import deleteicon from "../../images/delete.png"
 import editicon from "../../images/edit.png"
 import shareicon from "../../images/share.png"
 import lefticon from "../../images/lefticon.png"
-import { useEffect } from "react";
+
+
+
 
 function formatDate(string) {
     var options = { year: "numeric", month: "long", day: "numeric" };
@@ -18,7 +20,7 @@ function formatDate(string) {
 function CollectionCard(props) {
 
     //////////////////////////// variables ////////////////////////////
-    const { collectionData } = props
+    const { collectionData, toggleModal, setSignedPK } = props
     const id = collectionData.id
     const linkCollection = "/collection/" + id + "/"
     const [allAttributes, setAllAttributes] = useState([])
@@ -80,18 +82,6 @@ function CollectionCard(props) {
     }
 
 
-    function shareCollection() {
-
-        const linkText = "https://comparalist.herokuapp.com/collection/shared/" + collectionData.signed_pk + "/"
-
-        navigator.clipboard.writeText(linkText).then(function() {
-           alert("URL copied to clipboard")
-        })
-        
-      //   alert("Share this collection with others - your collection URL was copied to your clipboard!")
-
-    }
-
     // Delete collection
 
     const deleteCollection = async (e) => {
@@ -142,8 +132,8 @@ function CollectionCard(props) {
 
 
                 <div id="shareocllectioncontainer">
-                    <img style={{ cursor: "pointer" }} className="shareicons" alt="shareicon" src={shareicon} onClick={() => shareCollection()} />
-                    <p style={{ cursor: "pointer" }} onClick={shareCollection}>Share Collection</p>
+                    <img style={{ cursor: "pointer" }} className="shareicons" alt="shareicon" src={shareicon} onClick={() => {toggleModal(); setSignedPK(collectionData.signed_pk); console.log("setSignedPK in collection card: ", collectionData.signed_pk)}} />
+                    <p style={{ cursor: "pointer" }} onClick={() => {toggleModal(); setSignedPK(collectionData.signed_pk); console.log("setSignedPK in collection card: ", collectionData.signed_pk)}}>Share Collection</p>
                 </div>
 
                 <div id="dateupdatedcontainer">

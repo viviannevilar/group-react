@@ -12,6 +12,8 @@ import "../../components/CollectionCard/CollectionCard.css"
 import Loader from "../../components/Loader/Loader";
 import logoicon from "../../images/Comparalist_rectangle.png"
 
+// icons
+import { FaRegClipboard  } from 'react-icons/fa';
 
 function CollectionsPage() {
 
@@ -26,8 +28,17 @@ function CollectionsPage() {
 
     const [isLoading, setIsLoading] = useState(true)
 
+    const [signedPK, setSignedPK] = useState()
+
+    const [linkText, setLinkText] = useState()
+
     // This variable will store the error code from the request
     const [errorCode, setErrorCode] = useState();
+
+    // Modal
+    const [modalState, setModalState] = useState(false);
+
+    // const [summaryModal, setSummaryModal] = useState(false)
 
 
     //////////////////////////// methods ////////////////////////////
@@ -66,6 +77,33 @@ function CollectionsPage() {
                 setIsLoading(false)
             })
     }, [activePath]);
+
+    // Modal state change functions
+    const shareToggleModalState = () => {
+      setModalState(!modalState);
+      window.scrollTo(0, 0);
+    };
+
+    useEffect(() => {
+      setLinkText("https://comparalist.herokuapp.com/collection/" + signedPK + "/")
+      console.log("linkText useEffect ----> ", linkText)
+    }, [signedPK])
+
+  
+
+    function copyLink() {
+
+      console.log("linkText ----> copyLink", linkText)
+
+      // const linkText = "https://comparalist.herokuapp.com/collection/shared/" + signedPK + "/"
+
+      navigator.clipboard.writeText(linkText).then(function() {
+         alert("URL copied to clipboard")
+      })
+      
+    //   alert("Share this collection with others - your collection URL was copied to your clipboard!")
+
+    }
 
 
     //////////////////////////// return ////////////////////////////
@@ -128,16 +166,39 @@ function CollectionsPage() {
                         {collectionsList.length > 0
                             ? (<div className="box-wrap">
                                 {collectionsList.map((collectionData, key) => {
-                                    return <CollectionCard key={key} collectionData={collectionData} />;
+                                    return <CollectionCard key={key} collectionData={collectionData} toggleModal={shareToggleModalState} setSignedPK={setSignedPK} />;
                                 })}
                             </div>)
 
                             : (<div className="nodatacontainer">
-                                <img className="nodatalogo" alt="nodatalogo" src={logoicon} />
+                                {/* <img className="nodatalogo" alt="nodatalogo" src={logoicon} /> */}
                                 <p id="no-data">You have no {location.pathname === "/collections/" ? "active" : "archived"} collections</p>
                             </div>)}
 
                     </div>
+
+                    {/* Modal for Sharing */}
+                    <div className={`modalBackground modalShowing-${modalState}`}>
+                      <div className="modalInner">
+                          <div className="modalText">
+                            <h2>Share this collection</h2>
+                            {/* <SummaryItemCard summary_choice={summaryTitle} summary_info={summaryInfo} /> */}
+
+                            <div className="box-link">
+                              <p>{linkText}</p>
+                              <div onClick={copyLink} >
+                              <FaRegClipboard className="fa-icon"/>
+                              </div>
+                            </div>
+
+
+                            <div>
+                                <button className="exitButton" onClick={() => shareToggleModalState()}> exit </button>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+
                     {/* <Footer /> */}
                 </div>
             </div>

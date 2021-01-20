@@ -8,7 +8,21 @@
     text-transform: uppercase ;
 }
 
+.box-link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid gray;
+  padding: 0px 5px;
+}
 
+.box-link p {
+  font-size: 0.8rem;
+}
+
+.box-link div {
+  padding: 3px;
+}
 
 
 /* p#no-data {
@@ -92,6 +106,8 @@ a.addcollectioncontainer p{
 }
 
 }
+
+
 
 
 

@@ -84,12 +84,14 @@ function CollectionDetailPage() {
    const location = useLocation();
    const urlComponents = location.pathname.split("/")
 
-   if (urlComponents.length === 6) {
-      urlPath = "safe/" + id + "/" + urlComponents[4]
+   if (urlComponents.length === 5) {
+      urlPath = "safe/" + id + "/" + urlComponents[3]
       shared_link = "public"
+      console.log("urlPath public: ", urlPath)
    } else {
       urlPath = id
       shared_link = "private"
+      console.log("urlPath private: ", urlPath)
    }
 
    // let response
@@ -100,42 +102,22 @@ function CollectionDetailPage() {
    const fetchProjects = async () => {
       let response
       try {
-           response = await fetch(`${process.env.REACT_APP_API_URL}collection/${urlPath}/`, {
-              method: "get",
-              headers: {
-                 "Content-Type": "application/json",
-                 Authorization: `Token ${token}`,
-              },
-            
-           })
-           console.log(response)
-        // } else {
-        //    response = await fetch(`${process.env.REACT_APP_API_URL}collection/${urlPath}/`, {
-        //       method: "get",
-        //       headers: {
-        //          "Content-Type": "application/json",
-        //       },
-        //    })
-        //    console.log(response)
-        //}
-      // try {
-      //    if (urlComponents.length === 4) {
-      //       response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/`, {
-      //          method: "get",
-      //          headers: {
-      //             "Content-Type": "application/json",
-      //             Authorization: `Token ${token}`,
-      //          },
-      //       })
-      //    } else {
-      //       response = await fetch(`${process.env.REACT_APP_API_URL}collection/${urlPath}/`, {
-      //          method: "get",
-      //          headers: {
-      //             "Content-Type": "application/json",
-      //          },
-      //       })
-      //       console.log(response)
-      //    }
+        if (urlComponents.length === 4) {
+          response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/`, {
+             method: "get",
+             headers: {
+                "Content-Type": "application/json",
+                Authorization: `Token ${token}`,
+             },
+          })
+       } else {
+          response = await fetch(`${process.env.REACT_APP_API_URL}collection/${urlPath}/`, {
+             method: "get",
+             headers: {
+                "Content-Type": "application/json",
+             },
+          })
+       }  
       } catch (thisError) {
          console.log("---------------thisError: ", thisError)
          setIsLoading(false);
@@ -467,7 +449,7 @@ function CollectionDetailPage() {
                               <img style={{ cursor: "pointer" }} className="changeicons" alt="addicon" src={addicon} onClick={() => addItemToggleModalState()} />
                               <p style={{ cursor: "pointer" }} onClick={() => addItemToggleModalState()} > Add Item</p>
 
-                           </div>) : ("")}
+                           </div>) : ("To add items to this collection, unarchive it!")}
 
                         {/* {itemDisplayData.length > 0 ? ( */}
                            <div id="fexrow">
