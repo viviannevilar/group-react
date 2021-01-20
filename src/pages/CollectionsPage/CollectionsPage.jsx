@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { Link, useLocation } from "react-router-dom"
 import CollectionCard from "../../components/CollectionCard/CollectionCard"
 import "./CollectionsPage.css";
@@ -32,11 +32,18 @@ function CollectionsPage() {
 
     const [linkText, setLinkText] = useState()
 
+    let btnRefShare = useRef();
+
     // This variable will store the error code from the request
     const [errorCode, setErrorCode] = useState();
 
+    const [errorMessage, setErrorMessage] = useState();
+
     // Modal
     const [modalState, setModalState] = useState(false);
+    const [username, setUsername] = useState("")
+    const [id, setId] = useState()
+    const [collectionName, setCollectionName] = useState()
 
     // const [summaryModal, setSummaryModal] = useState(false)
 
@@ -87,24 +94,103 @@ function CollectionsPage() {
     useEffect(() => {
       setLinkText("https://comparalist.herokuapp.com/collection/" + signedPK + "/")
       console.log("linkText useEffect ----> ", linkText)
+
+      console.log(signedPK)
+      if (signedPK) {
+        setId(signedPK.split("/")[0])
+      }
+
     }, [signedPK])
 
   
 
     function copyLink() {
-
-      console.log("linkText ----> copyLink", linkText)
-
-      // const linkText = "https://comparalist.herokuapp.com/collection/shared/" + signedPK + "/"
-
       navigator.clipboard.writeText(linkText).then(function() {
          alert("URL copied to clipboard")
       })
-      
-    //   alert("Share this collection with others - your collection URL was copied to your clipboard!")
-
     }
 
+    const handleChange = (e) => {
+      const { id, value } = e.target;
+      setUsername((prevUsername) => ({
+         ...prevUsername,
+         [id]: value,
+      }));
+      console.log(username)
+   };
+
+
+  // Add username to allowed users
+  const shareCollection = async () => {
+  //   e.preventDefault();
+  let token = window.localStorage.getItem("token");
+
+
+
+  const response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/add_user/`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify(username),
+  });
+
+    // // this enables the submit button again
+    if (btnRefShare.current) {
+      btnRefShare.current.disabled = false
+      }
+
+  if (response.ok) {
+    console.log(response.status)
+    setErrorMessage(response.status)
+
+    return response.json();
+  } else {
+    response.text().then(text => {
+      throw Error(text)
+    }).catch(
+      (error) => {
+
+        console.log(error.message)
+
+    // const errorObj = JSON.parse(error.message);
+    // console.log(errorObj)
+
+
+      }
+    )
+  }
+
+
+
+};
+    
+    
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      // console.log("handlesubmit")
+      // console.log(credentials);
+
+
+
+      if (!username.username || !username.username.trim().length) {
+        setErrorMessage("please enter a valid username")
+      } else {
+        //disables the button to submit form until there is a response
+        if (btnRefShare.current) {
+          btnRefShare.current.disabled = true
+        }
+        shareCollection().then((response) => {
+          setErrorMessage(response.status)
+        });
+
+      }
+   };
+
+
+    
 
     //////////////////////////// return ////////////////////////////
 
@@ -166,7 +252,7 @@ function CollectionsPage() {
                         {collectionsList.length > 0
                             ? (<div className="box-wrap">
                                 {collectionsList.map((collectionData, key) => {
-                                    return <CollectionCard key={key} collectionData={collectionData} toggleModal={shareToggleModalState} setSignedPK={setSignedPK} />;
+                                    return <CollectionCard key={key} collectionData={collectionData} toggleModal={shareToggleModalState} setSignedPK={setSignedPK} setCollectionName={setCollectionName} />;
                                 })}
                             </div>)
 
@@ -181,8 +267,10 @@ function CollectionsPage() {
                     <div className={`modalBackground modalShowing-${modalState}`}>
                       <div className="modalInner">
                           <div className="modalText">
-                            <h2>Share this collection</h2>
+                            <h1>Share {collectionName}</h1>
                             {/* <SummaryItemCard summary_choice={summaryTitle} summary_info={summaryInfo} /> */}
+
+                            <p className="mb-2">Anyone with this link will be able to view this collection:</p>
 
                             <div className="box-link">
                               <p>{linkText}</p>
@@ -190,10 +278,32 @@ function CollectionsPage() {
                               <FaRegClipboard className="fa-icon"/>
                               </div>
                             </div>
+                            <br></br>
+                            <br></br>
 
+                            <p className="mb-2">Or you can give editing rights to an existing user:</p>
+                            
+                           
+                              
+                            <form className="share-form">
+                              <label htmlFor="username">
+                                  username:
+                              </label>
+                              <input
+                                  type="text"
+                                  id="username"
+                                  onChange={handleChange}
+                              />
+                              <button className="btn-share" type="submit" ref={btnRefShare} onClick={handleSubmit}>
+                                Share
+                              </button>
+                            </form>
+                            <p><span className="error">{ errorMessage ? errorMessage : null}</span></p>
+
+                            <br></br>
 
                             <div>
-                                <button className="exitButton" onClick={() => shareToggleModalState()}> exit </button>
+                                <button className="btn-share" onClick={() => shareToggleModalState()}> exit </button>
                             </div>
                           </div>
                       </div>

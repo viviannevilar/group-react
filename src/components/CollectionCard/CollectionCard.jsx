@@ -20,7 +20,7 @@ function formatDate(string) {
 function CollectionCard(props) {
 
     //////////////////////////// variables ////////////////////////////
-    const { collectionData, toggleModal, setSignedPK } = props
+    const { collectionData, toggleModal, setSignedPK, setCollectionName } = props
     const id = collectionData.id
     const linkCollection = "/collection/" + id + "/"
     const [allAttributes, setAllAttributes] = useState([])
@@ -132,8 +132,8 @@ function CollectionCard(props) {
 
 
                 <div id="shareocllectioncontainer">
-                    <img style={{ cursor: "pointer" }} className="shareicons" alt="shareicon" src={shareicon} onClick={() => {toggleModal(); setSignedPK(collectionData.signed_pk); console.log("setSignedPK in collection card: ", collectionData.signed_pk)}} />
-                    <p style={{ cursor: "pointer" }} onClick={() => {toggleModal(); setSignedPK(collectionData.signed_pk); console.log("setSignedPK in collection card: ", collectionData.signed_pk)}}>Share Collection</p>
+                    <img style={{ cursor: "pointer" }} className="shareicons" alt="shareicon" src={shareicon} onClick={() => {toggleModal(); setSignedPK(collectionData.signed_pk); setCollectionName(collectionData.title); console.log("setSignedPK in collection card: ", collectionData.signed_pk)}} />
+                    <p style={{ cursor: "pointer" }} onClick={() => {toggleModal(); setSignedPK(collectionData.signed_pk); setCollectionName(collectionData.title); }}>Share Collection</p>
                 </div>
 
                 <div id="dateupdatedcontainer">

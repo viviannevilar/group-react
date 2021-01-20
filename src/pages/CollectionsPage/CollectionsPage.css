@@ -1,4 +1,4 @@
-.collectionsheadertitle {
+.collectionsheadertitle, .modalText h1 {
     font-family: "Roboto", sans-serif;
     color: #004aad;
     text-align: center;
@@ -6,6 +6,15 @@
     padding-top: 1%;
     font-size: 0.7em;
     text-transform: uppercase ;
+}
+
+.modalText h1 {
+  font-size: 1rem;
+  padding-bottom: 2rem;
+}
+
+.mb-2 {
+  margin-bottom: 1.6rem;
 }
 
 .box-link {
@@ -16,6 +25,17 @@
   padding: 0px 5px;
 }
 
+.share-form input {
+  margin: 0rem 0.5rem;
+}
+
+.share-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
 .box-link p {
   font-size: 0.8rem;
 }
@@ -23,6 +43,22 @@
 .box-link div {
   padding: 3px;
 }
+
+.btn-share {
+  padding: 5px 10px;
+  background: #b3b7a4;
+  border-radius: 0.5rem;
+  color: white;
+  border: none;
+  display: flex;
+  place-items: center;
+  min-width: 8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  
+}
+
+
 
 
 /* p#no-data {
