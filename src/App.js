@@ -84,7 +84,7 @@ function App() {
                     <Route exact path="/collections-archive/">
                         <CollectionsPage />
                     </Route>
-                    <Route exact path="/collection/:id/:code/">
+                    <Route exact path="/collection/s/:id/:code/">
                         <CollectionDetailPage />
                     </Route>
 

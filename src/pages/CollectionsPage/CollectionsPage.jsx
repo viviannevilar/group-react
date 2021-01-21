@@ -41,11 +41,11 @@ function CollectionsPage() {
 
     // Modal
     const [modalState, setModalState] = useState(false);
-    const [username, setUsername] = useState("")
+    const [username, setUsername] = useState({username: "",})
     const [id, setId] = useState()
     const [collectionName, setCollectionName] = useState()
+    // const [collectionUsers, setCollectionUsers] = useState({ allowed_users: [] });
 
-    // const [summaryModal, setSummaryModal] = useState(false)
 
 
     //////////////////////////// methods ////////////////////////////
@@ -110,7 +110,16 @@ function CollectionsPage() {
       })
     }
 
+    const exitModal = () => {
+      shareToggleModalState()
+      setUsername({username: ""})
+
+    }
+
     const handleChange = (e) => {
+      console.log(e)
+      console.log(e.target)
+      console.log(e.target.id)
       const { id, value } = e.target;
       setUsername((prevUsername) => ({
          ...prevUsername,
@@ -123,57 +132,75 @@ function CollectionsPage() {
   // Add username to allowed users
   const shareCollection = async () => {
   //   e.preventDefault();
-  let token = window.localStorage.getItem("token");
+    let token = window.localStorage.getItem("token");
 
+    const response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/add_user/`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+        body: JSON.stringify(username),
+    });
 
-
-  const response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/add_user/`, {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
-      },
-      body: JSON.stringify(username),
-  });
-
-    // // this enables the submit button again
+    // this enables the submit button again
     if (btnRefShare.current) {
       btnRefShare.current.disabled = false
-      }
+    }
 
-  if (response.ok) {
-    console.log(response.status)
-    setErrorMessage(response.status)
+    if (response.ok) {
+      console.log(response.status)
+      setErrorMessage(response.status)
+      return response.json();
+    } else {
+      response.text().then(text => {
+        throw Error(text)
+      }).catch(
+        (error) => {
+         console.log(error.message)
+        }
+      )
+    }
 
-    return response.json();
-  } else {
-    response.text().then(text => {
-      throw Error(text)
-    }).catch(
-      (error) => {
+  };
 
-        console.log(error.message)
+  // get allowed_users for a collection
 
-    // const errorObj = JSON.parse(error.message);
-    // console.log(errorObj)
+  // const getCollectionUsers = async () => {
 
+  //     let token = window.localStorage.getItem("token");
+  
+  //     const response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/add_user/`, {
+  //         method: "get",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Token ${token}`,
+  //         },
+  //         body: JSON.stringify(username),
+  //     });
 
-      }
-    )
-  }
+  // }
 
+  // const handleGet = (e) => {
+  //   e.preventDefault();
 
-
-};
+  //   getCollectionUsers().then((response) => {
+  //     // console.log(response)
+  //     // history.push(`/collection/${collectionData.id}/`);
+  //     // window.location.reload();
+  //   }).then((data) => {
+  //     setCollectionUsers(data);
+  //     console.log(data)
+  // })}
     
     
+
+    // submit user to allowed_users
 
     const handleSubmit = (e) => {
       e.preventDefault();
       // console.log("handlesubmit")
       // console.log(credentials);
-
-
 
       if (!username.username || !username.username.trim().length) {
         setErrorMessage("please enter a valid username")
@@ -303,7 +330,7 @@ function CollectionsPage() {
                             <br></br>
 
                             <div>
-                                <button className="btn-share" onClick={() => shareToggleModalState()}> exit </button>
+                                <button className="btn-share" onClick={exitModal}> exit </button>
                             </div>
                           </div>
                       </div>
@@ -316,5 +343,8 @@ function CollectionsPage() {
     }
 
 }
+
+// () => shareToggleModalState()
+
 
 export default CollectionsPage;

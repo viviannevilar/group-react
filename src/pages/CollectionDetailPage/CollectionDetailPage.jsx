@@ -83,9 +83,11 @@ function CollectionDetailPage() {
    let token = window.localStorage.getItem("token");
    const location = useLocation();
    const urlComponents = location.pathname.split("/")
+   console.log(urlComponents)
+   console.log(urlComponents.length)
 
-   if (urlComponents.length === 5) {
-      urlPath = "safe/" + id + "/" + urlComponents[3]
+   if (urlComponents.length === 6) {
+      urlPath = "safe/" + id + "/" + urlComponents[4]
       shared_link = "public"
       console.log("urlPath public: ", urlPath)
    } else {

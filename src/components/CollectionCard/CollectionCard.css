@@ -59,23 +59,29 @@ a#collectionlink{
 
 }
 
-#shareocllectioncontainer{
+.sharecollectioncontainer{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
+.transparent {
+  opacity: 0;
+  margin-left: -1rem;
+}
+
+.gray {
+  color: gray;
+}
 
 
-div#shareocllectioncontainer p {
+div.sharecollectioncontainer p {
     display: flex;
     font-size: 0.8em;
     text-transform: uppercase ;
     /* opacity: 0.9; */
     margin-left: 4px;
-
-
 }
 
 

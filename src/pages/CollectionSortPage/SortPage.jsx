@@ -1,5 +1,4 @@
 //////////////////////////// imports ////////////////////////////
-
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory, useLocation } from "react-router-dom";
 
@@ -29,7 +28,8 @@ const SortableItem = SortableElement(({value, sortIndex}) => {
          {/* <div className={`${value.is_active ? "overlay-null" : "overlay"}`}></div> */}
          <img style={{ cursor: "pointer" }} className="changeicons sort-icons" alt="moveicon" src={moveicon} />
          {value.name}
-         <img className="item-small" alt="Item" src={`${value.image !== null ? value.image : nophoto}`} />
+         {value.image !== null ? <img className="item-small" alt="Item" src={value.image} /> : <img className="item-small" alt="Item" src={nophoto} />}
+         {/* <img className="item-small" alt="Item" src={`${value.image !== null ? value.image : nophoto}`} /> */}
          
       </div>
    )
@@ -48,6 +48,8 @@ const SortableList = SortableContainer(({items}) => {
 
 //////////////////////////// main function ////////////////////////////
 function SortableComponent(props) {
+
+  console.log("inside sortable")
 
    /////////////// variables
 

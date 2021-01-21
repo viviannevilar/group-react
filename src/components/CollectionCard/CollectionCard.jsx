@@ -25,6 +25,8 @@ function CollectionCard(props) {
     const linkCollection = "/collection/" + id + "/"
     const [allAttributes, setAllAttributes] = useState([])
     const history = useHistory();
+    const [isOwner, setIsOwner] = useState(true)
+
 
 
 
@@ -50,6 +52,10 @@ function CollectionCard(props) {
                 attributelist.push(collectionData.attribute4);
             }
             setAllAttributes(attributelist.join(", "))
+
+            const owner = collectionData.user
+            const username = window.localStorage.getItem("username");
+            setIsOwner(owner === username)
 
         }
 
@@ -98,6 +104,12 @@ function CollectionCard(props) {
         window.location.reload();
     }
 
+    // Get project details
+
+
+    
+
+
 
 
     return (
@@ -130,10 +142,17 @@ function CollectionCard(props) {
                 <p id="compareatttributeslist">Comparing items by: {allAttributes} </p>
 
 
+                <div>
+                  {isOwner  
+                  ? <div className="sharecollectioncontainer" style={{ cursor: "pointer" }} onClick={() => {toggleModal(); setSignedPK(collectionData.signed_pk); setCollectionName(collectionData.title); }}>
+                      <img className="shareicons" alt="shareicon" src={shareicon} />
+                      <p>Share Collection</p>
+                  </div> 
+                  : <div className="sharecollectioncontainer gray">
+                    <img className="shareicons transparent" alt="shareicon" src={shareicon} />
+                    <p>SHARED COLLECTION</p>
+                    </div>}
 
-                <div id="shareocllectioncontainer">
-                    <img style={{ cursor: "pointer" }} className="shareicons" alt="shareicon" src={shareicon} onClick={() => {toggleModal(); setSignedPK(collectionData.signed_pk); setCollectionName(collectionData.title); console.log("setSignedPK in collection card: ", collectionData.signed_pk)}} />
-                    <p style={{ cursor: "pointer" }} onClick={() => {toggleModal(); setSignedPK(collectionData.signed_pk); setCollectionName(collectionData.title); }}>Share Collection</p>
                 </div>
 
                 <div id="dateupdatedcontainer">
