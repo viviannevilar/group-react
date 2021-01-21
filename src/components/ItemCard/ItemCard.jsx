@@ -87,12 +87,14 @@ function ItemCard(props) {
 
     return (
 
-        <div className="project-card" id={projectData.is_active === false ? "project-closed" : "project-open"}>
+      <div className={`project-card ${projectData.is_active === false ? "project-closed" : "project-open"}`}>
+
+        {/* <div className="project-card" className={projectData.is_active === false ? "project-closed" : "project-open"}> */}
             <div id="onDisplayInfo">
                 <p id="titlep" style={{ color: "#004aad" }} ref={hideDetailsRef} >{projectData.name.toUpperCase()}</p>
                 <div className="item-card-img-container">
                   <img className="item" alt="Item" src={`${projectData.image !== null ? projectData.image : nophoto}`} /> 
-                  {/* <div className="item-card-img-container-overlay"></div> */}
+                  <div className="item-card-img-container-overlay"></div>
                 </div>
                
                 <div className="discountcontainer">
