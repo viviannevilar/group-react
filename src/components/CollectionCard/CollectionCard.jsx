@@ -108,10 +108,6 @@ function CollectionCard(props) {
 
 
     
-
-
-
-
     return (
 
         <div className="box">

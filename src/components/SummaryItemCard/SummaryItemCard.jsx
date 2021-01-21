@@ -59,7 +59,9 @@ function SummaryItemCard(props) {
 
                         )
                     })}
+                     
                 </div >) : (<div></div>)}
+
         </div>
     );
 }

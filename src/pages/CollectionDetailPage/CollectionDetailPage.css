@@ -75,7 +75,26 @@
   flex-direction: row;
   color: black;
   text-align: left;
+  position: relative;
 }
+
+.exit-symbol:before, .exit-symbol:after {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  content: ' ';
+  height: 25px;
+  width: 2px;
+  background-color: gray;
+  cursor: pointer;
+}
+.exit-symbol:before {
+  transform: rotate(45deg);
+}
+.exit-symbol:after {
+  transform: rotate(-45deg);
+}
+
 
 .modalText {
   display: flex;

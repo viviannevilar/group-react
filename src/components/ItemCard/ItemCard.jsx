@@ -45,6 +45,8 @@ function ItemCard(props) {
 
     };
 
+    console.log(projectData.name, projectData.sale_amount)
+
     const executeHide = () => {
         hideDetailsRef.current.scrollIntoView({
             behavior: 'smooth',

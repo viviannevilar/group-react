@@ -578,12 +578,15 @@ function CollectionDetailPage() {
                      <div className="modalInner">
                         <div className="modalText">
                            <SummaryItemCard summary_choice={summaryTitle} summary_info={summaryInfo} />
-                           <div>
+                           {/* <div>
                               <button className="exitButton" onClick={() => summaryToggleState()}> exit </button>
-                           </div>
+                           </div> */}
                         </div>
+                        <div className="exit-symbol" onClick={() => summaryToggleState()} ></div>
                      </div>
+                     
                   </div>
+                 
                </div>
             )
             }
