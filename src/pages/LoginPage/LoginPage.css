@@ -1,0 +1,17 @@
+.flex-place-items {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+.flex-place-items h2 {
+  margin-bottom: 4rem;
+}
+
+.all-caps {
+  text-transform: uppercase;
+  color: #004aad;
+}

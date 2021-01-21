@@ -46,6 +46,9 @@ function ItemCard(props) {
     };
 
     console.log(projectData.name, projectData.sale_amount)
+    console.log("parseInt(projectData.sale_amount) !== 0 ", parseInt(projectData.sale_amount) !== 0)
+    console.log("parseInt(projectData.sale_amount)", parseInt(projectData.sale_amount))
+    console.log(parseInt(projectData.sale_amount) !== 0 && parseInt(projectData.sale_amount) !== null)
 
     const executeHide = () => {
         hideDetailsRef.current.scrollIntoView({
@@ -104,9 +107,11 @@ function ItemCard(props) {
                         <img className="priceicon" alt="priceicon" src={pricetag} />
 
                         {projectData.price !== null && projectData.price !== ""
-                            ? (<div> { parseInt(projectData.sale_amount) !== 0 && parseInt(projectData.sale_amount) !== null
+                            ? (<div> { parseInt(projectData.sale_amount) !== 0 && projectData.sale_amount !== null
                                 ? (<p className={parseInt(projectData.sale_amount) !== 0 && parseInt(projectData.sale_amount) !== null ? "onsale" : "item"} >
-                                    ${calculateNewPrice(projectData.price, calculateDiscount(projectData.price, projectData.sale_amount))}   (<strike>${projectData.price}</strike>) </p>)
+                                    ${calculateNewPrice(projectData.price, calculateDiscount(projectData.price, projectData.sale_amount))}   
+                                    (<strike>${projectData.price}</strike>) 
+                                    </p>)
                                 : <p>${projectData.price} </p>}
                             </div>)
                             : (<div><p className="smalltext">NO PRICE INFORMATION PROVIDED</p></div>)}
