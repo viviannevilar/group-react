@@ -44,9 +44,9 @@ function SummaryItemCard(props) {
 
                                 {summary_choice === "Price" ? (
                                     <div id="summaryitemvalue">    {
-                                        value.value != null ?
+                                        value.value != null ? 
                                             (<div>
-                                                { parseInt(value.sale_amount) !== 0 ? (
+                                                { parseInt(value.sale_amount) !== 0 && value.sale_amount !== null ? (
                                                     <p> ${calculateNewPrice(value.value, calculateDiscount(value.value, value.sale_amount))}   (<strike>${value.value}</strike>) </p>)
                                                     : <p> ${value.value} </p>}
                                             </div>)
