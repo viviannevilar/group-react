@@ -92,7 +92,7 @@ function CollectionsPage() {
     };
 
     useEffect(() => {
-      setLinkText("https://comparalist.herokuapp.com/collection/" + signedPK + "/")
+      setLinkText("https://comparalist.herokuapp.com/collection/s/" + signedPK + "/")
       console.log("linkText useEffect ----> ", linkText)
 
       console.log(signedPK)
