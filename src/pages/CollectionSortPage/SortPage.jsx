@@ -2,6 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory, useLocation } from "react-router-dom";
 
+// components
+import ErrorComponent from "../../components/ErrorComponent/ErrorComponent";
+
 // sorting
 import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 import arrayMove from 'array-move';
@@ -126,7 +129,7 @@ function SortableComponent(props) {
 
       if (token === null) {
          console.log("token === null! ")
-         setErrorMessage("You are not logged in! Please log in to see your items!")
+         setErrorMessage("You are not logged in or you don't own this collection. Please log in to change the order of items!")
          setHasError(true)
       } 
  
@@ -156,17 +159,17 @@ function SortableComponent(props) {
 
             {/* There IS an error message */}
             {(hasError) ? (<div>
-               <div id="errormessage">
-                  <br></br>
-                  <img className="backgroundimage" alt="Error!" src="https://www.pngitem.com/pimgs/m/119-1190787_warning-alert-attention-search-error-icon-hd-png.png" />
-                  <h2>{errorMessage}</h2>
-               </div>
+
+              <ErrorComponent errorMessage={errorMessage} errorNumber="401" />
+
             </div>) : null}
 
       </div>
    )
 
 }
+
+
 
 export default SortableComponent
 

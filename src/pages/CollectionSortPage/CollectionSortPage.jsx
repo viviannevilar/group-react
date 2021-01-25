@@ -1,12 +1,16 @@
 /// ATTENTION ///
-// this page is not currently active. Code from this was used for another page.
+// this page is not currently active. Code from this was used in the collection detail page.
 // Use SortPage.jsx instead
-
 
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ItemCardSmall from "../../components/ItemCardSmall/ItemCardSmall";
 import "./CollectionSortPage.css"
+
+// components
+import Loader from "../../components/Loader/Loader";
+import ErrorComponent from "../../components/ErrorComponent/ErrorComponent";
+
 
 function formatDate(string) {
     var options = { year: "numeric", month: "long", day: "numeric" };
@@ -17,8 +21,8 @@ function CollectionSortPage() {
 
     //////////////////////////// variables ////////////////////////////
 
-    // to use in the html
-    const imageError = "https://www.pngitem.com/pimgs/m/119-1190787_warning-alert-attention-search-error-icon-hd-png.png"
+    // // to use in the html
+    // const imageError = "https://www.pngitem.com/pimgs/m/119-1190787_warning-alert-attention-search-error-icon-hd-png.png"
 
     // tokens, ids, location, history
     let token = window.localStorage.getItem("token");
@@ -205,27 +209,22 @@ function CollectionSortPage() {
             {(!isLoading && errorMessage) ? (
 
                 <div>
-                    <div id="errormessage">
+                  <ErrorComponent errorMessage={errorMessage} errorNumber="401" />
+                    {/* <div id="errormessage">
                         <br></br>
                         <img className="backgroundimage" alt="Error!" src={imageError} />
 
                         <h2 id="headerTitle">There is no collection with ID {id} </h2>
-                    </div>
+                    </div> */}
                 </div>
 
             ) : null}
 
-            {/* *******      if there IS an error message and 
-                             if it is no longer waiting for the fetch  ******** */}
+            {/* *******      if there is NO error message but it is still  
+                             loading (waiting for the fetch)  ******** */}
             {(isLoading) ? (
-
                 <div>
-                    <div>
-                        <div>
-                            <img alt="" src={imageError} />
-                        </div>
-                        {/* <Loader /> */}
-                    </div>
+                  <Loader />
                 </div>
 
             ) : null}

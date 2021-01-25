@@ -582,7 +582,9 @@ function CollectionDetailPage() {
                               <button className="exitButton" onClick={() => summaryToggleState()}> exit </button>
                            </div> */}
                         </div>
+                        
                         <div className="exit-symbol" onClick={() => summaryToggleState()} ></div>
+
                      </div>
                      
                   </div>

@@ -78,6 +78,9 @@
   position: relative;
 }
 
+
+
+
 .exit-symbol:before, .exit-symbol:after {
   position: absolute;
   right: 20px;
