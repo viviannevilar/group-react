@@ -501,7 +501,7 @@ function CollectionDetailPage() {
                                  <option value="date-created">Date created</option>
                                  <option value="date-modified">Date modified</option>
                               </select>
-                              <Link to={{ pathname: `/collection/${id}/manual-sort/`, state: { itemsProps: itemData } }}><button id="testselect"  >Change Default Order</button></Link>
+                              <Link to={{ pathname: `/collection/${id}/manual-sort/`, state: { itemsProps: itemData } }}><button id="testselect" >Change Default Order</button></Link>
 
                            </div>
 

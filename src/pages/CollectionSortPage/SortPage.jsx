@@ -65,9 +65,25 @@ function SortableComponent(props) {
    const [errorMessage, setErrorMessage] = useState()
    const [token, setToken] = useState(window.localStorage.getItem("token"))
 
+
+
    // get props passed down from <Link > component in CollectionDetailPage
-   let data = useLocation()
-   const [items, setItems] = useState(data.state.itemsProps);
+   // if the person is not coming from a collection page, there wil
+    let data = useLocation()
+    let itemsProps
+    if (data.state !== undefined) {
+      itemsProps = data.state.itemsProps;
+      console.log("data.state != undefined", data.state)
+    } else {
+      itemsProps = []
+      console.log("data.state == undefined", data.state)
+    }
+
+
+    const [items, setItems] = useState(itemsProps);
+
+
+
 
    // change order of elements
    const onSortEnd = ({oldIndex, newIndex}) => {
@@ -75,11 +91,12 @@ function SortableComponent(props) {
       setToken(window.localStorage.getItem("token"))
    };
 
+
    // get an array with the item.ids in the order they are displayed on the screen
    let myArray = []
-   items.forEach(item => {myArray.push(item.id)})
-
-
+   if (items) {
+    items.forEach(item => {myArray.push(item.id)})
+   }
    /////////////// methods
 
    // save order of items in the backend
@@ -92,8 +109,6 @@ function SortableComponent(props) {
       let jsonData = {}
       jsonData.ranking = myArray
       jsonData.collection_id = id
-
-      console.log(token)
 
       const response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/ranking/`, {
           method: "post",
