@@ -11,6 +11,9 @@ import SummaryItemCard from "../../components/SummaryItemCard/SummaryItemCard";
 import AddItemForm from "../../components/AddItemForm/AddItemForm";
 import ErrorComponent from "../../components/ErrorComponent/ErrorComponent";
 
+// functions
+import filterData from "../../components/Helpers/filterData"
+
 // icons
 import archiveicon from "../../images/archive.png"
 import deleteicon from "../../images/delete.png"
@@ -231,28 +234,8 @@ function CollectionDetailPage() {
 
    // FILTER active-archived-all items  
    useEffect(() => {
-
-      let filteredData
-
-      if (filterChoice === "active") {
-         filteredData = itemData.filter((item) => item.is_active)
-         setItemDisplayData(filteredData)
-         console.log("active filtering")
-
-      } else if (filterChoice === "archived") {
-
-         filteredData = itemData.filter((item) => !item.is_active)
-         setItemDisplayData(filteredData)
-         console.log("archive filtering")
-
-      } else if (filterChoice === "all") {
-
-         setItemDisplayData(itemData)
-         console.log("no filtering - all items")
-
-      } else {
-         console.log("Error in filters. Filter chosen doesn't match any of the filter options. filterChoice = ", filterChoice)
-      }
+    
+    setItemDisplayData(filterData(itemData, filterChoice))
 
    }, [filterChoice, itemData])
 

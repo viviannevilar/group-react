@@ -37,11 +37,14 @@ function SummaryItemCard(props) {
                     {summary_info.map((value, index) => {
                         return (
                             <div id="summaryitemcontainer">
+
+                                {/* title and picture */}
                                 <div className={`summary-item ${value.is_active ? "" : "archived-item"}`}>
                                     {value.image !== null ? <img className="item-small" alt="Item" src={value.image} /> : <img className="item-small" alt="Item" src={nophoto} />}
                                     <span id="summaryattributeselect" >{value.title}:</span>
                                 </div>
 
+                                {/* summarise by price */}
                                 {summary_choice === "Price" ? (
                                     <div id="summaryitemvalue">    {
                                         value.value != null ? 
@@ -53,7 +56,11 @@ function SummaryItemCard(props) {
                                             : (<div><p id="emptyattributelsit">No price provided</p></div>)
                                     }
                                     </div>) : ("")}
+                                
+                                {/* summarise by discount */}
                                 {summary_choice === "Discount" ? (<div id="summaryitemvalue">{value.value}% off</div>) : ("")}
+
+                                {/* summarise by other attributes */}
                                 {summary_choice !== "Discount" && summary_choice !== "Price" ? (<div id="summaryitemvalue">{value.value}</div>) : ("")}
                             </div>
 
