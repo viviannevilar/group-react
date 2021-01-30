@@ -1,133 +1,118 @@
 import React, { useState, useEffect, useRef } from "react"
 import { Link, useLocation } from "react-router-dom"
-import CollectionCard from "../../components/CollectionCard/CollectionCard"
 import "./CollectionsPage.css";
+import "../../components/CollectionCard/CollectionCard.css"
+
+// components
 import ErrorComponent from "../../components/ErrorComponent/ErrorComponent";
+import CollectionCard from "../../components/CollectionCard/CollectionCard"
+import Loader from "../../components/Loader/Loader";
+
+// icons
 import addicon from "../../images/add.png"
 import archiveicon from "../../images/archive.png"
 import activeicon from "../../images/activeicon.png"
-import "../../components/CollectionCard/CollectionCard.css"
-// import Nav from "../../components/Nav/Nav";
-// import Footer from "../../components/Footer/Footer";
-import Loader from "../../components/Loader/Loader";
-import logoicon from "../../images/Comparalist_rectangle.png"
-
-// icons
+// import logoicon from "../../images/Comparalist_rectangle.png"
 import { FaRegClipboard  } from 'react-icons/fa';
+
 
 function CollectionsPage() {
 
-    //////////////////////////// variables ////////////////////////////
+  //////////////////////////// variables ////////////////////////////
 
-    // this checks the url (/collections/ or /collections-archive/)
-    const location = useLocation()
+  // this checks the url (/collections/ or /collections-archive/)
+  const location = useLocation()
+  const [activePath, setActivePath] = useState("active-collections/")
+  const [collectionsList, setCollectionsList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
+  const [signedPK, setSignedPK] = useState()
+  const [linkText, setLinkText] = useState()
+  let btnRefShare = useRef();
 
-    const [activePath, setActivePath] = useState("active-collections/")
+  // This variable will store the error code from the request
+  const [errorCode, setErrorCode] = useState();
 
-    const [collectionsList, setCollectionsList] = useState([]);
+  const [errorMessage, setErrorMessage] = useState();
 
-    const [isLoading, setIsLoading] = useState(true)
+  // Modal
+  const [modalState, setModalState] = useState(false);
+  const [username, setUsername] = useState({username: "",})
+  const [id, setId] = useState()
+  const [collectionName, setCollectionName] = useState()
+  const [collectionUsers, setCollectionUsers] = useState({ allowed_users: [] });
 
-    const [signedPK, setSignedPK] = useState()
+  //////////////////////////// methods ////////////////////////////
 
-    const [linkText, setLinkText] = useState()
+  // the page shows different things depending on whether the path is collections or archived-collections. 
+  // this function checks the pathname and sets the state with the path
+  // when the location (url) changes, the value of activePath is updated
+  useEffect(() => {
+    if (location.pathname === "/collections/") {
+      setActivePath("active-collections/")
+    } else {
+      setActivePath("archived-collections/")
+    }
+  }, [location]);
 
-    let btnRefShare = useRef();
+  // fetch the data (archived or active, depending on the value of activePath)
+  useEffect(() => {
+    let token = window.localStorage.getItem("token");
 
-    // This variable will store the error code from the request
-    const [errorCode, setErrorCode] = useState();
-
-    const [errorMessage, setErrorMessage] = useState();
-
-    // Modal
-    const [modalState, setModalState] = useState(false);
-    const [username, setUsername] = useState({username: "",})
-    const [id, setId] = useState()
-    const [collectionName, setCollectionName] = useState()
-    // const [collectionUsers, setCollectionUsers] = useState({ allowed_users: [] });
-
-
-
-    //////////////////////////// methods ////////////////////////////
-
-    // the page shows different things depending on whether the path is collections or archived-collections. 
-    // this function checks the pathname and sets the state with the path
-    // when the location (url) changes, the value of activePath is updated
-    useEffect(() => {
-
-        if (location.pathname === "/collections/") {
-            setActivePath("active-collections/")
-        } else {
-            setActivePath("archived-collections/")
-        }
-
-    }, [location]);
-
-    // fetch the data (archived or active, depending on the value of activePath)
-    useEffect(() => {
-
-        let token = window.localStorage.getItem("token");
-
-        fetch(`${process.env.REACT_APP_API_URL}${activePath}`, {
-            method: "get",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Token ${token}`,
-            }
-        })
-            .then((results) => {
-                setErrorCode(results.status)
-                return results.json();
-            })
-            .then((data) => {
-                setCollectionsList(data);
-                setIsLoading(false)
-            })
-    }, [activePath]);
-
-    // Modal state change functions
-    const shareToggleModalState = () => {
-      setModalState(!modalState);
-      window.scrollTo(0, 0);
-    };
-
-    useEffect(() => {
-      setLinkText("https://comparalist.herokuapp.com/collection/s/" + signedPK + "/")
-      console.log("linkText useEffect ----> ", linkText)
-
-      console.log(signedPK)
-      if (signedPK) {
-        setId(signedPK.split("/")[0])
+    fetch(`${process.env.REACT_APP_API_URL}${activePath}`, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
       }
+    })
+    .then((results) => {
+      setErrorCode(results.status)
+      return results.json();
+    })
+    .then((data) => {
+      setCollectionsList(data);
+      setIsLoading(false)
+    })
+  }, [activePath]);
 
-    }, [signedPK])
+  // Modal state change functions
+  const shareToggleModalState = () => {
+    setModalState(!modalState);
+    window.scrollTo(0, 0);
+  };
 
-  
+  // when the modal shows, this getws the info to be shown for that particular collection
+  useEffect(() => {
+    setLinkText("https://comparalist.herokuapp.com/collection/s/" + signedPK + "/")
+    console.log("linkText useEffect ----> ", linkText)
 
-    function copyLink() {
-      navigator.clipboard.writeText(linkText).then(function() {
-         alert("URL copied to clipboard")
-      })
+    console.log("signedPK: ", signedPK)
+
+    if (signedPK) {
+      setId(signedPK.split("/")[0])
+      console.log(signedPK.split("/")[0])
     }
 
-    const exitModal = () => {
-      shareToggleModalState()
-      setUsername({username: ""})
+  }, [signedPK])
 
-    }
+  function copyLink() {
+    navigator.clipboard.writeText(linkText).then(function() {
+      alert("URL copied to clipboard")
+    })
+  }
 
-    const handleChange = (e) => {
-      console.log(e)
-      console.log(e.target)
-      console.log(e.target.id)
-      const { id, value } = e.target;
-      setUsername((prevUsername) => ({
-         ...prevUsername,
-         [id]: value,
-      }));
-      console.log(username)
-   };
+  const exitModal = () => {
+    shareToggleModalState()
+    setUsername({username: ""})
+  }
 
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setUsername((prevUsername) => ({
+      ...prevUsername,
+      [id]: value,
+    }));
+  };
 
   // Add username to allowed users
   const shareCollection = async () => {
@@ -135,12 +120,12 @@ function CollectionsPage() {
     let token = window.localStorage.getItem("token");
 
     const response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/add_user/`, {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-        body: JSON.stringify(username),
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify(username),
     });
 
     // this enables the submit button again
@@ -157,7 +142,7 @@ function CollectionsPage() {
         throw Error(text)
       }).catch(
         (error) => {
-         console.log(error.message)
+          console.log(error.message)
         }
       )
     }
@@ -166,181 +151,183 @@ function CollectionsPage() {
 
   // get allowed_users for a collection
 
-  // const getCollectionUsers = async () => {
+  // fetch the data (archived or active, depending on the value of activePath)
+  useEffect(() => {
 
-  //     let token = window.localStorage.getItem("token");
-  
-  //     const response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/add_user/`, {
-  //         method: "get",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Token ${token}`,
-  //         },
-  //         body: JSON.stringify(username),
-  //     });
+    let token = window.localStorage.getItem("token");
 
-  // }
-
-  // const handleGet = (e) => {
-  //   e.preventDefault();
-
-  //   getCollectionUsers().then((response) => {
-  //     // console.log(response)
-  //     // history.push(`/collection/${collectionData.id}/`);
-  //     // window.location.reload();
-  //   }).then((data) => {
-  //     setCollectionUsers(data);
-  //     console.log(data)
-  // })}
-    
-    
-
-    // submit user to allowed_users
-
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      // console.log("handlesubmit")
-      // console.log(credentials);
-
-      if (!username.username || !username.username.trim().length) {
-        setErrorMessage("please enter a valid username")
-      } else {
-        //disables the button to submit form until there is a response
-        if (btnRefShare.current) {
-          btnRefShare.current.disabled = true
-        }
-        shareCollection().then((response) => {
-          setErrorMessage(response.status)
-        });
-
+    fetch(`${process.env.REACT_APP_API_URL}collection/${id}/allowed_users/`, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
       }
-   };
+    })
+    .then((results) => {
+      // setErrorCode(results.status)
+      return results.json();
+    })
+    .then((data) => {
+      setCollectionUsers(data);
+      console.log("data get allowed_users: ", data)
+      console.log("data.allowed_users: ", data.allowed_users)
+      let users = []
+      data.allowed_users.map((user, key) => {
+        console.log("user: ", user.username)
+        users.push(user.username)
+      })
+      console.log(users)
 
+    })
+  }, [id]);
 
-    
+  // submit user to allowed_users
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // console.log("handlesubmit")
+    // console.log(credentials);
 
-    //////////////////////////// return ////////////////////////////
-
-    // while it is fetching the data show .gif
-    if (isLoading) {
-
-        return <Loader />
-
-        // if not found (project doesn't exist) 
-    } else if (errorCode === 404) {
-
-        return (
-
-            <ErrorComponent errorMessage="Collection not found!" errorNumber="404" />
-
-        )
-        // if not logged in or wrong credentials
-    } else if ((errorCode === 401) || (errorCode === 403)) {
-
-        return (
-            <ErrorComponent errorMessage="You don't have permission to see this page!" errorNumber="401" />
-        )
-
-        // if there are no collections to show
+    if (!username.username || !username.username.trim().length) {
+      setErrorMessage("please enter a valid username")
     } else {
+      //disables the button to submit form until there is a response
+      if (btnRefShare.current) {
+        btnRefShare.current.disabled = true
+      }
+      shareCollection().then((response) => {
+        setErrorMessage(response.status)
+      });
 
-        return (
-            <div className="page-wrapper">
-                {/* <div id="CollectionNav">
-                    <Nav />
-                </div> */}
-                <div >
-
-                    <div >
-                        <div className="collectionsheadertitle">
-                            <h1>{(activePath === "active-collections/") ? "Collections" : "Archived Collections"} </h1>
-                        </div>
-                        <div className="cpbuttoncontainer">
-                            {/* button to see archived collections or active collections */}
-                            {(activePath === "archived-collections/") ?
-
-                                <Link className="addcollectioncontainer" to={`/collections/`}>
-                                    <img style={{ cursor: "pointer" }} className="changeicons" alt="activeicon" src={activeicon} />
-                                    <p style={{ cursor: "pointer" }} > See Active Collections</p>
-                                </Link>
-                                :
-                                <Link className="addcollectioncontainer" to={`/collections-archive/`}>
-                                    <img style={{ cursor: "pointer" }} className="changeicons" alt="archiveicon" src={archiveicon} />
-                                    <p style={{ cursor: "pointer" }} > See Archived Collections</p>
-                                </Link>}
-
-                            <Link className="addcollectioncontainer" to={`/newcollection/`}>
-                                <img style={{ cursor: "pointer" }} className="changeicons" alt="addicon" src={addicon} />
-                                <p style={{ cursor: "pointer" }} > Create Collection</p>
-                            </Link>
-
-                        </div>
-                        {/* display list of collections */}
-                        {collectionsList.length > 0
-                            ? (<div className="box-wrap">
-                                {collectionsList.map((collectionData, key) => {
-                                    return <CollectionCard key={key} collectionData={collectionData} toggleModal={shareToggleModalState} setSignedPK={setSignedPK} setCollectionName={setCollectionName} />;
-                                })}
-                            </div>)
-
-                            : (<div className="nodatacontainer">
-                                {/* <img className="nodatalogo" alt="nodatalogo" src={logoicon} /> */}
-                                <p id="no-data">You have no {location.pathname === "/collections/" ? "active" : "archived"} collections</p>
-                            </div>)}
-
-                    </div>
-
-                    {/* Modal for Sharing */}
-                    <div className={`modalBackground modalShowing-${modalState}`}>
-                      <div className="modalInner">
-                          <div className="modalText">
-                            <h1>Share {collectionName}</h1>
-                            {/* <SummaryItemCard summary_choice={summaryTitle} summary_info={summaryInfo} /> */}
-
-                            <p className="mb-2">Anyone with this link will be able to view this collection:</p>
-
-                            <div className="box-link">
-                              <p>{linkText}</p>
-                              <div onClick={copyLink} >
-                              <FaRegClipboard className="fa-icon"/>
-                              </div>
-                            </div>
-                            <br></br>
-                            <br></br>
-
-                            <p className="mb-2">Or you can give editing rights to an existing user:</p>
-                            
-                           
-                              
-                            <form className="share-form">
-                              <label htmlFor="username">
-                                  username:
-                              </label>
-                              <input
-                                  type="text"
-                                  id="username"
-                                  onChange={handleChange}
-                              />
-                              <button className="btn-share" type="submit" ref={btnRefShare} onClick={handleSubmit}>
-                                Share
-                              </button>
-                            </form>
-                            <p><span className="error">{ errorMessage ? errorMessage : null}</span></p>
-
-                            <br></br>
-
-                            <div>
-                                <button className="btn-share" onClick={exitModal}> exit </button>
-                            </div>
-                          </div>
-                      </div>
-                    </div>
-
-                    {/* <Footer /> */}
-                </div>
-            </div>
-        )
     }
+  };
+
+
+  //////////////////////////// return ////////////////////////////
+
+  // while it is fetching the data show .gif
+  if (isLoading) {
+
+    return (<Loader />)
+
+  // if not found (project doesn't exist) 
+  } else if (errorCode === 404) {
+
+    return (
+      <ErrorComponent errorMessage="Collection not found!" errorNumber="404" />
+    )
+
+  // if not logged in or wrong credentials
+  } else if ((errorCode === 401) || (errorCode === 403)) {
+
+    return (
+      <ErrorComponent errorMessage="You don't have permission to see this page!" errorNumber="401" />
+    )
+
+  // if there are no collections to show
+  } else {
+
+    return (
+      <div className="page-wrapper">
+
+        <div >
+
+          <div >
+            <div className="collectionsheadertitle">
+              <h1>{(activePath === "active-collections/") ? "Collections" : "Archived Collections"} </h1>
+            </div>
+
+            <div className="cpbuttoncontainer">
+              {/* button to see archived collections or active collections */}
+              {(activePath === "archived-collections/") 
+                ?
+                <Link className="addcollectioncontainer" to={`/collections/`}>
+                  <img style={{ cursor: "pointer" }} className="changeicons" alt="activeicon" src={activeicon} />
+                  <p style={{ cursor: "pointer" }} > See Active Collections</p>
+                </Link>
+
+                :
+                <Link className="addcollectioncontainer" to={`/collections-archive/`}>
+                  <img style={{ cursor: "pointer" }} className="changeicons" alt="archiveicon" src={archiveicon} />
+                  <p style={{ cursor: "pointer" }} > See Archived Collections</p>
+                </Link>}
+
+                <Link className="addcollectioncontainer" to={`/newcollection/`}>
+                  <img style={{ cursor: "pointer" }} className="changeicons" alt="addicon" src={addicon} />
+                  <p style={{ cursor: "pointer" }} > Create Collection</p>
+                </Link>
+            </div>
+
+            {/* display list of collections */}
+            {collectionsList.length > 0
+              ? (<div className="box-wrap">
+                  {collectionsList.map((collectionData, key) => {
+                      return <CollectionCard key={key} collectionData={collectionData} toggleModal={shareToggleModalState} setSignedPK={setSignedPK} setCollectionName={setCollectionName} />;
+                  })}
+                </div>)
+
+              : (<div className="nodatacontainer">
+                  {/* <img className="nodatalogo" alt="nodatalogo" src={logoicon} /> */}
+                  <p id="no-data">You have no {location.pathname === "/collections/" ? "active" : "archived"} collections</p>
+                </div>)}
+
+          </div>
+
+          {/* Modal for Sharing */}
+          <div className={`modalBackground modalShowing-${modalState}`}>
+
+            <div className="modalInner">
+
+              <div className="modalText">
+                <h1>Share {collectionName}</h1>
+                {/* <SummaryItemCard summary_choice={summaryTitle} summary_info={summaryInfo} /> */}
+
+                <p className="mb-2">Anyone with this link will be able to view this collection:</p>
+
+                <div className="box-link">
+                  <p>{linkText}</p>
+                  <div onClick={copyLink} >
+                    <FaRegClipboard className="fa-icon"/>
+                  </div>
+                </div>
+
+                <br></br>
+                <br></br>
+
+                <p className="mb-2">Or you can give editing rights to an existing user:</p>
+                          
+                <form className="share-form">
+                  <label htmlFor="username"> username: </label>
+                  <input type="text" id="username" onChange={handleChange} />
+                  <button className="btn-share" type="submit" ref={btnRefShare} onClick={handleSubmit}>
+                    Share
+                  </button>
+                </form>
+
+                <p><span className="error">{ errorMessage ? errorMessage : null}</span></p>
+
+                <br></br>
+
+                <p> Allowed users: 
+                  {collectionUsers.allowed_users.map((user, key) => {
+                    return (user.username)
+                  } )}
+
+
+                </p>
+
+                <div>
+                  <button className="btn-share" onClick={exitModal}> exit </button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    )
+  }
 
 }
 

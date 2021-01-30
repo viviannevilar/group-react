@@ -9,8 +9,7 @@ function Nav(props) {
    const { myClassName } = props
    const [ username, setUsername ] = useState()
 
-   
-   console.log(myClassName)
+
     const [isloggedIn, setisloggedin] = useState(false);
     const location = useLocation();
 
