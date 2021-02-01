@@ -10,17 +10,17 @@ import archiveicon from "../../images/archive.png"
 import "../../components/Nav/Nav.css";
 
 function formatDate(string) {
-    var options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(string).toLocaleDateString([], options);
+  var options = { year: 'numeric', month: 'long', day: 'numeric' };
+  return new Date(string).toLocaleDateString([], options);
 }
 
 function calculateDiscount(price, discount) {
-    var total_saving = parseInt(price) * (discount / 100)
-    return Math.round(total_saving, 3)
+  var total_saving = parseInt(price) * (discount / 100)
+  return Math.round(total_saving, 3)
 }
 function calculateNewPrice(oldprice, totalsaving) {
-    var updateprice = parseInt(oldprice) - parseInt(totalsaving)
-    return updateprice
+  var updateprice = parseInt(oldprice) - parseInt(totalsaving)
+  return updateprice
 }
 
 // Phone detail handling:
@@ -28,66 +28,61 @@ function calculateNewPrice(oldprice, totalsaving) {
 
 function ItemCard(props) {
 
-    const { projectData, collectionData } = props;
-    const myRef = useRef(null)
-    const hideDetailsRef = useRef(null)
-    const [displayDetails, setdisplayDetails] = useState(false)
-    const [buttonDetails, setbuttonDetails] = useState(true)
-    const [dateDiff, setDateState] = useState(null)
-    const [emptyAttributes, setemptyAttributes] = useState([])
+  const { projectData, collectionData } = props;
+  const myRef = useRef(null)
+  const hideDetailsRef = useRef(null)
+  const [displayDetails, setdisplayDetails] = useState(false)
+  const [buttonDetails, setbuttonDetails] = useState(true)
+  const [dateDiff, setDateState] = useState(null)
+  const [emptyAttributes, setemptyAttributes] = useState([])
 
-    const executeScroll = () => {
-        setbuttonDetails(false)
-        setdisplayDetails(true)
-        myRef.current.scrollIntoView({
-            behavior: 'smooth',
-        })
+  const executeScroll = () => {
+    setbuttonDetails(false)
+    setdisplayDetails(true)
+    myRef.current.scrollIntoView({
+      behavior: 'smooth',
+    })
 
-    };
+  };
 
-    console.log(projectData.name, projectData.sale_amount)
-    console.log("parseInt(projectData.sale_amount) !== 0 ", parseInt(projectData.sale_amount) !== 0)
-    console.log("parseInt(projectData.sale_amount)", parseInt(projectData.sale_amount))
-    console.log(parseInt(projectData.sale_amount) !== 0 && parseInt(projectData.sale_amount) !== null)
+  const executeHide = () => {
+    hideDetailsRef.current.scrollIntoView({
+      behavior: 'smooth',
+    })
+    setdisplayDetails(false)
+    setbuttonDetails(true)
+  };
 
-    const executeHide = () => {
-        hideDetailsRef.current.scrollIntoView({
-            behavior: 'smooth',
-        })
-        setdisplayDetails(false)
-        setbuttonDetails(true)
-    };
+  useEffect(() => {
 
-    useEffect(() => {
+    if (collectionData !== undefined) {
+      if (projectData.sale_end_date !== null) {
+        var current_date = formatDate(new Date());
+        const diffInMs = (new Date(projectData.sale_end_date) - new Date(current_date))
+        const diffInDays = Math.round(diffInMs / (1000 * 60 * 60 * 24), 2);
+        setDateState(diffInDays)
+      }
+      let attributelist = []
 
-        if (collectionData !== undefined) {
-            if (projectData.sale_end_date !== null) {
-                var current_date = formatDate(new Date());
-                const diffInMs = (new Date(projectData.sale_end_date) - new Date(current_date))
-                const diffInDays = Math.round(diffInMs / (1000 * 60 * 60 * 24), 2);
-                setDateState(diffInDays)
-            }
-            let attributelist = []
+      if (projectData.attribute1 === "" && collectionData.attribute1 !== "") {
+        attributelist.push(collectionData.attribute1);
+      }
+      if (projectData.attribute2 === "" && collectionData.attribute2 !== "") {
+        attributelist.push(collectionData.attribute2);
+      }
+      if (projectData.attribute3 === "" && collectionData.attribute3 !== "") {
+        attributelist.push(collectionData.attribute3);
+      }
 
-            if (projectData.attribute1 === "" && collectionData.attribute1 !== "") {
-                attributelist.push(collectionData.attribute1);
-            }
-            if (projectData.attribute2 === "" && collectionData.attribute2 !== "") {
-                attributelist.push(collectionData.attribute2);
-            }
-            if (projectData.attribute3 === "" && collectionData.attribute3 !== "") {
-                attributelist.push(collectionData.attribute3);
-            }
+      if (projectData.attribute4 === "" && collectionData.attribute4 !== "") {
+        attributelist.push(collectionData.attribute4);
+      }
 
-            if (projectData.attribute4 === "" && collectionData.attribute4 !== "") {
-                attributelist.push(collectionData.attribute4);
-            }
+      setemptyAttributes(attributelist.join(", "))
+      //console.log(projectData.price)
+    }
 
-            setemptyAttributes(attributelist.join(", "))
-            //console.log(projectData.price)
-        }
-
-    }, [projectData, collectionData]);
+  }, [projectData, collectionData]);
 
 
     return (
@@ -117,9 +112,9 @@ function ItemCard(props) {
                             : (<div><p className="smalltext">NO PRICE INFORMATION PROVIDED</p></div>)}
                     </div>
                     <div className="DiscountEndDate">
-                        {parseInt(projectData.sale_amount) !== 0 && projectData.sale_end_date !== null && (<img className="priceicon" alt="discountend" src={discountend} />)}
-                        {parseInt(projectData.sale_amount) !== 0 && projectData.sale_end_date !== null && dateDiff > 0 ? (<p>{projectData.sale_amount}% ends -  {formatDate(projectData.sale_end_date)}  </p>) : (<br></br>)}
-                        {parseInt(projectData.sale_amount) !== 0 && projectData.sale_end_date !== null && dateDiff <= 0 ? (<p>{projectData.sale_amount}% expired on the {formatDate(projectData.sale_end_date)}  </p>) : (<br></br>)}
+                      {parseInt(projectData.sale_amount) !== 0 && projectData.sale_end_date !== null && (<img className="priceicon" alt="discountend" src={discountend} />)}
+                      {parseInt(projectData.sale_amount) !== 0 && projectData.sale_end_date !== null && dateDiff > 0 ? (<p>{projectData.sale_amount}% ends -  {formatDate(projectData.sale_end_date)}  </p>) : (<br></br>)}
+                      {parseInt(projectData.sale_amount) !== 0 && projectData.sale_end_date !== null && dateDiff <= 0 ? (<p>{projectData.sale_amount}% expired on the {formatDate(projectData.sale_end_date)}  </p>) : (<br></br>)}
 
                     </div>
                 </div>

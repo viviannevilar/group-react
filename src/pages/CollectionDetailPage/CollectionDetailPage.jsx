@@ -38,376 +38,336 @@ import 'swiper/swiper-bundle.min.css';
 
 // format date for display
 function formatDate(string) {
-   var options = { year: "numeric", month: "long", day: "numeric" };
-   return new Date(string).toLocaleDateString([], options);
+  var options = { year: "numeric", month: "long", day: "numeric" };
+  return new Date(string).toLocaleDateString([], options);
 }
-
 
 //////////////////////////// main component ////////////////////////////
 function CollectionDetailPage() {
 
-   /////////////// variables
+  /////////////// variables
 
-   // Collection id (from url) and history
-   const history = useHistory();
-   const { id } = useParams();
+  // Collection id (from url) and history
+  const history = useHistory();
+  const { id } = useParams();
 
-   // Loading and Modal States
-   const [isLoading, setIsLoading] = useState(true);
+  // Loading and Modal States
+  const [isLoading, setIsLoading] = useState(true);
+  const [modalState, setModalState] = useState(false);
+  const [summaryModal, setSummaryModal] = useState(false)
 
-   const [modalState, setModalState] = useState(false);
-   const [summaryModal, setSummaryModal] = useState(false)
+  // Error
+  const [hasError, setHasError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState();
 
-   // Error
-   const [hasError, setHasError] = useState(false);
-   const [errorMessage, setErrorMessage] = useState();
+  // Data state variables
+  const [collectionData, setCollectionData] = useState({ collection_items: [] });
+  const [itemData, setItemData] = useState([]);
+  const [itemDisplayData, setItemDisplayData] = useState([])
 
-   // Data state variables
-   const [collectionData, setCollectionData] = useState({ collection_items: [] });
-   const [itemData, setItemData] = useState([]);
-   const [itemDisplayData, setItemDisplayData] = useState([])
+  // swiper
+  Swiper.use([Navigation, Pagination, Controller, Thumbs]);
+  const swiper = useRef(null)
 
-   // swiper
-   Swiper.use([Navigation, Pagination, Controller, Thumbs]);
-   const swiper = useRef(null)
+  // ordering and filtering state variables
+  const [filterChoice, setFilterChoice] = useState("all")
+  const [orderChoice, setOrderChoice] = useState("default")
 
-   // ordering and filtering state variables
-   const [filterChoice, setFilterChoice] = useState("all")
-   const [orderChoice, setOrderChoice] = useState("default")
+  // summary variables:
+  const [summaryChoice, setSummaryChoice] = useState("")
+  const [summaryInfo, setSummaryInformation] = useState([])
+  const [summaryTitle, setSummaryTitle] = useState("No Summary Option Selected")
 
-   // summary variables:
-   const [summaryChoice, setSummaryChoice] = useState("")
-   const [summaryInfo, setSummaryInformation] = useState([])
-   const [summaryTitle, setSummaryTitle] = useState("No Summary Option Selected")
+  // Public or private path (shared collection or own collection)
+  let urlPath
+  let shared_link
+  let token = window.localStorage.getItem("token");
+  const location = useLocation();
+  const urlComponents = location.pathname.split("/")
+  console.log(urlComponents)
+  console.log(urlComponents.length)
 
-   // Public or private path (shared collection or own collection)
-   let urlPath
-   let shared_link
-   let token = window.localStorage.getItem("token");
-   const location = useLocation();
-   const urlComponents = location.pathname.split("/")
-   console.log(urlComponents)
-   console.log(urlComponents.length)
+  if (urlComponents.length === 6) {
+    urlPath = "safe/" + id + "/" + urlComponents[4]
+    shared_link = "public"
+    console.log("urlPath public: ", urlPath)
+  } else {
+    urlPath = id
+    shared_link = "private"
+    console.log("urlPath private: ", urlPath)
+  }
 
-   if (urlComponents.length === 6) {
-      urlPath = "safe/" + id + "/" + urlComponents[4]
-      shared_link = "public"
-      console.log("urlPath public: ", urlPath)
-   } else {
-      urlPath = id
-      shared_link = "private"
-      console.log("urlPath private: ", urlPath)
-   }
+  // let response
+  let key_information
+  /////////////// methods
 
-   // let response
-   let key_information
-   /////////////// methods
-
-   // Get collection and associated items' data
-   const fetchProjects = async () => {
-      let response
-      try {
-        if (urlComponents.length === 4) {
-          response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/`, {
-             method: "get",
-             headers: {
-                "Content-Type": "application/json",
-                Authorization: `Token ${token}`,
-             },
-          })
-       } else {
-          response = await fetch(`${process.env.REACT_APP_API_URL}collection/${urlPath}/`, {
-             method: "get",
-             headers: {
-                "Content-Type": "application/json",
-             },
-          })
-       }  
-      } catch (thisError) {
-         console.log("---------------thisError: ", thisError)
-         setIsLoading(false);
-         setErrorMessage(thisError);
-         setHasError(true);
-         return
-      }
-
-      const data = await response.json();
-
-      if (response.ok) {
-         setCollectionData(data);
-         setItemData(data.collection_items);
-         setItemDisplayData(data.collection_items)
-         setIsLoading(false);
-
+  // Get collection and associated items' data
+  const fetchProjects = async () => {
+    let response
+    try {
+      if (urlComponents.length === 4) {
+        response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/`, {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+        })
       } else {
-         setHasError(true);
-         setErrorMessage(data.detail);
-         console.log("-------------DATA: ", data.detail)
-         setIsLoading(false);
+        response = await fetch(`${process.env.REACT_APP_API_URL}collection/${urlPath}/`, {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+      }  
+    } catch (thisError) {
+      setIsLoading(false);
+      setErrorMessage(thisError);
+      setHasError(true);
+      return
+    }
 
-         // Here is a list of the errors I have gotten
-         // Not logged on
-         // data.detail = "Invalid token."
+    const data = await response.json();
 
-         // Logged in with different account
-         // data.detail = "You do not have permission to perform this action."
+    if (response.ok) {
+      setCollectionData(data);
+      setItemData(data.collection_items);
+      setItemDisplayData(data.collection_items)
 
-         // Collection doesn't exist
-         // data.detail = "Not found."
-         setIsLoading(false);
-      }
+    } else {
+      setHasError(true);
+      setErrorMessage(data.detail);
 
-   }
+    }
 
-   useEffect(() => {
-      fetchProjects()
-   }, []);
+    setIsLoading(false);
+  }
 
-   useEffect(() => {
-      fetchProjects()
-   }, [id]);
+  useEffect(() => {
+    fetchProjects()
+  }, []);
 
+  useEffect(() => {
+    fetchProjects()
+  }, [id]);
 
-   // Modal state change functions
-   const addItemToggleModalState = () => {
-      setModalState(!modalState);
-      window.scrollTo(0, 0);
-   };
+  // Modal state change functions
+  const addItemToggleModalState = () => {
+    setModalState(!modalState);
+    window.scrollTo(0, 0);
+  };
 
-   const summaryToggleState = () => {
-     console.log("%cSummary choice: ", "font-size: 20px; color: white; background-color: red", summaryChoice === "" )
-     
-     if (summaryChoice !== "" && itemDisplayData.length > 0) {
-
+  const summaryToggleState = () => {
+    
+    if (summaryChoice !== "" && itemDisplayData.length > 0) {
       setSummaryModal(!summaryModal);
       window.scrollTo(0, 0);
+    }
+  };
+  
+  // Delete Item
+  const handleDelete = (projectdat, e) => {
+    console.log("------------handleDelete")
 
-     }
-    
-      
-   };
-
-
-   // Delete Item
-   const handleDelete = (projectdat, e) => {
-      console.log("------------handleDelete")
-
-      fetch(`${process.env.REACT_APP_API_URL}item/${id}/${projectdat.id}/`, {
-         method: "delete",
-         headers: {
-            Authorization: `Token ${token}`,
-         },
-      })
-         .then((response) => {
-            if (response.ok) {
-               history.push(`/collection/${id}/`)
-               window.location.reload();
-            } else {
-               console.log(response)
-               setHasError(true)
-               setErrorMessage("Delete item: " + response.statusText + ". Please refresh page and try again.");
-            }
-         });
+    fetch(`${process.env.REACT_APP_API_URL}item/${id}/${projectdat.id}/`, {
+      method: "delete",
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
+    .then((response) => {
+      if (response.ok) {
+        history.push(`/collection/${id}/`)
+        window.location.reload();
+      } else {
+        console.log(response)
+        setHasError(true)
+        setErrorMessage("Delete item: " + response.statusText + ". Please refresh page and try again.");
+      }
+    });
    }
 
    // Archive Item
-   const archiveItem = (item, e) => {
-      let token = window.localStorage.getItem("token");
-      fetch(`${process.env.REACT_APP_API_URL}item/${id}/${item.id}/archive/`, {
-         method: "post",
-         headers: {
-            "Content-Type": "application/json",
-            Authorization: `Token ${token}`,
-         },
-      }).then((response) => {
-         if (response.ok) {
-            history.push(`/collection/${id}/`)
-            window.location.reload();
-            console.log("Archive response ---- :", response.ok)
-         } else {
-            setHasError(true)
-            setErrorMessage("Archive item: " + response.statusText + ". Please refresh page and try again.");
-            console.log(response)
-         }
-      });
-   }
-
-   // FILTER active-archived-all items  
-   useEffect(() => {
-    
-    setItemDisplayData(filterData(itemData, filterChoice))
-
-   }, [filterChoice, itemData])
-
-
-   // ORDER items by price, date 
-   let sorted
-
-   useEffect(() => {
-
-      if (orderChoice === "price-lh") {
-
-         sorted = [...itemData].sort((a, b) => a.price - b.price)
-         //see explanation at the end of this file to understand this a bit more
-         setItemData(sorted)
-         //console.log("price-lh ordering")
-
-      } else if (orderChoice === "price-hl") {
-
-         sorted = [...itemData].sort((a, b) => a.price - b.price).reverse()
-         setItemData(sorted)
-         //console.log("price-hl ordering")
-
-      } else if (orderChoice === "date-created") {
-
-         sorted = [...itemData].sort((a, b) => a.id - b.id)
-         setItemData(sorted)
-         //console.log("date-created ordering")
-
-      } else if (orderChoice === "alphabetical") {
-
-         sorted = [...itemData].sort((a, b) => a.name > b.name ? 1 : -1)
-         setItemData(sorted)
-         //console.log("alphabetical ordering")
-
-      } else if (orderChoice === "default") {
-
-         // sorted = [...itemData].sort((a, b) => a.last_updated - b.last_updated )
-         setItemData(collectionData.collection_items)
-         //console.log("default ordering")
-
-      } else if (orderChoice === "date-modified") {
-
-         sorted = [...itemData].sort((a, b) => new Date(a.last_updated) - new Date(b.last_updated))
-         setItemData(sorted)
-         // console.log("date-modified ordering")
-
+  const archiveItem = (item, e) => {
+    let token = window.localStorage.getItem("token");
+    fetch(`${process.env.REACT_APP_API_URL}item/${id}/${item.id}/archive/`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    }).then((response) => {
+      if (response.ok) {
+        history.push(`/collection/${id}/`)
+        window.location.reload();
+        console.log("Archive response ---- :", response.ok)
       } else {
-
-         console.log("Error in ordering. Order chosen doesn't match any of the order options. orderChoice = ", orderChoice)
-
+        setHasError(true)
+        setErrorMessage("Archive item: " + response.statusText + ". Please refresh page and try again.");
+        console.log(response)
       }
+    });
+  }
+
+  // FILTER active-archived-all items  
+  useEffect(() => {
+    setItemDisplayData(filterData(itemData, filterChoice))
+  }, [filterChoice, itemData])
+
+
+  // ORDER items by price, date 
+  let sorted
+
+  useEffect(() => {
+
+    if (orderChoice === "price-lh") {
+
+      sorted = [...itemData].sort((a, b) => a.price - b.price)
+      //see explanation at the end of this file to understand this a bit more
+      setItemData(sorted)
+
+    } else if (orderChoice === "price-hl") {
+
+      sorted = [...itemData].sort((a, b) => a.price - b.price).reverse()
+      setItemData(sorted)
+
+    } else if (orderChoice === "date-created") {
+
+      sorted = [...itemData].sort((a, b) => a.id - b.id)
+      setItemData(sorted)
+
+    } else if (orderChoice === "alphabetical") {
+
+      sorted = [...itemData].sort((a, b) => a.name > b.name ? 1 : -1)
+      setItemData(sorted)
+
+    } else if (orderChoice === "default") {
+
+      // sorted = [...itemData].sort((a, b) => a.last_updated - b.last_updated )
+      setItemData(collectionData.collection_items)
+
+    } else if (orderChoice === "date-modified") {
+
+      sorted = [...itemData].sort((a, b) => new Date(a.last_updated) - new Date(b.last_updated))
+      setItemData(sorted)
+
+    } else {
+
+      console.log("Error in ordering. Order chosen doesn't match any of the order options. orderChoice = ", orderChoice)
+
+    }
 
    }, [orderChoice])
 
 
 
    // Swiper
-   useEffect(() => {
+  useEffect(() => {
 
-      swiper.current = new Swiper('.swiper-container', {
-         // observer: true,
-         // loop: true,
-         effect: 'coverflow',
-         // grabCursor: false,
-         simulateTouch: true,
-         // slidesOffsetAfter: 20,
-         // centeredSlides: true,
-         // centeredSlidesBounds: true,
-         watchOverflow: true,
-         slidesPerView: 1,
-         spaceBetween: 10,
-         breakpoints: {
-            '@0.75': {
-               slidesPerView: 2,
-               spaceBetween: 20,
-            },
-            '@1.00': {
-               slidesPerView: 3,
-               spaceBetween: 40,
-            },
-            '@1.50': {
-               slidesPerView: 4,
-               spaceBetween: 50,
-            }
-         },
-         coverflowEffect: {
-            rotate: 50,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows: true,
-         },
-         pagination: {
-            el: '.swiper-pagination',
-            dynamicBullets: true,
-            clickable: true,
-         },
-         navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-         }
-      })
-
-   }, [itemDisplayData, id])
-
-
-   // SUMMARY choices
-   useEffect(() => {
-
-      if (summaryChoice === "price") {
-
-         key_information = itemDisplayData.map(function (item, index) {
-            return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.price, sale_amount: item.sale_amount, end_date: item.sale_end_date };
-         })
-         setSummaryInformation(key_information)
-         setSummaryTitle("Price")
-         console.log(key_information)
-
-      } else if (summaryChoice === "sale_amount") {
-
-         key_information = itemDisplayData.map(function (item, index) {
-            return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.sale_amount, end_date: item.sale_end_date };
-         })
-         setSummaryInformation(key_information)
-         setSummaryTitle("Discount")
-         console.log(key_information)
-
-
-      } else if (summaryChoice === "attribute1") {
-
-         key_information = itemDisplayData.map(function (item, index) {
-            return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute1 };
-         })
-         setSummaryInformation(key_information)
-         setSummaryTitle(collectionData.attribute1)
-         console.log(key_information)
-
-      } else if (summaryChoice === "attribute2") {
-
-         key_information = itemDisplayData.map(function (item, index) {
-            return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute2 };
-         })
-         setSummaryInformation(key_information)
-         setSummaryTitle(collectionData.attribute2)
-         console.log(key_information)
-
-      } else if (summaryChoice === "attribute3") {
-
-         key_information = itemDisplayData.map(function (item, index) {
-            return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute3 };
-         })
-         setSummaryInformation(key_information)
-         setSummaryTitle(collectionData.attribute3)
-
-         console.log(key_information)
-
-      } else if (summaryChoice === "attribute4") {
-
-         key_information = itemDisplayData.map(function (item, index) {
-            return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute4 };
-         })
-         setSummaryInformation(key_information)
-         setSummaryTitle(collectionData.attribute4)
-         console.log(key_information)
-
-      } else {
-
-         console.log("Error in summaryChoice. summaryChoice chosen doesn't match any of the attributes, attribute = ", summaryChoice)
-
+    swiper.current = new Swiper('.swiper-container', {
+      // observer: true,
+      // loop: true,
+      effect: 'coverflow',
+      // grabCursor: false,
+      simulateTouch: true,
+      // slidesOffsetAfter: 20,
+      // centeredSlides: true,
+      // centeredSlidesBounds: true,
+      watchOverflow: true,
+      slidesPerView: 1,
+      spaceBetween: 10,
+      breakpoints: {
+        '@0.75': {
+            slidesPerView: 2,
+            spaceBetween: 20,
+        },
+        '@1.00': {
+            slidesPerView: 3,
+            spaceBetween: 40,
+        },
+        '@1.50': {
+            slidesPerView: 4,
+            spaceBetween: 50,
+        }
+      },
+      coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: true,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        dynamicBullets: true,
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
       }
+    })
 
-   }, [summaryChoice])
+  }, [itemDisplayData, id])
+
+
+  // SUMMARY choices
+  useEffect(() => {
+
+    if (summaryChoice === "price") {
+
+      key_information = itemDisplayData.map(function (item, index) {
+        return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.price, sale_amount: item.sale_amount, end_date: item.sale_end_date };
+      })
+      setSummaryInformation(key_information)
+      setSummaryTitle("Price")
+
+    } else if (summaryChoice === "sale_amount") {
+
+      key_information = itemDisplayData.map(function (item, index) {
+        return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.sale_amount, end_date: item.sale_end_date };
+      })
+      setSummaryInformation(key_information)
+      setSummaryTitle("Discount")
+
+    } else if (summaryChoice === "attribute1") {
+
+      key_information = itemDisplayData.map(function (item, index) {
+        return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute1 };
+      })
+      setSummaryInformation(key_information)
+      setSummaryTitle(collectionData.attribute1)
+
+    } else if (summaryChoice === "attribute2") {
+
+      key_information = itemDisplayData.map(function (item, index) {
+        return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute2 };
+      })
+      setSummaryInformation(key_information)
+      setSummaryTitle(collectionData.attribute2)
+
+    } else if (summaryChoice === "attribute3") {
+
+      key_information = itemDisplayData.map(function (item, index) {
+        return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute3 };
+      })
+      setSummaryInformation(key_information)
+      setSummaryTitle(collectionData.attribute3)
+
+    } else if (summaryChoice === "attribute4") {
+
+      key_information = itemDisplayData.map(function (item, index) {
+        return { key: index, title: item.name, is_active: item.is_active, image: item.image, value: item.attribute4 };
+      })
+      setSummaryInformation(key_information)
+      setSummaryTitle(collectionData.attribute4)
+
+    } else {
+        console.log("Error in summaryChoice. summaryChoice chosen doesn't match any of the attributes, attribute = ", summaryChoice)
+    }
+
+  }, [summaryChoice])
 
 
 

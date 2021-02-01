@@ -31,7 +31,6 @@ function CollectionsPage() {
 
   // This variable will store the error code from the request
   const [errorCode, setErrorCode] = useState();
-
   const [errorMessage, setErrorMessage] = useState();
 
   // Modal
@@ -85,7 +84,6 @@ function CollectionsPage() {
   useEffect(() => {
     setLinkText("https://comparalist.herokuapp.com/collection/s/" + signedPK + "/")
     console.log("linkText useEffect ----> ", linkText)
-
     console.log("signedPK: ", signedPK)
 
     if (signedPK) {
@@ -103,7 +101,7 @@ function CollectionsPage() {
 
   const exitModal = () => {
     shareToggleModalState()
-    setUsername({username: ""})
+    setUsername({username: "",})
   }
 
   const handleChange = (e) => {
@@ -174,8 +172,15 @@ function CollectionsPage() {
       let users = []
       data.allowed_users.map((user, key) => {
         console.log("user: ", user.username)
-        users.push(user.username)
+        users.push(`<a href=""> {user.username} </a>`)
       })
+
+      console.log("%cusers.join: ", "color: red", users.join(", "))
+
+      // {collectionUsers.allowed_users.map((user, key) => {
+      //   return (<a href=""> user.username </a>)
+      // } )}
+
       console.log(users)
 
     })
@@ -200,6 +205,9 @@ function CollectionsPage() {
 
     }
   };
+
+
+
 
 
   //////////////////////////// return ////////////////////////////
@@ -229,46 +237,47 @@ function CollectionsPage() {
     return (
       <div className="page-wrapper">
 
-        <div >
+      <div>
 
-          <div >
-            <div className="collectionsheadertitle">
-              <h1>{(activePath === "active-collections/") ? "Collections" : "Archived Collections"} </h1>
-            </div>
+        <div>
+          <div className="collectionsheadertitle">
+            <h1>{(activePath === "active-collections/") ? "Collections" : "Archived Collections"} </h1>
+          </div>
 
-            <div className="cpbuttoncontainer">
-              {/* button to see archived collections or active collections */}
-              {(activePath === "archived-collections/") 
-                ?
-                <Link className="addcollectioncontainer" to={`/collections/`}>
-                  <img style={{ cursor: "pointer" }} className="changeicons" alt="activeicon" src={activeicon} />
-                  <p style={{ cursor: "pointer" }} > See Active Collections</p>
-                </Link>
+          <div className="cpbuttoncontainer">
+            {/* button to see archived collections or active collections */}
+            {(activePath === "archived-collections/") 
+              ?
+              <Link className="addcollectioncontainer" to={`/collections/`}>
+                <img style={{ cursor: "pointer" }} className="changeicons" alt="activeicon" src={activeicon} />
+                <p style={{ cursor: "pointer" }} > See Active Collections</p>
+              </Link>
+              :
+              <Link className="addcollectioncontainer" to={`/collections-archive/`}>
+                <img style={{ cursor: "pointer" }} className="changeicons" alt="archiveicon" src={archiveicon} />
+                <p style={{ cursor: "pointer" }} > See Archived Collections</p>
+              </Link>
+            }
 
-                :
-                <Link className="addcollectioncontainer" to={`/collections-archive/`}>
-                  <img style={{ cursor: "pointer" }} className="changeicons" alt="archiveicon" src={archiveicon} />
-                  <p style={{ cursor: "pointer" }} > See Archived Collections</p>
-                </Link>}
+            <Link className="addcollectioncontainer" to={`/newcollection/`}>
+              <img style={{ cursor: "pointer" }} className="changeicons" alt="addicon" src={addicon} />
+              <p style={{ cursor: "pointer" }} > Create Collection</p>
+            </Link>
 
-                <Link className="addcollectioncontainer" to={`/newcollection/`}>
-                  <img style={{ cursor: "pointer" }} className="changeicons" alt="addicon" src={addicon} />
-                  <p style={{ cursor: "pointer" }} > Create Collection</p>
-                </Link>
-            </div>
+          </div>
 
-            {/* display list of collections */}
-            {collectionsList.length > 0
-              ? (<div className="box-wrap">
-                  {collectionsList.map((collectionData, key) => {
-                      return <CollectionCard key={key} collectionData={collectionData} toggleModal={shareToggleModalState} setSignedPK={setSignedPK} setCollectionName={setCollectionName} />;
-                  })}
-                </div>)
+          {/* display list of collections */}
+          {collectionsList.length > 0
+            ? (<div className="box-wrap">
+                {collectionsList.map((collectionData, key) => {
+                    return <CollectionCard key={key} collectionData={collectionData} toggleModal={shareToggleModalState} setSignedPK={setSignedPK} setCollectionName={setCollectionName} />;
+                })}
+              </div>)
 
-              : (<div className="nodatacontainer">
-                  {/* <img className="nodatalogo" alt="nodatalogo" src={logoicon} /> */}
-                  <p id="no-data">You have no {location.pathname === "/collections/" ? "active" : "archived"} collections</p>
-                </div>)}
+            : (<div className="nodatacontainer">
+                {/* <img className="nodatalogo" alt="nodatalogo" src={logoicon} /> */}
+                <p id="no-data">You have no {location.pathname === "/collections/" ? "active" : "archived"} collections</p>
+              </div>)}
 
           </div>
 
@@ -291,7 +300,6 @@ function CollectionsPage() {
                 </div>
 
                 <br></br>
-                <br></br>
 
                 <p className="mb-2">Or you can give editing rights to an existing user:</p>
                           
@@ -307,13 +315,10 @@ function CollectionsPage() {
 
                 <br></br>
 
-                <p> Allowed users: 
-                  {collectionUsers.allowed_users.map((user, key) => {
-                    return (user.username)
-                  } )}
-
-
-                </p>
+                <p> Current allowed users (click on a name to remove them):</p>
+                 <p> {collectionUsers.allowed_users.map((user, key) => {
+                    return (<a href=""> {user.username}{(key < collectionUsers.allowed_users.length - 1) ? ',\u00A0' : ''}</a>)
+                  } )} </p>
 
                 <div>
                   <button className="btn-share" onClick={exitModal}> exit </button>
@@ -323,15 +328,11 @@ function CollectionsPage() {
             </div>
           </div>
 
-
         </div>
       </div>
     )
   }
 
 }
-
-// () => shareToggleModalState()
-
 
 export default CollectionsPage;
