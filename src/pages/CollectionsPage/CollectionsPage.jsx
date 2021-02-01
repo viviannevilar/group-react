@@ -113,11 +113,12 @@ function CollectionsPage() {
   };
 
   // Add username to allowed users
-  const shareCollection = async () => {
-  //   e.preventDefault();
-    let token = window.localStorage.getItem("token");
+  const shareCollection = async (addOrRemove) => {
 
-    const response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/add_user/`, {
+    let token = window.localStorage.getItem("token");
+    console.log(username)
+
+    const response = await fetch(`${process.env.REACT_APP_API_URL}collection/${id}/${addOrRemove}/`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -144,14 +145,40 @@ function CollectionsPage() {
         }
       )
     }
-
   };
 
-  // get allowed_users for a collection
+  // submit user to allowed_users
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
+    if (!username.username || !username.username.trim().length) {
+      setErrorMessage("please enter a valid username")
+    } else {
+      //disables the button to submit form until there is a response
+      if (btnRefShare.current) {
+        btnRefShare.current.disabled = true
+      }
+      shareCollection("add_user").then((response) => {
+        setErrorMessage(response.status)
+      });
+    }
+  };
+
+  // Remove user from allowed users
+  const handleRemove = (e, removeUsername) => {
+    e.preventDefault();
+    setUsername({username: removeUsername,})
+    console.log(username)
+    console.log("%ctesting","font-size:3rem", removeUsername)
+    shareCollection("remove_user").then((response) => {
+      setErrorMessage(response.status)
+    });
+  }
+
+
+  // get allowed_users for a collection, used in the modal to share collection
   // fetch the data (archived or active, depending on the value of activePath)
   useEffect(() => {
-
     let token = window.localStorage.getItem("token");
 
     fetch(`${process.env.REACT_APP_API_URL}collection/${id}/allowed_users/`, {
@@ -172,42 +199,12 @@ function CollectionsPage() {
       let users = []
       data.allowed_users.map((user, key) => {
         console.log("user: ", user.username)
-        users.push(`<a href=""> {user.username} </a>`)
+        users.push(user.username)
       })
-
-      console.log("%cusers.join: ", "color: red", users.join(", "))
-
-      // {collectionUsers.allowed_users.map((user, key) => {
-      //   return (<a href=""> user.username </a>)
-      // } )}
-
       console.log(users)
-
+      console.log("%cusers.join: ", "color: red", users.join(", "))
     })
   }, [id]);
-
-  // submit user to allowed_users
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // console.log("handlesubmit")
-    // console.log(credentials);
-
-    if (!username.username || !username.username.trim().length) {
-      setErrorMessage("please enter a valid username")
-    } else {
-      //disables the button to submit form until there is a response
-      if (btnRefShare.current) {
-        btnRefShare.current.disabled = true
-      }
-      shareCollection().then((response) => {
-        setErrorMessage(response.status)
-      });
-
-    }
-  };
-
-
-
 
 
   //////////////////////////// return ////////////////////////////
@@ -270,7 +267,7 @@ function CollectionsPage() {
           {collectionsList.length > 0
             ? (<div className="box-wrap">
                 {collectionsList.map((collectionData, key) => {
-                    return <CollectionCard key={key} collectionData={collectionData} toggleModal={shareToggleModalState} setSignedPK={setSignedPK} setCollectionName={setCollectionName} />;
+                  return <CollectionCard key={key} collectionData={collectionData} toggleModal={shareToggleModalState} setSignedPK={setSignedPK} setCollectionName={setCollectionName} />;
                 })}
               </div>)
 
@@ -317,7 +314,8 @@ function CollectionsPage() {
 
                 <p> Current allowed users (click on a name to remove them):</p>
                  <p> {collectionUsers.allowed_users.map((user, key) => {
-                    return (<a href=""> {user.username}{(key < collectionUsers.allowed_users.length - 1) ? ',\u00A0' : ''}</a>)
+                    //  the expression below is to add a comma after each entry except last
+                    return (<a onClick={(e) => handleRemove(e, user.username)}> {user.username}{(key < collectionUsers.allowed_users.length - 1) ? ',\u00A0' : ''}</a>)
                   } )} </p>
 
                 <div>
