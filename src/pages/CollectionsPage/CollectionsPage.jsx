@@ -83,12 +83,11 @@ function CollectionsPage() {
   // when the modal shows, this getws the info to be shown for that particular collection
   useEffect(() => {
     setLinkText("https://comparalist.herokuapp.com/collection/s/" + signedPK + "/")
-    console.log("linkText useEffect ----> ", linkText)
-    console.log("signedPK: ", signedPK)
+    // console.log("linkText useEffect ----> ", linkText)
+    // console.log("signedPK: ", signedPK)
 
     if (signedPK) {
       setId(signedPK.split("/")[0])
-      console.log(signedPK.split("/")[0])
     }
 
   }, [signedPK])
@@ -103,6 +102,12 @@ function CollectionsPage() {
     shareToggleModalState()
     setUsername({username: "",})
   }
+
+  useEffect(() => {
+    setErrorMessage("")
+    setUsername({username: "",})
+  }, [modalState])
+
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -167,9 +172,11 @@ function CollectionsPage() {
   // Remove user from allowed users
   const handleRemove = (e, removeUsername) => {
     e.preventDefault();
+    const usernameRemove = {username: removeUsername, }
     setUsername({username: removeUsername,})
+    console.log("usernameRemove: ", usernameRemove)
     console.log(username)
-    console.log("%ctesting","font-size:3rem", removeUsername)
+    console.log("%ctesting","font-size:3rem", usernameRemove)
     shareCollection("remove_user").then((response) => {
       setErrorMessage(response.status)
     });
@@ -313,10 +320,10 @@ function CollectionsPage() {
                 <br></br>
 
                 <p> Current allowed users (click on a name to remove them):</p>
-                 <p> {collectionUsers.allowed_users.map((user, key) => {
-                    //  the expression below is to add a comma after each entry except last
-                    return (<a onClick={(e) => handleRemove(e, user.username)}> {user.username}{(key < collectionUsers.allowed_users.length - 1) ? ',\u00A0' : ''}</a>)
-                  } )} </p>
+                <p> {collectionUsers.allowed_users.map((user, key) => {
+                  //  the expression below is to add a comma after each entry except last
+                  return (<a className="blue" onClick={(e) => handleRemove(e, user.username)}> {user.username}{(key < collectionUsers.allowed_users.length - 1) ? ',\u00A0' : ''}</a>)
+                } )} </p>
 
                 <div>
                   <button className="btn-share" onClick={exitModal}> exit </button>

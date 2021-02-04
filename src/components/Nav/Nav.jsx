@@ -16,7 +16,6 @@ function Nav(props) {
     useEffect(() => {
         const token = window.localStorage.getItem("token");
         setUsername(window.localStorage.getItem("username"))
-        console.log(username)
         token != null ? setisloggedin(true) : setisloggedin(false);
     }, [location]);
 

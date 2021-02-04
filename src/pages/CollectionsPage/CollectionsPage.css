@@ -1,11 +1,11 @@
 .collectionsheadertitle, .modalText h1 {
-    font-family: "Roboto", sans-serif;
-    color: #004aad;
-    text-align: center;
-    margin: 0;
-    padding-top: 1%;
-    font-size: 0.7em;
-    text-transform: uppercase ;
+  font-family: "Roboto", sans-serif;
+  color: var(--blue-color);
+  text-align: center;
+  margin: 0;
+  padding-top: 1%;
+  font-size: 0.7em;
+  text-transform: uppercase;
 }
 
 .modalText h1 {
@@ -55,133 +55,117 @@
   place-items: center;
   min-width: 8rem;
   font-weight: bold;
-  text-transform: uppercase;
-  
+  text-transform: uppercase; 
 }
 
-
-
-
-/* p#no-data {
-   text-align: center;
-   border: 1px solid red;
-} */
-
-
 .cpbuttoncontainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
   }
 
 .collectionspagebutton {
-    padding: 5px 10px;
-    background: #b3b7a4;
-    color: white;
-    border: none;
-    border-radius: 0.2em;
-    height: 60px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
+  padding: 5px 10px;
+  background: #b3b7a4;
+  color: white;
+  border: none;
+  border-radius: 0.2em;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
   }
 
   a.addcollectioncontainer{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    color: black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: black;
 }
 
 a.addcollectioncontainer:visited{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    color: black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: black;
 }
 a.addcollectioncontainer p{
-    text-transform: uppercase ;
-    margin: 2px;
-    font-size: 0.7em;
-
+  text-transform: uppercase;
+  margin: 2px;
+  font-size: 0.7em;
 }
-
-@media only screen and (max-width: 800px) {
-    a {
-        align-items: center;
-        /* padding-right: 5px;
-        padding-left: 5px; */
-    }
-   
-}
-@media only screen and (max-width: 500px) {
-
-a.addcollectioncontainer{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    color: black;
-}
-
-a.addcollectioncontainer:visited{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    color: black;
-}
-
-a.addcollectioncontainer p{
-    text-transform: uppercase ;
-    font-size: 0.5em;
-    margin: 2px;
-}
-
-}
-
-
-
-
 
 .nodatacontainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 80%;
-    margin: 0 auto;
-    margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 10px;
 }
 
-
 img.nodatalogo{
-    display: flex;
-    width: 50%;
-    max-width: 400px;
+  display: flex;
+  width: 50%;
+  max-width: 400px;
 }
 
 div.nodatacontainer p{
-    text-transform: uppercase ;
-    font-size: 1.2em;
-
+  text-transform: uppercase ;
+  font-size: 1.2em;
 }
 
 .Navbarcontainer {
-    justify-content: space-around;
+  justify-content: space-around;
 }
 
 #CollectionNav {
-    max-width: 800px;
-    min-width: 300px;
-    max-height: 900px;
-    width: 50%;
-    margin: 0px auto;
-    background-color: #FFFFFF;
-    border-radius: 25px;
+  max-width: 800px;
+  min-width: 300px;
+  max-height: 900px;
+  width: 50%;
+  margin: 0px auto;
+  background-color: #FFFFFF;
+  border-radius: 25px;
 }
 
+
+
+@media only screen and (max-width: 800px) {
+  a {
+    align-items: center;
+    /* padding-right: 5px;
+    padding-left: 5px; */
+  }
+}
+
+@media only screen and (max-width: 500px) {
+
+  a.addcollectioncontainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: black;
+  }
+
+  a.addcollectioncontainer:visited {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: black;
+  }
+
+  a.addcollectioncontainer p{
+    text-transform: uppercase ;
+    font-size: 0.5em;
+    margin: 2px;
+  }
+
+}

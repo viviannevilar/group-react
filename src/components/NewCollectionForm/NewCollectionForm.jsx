@@ -8,7 +8,7 @@ import "../../components/Nav/Nav.css";
 function NewCollectionForm() {
 
      //variables
-    const [error, setError] = useState();
+    // const [error, setError] = useState();
     const history = useHistory();
 
     const [errorMessage, setErrorMessage] = useState()
@@ -35,8 +35,6 @@ function NewCollectionForm() {
       [id]: value,
     }));
   };
-
-
 
   const postData = async () => {
     let token = window.localStorage.getItem("token");
@@ -81,22 +79,21 @@ function NewCollectionForm() {
 
   };
 
-   const handleSubmit = (e) => {
-      e.preventDefault();
-      console.log("---------------- button pressed! ")
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("---------------- button pressed! ")
 
-      //disables the button to submit form until there is a response
-      if (btnRefAdd.current) {
-         btnRefAdd.current.disabled = true
-      }
+    //disables the button to submit form until there is a response
+    if (btnRefAdd.current) {
+        btnRefAdd.current.disabled = true
+    }
 
-      postData().then((response) => {
-         if (response !== undefined) {
-         
-         } 
-      })
-   };
-
+    postData().then((response) => {
+        if (response !== undefined) {
+        
+        } 
+    })
+  };
 
 
   const cancelSubmit = (e) => {
@@ -216,7 +213,7 @@ function NewCollectionForm() {
 
         </div>
       </form>
-      {
+      {/* {
         error && (
           <div>
             {
@@ -226,7 +223,7 @@ function NewCollectionForm() {
             }
           </div>
         )
-      }
+      } */}
     </div >
   );
 }

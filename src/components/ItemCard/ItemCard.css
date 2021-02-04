@@ -1,35 +1,25 @@
 div.project-card {
   width: 99%;
   height: 99%;
-  /* border: 0.1px solid black; */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-/* img.item{
-  width: 100%;
-  height: 200px;
-  object-fit: fill;
-} */
 
 .item-card-img-container {
   width: 100%;
   height: 200px;
-  /* position: absolute; */
   position: relative;
   display: flex;
-  /* justify-content: center; */
+  justify-content: center;
 }
 
-
-
-img.item{
+img.item {
   max-width: 100%;
-  /* max-height: 199px; */
   object-fit: contain;
-  /* border: 1px solid red; */
 }
 
+/* x on top of archived items */
 .project-closed .item-card-img-container-overlay:before, .project-closed .item-card-img-container-overlay:after {
   position: absolute;
   left: calc(100% / 2);
@@ -39,30 +29,24 @@ img.item{
   background-color: #B8B8B8;
   opacity: 0.7;
 }
+
 .project-closed .item-card-img-container-overlay:before {
   transform: rotate(30deg);
 }
+
 .project-closed .item-card-img-container-overlay:after {
   transform: rotate(-30deg);
 }
-
-
+/* -------------------------- */
 
 a {
-width: 99%;
-text-decoration: none;
+  width: 99%;
+  text-decoration: none;
 }
-
 
 div.project-closed.project-card{
   opacity: 0.7  
 }
-
-/* #project-list a{text-decoration: none; color:#2e2c38;}
-#project-list a:visited { text-decoration: none; color:#2e2c38; }
-#project-list a:focus { text-decoration: none; color:#2e2c38; } */
-/* #project-list p:hover, #project-list p:active { text-decoration: none; opacity: 0.6; } */
-
 
 .item {
   position:relative;
@@ -70,7 +54,7 @@ div.project-closed.project-card{
   display:inline-block;
 }
 
-.notify-badge{
+.notify-badge {
   position: absolute;
   right:-10px;
   top:10px;
@@ -81,29 +65,31 @@ div.project-closed.project-card{
   padding:5px 10px;
   font-size:20px;
 }
-.priceSummary{
+
+.priceSummary {
   margin-top: 10px;
 }
 
-.priceSummary, .DiscountEndDate{
+.priceSummary, .DiscountEndDate {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
 
-.priceSummary img, .DiscountEndDate img{
+.priceSummary img, .DiscountEndDate img {
   width: 20%;
   max-width: 30px;
   max-height: 30px;
   margin: 3px;
 }
 
-.priceSummary p{
+.priceSummary p {
   font-size: 1.3em;
   margin: 1px;
 }
-.DiscountEndDate p{
+
+.DiscountEndDate p {
   font-size: 0.9em;
 }
 
@@ -134,7 +120,7 @@ div.project-infosummary{
 }
 
 div#onDisplayInfo p {
- margin: 0;
+  margin: 0;
 }
 
 div#scrolldowndetails {
@@ -163,12 +149,12 @@ div.testbig {
   flex-direction: column;
   align-items: center;
   font-size: 1.3em;
-  text-transform: uppercase ;
+  text-transform: uppercase;
 }
 
 #attributetext {
   font-weight: bolder;
-  text-transform: uppercase ;
+  text-transform: uppercase;
 }
 
 .notesbox {
@@ -201,18 +187,18 @@ p.smalltext{
 }
 
 
-@media screen and (max-height: 600px){
+@media screen and (max-height: 600px) {
   div.discountcontainer{
     margin-top: 2px;
     margin-bottom: 2px;
     font-size: 0.6em;
   }
 
-  #titlep{
+  #titlep {
     font-size: 0.8em;
   }
 
-  img.changeicons{
+  img.changeicons {
     width: 20px;
   }
 
@@ -228,19 +214,13 @@ p.smalltext{
     /* align-content: center; */
     /* place-items: center; */
   }
-
-  /* img.item{
-    width: 100%;
-    height: 175px;
-    object-fit: fill;
-  } */
   
-  div#scrolldowndetails{
+  div#scrolldowndetails {
     margin-top: 2px;
     margin-bottom: 2px;
     font-size: 0.7em;
+  }
 
-}
   .priceSummary {
     margin-top: 0px;
   }
@@ -248,23 +228,23 @@ p.smalltext{
 }
 
 
+@media screen and (min-height: 900px) {
 
-@media screen and (min-height: 900px){
-  div.discountcontainer{
+  div.discountcontainer {
     margin-top: 30px;
     margin-bottom: 80px;
     font-size: 1.1em;
   }
 
-  #titlep{
+  #titlep {
     font-size: 1.4em;
   }
 
-  img.changeicons{
+  img.changeicons {
     width: 40px;
   }
   
-  div#scrolldowndetails{
+  div#scrolldowndetails {
     margin-top: 30px;
     margin-bottom: 80px;
     font-size: 1.1em;
@@ -273,14 +253,14 @@ p.smalltext{
 }
 
 
-@media screen and (max-width: 400px){
+@media screen and (max-width: 400px) {
 
-  img.changeicons{
+  img.changeicons {
     width: 20px;
     height: 20px;
   }  
 
-  img.item{
+  img.item {
     width: 100%;
     height: 175px;
     object-fit: contain;

@@ -18,10 +18,14 @@ code {
     --dark-color: #343434;
     --dark-color-muted: #474747;
     --grey-color: #f5f2ef;
-    --blue-colkor: #004aad;
+    --blue-color: #004aad;
     /* --primary-color: #eea489; */
     /* --primary-color-muted: #dbb5a2; */
     /* --secondary-color: #0d4d4f; */
     /* --main-font: 'Patua One', cursive; */
     /* --secondary-font: tahoma; */
+}
+
+.blue {
+  color: var(--blue-color);
 }
