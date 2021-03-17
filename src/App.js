@@ -14,7 +14,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import LogoutPage from "./components/LogoutForm/LogoutForm";
 import SignUp from "./pages/SignUp/SignUp";
 
-import EditProfilePage from "./pages/Editprofile/EditProfile";
+import EditProfilePage from "./pages/EditProfile/EditProfile";
 import NewCollection from './pages/NewCollection/NewCollection';
 import ItemEditPage from "./pages/ItemEditPage/ItemEditPage";
 import EditCollectionPage from "./pages/EditCollectionPage/EditCollectionPage";
